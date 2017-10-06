@@ -8,7 +8,7 @@ keywords: [feling.io, 在线工具, json]
         <textarea id="json_src" class="uk-width-1-1" autofocus v-model="json_src"></textarea>
     </div>
     <div class="uk-width-6-10">
-        <div class="uk-width-1-1">复制、展开 快捷键</div>
+        <div class="uk-width-1-1"> 隐藏/显示左侧输入框、复制、展开 快捷键</div>
         <hr>
         <div id="json_result" class="uk-width-1-1">{% raw %} {{ json_result }} {% endraw %}</div>
     </div>
@@ -38,8 +38,9 @@ keywords: [feling.io, 在线工具, json]
 <style type="text/css">
 #json_src {
     padding: 10px;
-    width: 95px; 
+    width: 95%; 
     resize: vertical;
+    font-size: 14px;
 },
 #json_result {
     padding: 10px;
