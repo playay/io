@@ -5,12 +5,17 @@ keywords: [feling.io, 在线工具, json]
 
 <div id="main" class="uk-grid uk-grid-collapse">
     <div class="uk-width-4-10">
-        <textarea id="json_src" class="uk-width-1-1 json_src" autofocus v-model="json_src" ></textarea>
+        <textarea id="json_src" class="uk-width-1-1" autofocus v-model="json_src" 
+        style="padding: 10px;width: 98%;height: 600px;resize: vertical;font-size: 14px;">
+        </textarea>
     </div>
+    
     <div class="uk-width-6-10">
         <div class="uk-width-1-1"> 隐藏/显示左侧输入框、复制、展开 快捷键、右边选中左边也选中</div>
         <hr>
-        <div class="uk-width-1-1 json_result" id="json_result">{% raw %} {{ json_result }} {% endraw %}</div>
+        <div id="json_result" class="uk-width-1-1" 
+        style="padding: 10px;height: 100%;width: 100%;max-width: 100%;word-wrap: break-word;">
+        {% raw %} {{ json_result }} {% endraw %}</div>
     </div>
 </div>
 
@@ -34,20 +39,3 @@ keywords: [feling.io, 在线工具, json]
     })
 
 </script>
-
-<style type="text/css">
-.json_src {
-    padding: 10px;
-    width: 98%;
-    height: 600px;
-    resize: vertical;
-    font-size: 14px;
-},
-.json_result {
-    padding: 10px;
-    height: 100%;
-    width: 100%;
-    max-width: 100%;
-    word-wrap: break-word;
-}
-</style>
