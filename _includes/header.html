@@ -1,9 +1,9 @@
 <nav class="uk-navbar">
     <a class="uk-navbar-brand" href="/">首页</a>
     <ul class="uk-navbar-nav">
-        <li v-bind:class="{ uk-active: current_io === 'json' }">
+        <li v-bind:class="{current_io === 'json' ? uk-active : ''}">
             <a href="http://feling.io/json/index.html">JSON</a></li>
-        <li v-bind:class="{ uk-active: current_io === 'qr' }">
+        <li v-bind:class="{current_io === 'qr' ? uk-active : ''}">
             <a href="http://feling.io/qr/index.html">二维码</a></li>
     </ul>
 </nav>
