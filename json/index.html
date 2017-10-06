@@ -3,7 +3,7 @@ layout: default
 keywords: [feling.io, 在线小工具, json]
 ---
 
-<div id="vm" class="uk-flex uk-grid-small">
+<div id="main" class="uk-flex uk-grid-small">
     <div>
         <textarea id="json_src" v-model="json_src"></textarea>
     </div>
@@ -16,7 +16,7 @@ keywords: [feling.io, 在线小工具, json]
 <script>
     vm_header.current_io = 'json'
     var vm = new Vue({
-        el: "#vm"
+        el: "#main"
         data: {
             json_src: "{}"
         }
