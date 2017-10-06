@@ -5,12 +5,16 @@ keywords: [feling.io, 在线小工具, json]
 
 <div id="main" class="uk-flex uk-grid-small">
     <div>
-        <textarea id="json_src" v-model="input"></textarea>
+        <textarea id="json_src" v-model="json_src"></textarea>
     </div>
     <div >
         <div>sfsafasf</div>
-        <div>{% raw %} {{ input }} {% endraw %}</div>
+        <div id="json_result">{% raw %} {{ json_result }} {% endraw %}</div>
     </div>
+</div>
+
+<div>
+    <!-- 历史记录、保存 -->
 </div>
 
 
@@ -19,16 +23,24 @@ keywords: [feling.io, 在线小工具, json]
     var vm = new Vue({
         el: "#main",
         data: {
-            input: "{}"
+            json_src: '{"site": "feling.io"}'
+        },
+        computed: {
+            json_result: function () {
+                return this.json_src + 'xxxx'
+            }
         }
     })
 
 </script>
 
 <style type="text/css">
-
 #json_src {
     padding: 10px;
+    width: 40%;
+},
+#json_result {
+    padding: 10px;
+    width: 100%;
 }
-
 </style>
