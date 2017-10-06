@@ -5,11 +5,11 @@ keywords: [feling.io, 在线小工具, json]
 
 <div id="main" class="uk-grid uk-grid-small">
     <div class="uk-width-4-10">
-        <textarea id="json_src" v-model="json_src"></textarea>
+        <textarea id="json_src" class="uk-width-1-1" autofocus v-model="json_src"></textarea>
     </div>
     <div class="uk-width-6-10">
-        <div>sfsafasf</div>
-        <div id="json_result">{% raw %} {{ json_result }} {% endraw %}</div>
+        <div class="uk-width-1-1">sfsafasf</div>
+        <textarea disabled id="json_result" class="uk-width-1-1">{% raw %} {{ json_result }} {% endraw %}</div>
     </div>
 </div>
 
