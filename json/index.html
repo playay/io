@@ -5,11 +5,11 @@ keywords: [feling.io, 在线小工具, json]
 
 <div id="main" class="uk-flex uk-grid-small">
     <div>
-        <textarea id="json_src" v-model="json_src"></textarea>
+        <textarea id="json_src" v-model="input"></textarea>
     </div>
     <div >
         <div>sfsafasf</div>
-        <div>{{json_src}}</div>
+        <div>{{ input }}</div>
     </div>
 </div>
 
@@ -19,7 +19,7 @@ keywords: [feling.io, 在线小工具, json]
     var vm = new Vue({
         el: "#main",
         data: {
-            json_src: "{}"
+            input: "{}"
         }
     })
 
@@ -31,6 +31,7 @@ keywords: [feling.io, 在线小工具, json]
     padding: 2px;
     width: 50%;
     max-width: 70%;
+    height: 100%;
 }
 
 </style>
