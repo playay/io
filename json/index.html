@@ -3,11 +3,11 @@ layout: default
 keywords: [feling.io, 在线小工具, json]
 ---
 
-<div id="main" class="uk-flex uk-grid-small">
-    <div>
+<div id="main" class="uk-grid-small">
+    <div class="uk-width-4-10">
         <textarea id="json_src" v-model="json_src"></textarea>
     </div>
-    <div >
+    <div class="uk-width-6-10">
         <div>sfsafasf</div>
         <div id="json_result">{% raw %} {{ json_result }} {% endraw %}</div>
     </div>
@@ -37,10 +37,8 @@ keywords: [feling.io, 在线小工具, json]
 <style type="text/css">
 #json_src {
     padding: 10px;
-    width: 40%;
 },
 #json_result {
     padding: 10px;
-    width: 100%;
 }
 </style>
