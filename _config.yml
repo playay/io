@@ -1,0 +1,5 @@
+title:          feling.io
+exclude:        ['README.md']
+timezone:       Asia/shanghai
+encoding:       'utf-8'
+url:            http://feling.io
