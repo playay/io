@@ -174,7 +174,7 @@ TODO: 历史记录、保存
                     document.getElementById("json_result"),
                     function(element, depth) {
                         if(element.tagName === 'I'){
-                            if(depth >= level){
+                            if(depth > level){
                                 this.fold(element)
                             } else {
                                 this.unFold(element)
@@ -185,10 +185,6 @@ TODO: 历史记录、保存
                 )
             },
             traverseChildren: function (element, func, depth) {
-                if (element.childNodes === undefined) {
-                    console.log('level')
-                    return
-                }
                 for(var i = 0; i < element.childNodes.length; i++){
                     this.traverseChildren(element.childNodes[i], func, depth + 1)
                 }
