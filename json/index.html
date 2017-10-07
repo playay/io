@@ -46,6 +46,7 @@ TODO: 历史记录、保存
                         this.jsonResultTemp = this.jsonResultTemp + key + ':'
                         this.parse(obj[key])
                     }
+                    return
                 }
                 this.jsonResultTemp = this.jsonResultTemp + obj + '\n<br>'
             },
@@ -56,10 +57,7 @@ TODO: 历史记录、保存
                 try {
                     var obj = JSON.parse(this.jsonSrc)
                     this.jsonResultTemp = ''
-                    for (key in obj) {
-                        this.jsonResultTemp = this.jsonResultTemp + key + ':'
-                        this.parse(obj[key])
-                    }
+                    this.parse(obj)
                     this.jsonResult = this.jsonResultTemp
                 } catch (e) {
                     this.jsonResult = e.message;
