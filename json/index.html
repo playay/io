@@ -3,6 +3,14 @@ layout: default
 keywords: [feling.io, 在线工具, json]
 ---
 
+<style type="text/css">
+.json_key {
+    color: #92278f;
+    font-weight: bold;
+}
+</style>
+
+
 <div id="main" class="uk-grid uk-grid-collapse">
     <div class="uk-width-4-10" style="padding: 10px;">
         <textarea id="json_src" class="uk-width-1-1" autofocus 
@@ -34,7 +42,7 @@ TODO: 历史记录、保存
             jsonSrc: '',
             jsonResultTemp: '',
             jsonResult: '',
-            tab: '....'
+            tab: '&nbsp;&nbsp;&nbsp;&nbsp;'
         },
         methods: {
             isArray: function (obj) {
@@ -42,7 +50,7 @@ TODO: 历史记录、保存
             },
             genKey: function (key, depth) {
                 return "<br>"
-                + "<span class='property_name'>"
+                + "<span class='json_key'>"
                 + this.tab.repeat(depth + 1)
                 + "\""+ key + "\""
                 + "</span>:&nbsp;"
@@ -56,6 +64,7 @@ TODO: 历史记录、保存
                 } else {
                     this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
                 }
+
             },
             genEnd: function (end, depth) {
                 this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>' + this.tab.repeat(depth) + end + ','
