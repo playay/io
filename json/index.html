@@ -58,7 +58,7 @@ TODO: 历史记录、保存
             },
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
-                    this.jsonResultTemp = this.jsonResultTemp + '[<br>'
+                    this.jsonResultTemp = this.jsonResultTemp + "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(depth + 1) + '[<br>'
                     for(var i = 0; i < obj.length; i++){
                         this.genResult(obj[i], depth + 1)
                     }
@@ -66,7 +66,7 @@ TODO: 历史记录、保存
                     return
                 }
                 if ((typeof obj) == 'object') {
-                    this.jsonResultTemp = this.jsonResultTemp + '{'
+                    this.jsonResultTemp = this.jsonResultTemp + "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(depth + 1) + '{'
                     for (key in obj) {
                         console.log(key, obj[key])
                         this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
