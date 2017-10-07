@@ -34,6 +34,7 @@ TODO: 历史记录、保存
             jsonSrc: '',
             jsonResultTemp: '',
             jsonResult: ''
+            tab: '....'
         },
         methods: {
             isArray: function (obj) {
@@ -50,10 +51,10 @@ TODO: 历史记录、保存
                 return obj + ","
             },
             genStart: function (start, depth) {
-                this.jsonResultTemp = this.jsonResultTemp + "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(depth) + start
+                this.jsonResultTemp = this.jsonResultTemp + this.tab.repeat(depth) + start
             },
             genEnd: function (end, depth) {
-                this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(depth) + end
+                this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + this.tab.repeat(depth) + end
             },
             deletLastComma: function (string) {
                 var index = string.lastIndexOf(',')
