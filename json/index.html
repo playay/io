@@ -83,15 +83,18 @@ TODO: 历史记录、保存
                 + "</span>:&nbsp;"
             },
             genValue: function (obj) {
+                if (obj === null) {
+                    return '<span class="json_boolean">null</span>,'
+                }
                 var type = typeof obj
                 if (type === 'string') {
-                    return '<span class="json_string">"' + obj + '",</span>'
+                    return '<span class="json_string">"' + obj + '"</span>,'
                 }
                 if (type === 'number') {
-                    return '<span class="json_number">' + obj + ',</span>'
+                    return '<span class="json_number">' + obj + '</span>,'
                 }
                 if (type === 'boolean') {
-                    return '<span class="json_boolean">' + obj + ',</span>'
+                    return '<span class="json_boolean">' + obj + '</span>,'
                 }
             },
             genStart: function (start, depth) {
@@ -123,7 +126,7 @@ TODO: 历史记录、保存
                     this.genEnd(']', depth)
                     return
                 }
-                if ((typeof obj) === 'object' && obj != null) {
+                if ((typeof obj) === 'object' && obj !== null) {
                     this.genStart('{', depth)
                     for (key in obj) {
                         this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
