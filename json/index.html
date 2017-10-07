@@ -37,6 +37,15 @@ TODO: 历史记录、保存
             },
             jsonSrcChange: function () {
                 console.log(this.json_src)
+                if (this.json_src === "") {
+                    return
+                }
+                try {
+                    var obj = JSON.parse(this.json_src)
+                    console.log(obj)
+                } catch (e) {
+                    $id("json_result").innerHTML = e.message;
+                }
             }
         }
     })
