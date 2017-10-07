@@ -111,6 +111,9 @@ TODO: 历史记录、保存
             jsonResult: '',
             tab: '&nbsp;&nbsp;&nbsp;&nbsp;'
         },
+        mounted: function () {
+            this.jsonSrcChange()
+        },
         methods: {
             isArray: function (obj) {
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
