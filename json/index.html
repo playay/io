@@ -46,11 +46,11 @@ keywords: [feling.io, 在线工具, json]
 
     <div class="uk-width-6-10" style="padding: 10px;">
         <div class="uk-width-1-1">
-            <button class="uk-button" v-on="unFoldAll(1)">1级</button>
-            <button class="uk-button" v-on="unFoldAll(2)">2级</button>
-            <button class="uk-button" v-on="unFoldAll(3)">3级</button>
-            <button class="uk-button" v-on="unFoldAll(4)">4级</button>
-            <button class="uk-button" v-on="unFoldAll(999)">n级</button>
+            <button class="uk-button" v-on:click="unFoldAll(1)">1级</button>
+            <button class="uk-button" v-on:click="unFoldAll(2)">2级</button>
+            <button class="uk-button" v-on:click="unFoldAll(3)">3级</button>
+            <button class="uk-button" v-on:click="unFoldAll(4)">4级</button>
+            <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
         </div>
         <hr>
         <div id="json_result" class="uk-width-1-1" >
