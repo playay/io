@@ -186,6 +186,7 @@ TODO: 历史记录、保存
             },
             traverseChildren: function (element, func, depth) {
                 if (element.childNodes === undefined) {
+                    console.log('undefined')
                     return
                 }
                 for(var i = 0; i < element.childNodes.length; i++){
