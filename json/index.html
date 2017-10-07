@@ -21,6 +21,10 @@ keywords: [feling.io, 在线工具, json]
     color: #f98280;
     font-weight: bold;
 }
+.json_null {
+    color: #f98280;
+    font-weight: bold;
+}
 #json_src {
     height: 500px;
     resize: vertical;
@@ -132,26 +136,23 @@ TODO: 历史记录、保存
                 this.jsonResultTemp.push("\"</span>:&nbsp;")
             },
             genValue: function (obj, depth) {
-                var value = ''
-                var type = typeof obj
-                if (obj === null) {
-                    value = '<span class="json_boolean">null</span>,'
-                } else if (type === 'string') {
-                    value = '<span class="json_string">"' + obj + '"</span>,'
-                } else if (type === 'number') {
-                    value = '<span class="json_number">' + obj + '</span>,'
-                } else if (type === 'boolean') {
-                    value = '<span class="json_boolean">' + obj + '</span>,'
-                }
-
                 if (!this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(':&nbsp;')) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
-                this.jsonResultTemp.push(value)
+                this.jsonResultTemp.push('<span class="json_')
+                this.jsonResultTemp.push(obj)
+                this.jsonResultTemp.push('">')
+                if (typeof obj === 'string') {
+                    this.jsonResultTemp.push('"')
+                    this.jsonResultTemp.push(obj)
+                    this.jsonResultTemp.push('"')
+                } else {
+                    this.jsonResultTemp.push(obj)
+                }
+                this.jsonResultTemp.push('</span>,')
             },
             genStart: function (start, depth) {
-                console.log('alive')
                 if (this.jsonResultTemp.length > 0 
                     && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(':&nbsp;')) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
@@ -174,7 +175,8 @@ TODO: 历史记录、保存
                 var index1 = old.lastIndexOf('{')
                 var index2 = old.lastIndexOf('[')
                 if (index > index1 && index > index2) {
-                    this.jsonResultTemp.push(old.substring(0, index) + old.substring(index + 1))
+                    this.jsonResultTemp.push(old.substring(0, index))
+                    this.jsonResultTemp.push(old.substring(index + 1))
                     return
                 }
                 this.jsonResultTemp.push(old)
