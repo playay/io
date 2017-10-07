@@ -175,6 +175,7 @@ TODO: 历史记录、保存
                 var index2 = old.lastIndexOf('[')
                 if (index > index1 && index > index2) {
                     this.jsonResultTemp.push(old.substring(0, index) + old.substring(index + 1))
+                    return
                 }
                 this.jsonResultTemp.push(old)
             },
