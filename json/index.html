@@ -38,16 +38,16 @@ TODO: 历史记录、保存
     function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
-        icon.setAttribute("onClick", "javascript: unFold(this)")
-        icon.innerHTML('...')
-        icon.nextSibling.style.display = "none"
+        icon.setAttribute('onClick', 'javascript: unFold(this)')
+        icon.innerHTML = '...'
+        icon.nextSibling.style.display = 'none'
     }
     function unFold(icon) {
         icon.classList.remove('uk-icon-angle-right')
         icon.classList.add('uk-icon-angle-down')
-        icon.setAttribute("onClick", "javascript: fold(this)")
-        icon.innerHTML('')
-        icon.nextSibling.style.display = "inline"
+        icon.setAttribute('onClick', 'javascript: fold(this)')
+        icon.innerHTML = ''
+        icon.nextSibling.style.display = 'inline'
     }
     vm_header.current_io = 'json'
     var vm = new Vue({
