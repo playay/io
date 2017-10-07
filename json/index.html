@@ -4,17 +4,17 @@ keywords: [feling.io, 在线工具, json]
 ---
 
 <div id="main" class="uk-grid uk-grid-collapse">
-    <div class="uk-width-4-10">
+    <div class="uk-width-4-10" style="padding: 10px;">
         <textarea id="json_src" class="uk-width-1-1" autofocus v-model="json_src" 
-        style="padding: 10px;height: 600px;resize: vertical;font-size: 14px;">
+        style="height: 600px;resize: vertical;font-size: 14px;">
         </textarea>
     </div>
 
-    <div class="uk-width-6-10">
+    <div class="uk-width-6-10" style="padding: 10px;">
         <div class="uk-width-1-1"> TODO: 隐藏/显示左侧输入框、复制、展开</div>
         <hr>
         <div id="json_result" class="uk-width-1-1" 
-        style="padding: 10px;height: 100%;width: 100%;max-width: 100%;word-wrap: break-word;">
+        style="height: 100%;width: 100%;max-width: 100%;word-wrap: break-word;">
         {% raw %} {{ json_result }} {% endraw %}</div>
     </div>
 </div>
