@@ -15,7 +15,7 @@ keywords: [feling.io, 在线工具, json]
         <div class="uk-width-1-1"> TODO: 隐藏/显示左侧输入框、复制、展开</div>
         <hr>
         <div id="json_result" class="uk-width-1-1" 
-        style="height: 100%;width: 100%;max-width: 100%;word-wrap: break-word;">
+        style="height: 100%;width: 100%;max-width: 100%;word-wrap: break-word; padding-top: 10px;">
             <div v-html="jsonResult"></div>
         </div>
     </div>
@@ -39,13 +39,13 @@ TODO: 历史记录、保存
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
             },
             jsonSrcChange: function () {
-                console.log(this.jsonSrc)
                 if (this.jsonSrc === '') {
                     return
                 }
                 try {
                     var obj = JSON.parse(this.jsonSrc)
                     console.log(obj)
+                    this.jsonResult = '<p> nihao </p>'
                 } catch (e) {
                     this.jsonResult = e.message;
                 }
