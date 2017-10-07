@@ -57,7 +57,7 @@ TODO: 历史记录、保存
                     var obj = JSON.parse(this.jsonSrc)
                     this.jsonResultTemp = ''
                     for (key in obj) {
-\                       this.jsonResultTemp = this.jsonResultTemp + key + ':'
+                        this.jsonResultTemp = this.jsonResultTemp + key + ':'
                         this.parse(obj[key])
                     }
                     this.jsonResult = this.jsonResultTemp
