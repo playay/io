@@ -32,6 +32,7 @@ TODO: 历史记录、保存
         el: "#main",
         data: {
             jsonSrc: '',
+            jsonResultTemp: '',
             jsonResult: ''
         },
         methods: {
@@ -41,13 +42,14 @@ TODO: 历史记录、保存
             parse: function (obj) {
                 if ((typeof obj) == 'object') {
                     if (obj == null) {
-                        this.jsonResult = this.jsonResult + 'null' + '\n'
+                        this.jsonResultTemp = this.jsonResultTemp + 'null' + '\n'
                     }
                     for (key in obj) {
+                        this.jsonResultTemp = this.jsonResultTemp + key + '\n'
                         this.parse(obj[key])
                     }
                 }
-                this.jsonResult = this.jsonResult + obj + '\n'
+                this.jsonResultTemp = this.jsonResultTemp + obj + '\n'
             },
             jsonSrcChange: function () {
                 if (this.jsonSrc === '') {
@@ -57,6 +59,7 @@ TODO: 历史记录、保存
                     var obj = JSON.parse(this.jsonSrc)
                     console.log(obj)
                     this.parse(obj)
+                    this.jsonResult = this.jsonResultTemp
                 } catch (e) {
                     this.jsonResult = e.message;
                 }
