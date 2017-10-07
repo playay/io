@@ -208,7 +208,7 @@ TODO: 历史记录、保存
                     var obj = JSON.parse(this.jsonSrc)
                     this.jsonResultTemp = []
                     this.genResult(obj, 0)
-                    // this.deletLastComma()
+                    this.deletLastComma()
                     this.jsonResult = this.jsonResultTemp.join("")
                     this.costTime = new Date().getTime() - startTime
                 } catch (e) {
