@@ -75,7 +75,7 @@ keywords: [feling.io, 在线工具, json]
             <button class="uk-button" v-on:click="unFoldAll(6)">5级</button>
             <button class="uk-button" v-on:click="unFoldAll(7)">6级</button>
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
-            <button class="uk-button">耗时: {% raw %}{{costTime}}{% endraw %}ms</button>
+            <button class="uk-button">{% raw %}{{progress}}{% endraw %}</button>
             <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button>
         </div>
         <hr>
@@ -113,7 +113,7 @@ TODO: 历史记录、保存
             jsonResultTemp: '',
             jsonResult: '',
             tab: '&nbsp;&nbsp;&nbsp;&nbsp;',
-            costTime: ''
+            progress: ''
         },
         mounted: function () {
             this.jsonSrcChange()
@@ -170,6 +170,7 @@ TODO: 历史记录、保存
                 return string
             },
             genResult: function (obj, depth) {
+                this.progress = 'depth: ' + depth
                 if (this.isArray(obj)) {
                     this.genStart('[', depth)
                     for(var i = 0; i < obj.length; i++){
@@ -199,7 +200,7 @@ TODO: 历史记录、保存
                     this.jsonResultTemp = ''
                     this.genResult(obj, 0)
                     this.jsonResult = this.deletLastComma(this.jsonResultTemp)
-                    this.costTime = new Date().getTime() - startTime
+                    this.progress = '耗时: ' + new Date().getTime() - startTime + 'ms'
                 } catch (e) {
                     // TODO src 里标记出错的位置
                     this.jsonResult = e.message;
