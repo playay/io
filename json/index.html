@@ -69,6 +69,7 @@ TODO: 历史记录、保存
                 return obj + ","
             },
             genStart: function (start, depth) {
+                this.jsonResultTemp = this.jsonResultTemp + '<span>'
                 if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
                     this.jsonResultTemp = this.jsonResultTemp + start
                 } else {
@@ -77,7 +78,8 @@ TODO: 历史记录、保存
                 this.jsonResultTemp = this.jsonResultTemp + '<i class="uk-icon-angle-down" onClick="fold(this)"></i>'
             },
             genEnd: function (end, depth) {
-                this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>' + this.tab.repeat(depth) + end + ','
+                this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>' + this.tab.repeat(depth) + end + ',' 
+                + '</span>'
             },
             deletLastComma: function (string) {
                 var index = string.lastIndexOf(',')
