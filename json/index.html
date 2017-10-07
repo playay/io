@@ -75,7 +75,7 @@ keywords: [feling.io, 在线工具, json]
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(6)">5级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(7)">6级</button>
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
-            <button class="uk-button">耗时: {% raw %}{{costTime}}{% endraw %}ms</button>
+            <button class="uk-button uk-visible-large">耗时: {% raw %}{{costTime}}{% endraw %}ms</button>
             <input type="checkbox" v-model="arraySampling" v-on:change="jsonSrcChange"><label>数组只解析第一个元素</label>
             <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button>
         </div>
