@@ -42,7 +42,7 @@ TODO: 历史记录、保存
             genKey: function (key, depth) {
                 return "<br>"
                 + "<span class='property_name'>"
-                + "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(depth)
+                + "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(depth + 1)
                 + "\""+ key + "\""
                 + "</span>:&nbsp;"
             },
@@ -62,7 +62,7 @@ TODO: 历史记录、保存
                     for(var i = 0; i < obj.length; i++){
                         this.genResult(obj[i], depth + 1)
                     }
-                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>]'
+                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>],'
                     return
                 }
                 if ((typeof obj) == 'object') {
@@ -72,7 +72,7 @@ TODO: 历史记录、保存
                         this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
                     }
-                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>}'
+                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>},'
                     return
                 }
                 this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj)
@@ -85,7 +85,7 @@ TODO: 历史记录、保存
                     var obj = JSON.parse(this.jsonSrc)
                     this.jsonResultTemp = ''
                     this.genResult(obj, 0)
-                    this.jsonResult = this.jsonResultTemp
+                    this.jsonResult = this.deletLastComma(this.jsonResultTemp)
                 } catch (e) {
                     // TODO src 里标记出错的位置
                     this.jsonResult = e.message;
