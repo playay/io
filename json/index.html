@@ -173,7 +173,7 @@ TODO: 历史记录、保存
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
                     this.genStart('[', depth)
-                    for(var i = 0; i < (arraySampling ? Math.max(obj.length, 1) : obj.length); i++) {
+                    for(var i = 0; i < (this.arraySampling ? Math.max(obj.length, 1) : obj.length); i++) {
                         this.genResult(obj[i], depth + 1)
                     }
                     this.genEnd(']', depth)
