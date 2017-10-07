@@ -123,7 +123,7 @@ TODO: 历史记录、保存
                     this.genEnd(']', depth)
                     return
                 }
-                if ((typeof obj) == 'object') {
+                if ((typeof obj) === 'object' && obj !== null) {
                     this.genStart('{', depth)
                     for (key in obj) {
                         this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
