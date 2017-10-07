@@ -140,16 +140,16 @@ TODO: 历史记录、保存
                     this.jsonResultTemp.push('<br>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
-                var type = typeof obj;
+                var type = obj === null ? 'null' : typeof obj
                 this.jsonResultTemp.push('<span class="json_')
                 this.jsonResultTemp.push(type)
                 this.jsonResultTemp.push('">')
                 if (type === 'string') {
                     this.jsonResultTemp.push('"')
-                    this.jsonResultTemp.push(obj)
+                    this.jsonResultTemp.push(obj === null ? 'null' : obj)
                     this.jsonResultTemp.push('"')
                 } else {
-                    this.jsonResultTemp.push(obj)
+                    this.jsonResultTemp.push(obj === null ? 'null' : obj)
                 }
                 this.jsonResultTemp.push('</span>,')
             },
