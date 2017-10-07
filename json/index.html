@@ -41,9 +41,6 @@ TODO: 历史记录、保存
             },
             parse: function (obj) {
                 if ((typeof obj) == 'object') {
-                    if (obj == null) {
-                        this.jsonResultTemp = this.jsonResultTemp + 'null' + '\n'
-                    }
                     for (key in obj) {
                         if (key.startsWith("__")) {
                             return
