@@ -152,8 +152,8 @@ TODO: 历史记录、保存
             },
             genStart: function (start, depth) {
                 console.log('alive')
-                if (!this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(':&nbsp;') // 冒号后面不换行
-                    && this.jsonResultTemplength > 0) {
+                if (this.jsonResultTemp.length > 0 
+                    && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(':&nbsp;')) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
