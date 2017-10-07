@@ -72,11 +72,14 @@ keywords: [feling.io, 在线工具, json]
             <button class="uk-button" v-on:click="unFoldAll(3)">2级</button>
             <button class="uk-button" v-on:click="unFoldAll(4)">3级</button>
             <button class="uk-button" v-on:click="unFoldAll(5)">4级</button>
+            <button class="uk-button" v-on:click="unFoldAll(6)">5级</button>
+            <button class="uk-button" v-on:click="unFoldAll(7)">6级</button>
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
+            <button class="uk-button" style="float: right;">耗时: {% raw %}{{costTime}}{% endRaw %}ms</button>
             <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button>
         </div>
         <hr>
-        <div id="json_result" class="uk-width-1-1" >
+        <div id="json_result" class="uk-width-1-1">
             <div v-html="jsonResult"></div>
         </div>
     </div>
@@ -109,7 +112,8 @@ TODO: 历史记录、保存
             jsonSrc: '{"siteList":["feling.io","pages.feling.net"],"number":123,"obj":{"null":null,"boolean":true},"objList":[{"key":"value"},{}]}',
             jsonResultTemp: '',
             jsonResult: '',
-            tab: '&nbsp;&nbsp;&nbsp;&nbsp;'
+            tab: '&nbsp;&nbsp;&nbsp;&nbsp;',
+            costTime: ''
         },
         mounted: function () {
             this.jsonSrcChange()
@@ -191,10 +195,12 @@ TODO: 历史记录、保存
                     return
                 }
                 try {
+                    var startTime = new Date().getTime()
                     var obj = JSON.parse(this.jsonSrc)
                     this.jsonResultTemp = ''
                     this.genResult(obj, 0)
                     this.jsonResult = this.deletLastComma(this.jsonResultTemp)
+                    this.costTime = new Date().getTime() - startTime
                 } catch (e) {
                     // TODO src 里标记出错的位置
                     this.jsonResult = e.message;
