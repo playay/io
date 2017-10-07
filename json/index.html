@@ -51,7 +51,7 @@ TODO: 历史记录、保存
                 return obj + ","
             },
             genStart: function (start, depth) {
-                if (this.jsonResultTemp.endsWith(':&nbsp;')) {
+                if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
                     this.jsonResultTemp = this.jsonResultTemp + start
                 } else {
                     this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
