@@ -170,9 +170,9 @@ TODO: 历史记录、保存
             },
             deletLastComma: function () {
                 var old = this.jsonResultTemp.pop()
-                var index = string.lastIndexOf(',')
-                var index1 = string.lastIndexOf('{')
-                var index2 = string.lastIndexOf('[')
+                var index = old.lastIndexOf(',')
+                var index1 = old.lastIndexOf('{')
+                var index2 = old.lastIndexOf('[')
                 if (index > index1 && index > index2) {
                     this.jsonResultTemp.push(old.substring(0, index) + old.substring(index + 1))
                 }
