@@ -76,7 +76,7 @@ TODO: 历史记录、保存
                 } else {
                     this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
                 }
-                this.jsonResultTemp = this.jsonResultTemp + '<i class="uk-icon-angle-down" onClick="fold(this)">···</i><span class="foldContent">'
+                this.jsonResultTemp = this.jsonResultTemp + '<i class="uk-icon-angle-down" onClick="fold(this)">··</i><span class="foldContent">'
             },
             genEnd: function (end, depth) {
                 this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>' + this.tab.repeat(depth) 
