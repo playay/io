@@ -125,7 +125,7 @@ TODO: 历史记录、保存
                 + "\""+ key + "\""
                 + "</span>:&nbsp;"
             },
-            genValue: function (obj) {
+            genValue: function (obj, depth) {
                 if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
                     this.jsonResultTemp = this.jsonResultTemp + start
                 } else {
@@ -183,7 +183,7 @@ TODO: 历史记录、保存
                     this.genEnd('}', depth)
                     return
                 }
-                this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj)
+                this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj, depth)
             },
             jsonSrcChange: function () {
                 if (this.jsonSrc === '') {
