@@ -39,13 +39,13 @@ TODO: 历史记录、保存
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
         icon.setAttribute("onClick", "javascript: unFold(this)")
-        icon.nextSibling.setAttribute("display", "none")
+        icon.nextSibling.style.display = "none"
     }
     function unFold(icon) {
         icon.classList.remove('uk-icon-angle-right')
         icon.classList.add('uk-icon-angle-down')
         icon.setAttribute("onClick", "javascript: fold(this)")
-        icon.nextSibling.setAttribute("display", "inline")
+        icon.nextSibling.style.display = "inline"
     }
     vm_header.current_io = 'json'
     var vm = new Vue({
