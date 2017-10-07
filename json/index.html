@@ -141,18 +141,17 @@ TODO: 历史记录、保存
                     value = '<span class="json_boolean">' + obj + '</span>,'
                 }
 
-                if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
-                    this.jsonResultTemp += value
-                } else {
-                    this.jsonResultTemp += '<br>' + this.tab.repeat(depth) + value
+                if (!this.jsonResultTemp.endsWith(':&nbsp;')) {
+                    this.jsonResultTemp += '<br>' + this.tab.repeat(depth)
                 }
+                this.jsonResultTemp += value
             },
             genStart: function (start, depth) {
-                if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
-                    this.jsonResultTemp += start
-                } else {
-                    this.jsonResultTemp += '<br>' + this.tab.repeat(depth) + start
+                console.log('alive')
+                if (!this.jsonResultTemp.endsWith(':&nbsp;') && this.jsonResultTemp !== '') {
+                    this.jsonResultTemp += '<br>' + this.tab.repeat(depth)
                 }
+                this.jsonResultTemp += start
                 this.jsonResultTemp += '<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">'
             },
             genEnd: function (end, depth) {
