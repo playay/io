@@ -46,10 +46,11 @@ keywords: [feling.io, 在线工具, json]
 
     <div class="uk-width-6-10" style="padding: 10px;">
         <div class="uk-width-1-1">
-            <button class="uk-button">1级</button>
-            <button class="uk-button">2级</button>
-            <button class="uk-button">3级</button>
-            <button class="uk-button">4级</button>
+            <button class="uk-button" v-on="unFoldAll(1)">1级</button>
+            <button class="uk-button" v-on="unFoldAll(2)">2级</button>
+            <button class="uk-button" v-on="unFoldAll(3)">3级</button>
+            <button class="uk-button" v-on="unFoldAll(4)">4级</button>
+            <button class="uk-button" v-on="unFoldAll(999)">n级</button>
         </div>
         <hr>
         <div id="json_result" class="uk-width-1-1" >
@@ -166,7 +167,28 @@ TODO: 历史记录、保存
                     // TODO src 里标记出错的位置
                     this.jsonResult = e.message;
                 }
-            }
+            },
+            unFoldAll: function (level) {
+                this.traverseChildren(
+                    $("#json_result"),
+                    function(element, depth) {
+                        if(element.tagName === 'I'){
+                            if(depth >= level){
+                                this.fold(element)
+                            } else {
+                                this.unFold(element)
+                            }
+                        }
+                    },
+                    0
+                )
+            },
+            traverseChildren: function (element, func, depth) {
+                for(var i = 0; i < element.childNodes.length; i++){
+                    this.traverseChildren(element.childNodes[i], func, depth + 1)
+                }
+                func(element, depth)
+            },
         }
     })
 
