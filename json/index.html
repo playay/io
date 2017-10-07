@@ -122,24 +122,21 @@ TODO: 历史记录、保存
                 return "<br>"
                 + "<span class='json_key'>"
                 + this.tab.repeat(depth + 1)
-                + "\""+ key + "\""
-                + "</span>:&nbsp;"
+                + "\""+ key + "\"</span>:&nbsp;"
             },
             genValue: function (obj, depth) {
                 var value = ''
+                var type = typeof obj
                 if (obj === null) {
                     value = '<span class="json_boolean">null</span>,'
-                }
-                var type = typeof obj
-                if (type === 'string') {
+                } else if (type === 'string') {
                     value = '<span class="json_string">"' + obj + '"</span>,'
-                }
-                if (type === 'number') {
+                } else if (type === 'number') {
                     value = '<span class="json_number">' + obj + '</span>,'
-                }
-                if (type === 'boolean') {
+                } else if (type === 'boolean') {
                     value = '<span class="json_boolean">' + obj + '</span>,'
                 }
+
                 if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
                     this.jsonResultTemp += value
                 } else {
@@ -161,7 +158,9 @@ TODO: 历史记录、保存
             },
             deletLastComma: function (string) {
                 var index = string.lastIndexOf(',')
-                if (index >= 0) {
+                var index1 = string.lastIndexOf('{')
+                var index2 = string.lastIndexOf('[')
+                if (index > index1 && index > index2) {
                     return string.substring(0, index) + string.substring(index + 1);
                 }
                 return string
