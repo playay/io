@@ -91,14 +91,14 @@ TODO: 历史记录、保存
     function fold(icon, num) {
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
-        icon.setAttribute('onClick', 'javascript: unFold(this, num)')
+        icon.setAttribute('onClick', 'javascript: unFold(this, ' + num + ')')
         icon.innerHTML = num + '...'
         icon.nextSibling.style.display = 'none'
     }
     function unFold(icon, num) {
         icon.classList.remove('uk-icon-angle-right')
         icon.classList.add('uk-icon-angle-down')
-        icon.setAttribute('onClick', 'javascript: fold(this, num)')
+        icon.setAttribute('onClick', 'javascript: fold(this, ' + num + ')')
         icon.innerHTML = num
         icon.nextSibling.style.display = 'inline'
     }
