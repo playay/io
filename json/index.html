@@ -38,6 +38,17 @@ TODO: 历史记录、保存
             isArray: function (obj) {
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
             },
+            parse: function (obj) {
+                if ((typeof obj) == 'object') {
+                    if (obj == null) {
+                        this.jsonResult = this.jsonResult + 'null' + '\n'
+                    }
+                    for (key in obj) {
+                        this.parse(obj[key])
+                    }
+                }
+                this.jsonResult = this.jsonResult + obj + '\n'
+            },
             jsonSrcChange: function () {
                 if (this.jsonSrc === '') {
                     return
@@ -45,7 +56,7 @@ TODO: 历史记录、保存
                 try {
                     var obj = JSON.parse(this.jsonSrc)
                     console.log(obj)
-                    this.jsonResult = '<p> nihao </p>'
+                    this.parse(obj)
                 } catch (e) {
                     this.jsonResult = e.message;
                 }
