@@ -126,6 +126,11 @@ TODO: 历史记录、保存
                 + "</span>:&nbsp;"
             },
             genValue: function (obj) {
+                if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
+                    this.jsonResultTemp = this.jsonResultTemp + start
+                } else {
+                    this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
+                }
                 if (obj === null) {
                     return '<span class="json_boolean">null</span>,'
                 }
