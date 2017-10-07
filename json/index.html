@@ -88,18 +88,18 @@ TODO: 历史记录、保存
 
 
 <script>
-    function fold(icon, num) {
+    function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
-        icon.setAttribute('onClick', 'javascript: unFold(this, ' + num + ')')
-        icon.innerHTML = num + '...'
+        icon.setAttribute('onClick', 'javascript: unFold(this)')
+        icon.innerHTML = '...'
         icon.nextSibling.style.display = 'none'
     }
-    function unFold(icon, num) {
+    function unFold(icon) {
         icon.classList.remove('uk-icon-angle-right')
         icon.classList.add('uk-icon-angle-down')
-        icon.setAttribute('onClick', 'javascript: fold(this, ' + num + ')')
-        icon.innerHTML = num
+        icon.setAttribute('onClick', 'javascript: fold(this)')
+        icon.innerHTML = ''
         icon.nextSibling.style.display = 'inline'
     }
     vm_header.current_io = 'json'
@@ -143,13 +143,13 @@ TODO: 历史记录、保存
                     this.jsonResultTemp += '<br>' + this.tab.repeat(depth) + value
                 }
             },
-            genStart: function (start, depth, num) {
+            genStart: function (start, depth) {
                 if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
                     this.jsonResultTemp += start
                 } else {
                     this.jsonResultTemp += '<br>' + this.tab.repeat(depth) + start
                 }
-                this.jsonResultTemp += '<i class="uk-icon-angle-down" onClick="fold(this, \''+ num +'\')"></i><span class="foldContent">'
+                this.jsonResultTemp += '<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">'
             },
             genEnd: function (end, depth) {
                 this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>' + this.tab.repeat(depth) 
@@ -167,7 +167,7 @@ TODO: 历史记录、保存
             },
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
-                    this.genStart('[', depth, obj.length)
+                    this.genStart('[', depth)
                     for(var i = 0; i < (obj.length > 10 ? 10 : obj.length); i++){
                         this.genResult(obj[i], depth + 1)
                     }
@@ -175,7 +175,7 @@ TODO: 历史记录、保存
                     return
                 }
                 if ((typeof obj) === 'object' && obj !== null) {
-                    this.genStart('{', depth, '')
+                    this.genStart('{', depth)
                     for (key in obj) {
                         console.log(key)
                         this.jsonResultTemp += this.genKey(key, depth)
