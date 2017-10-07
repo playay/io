@@ -31,9 +31,17 @@ TODO: 历史记录、保存
         data: {
             json_src: '{"site": "feling.io"}'
         },
+        methods: {
+            isArray: function (obj) {
+                return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
+            }
+        },
         computed: {
             json_result: function () {
-                return this.json_src + "TODO"
+                if (this.json_src == "") {
+                    return this.json_result
+                }
+                return "<p> nihao </p>"
             }
         }
     })
