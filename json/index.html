@@ -200,7 +200,7 @@ TODO: 历史记录、保存
                     this.jsonResultTemp = ''
                     this.genResult(obj, 0)
                     this.jsonResult = this.deletLastComma(this.jsonResultTemp)
-                    this.progress = '耗时: ' + new Date().getTime() - startTime + 'ms'
+                    this.progress = '耗时: ' + (new Date().getTime() - startTime) + 'ms'
                 } catch (e) {
                     // TODO src 里标记出错的位置
                     this.jsonResult = e.message;
