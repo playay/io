@@ -172,7 +172,7 @@ TODO: 历史记录、保存
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
                     this.genStart('[', depth)
-                    for(var i = 0; i < (obj.length > 10 ? 10 : obj.length); i++){
+                    for(var i = 0; i < obj.length; i++){
                         this.genResult(obj[i], depth + 1)
                     }
                     this.genEnd(']', depth)
@@ -181,7 +181,6 @@ TODO: 历史记录、保存
                 if ((typeof obj) === 'object' && obj !== null) {
                     this.genStart('{', depth)
                     for (key in obj) {
-                        console.log(key)
                         this.jsonResultTemp += this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
                     }
