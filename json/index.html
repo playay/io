@@ -64,7 +64,7 @@ TODO: 历史记录、保存
                 } else {
                     this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
                 }
-
+                this.jsonResultTemp = this.jsonResultTemp + '<span><i class="uk-icon-angle-down"></i></span>'
             },
             genEnd: function (end, depth) {
                 this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>' + this.tab.repeat(depth) + end + ','
