@@ -49,21 +49,30 @@ TODO: 历史记录、保存
             genValue: function (obj) {
                 return obj + ","
             },
+            deletLastComma: function (string) {
+                var index = string.lastIndexOf(',')
+                if (index >= 0) {
+                    return string.substring(0, index) + this.substring(index + string.length);
+                }
+                return string
+            },
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
                     this.jsonResultTemp = this.jsonResultTemp + '['
                     for(var i = 0; i < obj.length; i++){
                         this.genResult(obj[i], depth + 1)
                     }
-                    this.jsonResultTemp = this.jsonResultTemp + ']'
+                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>]'
                     return
                 }
                 if ((typeof obj) == 'object') {
+                    this.jsonResultTemp = this.jsonResultTemp + '{'
                     for (key in obj) {
                         console.log(key, obj[key])
                         this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
                     }
+                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>}'
                     return
                 }
                 this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj)
