@@ -126,23 +126,24 @@ TODO: 历史记录、保存
                 + "</span>:&nbsp;"
             },
             genValue: function (obj, depth) {
-                if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
-                    this.jsonResultTemp = this.jsonResultTemp + start
-                } else {
-                    this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
-                }
+                var value = ''
                 if (obj === null) {
-                    return '<span class="json_boolean">null</span>,'
+                    value = '<span class="json_boolean">null</span>,'
                 }
                 var type = typeof obj
                 if (type === 'string') {
-                    return '<span class="json_string">"' + obj + '"</span>,'
+                    value = '<span class="json_string">"' + obj + '"</span>,'
                 }
                 if (type === 'number') {
-                    return '<span class="json_number">' + obj + '</span>,'
+                    value = '<span class="json_number">' + obj + '</span>,'
                 }
                 if (type === 'boolean') {
-                    return '<span class="json_boolean">' + obj + '</span>,'
+                    value = '<span class="json_boolean">' + obj + '</span>,'
+                }
+                if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
+                    this.jsonResultTemp = this.jsonResultTemp + value
+                } else {
+                    this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + value
                 }
             },
             genStart: function (start, depth) {
@@ -183,7 +184,7 @@ TODO: 历史记录、保存
                     this.genEnd('}', depth)
                     return
                 }
-                this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj, depth)
+                this.genValue(obj, depth)
             },
             jsonSrcChange: function () {
                 if (this.jsonSrc === '') {
