@@ -40,10 +40,14 @@ TODO: 历史记录、保存
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
             },
             genKey: function (key, depth) {
-                return "<span class='property_name'>"
+                return "<br>"
+                + "<span class='property_name'>"
                 + "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(depth)
                 + "\""+ key + "\""
-                + "</span>: "
+                + "</span>:&nbsp;"
+            },
+            genValue: function (obj) {
+                return obj + ","
             },
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
@@ -62,7 +66,7 @@ TODO: 历史记录、保存
                     }
                     return
                 }
-                this.jsonResultTemp = this.jsonResultTemp + obj + '\n<br>'
+                this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj)
             },
             jsonSrcChange: function () {
                 if (this.jsonSrc === '') {
