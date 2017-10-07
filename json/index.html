@@ -43,7 +43,7 @@ TODO: 历史记录、保存
                 if (this.isArray(obj)) {
                     this.jsonResultTemp = this.jsonResultTemp + '['
                     for(var i = 0; i < obj.length; i++){
-                        this.parse(obj)
+                        this.parse(obj[i])
                     }
                     this.jsonResultTemp = this.jsonResultTemp + ']'
                     return
@@ -68,6 +68,7 @@ TODO: 历史记录、保存
                     this.parse(obj)
                     this.jsonResult = this.jsonResultTemp
                 } catch (e) {
+                    // TODO src 里标记出错的位置
                     this.jsonResult = e.message;
                 }
             }
