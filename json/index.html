@@ -39,11 +39,14 @@ TODO: 历史记录、保存
             isArray: function (obj) {
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
             },
-            parse: function (obj) {
+            genKey: function (key, depth) {
+                return "<span class='property_name'>\"" + key + "\"</span>: "
+            },
+            genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
                     this.jsonResultTemp = this.jsonResultTemp + '['
                     for(var i = 0; i < obj.length; i++){
-                        this.parse(obj[i])
+                        this.genResult(obj[i], depth + 1)
                     }
                     this.jsonResultTemp = this.jsonResultTemp + ']'
                     return
@@ -51,8 +54,8 @@ TODO: 历史记录、保存
                 if ((typeof obj) == 'object') {
                     for (key in obj) {
                         console.log(key, obj[key])
-                        this.jsonResultTemp = this.jsonResultTemp + key + ':'
-                        this.parse(obj[key])
+                        this.jsonResultTemp = this.jsonResultTemp + genKey(key, depth)
+                        this.genResult(obj[key], depth + 1)
                     }
                     return
                 }
@@ -65,7 +68,7 @@ TODO: 历史记录、保存
                 try {
                     var obj = JSON.parse(this.jsonSrc)
                     this.jsonResultTemp = ''
-                    this.parse(obj)
+                    this.genResult(obj, 0)
                     this.jsonResult = this.jsonResultTemp
                 } catch (e) {
                     // TODO src 里标记出错的位置
