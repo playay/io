@@ -110,7 +110,7 @@ TODO: 历史记录、保存
             deletLastComma: function (string) {
                 var index = string.lastIndexOf(',')
                 if (index >= 0) {
-                    return string.substring(0, index) + string.substring(index + string.length);
+                    return string.substring(0, index) + string.substring(index, string.length);
                 }
                 return string
             },
