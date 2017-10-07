@@ -192,8 +192,9 @@ TODO: 历史记录、保存
             },
             selectAll: function () {
                 var range = document.createRange()
+                var selection = window.getSelection()
                 range.selectNode(document.getElementById("json_result"))
-                window.getSelection().addRange(range)
+                selection.addRange(range)
             }
         }
     })
