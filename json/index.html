@@ -9,6 +9,18 @@ keywords: [feling.io, 在线工具, json]
     color: #92278f;
     font-weight: bold;
 }
+.json_string {
+    color: #3ab54a;
+    font-weight: bold;
+}
+.json_number {
+    color: #25aae2;
+    font-weight: bold;
+}
+.json_boolean {
+    color: #f98280;
+    font-weight: bold;
+}
 </style>
 
 
@@ -71,7 +83,16 @@ TODO: 历史记录、保存
                 + "</span>:&nbsp;"
             },
             genValue: function (obj) {
-                return obj + ","
+                var type = typeof obj
+                if (type === 'string') {
+                    return '<span class="json_string">"' + obj + '",</span>'
+                }
+                if (type === 'number') {
+                    return '<span class="json_number">' + obj + ',</span>'
+                }
+                if (type === 'boolean') {
+                    return '<span class="json_boolean">' + obj + ',</span>'
+                }
             },
             genStart: function (start, depth) {
                 if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
