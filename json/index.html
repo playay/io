@@ -31,7 +31,8 @@ TODO: 历史记录、保存
     var vm = new Vue({
         el: "#main",
         data: {
-            jsonSrc: '{"site": "feling.io"}'
+            jsonSrc: '',
+            jsonResult: ''
         },
         methods: {
             isArray: function (obj) {
@@ -39,7 +40,7 @@ TODO: 历史记录、保存
             },
             jsonSrcChange: function () {
                 console.log(this.jsonSrc)
-                if (this.jsonSrc === "") {
+                if (this.jsonSrc === '') {
                     return
                 }
                 try {
