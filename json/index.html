@@ -141,16 +141,16 @@ TODO: 历史记录、保存
                     value = '<span class="json_boolean">' + obj + '</span>,'
                 }
                 if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
-                    this.jsonResultTemp = this.jsonResultTemp + value
+                    this.jsonResultTemp += value
                 } else {
-                    this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + value
+                    this.jsonResultTemp += '<br>' + this.tab.repeat(depth) + value
                 }
             },
             genStart: function (start, depth) {
                 if (this.jsonResultTemp === '' || this.jsonResultTemp.endsWith(':&nbsp;')) {
-                    this.jsonResultTemp = this.jsonResultTemp + start
+                    this.jsonResultTemp += start
                 } else {
-                    this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
+                    this.jsonResultTemp += '<br>' + this.tab.repeat(depth) + start
                 }
                 this.jsonResultTemp = this.jsonResultTemp + '<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">'
             },
@@ -178,7 +178,8 @@ TODO: 历史记录、保存
                 if ((typeof obj) === 'object' && obj !== null) {
                     this.genStart('{', depth)
                     for (key in obj) {
-                        this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
+                        console.log(key)
+                        this.jsonResultTemp += this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
                     }
                     this.genEnd('}', depth)
