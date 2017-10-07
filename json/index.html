@@ -73,7 +73,7 @@ keywords: [feling.io, 在线工具, json]
     <div id="json_result_box" class="uk-width-10-10">
         <div class="uk-width-1-1">
             <button class="uk-button" v-on:click="unFoldAll(2)">1级</button>
-            <button class="uk-button uk-visible-Medium" v-on:click="unFoldAll(3)">2级</button>
+            <button class="uk-button uk-visible-small" v-on:click="unFoldAll(3)">2级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">3级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">4级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(6)">5级</button>
@@ -114,7 +114,7 @@ TODO: 历史记录、保存
     var vm = new Vue({
         el: "#main",
         data: {
-            jsonSrc: '{"siteList":["feling.io","pages.feling.net"],"number":123,"obj":{"null":null,"boolean":true},"objList":[{"key":"value"},{}]}',
+            jsonSrc: '{"siteList":["feling.io","pages.feling.net"],"obj":{"number":123,"null":null,"boolean":true},"objList":[{"key":"value"},{}]}',
             jsonResultTemp:[],
             jsonResult: '',
             tab: '&nbsp;&nbsp;&nbsp;&nbsp;',
