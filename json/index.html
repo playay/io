@@ -40,6 +40,14 @@ TODO: 历史记录、保存
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
             },
             parse: function (obj) {
+                if (isArray(obj)) {
+                    this.jsonResultTemp = this.jsonResultTemp + '['
+                    for(var i = 0; i < obj.length; i++){
+                        this.parse(obj)
+                    }
+                    this.jsonResultTemp = this.jsonResultTemp + ']'
+                    return
+                }
                 if ((typeof obj) == 'object') {
                     for (key in obj) {
                         console.log(key, obj[key])
