@@ -36,13 +36,11 @@ TODO: 历史记录、保存
 
 <script>
     function fold(icon) {
-        console.log(icon)
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
         icon.setAttribute( "onClick", "javascript: unFold(this)" );
     }
     function unFold(icon) {
-        console.log(icon)
         icon.classList.remove('uk-icon-angle-right')
         icon.classList.add('uk-icon-angle-down')
         icon.setAttribute( "onClick", "javascript: fold(this)" );
@@ -76,7 +74,7 @@ TODO: 历史记录、保存
                 } else {
                     this.jsonResultTemp = this.jsonResultTemp + '<br>' + this.tab.repeat(depth) + start
                 }
-                this.jsonResultTemp = this.jsonResultTemp + '<span><i class="uk-icon-angle-down" onClick="fold(this)"></i></span>'
+                this.jsonResultTemp = this.jsonResultTemp + '<i class="uk-icon-angle-down" onClick="fold(this)"></i>'
             },
             genEnd: function (end, depth) {
                 this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>' + this.tab.repeat(depth) + end + ','
