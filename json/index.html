@@ -54,7 +54,7 @@ TODO: 历史记录、保存
                 if ((typeof obj) == 'object') {
                     for (key in obj) {
                         console.log(key, obj[key])
-                        this.jsonResultTemp = this.jsonResultTemp + genKey(key, depth)
+                        this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
                     }
                     return
