@@ -42,14 +42,15 @@ TODO: 历史记录、保存
             parse: function (obj) {
                 if ((typeof obj) == 'object') {
                     for (key in obj) {
-                        if (key.startsWith("__")) {
+                        console.log(key, '  key')
+                        if (key === '__proto__') {
                             return
                         }
-                        this.jsonResultTemp = this.jsonResultTemp + key + '\n'
+                        this.jsonResultTemp = this.jsonResultTemp + key + '\n<br>'
                         this.parse(obj[key])
                     }
                 }
-                this.jsonResultTemp = this.jsonResultTemp + obj + '\n'
+                this.jsonResultTemp = this.jsonResultTemp + obj + '\n<br>'
             },
             jsonSrcChange: function () {
                 if (this.jsonSrc === '') {
