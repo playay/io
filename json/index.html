@@ -47,7 +47,6 @@ TODO: 历史记录、保存
                         this.parse(obj[key])
                     }
                 }
-                console.log(obj, 11)
                 this.jsonResultTemp = this.jsonResultTemp + obj + '\n<br>'
             },
             jsonSrcChange: function () {
@@ -56,8 +55,7 @@ TODO: 历史记录、保存
                 }
                 try {
                     var obj = JSON.parse(this.jsonSrc)
-                    console.log(obj)
-                    this.jsonResult = ''
+                    this.jsonResultTemp = ''
                     for (key in obj) {
 \                       this.jsonResultTemp = this.jsonResultTemp + key + ':'
                         this.parse(obj[key])
