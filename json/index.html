@@ -60,12 +60,12 @@ keywords: [feling.io, 在线工具, json]
 
 
 <div id="main" class="uk-grid uk-grid-collapse">
-    <div id="json_src_box" class="uk-width-10-10" style="padding: 10px;">
+    <div id="json_src_box" class="uk-width-10-10">
         <textarea id="json_src" class="uk-width-1-1" autofocus v-model="jsonSrc" v-on:change="jsonSrcChange">
         </textarea>
     </div>
 
-    <div id="json_result_box" class="uk-width-10-10" style="padding: 10px;">
+    <div id="json_result_box" class="uk-width-10-10">
         <div class="uk-width-1-1">
             <button class="uk-button" v-on:click="unFoldAll(2)">1级</button>
             <button class="uk-button" v-on:click="unFoldAll(3)">2级</button>
