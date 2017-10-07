@@ -50,11 +50,11 @@ TODO: 历史记录、保存
             genValue: function (obj) {
                 return obj + ","
             },
-            genStart: function (start, depth) {
-                this.jsonResultTemp = this.jsonResultTemp + this.tab.repeat(depth) + start
+            genStart: function (start) {
+                this.jsonResultTemp = this.jsonResultTemp + start
             },
-            genEnd: function (end, depth) {
-                this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + this.tab.repeat(depth) + end
+            genEnd: function (end) {
+                this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + end
             },
             deletLastComma: function (string) {
                 var index = string.lastIndexOf(',')
@@ -65,21 +65,21 @@ TODO: 历史记录、保存
             },
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
-                    this.genStart('[<br>', depth)
+                    this.genStart('[<br>')
                     for(var i = 0; i < obj.length; i++){
                         this.genResult(obj[i], depth + 1)
                     }
-                    this.genEnd('<br>],<br>', depth)
+                    this.genEnd('<br>' + this.tab.repeat(depth) + '],<br>')
                     return
                 }
                 if ((typeof obj) == 'object') {
-                    this.genStart('{', depth)
+                    this.genStart(this.tab.repeat(depth) + '{')
                     for (key in obj) {
                         console.log(key, obj[key])
                         this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
                     }
-                    this.genEnd('<br>},<br>', depth)
+                    this.genEnd('<br>' + this.tab.repeat(depth) + '},<br>')
                     return
                 }
                 this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj)
