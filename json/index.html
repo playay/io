@@ -35,8 +35,17 @@ TODO: 历史记录、保存
 
 
 <script>
-    function fold(obj) {
-        console.log(obj)
+    function fold(icon) {
+        console.log(icon)
+        icon.classList.remove('uk-icon-angle-down')
+        icon.classList.add('uk-icon-angle-right')
+        icon.setAttribute( "onClick", "javascript: unFold(this)" );
+    }
+    function unFold(icon) {
+        console.log(icon)
+        icon.classList.remove('uk-icon-angle-right')
+        icon.classList.add('uk-icon-angle-down')
+        icon.setAttribute( "onClick", "javascript: fold(this)" );
     }
     vm_header.current_io = 'json'
     var vm = new Vue({
