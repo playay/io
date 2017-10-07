@@ -51,6 +51,7 @@ keywords: [feling.io, 在线工具, json]
             <button class="uk-button" v-on:click="unFoldAll(4)">3级</button>
             <button class="uk-button" v-on:click="unFoldAll(5)">4级</button>
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
+            <button class="uk-button" v-on:click="selectAll()">全选</button>
         </div>
         <hr>
         <div id="json_result" class="uk-width-1-1" >
@@ -169,7 +170,6 @@ TODO: 历史记录、保存
                 }
             },
             unFoldAll: function (level) {
-                console.log(level)
                 this.traverseChildren(
                     document.getElementById("json_result"),
                     function(element, depth) {
@@ -190,6 +190,9 @@ TODO: 历史记录、保存
                 }
                 func(element, depth)
             },
+            selectAll: function () {
+                window.getSelection().addRange(document.createRange().selectNode(document.getElementById("json_result")))
+            }
         }
     })
 
