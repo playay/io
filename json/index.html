@@ -58,11 +58,11 @@ TODO: 历史记录、保存
             },
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
-                    this.jsonResultTemp = this.jsonResultTemp + '['
+                    this.jsonResultTemp = this.jsonResultTemp + '[<br>'
                     for(var i = 0; i < obj.length; i++){
                         this.genResult(obj[i], depth + 1)
                     }
-                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>],'
+                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>],<br>'
                     return
                 }
                 if ((typeof obj) == 'object') {
@@ -72,7 +72,7 @@ TODO: 历史记录、保存
                         this.jsonResultTemp = this.jsonResultTemp + this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
                     }
-                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>},'
+                    this.jsonResultTemp = this.deletLastComma(this.jsonResultTemp) + '<br>},<br>'
                     return
                 }
                 this.jsonResultTemp = this.jsonResultTemp + this.genValue(obj)
