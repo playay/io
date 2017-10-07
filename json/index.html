@@ -5,7 +5,8 @@ keywords: [feling.io, 在线工具, json]
 
 <div id="main" class="uk-grid uk-grid-collapse">
     <div class="uk-width-4-10" style="padding: 10px;">
-        <textarea id="json_src" class="uk-width-1-1" autofocus v-model="json_src" 
+        <textarea id="json_src" class="uk-width-1-1" autofocus 
+        v-model="json_src" v-on:change="jsonSrcChange"
         style="height: 600px;resize: vertical;font-size: 14px;">
         </textarea>
     </div>
@@ -14,8 +15,7 @@ keywords: [feling.io, 在线工具, json]
         <div class="uk-width-1-1"> TODO: 隐藏/显示左侧输入框、复制、展开</div>
         <hr>
         <div id="json_result" class="uk-width-1-1" 
-        style="height: 100%;width: 100%;max-width: 100%;word-wrap: break-word;">
-        {% raw %} {{ json_result }} {% endraw %}</div>
+        style="height: 100%;width: 100%;max-width: 100%;word-wrap: break-word;"></div>
     </div>
 </div>
 
@@ -34,14 +34,9 @@ TODO: 历史记录、保存
         methods: {
             isArray: function (obj) {
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
-            }
-        },
-        computed: {
-            json_result: function () {
-                if (this.json_src == "") {
-                    return this.json_result
-                }
-                return "<p> nihao </p>"
+            },
+            jsonSrcChange: function () {
+                console.log(this.json_src)
             }
         }
     })
