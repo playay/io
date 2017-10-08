@@ -72,7 +72,7 @@ keywords: [feling.io, 在线工具, base64]
 <!--                         <input id="img_input" type="file" accept="image/*"/>
  -->                    </div>
                     <div class="uk-width-1-2 fl-box">
-                        <textarea style="height: 320px;resize: none;" class="uk-width-1-1" readonly spellcheck="false"></textarea>
+                        <textarea style="height: 320px;resize: none;" class="uk-width-1-1" readonly spellcheck="false" v-model="base64"></textarea>
                     </div>
                 </div>
             </li>
@@ -112,7 +112,6 @@ keywords: [feling.io, 在线工具, base64]
                 this.processImg(files[0])
             },
             processImg: function(file) {
-                console.log(file)
                 this.imgType = file.type
                 this.imgSize = file.size
                 var reader = new FileReader()
