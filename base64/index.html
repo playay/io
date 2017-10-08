@@ -107,7 +107,7 @@ keywords: [feling.io, 在线工具, base64]
             drop: function (event){
                 event.stopPropagation()
                 event.preventDefault()
-                var files = e.target.files || event.dataTransfer.files
+                var files = event.target.files || event.dataTransfer.files
                 this.processImg(files[0])
             },
             processImg: function(file) {
