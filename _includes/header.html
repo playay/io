@@ -18,33 +18,12 @@ $(function() {
 
 
 <nav id="header" class="uk-navbar">
-    <a class="uk-navbar-brand uk-hidden-large" href="#offcanvas" data-uk-offcanvas><i class="uk-navbar-toggle"></i></a>
-    <a class="uk-navbar-brand" href="https://pages.feling.net" target="_blank">pages</a>
-    <ul class="uk-navbar-nav uk-visible-large">
-        <li v-bind:class="{'uk-active': current_io === 'json'}">
-            <a href="/json/">json格式化</a></li>
-
-<!--         <li v-bind:class="{'uk-active': current_io === 'qr'}">
-            <a href="/qr/">二维码</a></li> -->
-
-        <li v-bind:class="{'uk-active': current_io === 'base64'}">
-            <a href="/base64/">base64</a></li>
-    </ul>
+    <a class="uk-navbar-brand" href="/">io</a>
     <ul class="uk-navbar-nav">
+        <li><a href="https://pages.feling.net" target="_blank">博客</a></li>
         <li><a href="https://pages.feling.net/2015/06/donate.html" target="_blank">donate</a></li>
     </ul>
 </nav>
-
-<div id="offcanvas" class="uk-offcanvas">
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-offcanvas">
-        <li><a href="/json/">json格式化</a></li>
-<!--         <li><a href="/qr/">二维码</a></li> -->
-        <li><a href="/base64/">base64</a></li>
-        <li><a href="https://pages.feling.net/2015/06/donate.html" target="_blank">donate</a></li>
-        </ul>
-    </div>
-</div>
 
 
 <script>
