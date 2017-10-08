@@ -7,6 +7,10 @@ keywords: [feling.io, 在线工具, base64]
 .fl-box {
     padding: 0px 0px 10px 10px;
 }
+#drop_box {
+    border: 1px dashed #ccc;
+    height:280px;
+}
 @media (min-width: 960px) {
     .fl-box {
         width: 50%;
@@ -53,11 +57,11 @@ keywords: [feling.io, 在线工具, base64]
             <li>
                 <div id="img_to_base64" class="uk-grid uk-grid-collapse">
                     <div class="uk-width-1-2 fl-box">
-                        <div id="drop_box" style="border: 1px dashed #ccc;" 
+                        <div id="drop_box"
                         v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
-                            <img style="max-height: 240px;" v-bind:src="imgInput"></img>
+                            <img style="max-height: 280px;" v-bind:src="imgInput"></img>
                         </div>
-                        <input id="img_input" type="file" accept="image/*"/>
+                        <input id="img_input" type="file" accept="image/*" v-on:change="processImg()"/>
                     </div>
                     <div class="uk-width-1-2 fl-box">
                         <textarea style="height: 320px;" class="uk-width-1-1" readonly spellcheck="false"></textarea>
@@ -92,8 +96,7 @@ keywords: [feling.io, 在线工具, base64]
             drop: function (event){
                 event.stopPropagation()
                 event.preventDefault()
-                var data = event.dataTransfer
-                var files = data.files
+                var files = event.originalEvent.dataTransfer.files;
                 this.processImg(files[0])
             },
             processImg: function(file) {
