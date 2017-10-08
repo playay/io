@@ -68,6 +68,7 @@ keywords: [feling.io, 在线工具, base64]
                     </div>
                 </div>
             </li>
+
         </ul>
     </div>
 </div>
@@ -100,6 +101,7 @@ keywords: [feling.io, 在线工具, base64]
                 this.processImg(files[0])
             },
             processImg: function(file) {
+                console.log(file)
                 var reader = new FileReader()
                 reader.onload = function (o) {
                     this.imgInput = "url('" + o.target.result + "')"
