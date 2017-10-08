@@ -112,8 +112,8 @@ keywords: [feling.io, 在线工具, base64]
             },
             processImg: function(file) {
                 console.log(file)
-                this.imgType = ''
-                this.imgSize = ''
+                this.imgType = file.type
+                this.imgSize = file.size
                 var reader = new FileReader()
                 reader.onload = function (o) {
                     this.imgInput = o.target.result
