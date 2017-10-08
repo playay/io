@@ -25,7 +25,7 @@ keywords: [feling.io, 在线工具, base64]
                     <div id="base64_to_img_src_box" class="uk-width-1-2">
                         <textarea id="base64_to_img_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="base64"></textarea>
                     </div>
-                    <div id="base64_to_img_result_box" class="uk-width-1-2" v-bind:src="base64 | addImgHead"></div>
+                    <img id="base64_to_img_result_box" class="uk-width-1-2" v-bind:src="base64 | addImgHead"></img>
                 </div>
             </li>
 
@@ -49,7 +49,7 @@ keywords: [feling.io, 在线工具, base64]
         },
         filters: {
             addImgHead: function (base64) {
-                if (base64.startsWith('data')) {
+                if (base64.startsWith('data:image/')) {
                     return base64
                 } else {
                     return 'data:image/jpg;base64,' + base64
