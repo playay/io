@@ -56,7 +56,7 @@ keywords: [feling.io, 在线工具, base64]
                             <span v-show="base64 === ''">拖拽图片到此处。。。</span>
                             <img style="max-height: 280px;" v-bind:src="base64"></img>
                         </div>
-                        <div id="info_box">
+                        <div id="info_box" v-show="imgType !== ''">
                             <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
                         </div>
                     </div>
