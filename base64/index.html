@@ -95,9 +95,10 @@ keywords: [feling.io, 在线工具, base64]
     var vm_img_to_base64 = new Vue({
         el: "#img_to_base64",
         data: {
-            imgInput: '/favicon.png',
+            imgInput: '',
             imgType: '',
-            imgSize: ''
+            imgSize: '',
+            base64: ''
         },
         methods: {
             ignoreDrag: function(event) {
@@ -116,7 +117,8 @@ keywords: [feling.io, 在线工具, base64]
                 this.imgSize = file.size
                 var reader = new FileReader()
                 reader.onload = function (o) {
-                    this.imgInput = o.target.result
+                    this.base64 = o.target.result
+                    this.imgInput = this.base64
                 }
                 reader.readAsDataURL(file);
             }
