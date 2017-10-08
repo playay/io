@@ -53,11 +53,13 @@ keywords: [feling.io, 在线工具, base64]
             <li>
                 <div id="img_to_base64" class="uk-grid uk-grid-collapse">
                     <div class="uk-width-1-2 fl-box">
-                        <img style="max-height: 240px;" src="/favicon.png"></img>
+                        <div id="dropBox" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
+                            <img style="max-height: 240px;" v-bind:src="imgInput"></img>
+                        </div>
                         <input id="img_input" type="file" accept="image/*"/>
                     </div>
                     <div class="uk-width-1-2 fl-box">
-                        <textarea style="height: 320px;" class="uk-width-1-1" autofocus spellcheck="false"></textarea>
+                        <textarea style="height: 320px;" class="uk-width-1-1" readonly spellcheck="false"></textarea>
                     </div>
                 </div>
             </li>
@@ -79,6 +81,27 @@ keywords: [feling.io, 在线工具, base64]
     var vm_img_to_base64 = new Vue({
         el: "#img_to_base64",
         data: {
+            imgInput: '/favicon.png'
+        },
+        methods: {
+            ignoreDrag: function(event) {
+                event.stopPropagation()
+                event.preventDefault()
+            },
+            drop: function (event){
+                event.stopPropagation()
+                event.preventDefault()
+                var data = event.dataTransfer
+                var files = data.files
+                processImg(files[0])
+            },
+            processImg: function(file) {
+                var reader = new FileReader()
+                reader.onload = function (o) {
+                    this.imgInput = "url('" + o.target.result + "')"
+                }
+                reader.readAsDataURL(file);
+            }
         }
     })
 </script>
