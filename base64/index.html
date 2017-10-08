@@ -58,11 +58,11 @@ keywords: [feling.io, 在线工具, base64]
                 <div id="img_to_base64" class="uk-grid uk-grid-collapse">
                     <div class="uk-width-1-2 fl-box">
                         <div id="drop_box"
-                        v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
+                        v-on:dragenter="ignoreDrag($event)" v-on:dragover="ignoreDrag($event)" v-on:drop="drop($event)">
                             <img style="max-height: 280px;" v-bind:src="imgInput"></img>
                         </div>
-                        <input id="img_input" type="file" accept="image/*" v-on:change="processImg()"/>
-                    </div>
+<!--                         <input id="img_input" type="file" accept="image/*"/>
+ -->                    </div>
                     <div class="uk-width-1-2 fl-box">
                         <textarea style="height: 320px;" class="uk-width-1-1" readonly spellcheck="false"></textarea>
                     </div>
