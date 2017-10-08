@@ -63,6 +63,7 @@ keywords: [feling.io, 在线工具, base64]
                 <div id="img_to_base64" class="uk-grid uk-grid-collapse">
                     <div class="uk-width-1-2 fl-box">
                         <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
+                            <span v-show="imgInput === ''">拖拽图片到此处。。。</span>
                             <img style="max-height: 280px;" v-bind:src="imgInput"></img>
                         </div>
                         <div id="info_box">
