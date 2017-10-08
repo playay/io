@@ -111,13 +111,12 @@ keywords: [feling.io, 在线工具, base64]
                 this.processImg(files[0])
             },
             processImg: function(file) {
-                // this.imgType = file.type
-                // this.imgSize = file.size
+                this.imgType = file.type
+                this.imgSize = file.size
                 var reader = new FileReader()
                 reader.onload = function (o) {
-                    this.base64 = o.target.result
-                    this.imgInput = this.base64
-                    console.log(this.imgInput)
+                    vm_img_to_base64.base64 = o.target.result
+                    vm_img_to_base64.imgInput = vm_img_to_base64.base64
                 }
                 reader.readAsDataURL(file);
             }
