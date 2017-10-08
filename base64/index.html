@@ -3,22 +3,36 @@ layout: default
 keywords: [feling.io, 在线工具, base64]
 ---
 
+<p> base64 开发中</p>
 
 <div class="uk-grid">
-    <div class="uk-width-1-10">
+    <div class="uk-width-2-10">
         <ul class="uk-tab uk-tab-left" data-uk-tab="{connect:'#main', active:2, animation:'fade'}">
-            <li><a href="#" style="white-space:nowrap;">编码</a></li>
-            <li><a href="#" style="white-space:nowrap;">解码</a></li>
-            <li><a href="#" style="white-space:nowrap;">base64 -&gt; 图片</a></li>
-            <li><a href="#" style="white-space:nowrap;">图片 -&gt; base64</a></li>
+            <li><a href="#">编码</a></li>
+            <li><a href="#">解码</a></li>
+            <li><a href="#">base64 -&gt; 图片</a></li>
+            <li><a href="#">图片 -&gt; base64</a></li>
         </ul>
     </div>
-    <div class="uk-width-9-10" style="padding: 0px 0px 10px 10px;">
+    <div class="uk-width-8-10" style="padding: 0px 0px 10px 10px;">
         <ul id="main" class="uk-switcher">
             <li>编码前 -&gt; 编码后</li>
             <li>解码前 -&gt; 解码后</li>
-            <li>base64 -&gt; 图片</li>
-            <li>图片 -&gt; base64</li>
+
+            <li>
+                <div id="base64_to_img" class="uk-grid uk-grid-collapse">
+                    <div id="base64_to_img_src_box" class="uk-width-1-1">
+                        <textarea id="base64_to_img_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="base64"></textarea>
+                    </div>
+                    <div id="base64_to_img_result_box" class="uk-width-1-1"></div>
+                </div>
+            </li>
+
+            <li>
+                <div id="img_to_base64" >
+                    
+                </div>
+            </li>
         </ul>
     </div>
 </div>
@@ -26,5 +40,21 @@ keywords: [feling.io, 在线工具, base64]
 
 <script>
     vm_header.current_io = 'base64'
+
+    var vm_base64_to_img = new Vue({
+        el: "#base64_to_img",
+        data: {
+        },
+        methods: {
+        }
+    }
+
+    var vm_base64_to_img = new Vue({
+        el: "#img_to_base64",
+        data: {
+        },
+        methods: {
+        }
+    }
 
 </script>
