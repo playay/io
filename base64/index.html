@@ -20,15 +20,18 @@ keywords: [feling.io, 在线工具, base64]
 </style>
 
 <div class="uk-grid">
-    <div class="uk-width-2-10">
-        <ul class="uk-tab uk-tab-left" style="min-width: 150px;" 
-        data-uk-tab="{connect:'#main', active:2, animation:'fade'}">
+    
+    <!-- 左侧选项卡 -->
+    <div class="uk-width-2-10" style="min-width: 150px;">
+        <ul class="uk-tab uk-tab-left" data-uk-tab="{connect:'#main', active:2, animation:'fade'}">
             <li><a href="#">编码</a></li>
             <li><a href="#">解码</a></li>
             <li><a href="#">base64 -&gt; 图片</a></li>
             <li><a href="#">图片 -&gt; base64</a></li>
         </ul>
     </div>
+
+    <!-- 右侧表单、结果 -->
     <div class="uk-width-8-10">
         <ul id="main" class="uk-switcher">
             <li>编码前 -&gt; 编码后</li>
