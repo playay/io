@@ -1,9 +1,23 @@
+<script>
+$(function() {
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 400)
+            $('div.go-top').show();
+        else
+            $('div.go-top').hide();
+    });
+    $('div.go-top').click(function() {
+        $('html, body').animate({scrollTop: 0}, 400);
+    });
+});
+</script>
 <div class="go-top">
     <div class="arrow"></div>
     <div class="stick"></div>
 </div>
+
+
 <nav id="header" class="uk-navbar">
-<!--     <a class="uk-navbar-brand uk-hidden-large" href="#offcanvas" data-uk-offcanvas><i class="uk-navbar-toggle"></i></a>-->
     <a class="uk-navbar-brand uk-hidden-large" href="#offcanvas" data-uk-offcanvas><i class="uk-navbar-toggle"></i></a>
     <a class="uk-navbar-brand" href="https://pages.feling.net" target="_blank">pages</a>
     <ul class="uk-navbar-nav uk-visible-large">
