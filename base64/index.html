@@ -62,7 +62,7 @@ keywords: [feling.io, 在线工具, base64]
             <li>
                 <div id="img_to_base64" class="uk-grid uk-grid-collapse">
                     <div class="uk-width-1-2 fl-box">
-                        <div id="drop_box" v-on:dragenter="ignoreDrag($event)" v-on:dragover="ignoreDrag($event)" v-on:drop="drop($event)">
+                        <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
                             <img style="max-height: 280px;" v-bind:src="imgInput"></img>
                         </div>
                         <div id="info_box">
@@ -107,7 +107,7 @@ keywords: [feling.io, 在线工具, base64]
             drop: function (event){
                 event.stopPropagation()
                 event.preventDefault()
-                var files = event.dataTransfer.files;
+                var files = e.target.files || event.dataTransfer.files
                 this.processImg(files[0])
             },
             processImg: function(file) {
