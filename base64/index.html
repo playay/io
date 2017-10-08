@@ -49,7 +49,7 @@ keywords: [feling.io, 在线工具, base64]
         },
         filters: {
             addImgHead: function (base64) {
-                if (base64.startsWith('data:image/jpg;base64,')) {
+                if (base64.startsWith('data')) {
                     return base64
                 } else {
                     return 'data:image/jpg;base64,' + base64
