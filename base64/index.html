@@ -58,7 +58,7 @@ keywords: [feling.io, 在线工具, base64]
                 </div>
                 <div class="uk-width-1-2 fl-box">
                     <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
-                        <span v-show="base64 === ''">拖拽图片到此处...</span>
+                        <p v-show="base64 === ''">拖拽图片到此处...</p>
                         <img style="max-height: 280px;" v-bind:src="base64"></img>
                     </div>
                     <div id="info_box" v-show="imgType !== ''">
