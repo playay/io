@@ -50,7 +50,7 @@ keywords: [feling.io, 在线工具, base64]
         filters: {
             addImgHead: function (base64) {
                 if (base64.startsWith('data:image/')) {
-                    return base64
+                    return "https://pages.feling.net/images/donate-alipay-small.png"// base64
                 } else {
                     return 'data:image/jpg;base64,' + base64
                 }
