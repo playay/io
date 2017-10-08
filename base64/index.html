@@ -11,6 +11,10 @@ keywords: [feling.io, 在线工具, base64]
     border: 1px dashed #ccc;
     height:280px;
 }
+#info_box {
+    border: 1px dashed #ccc;
+    height:40px;
+}
 @media (min-width: 960px) {
     .fl-box {
         width: 50%;
@@ -57,9 +61,11 @@ keywords: [feling.io, 在线工具, base64]
             <li>
                 <div id="img_to_base64" class="uk-grid uk-grid-collapse">
                     <div class="uk-width-1-2 fl-box">
-                        <div id="drop_box"
-                        v-on:dragenter="ignoreDrag($event)" v-on:dragover="ignoreDrag($event)" v-on:drop="drop($event)">
+                        <div id="drop_box" v-on:dragenter="ignoreDrag($event)" v-on:dragover="ignoreDrag($event)" v-on:drop="drop($event)">
                             <img style="max-height: 280px;" v-bind:src="imgInput"></img>
+                        </div>
+                        <div id="info_box">
+                            {% raw %}type: {{ imgType }} size:{{ imgSize }}{% endraw %}
                         </div>
 <!--                         <input id="img_input" type="file" accept="image/*"/>
  -->                    </div>
@@ -87,7 +93,9 @@ keywords: [feling.io, 在线工具, base64]
     var vm_img_to_base64 = new Vue({
         el: "#img_to_base64",
         data: {
-            imgInput: '/favicon.png'
+            imgInput: '/favicon.png',
+            imgType: '',
+            imgSize: ''
         },
         methods: {
             ignoreDrag: function(event) {
@@ -101,7 +109,6 @@ keywords: [feling.io, 在线工具, base64]
                 this.processImg(files[0])
             },
             processImg: function(file) {
-                console.log(file)
                 var reader = new FileReader()
                 reader.onload = function (o) {
                     console.log(o.target.result)
