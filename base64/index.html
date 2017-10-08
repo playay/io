@@ -87,10 +87,10 @@ keywords: [feling.io, 在线工具, base64]
         },
         methods: {
             onInputOrigin: function() {
-                this.base64 = btoa(this.origin)
+                this.base64 = btoa(encodeURIComponent(this.origin))
             },
             onInputBase64: function() {
-                this.origin = atob(this.base64)
+                this.origin = decodeURIComponent(atob(this.base64))
             }
         }
     })
