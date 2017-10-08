@@ -94,7 +94,7 @@ keywords: [feling.io, 在线工具, base64]
                 event.preventDefault()
                 var data = event.dataTransfer
                 var files = data.files
-                processImg(files[0])
+                this.processImg(files[0])
             },
             processImg: function(file) {
                 var reader = new FileReader()
