@@ -40,18 +40,24 @@ keywords: [feling.io, 在线工具, base64]
             <!-- base64 转 图片 -->
             <li>
                 <div id="base64_to_img" class="uk-grid uk-grid-collapse">
-                    <div id="base64_to_img_src_box" class="uk-width-1-2 fl-box">
-                        <textarea id="base64_to_img_src" style="height: 320px;" class="uk-width-1-1" autofocus spellcheck="false" v-model="base64"></textarea>
+                    <div class="uk-width-1-2 fl-box">
+                        <textarea style="height: 320px;" class="uk-width-1-1" autofocus spellcheck="false" v-model="base64"></textarea>
                     </div>
-                    <div id="base64_to_img_result_box" class="uk-width-1-2 fl-box">
-                        <img  style="max-height: 320px;" v-bind:src="base64"></img>
+                    <div class="uk-width-1-2 fl-box">
+                        <img style="max-height: 320px;" v-bind:src="base64"></img>
                     </div>
                 </div>
             </li>
 
+            <!-- 图片 转 base64 -->
             <li>
-                <div id="img_to_base64" >
-                    开发中
+                <div id="img_to_base64" class="uk-grid uk-grid-collapse">
+                    <div class="uk-width-1-2 fl-box">
+                        <img style="max-height: 320px;"></img>
+                    </div>
+                    <div class="uk-width-1-2 fl-box">
+                        <textarea style="height: 320px;" class="uk-width-1-1" autofocus spellcheck="false" v-model=""></textarea>
+                    </div>
                 </div>
             </li>
         </ul>
