@@ -45,15 +45,14 @@ keywords: [feling.io, 在线工具, base64]
     var vm_base64_to_img = new Vue({
         el: "#base64_to_img",
         data: {
-            imgHead: 'data:image/jpg;base64,',
             base64: ''
         },
         filters: {
             addImgHead: function (base64) {
-                if (base64.startsWith(vm_base64_to_img.imgHead)) {
+                if (base64.startsWith('data:image/jpg;base64,')) {
                     return base64
                 } else {
-                    return vm_base64_to_img.imgHead + base64
+                    return 'data:image/jpg;base64,' + base64
                 }
             }
         }
