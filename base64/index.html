@@ -29,7 +29,7 @@ keywords: [feling.io, 在线工具, base64]
 </style>
 
 <!-- 选项卡 -->
-<div class="uk-width-10-10" style="margin-bottom: 20px;">
+<div class="uk-width-10-10" style="margin-bottom: 10px;">
     <ul class="uk-tab uk-tab-top" data-uk-tab="{connect:'#main', active:1, animation:'fade'}">
         <li><a href="#">文字</a></li>
         <li><a href="#">图片</a></li>
@@ -47,7 +47,8 @@ keywords: [feling.io, 在线工具, base64]
         <li>
             <div id="img" class="uk-grid uk-grid-collapse">
                 <div class="uk-width-1-2 fl-box">
-                    <textarea style="height: 320px;resize: none;" placeholder="输入 url地址 或 base64码" class="uk-width-1-1" autofocus spellcheck="false" v-model="base64"></textarea>
+                    <textarea class="uk-width-1-1" style="height: 320px;resize: none;" placeholder="输入 url地址 或 base64码" 
+                    autofocus spellcheck="false" v-model="base64" v-on:input="onInputBase64"></textarea>
                 </div>
                 <div class="uk-width-1-2 fl-box">
                     <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
@@ -75,6 +76,10 @@ keywords: [feling.io, 在线工具, base64]
             base64: ''
         },
         methods: {
+            onInputBase64: function() {
+                this.imgType = ''
+                this.imgSize = ''
+            },
             ignoreDrag: function(event) {
                 event.stopPropagation()
                 event.preventDefault()
