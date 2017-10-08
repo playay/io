@@ -104,6 +104,7 @@ keywords: [feling.io, 在线工具, base64]
                 console.log(file)
                 var reader = new FileReader()
                 reader.onload = function (o) {
+                    console.log(o.target.result)
                     this.imgInput = "url('" + o.target.result + "')"
                 }
                 reader.readAsDataURL(file);
