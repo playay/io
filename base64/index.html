@@ -49,7 +49,7 @@ keywords: [feling.io, 在线工具, base64]
             <li>
                 <div id="base64_to_img" class="uk-grid uk-grid-collapse">
                     <div class="uk-width-1-2 fl-box">
-                        <textarea style="height: 320px;" class="uk-width-1-1" autofocus spellcheck="false" v-model="base64"></textarea>
+                        <textarea style="height: 320px;resize: none;" class="uk-width-1-1" autofocus spellcheck="false" v-model="base64"></textarea>
                     </div>
                     <div class="uk-width-1-2 fl-box">
                         <img style="max-height: 320px;" v-bind:src="base64"></img>
@@ -65,12 +65,12 @@ keywords: [feling.io, 在线工具, base64]
                             <img style="max-height: 280px;" v-bind:src="imgInput"></img>
                         </div>
                         <div id="info_box">
-                            {% raw %}type: {{ imgType }} size:{{ imgSize }}{% endraw %}
+                            <span>{% raw %}type:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;{{ imgSize }}{% endraw %}</span>
                         </div>
 <!--                         <input id="img_input" type="file" accept="image/*"/>
  -->                    </div>
                     <div class="uk-width-1-2 fl-box">
-                        <textarea style="height: 320px;" class="uk-width-1-1" readonly spellcheck="false"></textarea>
+                        <textarea style="height: 320px;resize: none;" class="uk-width-1-1" readonly spellcheck="false"></textarea>
                     </div>
                 </div>
             </li>
@@ -109,10 +109,12 @@ keywords: [feling.io, 在线工具, base64]
                 this.processImg(files[0])
             },
             processImg: function(file) {
+                console.log(file)
+                this.imgType = ''
+                this.imgSize = ''
                 var reader = new FileReader()
                 reader.onload = function (o) {
-                    console.log(o.target.result)
-                    this.imgInput = "url('" + o.target.result + "')"
+                    this.imgInput = o.target.result
                 }
                 reader.readAsDataURL(file);
             }
