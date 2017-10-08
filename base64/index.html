@@ -41,7 +41,15 @@ keywords: [feling.io, 在线工具, base64]
     <ul id="main" class="uk-switcher">
 
         <!-- 文字 -->
-        <li>开发中</li>
+        <li>
+            <div id="text" class="uk-grid uk-grid-collapse">
+                <div class="uk-width-1-2 fl-box">
+                    <textarea class="uk-width-1-1" style="height: 320px;resize: vertical;" placeholder="编码前" autofocus spellcheck="false" v-model="origin"></textarea>
+                </div>
+                <div class="uk-width-1-2 fl-box">
+                    <textarea class="uk-width-1-1" style="height: 320px;resize: vertical;" placeholder="编码后" autofocus spellcheck="false" v-model="base64"></textarea>
+                </div>
+        </li>
 
         <!-- 图片 -->
         <li>
@@ -67,6 +75,25 @@ keywords: [feling.io, 在线工具, base64]
 
 <script>
     vm_header.current_io = 'base64'
+
+    var vm_text = new Vue({
+        el: "#text",
+        data: {
+            origin: '你好',
+            base64: ''
+        },
+        mounted: function () {
+            this.onInputOrigin()
+        },
+        methods: {
+            onInputOrigin: function() {
+                this.base64 = btoa(this.origin)
+            },
+            onInputBase64: function() {
+                this.origin = atob(this.base64)
+            }
+        }
+    })
 
     var vm_img = new Vue({
         el: "#img",
