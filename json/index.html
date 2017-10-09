@@ -37,7 +37,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
     padding: 10px;
     font-size: 13px;
 }
-#json_result {
+#json_result_box {
     height: 100%;
     width: 100%;
     max-width: 100%;
@@ -92,8 +92,8 @@ keywords: [feling.io, 在线工具, json, 格式化]
             <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button>
         </div>
         <hr>
-        <div id="json_result" class="uk-width-1-1">
-            <pre><code v-html="jsonResult"></code></pre>
+        <div class="uk-width-1-1">
+            <pre><code v-html="jsonResult" id="json_result"></code></pre>
         </div>
     </div>
 </div>
