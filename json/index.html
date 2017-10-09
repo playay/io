@@ -231,9 +231,10 @@ keywords: [feling.io, 在线工具, json, 格式化]
             },
             selectAll: function () {
                 try {
-                    var range = document.createRange()
-                    range.selectNodeContents(document.getElementById("json_result"))
-                    window.getSelection().addRange(range)
+                    // var range = document.createRange()
+                    // range.selectNodeContents(document.getElementById("json_result"))
+                    // window.getSelection().addRange(range)
+                    document.getElementById("json_result").select
                 } catch (e) {
                     alert(e.message)
                 }
