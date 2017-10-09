@@ -114,7 +114,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
             jsonSrc: '{"siteList":["feling.io","pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}],"hello":"世界"}',
             jsonResultTemp:[],
             jsonResult: '',
-            tab: '<span>    </span>',
+            tab: '<span style="width: 4em">    </span>',
             keyEnd: '": </span>',
             arraySampling: true,// 遇到数组，只解析一个元素
             costTime: ''
@@ -166,10 +166,8 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 this.jsonResultTemp.push(this.tab.repeat(depth))
 
                 this.jsonResultTemp.push('</span>') // <span class="foldContent">
-
-                this.jsonResultTemp.push('<span>')
                 this.jsonResultTemp.push(end)
-                this.jsonResultTemp.push(',</span>')
+                this.jsonResultTemp.push(',')
             },
             deletLastComma: function () {
                 var old = this.jsonResultTemp.pop()
