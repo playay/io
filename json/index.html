@@ -136,7 +136,9 @@ keywords: [feling.io, 在线工具, json, 格式化]
             genValue: function (obj, depth) {
                 if (!this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
+                    this.jsonResultTemp.push('<span>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
+                    this.jsonResultTemp.push('</span>')
                 }
                 var type = obj === null ? 'null' : typeof obj
                 this.jsonResultTemp.push('<span class="json_')
@@ -149,24 +151,32 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 } else {
                     this.jsonResultTemp.push(obj === null ? 'null' : obj)
                 }
-                this.jsonResultTemp.push('</span>,')
+                this.jsonResultTemp.push(',</span>')
             },
             genStart: function (start, depth) {
+                this.jsonResultTemp.push('<span>')
                 if (this.jsonResultTemp.length > 0 
                     && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
                 this.jsonResultTemp.push(start)
+                this.jsonResultTemp.push('</span>')
                 this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">')
             },
             genEnd: function (end, depth) {
                 this.deletLastComma()
                 this.jsonResultTemp.push('<br>')
+
+                this.jsonResultTemp.push('<span>')
                 this.jsonResultTemp.push(this.tab.repeat(depth))
+                this.jsonResultTemp.push('</span>')
+
                 this.jsonResultTemp.push('</span>') // <span class="foldContent">
+
+                this.jsonResultTemp.push('<span>')
                 this.jsonResultTemp.push(end)
-                this.jsonResultTemp.push(',')
+                this.jsonResultTemp.push(',</span>')
             },
             deletLastComma: function () {
                 var old = this.jsonResultTemp.pop()
