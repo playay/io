@@ -205,7 +205,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                     this.costTime = new Date().getTime() - startTime
                 } catch (e) {
                     // TODO src 里标记出错的位置
-                    this.jsonResult = e.message;
+                    this.jsonResult = e.message
                 }
             },
             unFoldAll: function (level) {
@@ -230,6 +230,9 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 func(element, depth)
             },
             selectAll: function () {
+                try {
+
+
                 if (window.getSelection) {
                     var selection = window.getSelection()
                     selection.removeAllRanges()
@@ -241,6 +244,9 @@ keywords: [feling.io, 在线工具, json, 格式化]
                     textRange.moveToElementText(document.getElementById("json_result"));
                     textRange.select()
                 }
+            } catch (e) {
+                alert(e.message)
+            }
             }
         }
     })
