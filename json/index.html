@@ -230,7 +230,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 func(element, depth)
             },
             selectAll: function () {
-                if (window.selection) {
+                if (window.getSelection) {
                     var selection = window.getSelection()
                     selection.removeAllRanges()
                     var range = document.createRange()
