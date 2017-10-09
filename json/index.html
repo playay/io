@@ -230,9 +230,11 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 func(element, depth)
             },
             selectAll: function () {
+                var selection = window.getSelection()
+                selection.removeAllRanges()
                 var range = document.createRange()
                 range.selectNodeContents(document.getElementById("json_result"))
-                window.getSelection().addRange(range)
+                selection.addRange(range)
             }
         }
     })
