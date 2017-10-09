@@ -92,9 +92,9 @@ keywords: [feling.io, 在线工具, json, 格式化]
             <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button>
         </div>
         <hr>
-        <div id="json_result" class="uk-width-1-1">
-            <pre v-html="jsonResult"></pre>
-        </div>
+        <pre id="json_result" class="uk-width-1-1">
+            <code v-html="jsonResult"></code>
+        </pre>
     </div>
 </div>
 
@@ -119,8 +119,8 @@ keywords: [feling.io, 在线工具, json, 格式化]
             jsonSrc: '{"siteList":["feling.io","pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}],"hello":"世界"}',
             jsonResultTemp:[],
             jsonResult: '',
-            tab: '<span class="fl-tab">    </span>',
-            keyEnd: '": </span>',
+            tab: '    ',
+            keyEnd: '"</span>: ',
             arraySampling: true,// 遇到数组，只解析一个元素
             costTime: ''
         },
