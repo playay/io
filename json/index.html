@@ -154,7 +154,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 } else {
                     this.jsonResultTemp.push(obj === null ? 'null' : obj)
                 }
-                this.jsonResultTemp.push(',</span>')
+                this.jsonResultTemp.push('</span>,')
             },
             genStart: function (start, depth) {
                 if (this.jsonResultTemp.length > 0 
