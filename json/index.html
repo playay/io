@@ -154,14 +154,14 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 this.jsonResultTemp.push(',</span>')
             },
             genStart: function (start, depth) {
-                this.jsonResultTemp.push('<span>')
                 if (this.jsonResultTemp.length > 0 
                     && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
+                    this.jsonResultTemp.push('<span>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
+                    this.jsonResultTemp.push('</span>')
                 }
                 this.jsonResultTemp.push(start)
-                this.jsonResultTemp.push('</span>')
                 this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">')
             },
             genEnd: function (end, depth) {
