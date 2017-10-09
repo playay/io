@@ -57,9 +57,13 @@ keywords: [feling.io, 在线工具, base64]
                     autofocus spellcheck="false" v-model="base64" v-on:input="onInputBase64"></textarea>
                 </div>
                 <div class="uk-width-1-2 fl-box">
-                    <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop">
-                         <input type="image" v-bind:src="base64" value="拖拽图片到此处 / 点击上传图片">
+                    <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="$('#file_input').click()">
+                        <p style="width: 100%;height: 100%;text-align: center;line-height: 270px"
+                            v-show="base64 === ''">拖拽图片到此处 / 点击上传图片</p>
+                        <img style="max-height: 280px;" v-bind:src="base64"></img>
                     </div>
+                    <input type="file" style="display:none;" id="file_input" accept="image/*"
+                    v-on:change="onFileInputChange">
                     <div id="info_box" v-show="imgType !== ''">
                         <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
                     </div>
@@ -106,10 +110,14 @@ keywords: [feling.io, 在线工具, base64]
                 event.stopPropagation()
                 event.preventDefault()
             },
-            drop: function (event){
+            drop: function (event) {
                 event.stopPropagation()
                 event.preventDefault()
-                var files = event.target.files || event.dataTransfer.files
+                var files = event.dataTransfer.files
+                this.processImg(files[0])
+            },
+            onFileInputChange: function (event) {
+                var files = event.target.files
                 this.processImg(files[0])
             },
             processImg: function(file) {
