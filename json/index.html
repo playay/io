@@ -40,7 +40,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
     white-space: pre;
     font-size: 13px;
     line-height: 19px;
-    font-family: Consolas, monospace;
+    font-family: monospace;
 }
 
 @media (min-width: 960px) {
@@ -115,6 +115,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
             jsonResultTemp:[],
             jsonResult: '',
             tab: '    ',
+            keyEnd: ': </span>',
             arraySampling: true,// 遇到数组，只解析一个元素
             costTime: ''
         },
@@ -130,10 +131,10 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 this.jsonResultTemp.push(this.tab.repeat(depth + 1))
                 this.jsonResultTemp.push("\"")
                 this.jsonResultTemp.push(key)
-                this.jsonResultTemp.push("\"</span>:&nbsp;")
+                this.jsonResultTemp.push(this.keyEnd)
             },
             genValue: function (obj, depth) {
-                if (!this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(':&nbsp;')) { // 冒号后面不换行
+                if (!this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
@@ -152,7 +153,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
             },
             genStart: function (start, depth) {
                 if (this.jsonResultTemp.length > 0 
-                    && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(':&nbsp;')) { // 冒号后面不换行
+                    && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
