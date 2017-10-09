@@ -114,7 +114,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
             jsonSrc: '{"siteList":["feling.io","pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}],"hello":"世界"}',
             jsonResultTemp:[],
             jsonResult: '',
-            tab: '    ',
+            tab: '<span>    </span>',
             keyEnd: '": </span>',
             arraySampling: true,// 遇到数组，只解析一个元素
             costTime: ''
@@ -136,9 +136,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
             genValue: function (obj, depth) {
                 if (!this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
-                    this.jsonResultTemp.push('<span>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
-                    this.jsonResultTemp.push('</span>')
                 }
                 var type = obj === null ? 'null' : typeof obj
                 this.jsonResultTemp.push('<span class="json_')
@@ -157,9 +155,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 if (this.jsonResultTemp.length > 0 
                     && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
                     this.jsonResultTemp.push('<br>')
-                    this.jsonResultTemp.push('<span>')
                     this.jsonResultTemp.push(this.tab.repeat(depth))
-                    this.jsonResultTemp.push('</span>')
                 }
                 this.jsonResultTemp.push(start)
                 this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">')
@@ -167,10 +163,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
             genEnd: function (end, depth) {
                 this.deletLastComma()
                 this.jsonResultTemp.push('<br>')
-
-                this.jsonResultTemp.push('<span>')
                 this.jsonResultTemp.push(this.tab.repeat(depth))
-                this.jsonResultTemp.push('</span>')
 
                 this.jsonResultTemp.push('</span>') // <span class="foldContent">
 
