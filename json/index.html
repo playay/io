@@ -236,7 +236,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                     var range = document.createRange()
                     range.selectNodeContents(document.getElementById("json_result"))
                     selection.addRange(range)
-                } else {
+                } if (document.selection) { 
                     var textRange = document.body.createTextRange();
                     textRange.moveToElementText(document.getElementById("json_result"));
                     textRange.select()
