@@ -22,10 +22,10 @@ keywords: [feling.io, 在线工具, 时间戳转换]
         },
         methods: {
             onChangeTimestamp: function() {
-                this.date = new Date(timestamp)
+                this.date = new Date(this.timestamp)
             },
             onChangeDate: function() {
-                this.timestamp = new Date(date).getTime()
+                this.timestamp = new Date(this.date).getTime()
             }
         }
     })
