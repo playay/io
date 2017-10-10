@@ -23,16 +23,16 @@ keywords: [feling.io, 在线工具, 二维码识别]
 <div id="main" class="uk-grid uk-grid-small">
     <div class="uk-width-1-2 fl-box">
         <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="$('#file_input').click()">
-            <p style="width: 100%;height: 100%;text-align: center;line-height: 270px"
+            <p style="width: 100%;height: 100%;text-align: center;line-height: 230px"
                 v-show="imgBase64 === ''">拖拽二维码图片到此处 / 点击上传二维码图片</p>
-            <img style="max-height: 280px;" v-bind:src="imgBase64"></img>
+            <img style="max-height: 240px;" v-bind:src="imgBase64"></img>
         </div>
         <input type="file" style="display:none;" id="file_input" accept="image/*"
         v-on:change="onFileInputChange">
     </div>
 
     <div class="uk-width-1-2 fl-box">
-        <textarea class="uk-width-1-1" style="height: 280px;resize: none;"
+        <textarea class="uk-width-1-1" style="height: 240px;resize: none;"
         spellcheck="false" readonly v-model="textContent"></textarea>
     </div>
 </div>
@@ -45,7 +45,7 @@ var vm = new Vue({
         textContent: ''
     },
     methods: {
-        ignoreDrag: function(event) {
+        ignoreDrag: function (event) {
             event.stopPropagation()
             event.preventDefault()
         },
@@ -57,7 +57,10 @@ var vm = new Vue({
         },
         onFileInputChange: function (event) {
             var files = event.target.files
-            if (files[0]) {
+            this.processImg(files[0])
+        },
+        processImg: function (file) {
+            if (file) {
                 var reader = new FileReader()
                 reader.onload = function (o) {
                     vm.imgBase64 = o.target.result
