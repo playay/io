@@ -1,11 +1,61 @@
 ---
 layout: default
-keywords: [feling.io, 在线工具, 二维码]
+keywords: [feling.io, 在线工具, 二维码识别]
 ---
 
-<p> qr 开发中</p>
+<style type="text/css">
+#drop_box {
+    border: 1px dashed #ccc;
+    height:280px;
+}
+@media (min-width: 960px) {
+    .fl-box {
+        width: 50%;
+    }
+}
+@media (max-width: 960px) {
+    .fl-box {
+        width: 100%;
+    }
+}
+</style>
+
+<div id="main" class="uk-grid uk-grid-small">
+    <div class="uk-width-1-2 fl-box">
+        <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="$('#file_input').click()">
+            <p style="width: 100%;height: 100%;text-align: center;line-height: 270px"
+                v-show="imgBase64 === ''">拖拽二维码图片到此处 / 点击上传二维码图片</p>
+            <img style="max-height: 280px;" v-bind:src="imgBase64"></img>
+        </div>
+        <input type="file" style="display:none;" id="file_input" accept="image/*"
+        v-on:change="onFileInputChange">
+    </div>
+
+    <div class="uk-width-1-2 fl-box">
+        <textarea class="uk-width-1-1" style="height: 280px;resize: none;"
+        spellcheck="false" readonly v-model="textContent"></textarea>
+    </div>
+</div>
 
 <script>
-    vm_header.current_io = 'qr'
-
+var vm = new Vue({
+    el: "#main",
+    data: {
+        imgBase64: '',
+        textContent: ''
+    },
+    methods: {
+        onFileInputChange: function (event) {
+            var files = event.target.files
+            if (files[0]) {
+                var reader = new FileReader()
+                reader.onload = function (o) {
+                    vm.imgBase64 = o.target.result
+                    vm.textContent = 'nihao'
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+})
 </script>
