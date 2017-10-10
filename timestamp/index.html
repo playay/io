@@ -5,8 +5,8 @@ keywords: [feling.io, 在线工具, 时间戳转换]
 ---
 
 <div id="main">
-    <input type="text" autofocus v-model.lazy="timestamp" v-on:change="onChangeTimestamp"/>
-    <input type="text" autofocus v-model.lazy="date" v-on:change="onChangeDate"/>
+    <input type="text" autofocus v-model.lazy="timestamp" placeholder="毫秒数" v-on:change="onChangeTimestamp"/>
+    <input type="text" v-model.lazy="date" v-on:change="onChangeDate"/>
 </div>
 
 <script type="text/javascript" src="/js/dateFormat.min.js"></script>
