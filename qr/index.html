@@ -45,6 +45,16 @@ var vm = new Vue({
         textContent: ''
     },
     methods: {
+        ignoreDrag: function(event) {
+            event.stopPropagation()
+            event.preventDefault()
+        },
+        drop: function (event) {
+            event.stopPropagation()
+            event.preventDefault()
+            var files = event.dataTransfer.files
+            this.processImg(files[0])
+        },
         onFileInputChange: function (event) {
             var files = event.target.files
             if (files[0]) {
