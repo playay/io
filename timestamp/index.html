@@ -1,0 +1,32 @@
+---
+title: 时间戳 转 时间
+layout: default
+keywords: [feling.io, 在线工具, 时间戳转换]
+---
+
+<div id="main">
+    <input type="text" autofocus v-model.lazy="timestamp" v-on:change="onChangeTimestamp"/>
+    <input type="text" autofocus v-model.lazy="date" v-on:change="onChangeDate"/>
+</div>
+
+<script type="text/javascript" src="/js/dateFormat.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#main",
+        data: {
+            timestamp: new Date().getTime(),
+            date: ''
+        },
+        mounted: function () {
+            this.onChangeTimestamp()
+        },
+        methods: {
+            onChangeTimestamp: function() {
+                this.date = new Date(timestamp)
+            },
+            onChangeDate: function() {
+                this.timestamp = new Date(date).getTime()
+            }
+        }
+    })
+</script>
