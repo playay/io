@@ -101,7 +101,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
     var vm = new Vue({
         el: "#main",
         data: {
-            jsonSrc: '',
+            jsonSrc: '{"siteList":["feling.io","pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}],"hello":"世界"}',
             jsonResultTemp:[],
             jsonResult: '',
             tab: '    ',
@@ -111,12 +111,10 @@ keywords: [feling.io, 在线工具, json, 格式化]
         },
         mounted: function () {
             if (localStorage.json_arraySampling !== undefined) {
-                this.arraySampling = localStorage.json_arraySampling
+                this.arraySampling = localStorage.json_arraySampling === 'true'
             }
             if (localStorage.json_jsonSrc) {
                 this.jsonSrc = localStorage.json_jsonSrc
-            } else {
-                this.jsonSrc = '{"siteList":["feling.io","pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}],"hello":"世界"}'
             }
             this.jsonSrcChange()
         },
