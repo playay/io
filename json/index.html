@@ -110,6 +110,9 @@ keywords: [feling.io, 在线工具, json, 格式化]
             costTime: ''
         },
         mounted: function () {
+            if (localStorage.json_arraySampling !== undefined) {
+                this.arraySampling = localStorage.json_arraySampling
+            }
             if (localStorage.json_jsonSrc) {
                 this.jsonSrc = localStorage.json_jsonSrc
             } else {
@@ -197,6 +200,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 this.genValue(obj, depth)
             },
             jsonSrcChange: function () {
+                localStorage.json_arraySampling = this.arraySampling
                 if (this.jsonSrc === '') {
                     return
                 }
