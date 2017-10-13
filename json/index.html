@@ -154,7 +154,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
                 this.jsonResultTemp.push(start)
-                if (depth > 1) {
+                if (depth > 0) {
                     this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent" style="display:none">')
                 } else {
                     this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">')
