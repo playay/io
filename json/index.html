@@ -107,7 +107,8 @@ keywords: [feling.io, 在线工具, json, 格式化]
             tab: '    ',
             keyEnd: '"</span>: ',
             arraySampling: true,// 遇到数组，只解析一个元素
-            costTime: ''
+            costTime: '',
+            defaultFold: 0
         },
         mounted: function () {
             if (localStorage.json_arraySampling !== undefined) {
@@ -115,6 +116,9 @@ keywords: [feling.io, 在线工具, json, 格式化]
             }
             if (localStorage.json_jsonSrc) {
                 this.jsonSrc = localStorage.json_jsonSrc
+            }
+            if (localStorage.json_defaultFold) {
+                this.defaultFold = localStorage.json_defaultFold
             }
             this.jsonSrcChange()
         },
@@ -154,7 +158,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
                 this.jsonResultTemp.push(start)
-                if (depth > 0) {
+                if (depth > this.defaultFold) {
                     this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)">...</i><span class="foldContent" style="display:none">')
                 } else {
                     this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)"></i><span class="foldContent">')
@@ -223,6 +227,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                 }
             },
             unFoldAll: function (level) {
+                localStorage.json_defaultFold = level - 1
                 this.traverseChildren(
                     document.getElementById("json_result"),
                     function(element, depth) {
