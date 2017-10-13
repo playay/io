@@ -203,7 +203,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
                     this.deletLastComma()
                     this.jsonResult = this.jsonResultTemp.join("")
                     this.costTime = new Date().getTime() - startTime
-                    localStorage.json_jsonSrc = this.json_src
+                    localStorage.json_jsonSrc = this.jsonSrc
                 } catch (e) {
                     // TODO src 里标记出错的位置
                     this.jsonResult = e.message
