@@ -110,7 +110,9 @@ keywords: [feling.io, 在线工具, json, 格式化]
             costTime: ''
         },
         mounted: function () {
-            this.jsonSrcChange()
+            if (localStorage.json_jsonSrc) {
+                this.jsonSrc = localStorage.json_jsonSrc
+            }
         },
         methods: {
             isArray: function (obj) {
