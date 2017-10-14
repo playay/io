@@ -228,6 +228,7 @@ keywords: [feling.io, 在线工具, json, 格式化]
             },
             unFoldAll: function (level) {
                 localStorage.json_defaultFold = level - 1
+                this.defaultFold = level - 1
                 this.traverseChildren(
                     document.getElementById("json_result"),
                     function(element, depth) {
