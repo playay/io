@@ -22,7 +22,7 @@ keywords: [feling.io, 在线工具, 时间戳转换]
         },
         methods: {
             onChangeTimestamp: function() {
-                this.date = DateFormat.format.date(new Date(this.timestamp), "yyyy-MM-ddTHH:mm:ss.SSSZ")
+                this.date = DateFormat.format.date(new Date(this.timestamp), "yyyy-MM-dd HH:mm:ss.SSS")
             },
             onChangeDate: function() {
                 this.timestamp = new Date(this.date).getTime()
