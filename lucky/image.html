@@ -28,7 +28,7 @@ keywords: [feling.io]
                 v-show="imgURL === ''">拖拽图片到此处 / 点击上传图片</p>
             <img style="max-height: 240px;" v-bind:src="imgURL"></img>
         </div>
-        <input type="file" style="display:none;" id="file_input" accept="image/*" 
+        <input type="file" style="display:none;" id="file_input" name="file_input" accept="image/*" 
         v-on:change="onFileInputChange">
         <div id="info_box" v-show="imgType !== ''">
             <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
@@ -69,7 +69,6 @@ keywords: [feling.io]
                     this.imgSize = file.size
                     var formData = new FormData()
                     formData.append('file', $('#file_input')[0].files[0])
-                    formData.append("username","zxj")
                     $.ajax({
                         url: 'http://feling.io/luckyEurope/resource/image/upload',
                         type: 'POST',
