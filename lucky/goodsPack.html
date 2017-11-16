@@ -1,0 +1,29 @@
+---
+title: 添加 goodsPack
+layout: default
+keywords: [feling.io]
+---
+
+<style type="text/css">
+
+</style>
+
+<div id="main" class="uk-grid uk-grid-small" style="display: none;">
+    
+</div>
+
+<script>
+var vm = new Vue({
+    el: "#main",
+    data: {
+        imgBase64: '',
+        textContent: ''
+    },
+    methods: {
+        ignoreDrag: function (event) {
+            event.stopPropagation()
+            event.preventDefault()
+        }
+    }
+})
+</script>

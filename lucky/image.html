@@ -1,0 +1,90 @@
+---
+title: 上传图片
+layout: default
+keywords: [feling.io]
+---
+
+<style type="text/css">
+#drop_box {
+    border: 1px dashed #ccc;
+    height:240px;
+}
+@media (min-width: 960px) {
+    .fl-box {
+        width: 50%;
+    }
+}
+@media (max-width: 960px) {
+    .fl-box {
+        width: 100%;
+    }
+}
+</style>
+
+<div id="main" class="uk-grid uk-grid-small">
+    <div class="uk-width-1-2 fl-box">
+        <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="$('#file_input').click()">
+            <p style="width: 100%;height: 100%;text-align: center;line-height: 270px" 
+                v-show="imgURL === ''">拖拽图片到此处 / 点击上传图片</p>
+            <img style="max-height: 280px;" v-bind:src="base64"></img>
+        </div>
+        <input type="file" style="display:none;" id="file_input" accept="image/*" 
+        v-on:change="onFileInputChange">
+        <div id="info_box" v-show="imgType !== ''">
+            <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
+        </div>
+    </div>
+    <div class="uk-width-1-2 fl-box">
+        <textarea class="uk-width-1-1" style="height: 320px;resize: none;" 
+        spellcheck="false" v-model="imgURL"></textarea>
+    </div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: "#main",
+        data: {
+            imgType: '',
+            imgSize: '',
+            imgURL: ''
+        },
+        methods: {
+            ignoreDrag: function(event) {
+                event.stopPropagation()
+                event.preventDefault()
+            },
+            drop: function (event) {
+                event.stopPropagation()
+                event.preventDefault()
+                var files = event.dataTransfer.files
+                this.processImg(files[0])
+            },
+            onFileInputChange: function (event) {
+                var files = event.target.files
+                this.processImg(files[0])
+            },
+            processImg: function(file) {
+                if (file) {
+                    this.imgType = file.type
+                    this.imgSize = file.size
+                    vm.imgURL = '..'
+                    $.ajax({
+                        url: 'http://localhost:10000/luckyEurope/resource/image/upload' ,  /*这是处理文件上传的servlet*/  
+                        type: 'POST',
+                        data: new FormData(file),
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (returndata) {
+                            console.log(returndata)
+                        },
+                        error: function (returndata) {
+                            console.log(returndata)
+                        }
+                    })
+                }
+            }
+        }
+    })
+</script>
