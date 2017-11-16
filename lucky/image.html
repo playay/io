@@ -21,8 +21,8 @@ keywords: [feling.io]
 }
 </style>
 
-<div>
-    <input class="uk-form-large uk-form-width-large" type="text" id="access_token">
+<div style="margin-bottom: 10px">
+    <input class="uk-form-medium uk-form-width-large" type="text" id="access_token">
 </div>
 <div id="main" class="uk-grid uk-grid-small">
     <div class="uk-width-1-2 fl-box">
@@ -32,8 +32,8 @@ keywords: [feling.io]
             <img style="max-height: 240px;" v-bind:src="imgURL"></img>
         </div>
         <form>
-            <input type="file" style="display:none;" id="file_input" name="file[]" accept="image/*" 
-        v-on:change="onFileInputChange" multiple>
+            <input type="file" style="display:none;" id="file_input" name="file_input" accept="image/*" 
+        v-on:change="onFileInputChange">
         </form>
         <div id="info_box" v-show="imgType !== ''">
             <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
@@ -73,7 +73,7 @@ keywords: [feling.io]
                     this.imgType = file.type
                     this.imgSize = file.size
                     var formData = new FormData()
-                    formData.append('file[]', $('#file_input')[0].files[0])
+                    formData.append('file', $('#file_input')[0].files[0])
                     formData.append('accessToken', $('#access_token').val())
                     $.ajax({
                         url: 'http://feling.io/luckyEurope/resource/image/upload',
@@ -81,6 +81,7 @@ keywords: [feling.io]
                         data: formData,
                         async: true,
                         cache: false,
+                        enctype: 'multipart/form-data',
                         contentType: false,
                         processData: false,
                         success: function (returndata) {
