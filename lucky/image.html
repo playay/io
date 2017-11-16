@@ -7,7 +7,7 @@ keywords: [feling.io]
 <style type="text/css">
 #drop_box {
     border: 1px dashed #ccc;
-    height:240px;
+    height:280px;
 }
 @media (min-width: 960px) {
     .fl-box {
@@ -35,7 +35,7 @@ keywords: [feling.io]
         </div>
     </div>
     <div class="uk-width-1-2 fl-box">
-        <textarea class="uk-width-1-1" style="height: 320px;resize: none;" 
+        <textarea class="uk-width-1-1" style="height: 240px;resize: none;" 
         spellcheck="false" v-model="imgURL"></textarea>
     </div>
 </div>
@@ -67,9 +67,8 @@ keywords: [feling.io]
                 if (file) {
                     this.imgType = file.type
                     this.imgSize = file.size
-                    vm.imgURL = '..'
                     $.ajax({
-                        url: 'http://luckyEurope.feling.io:10000/luckyEurope/resource/image/upload',
+                        url: 'https://luckyEurope.feling.io:10000/luckyEurope/resource/image/upload',
                         type: 'POST',
                         data: new FormData(file),
                         async: false,
@@ -78,9 +77,11 @@ keywords: [feling.io]
                         processData: false,
                         success: function (returndata) {
                             console.log(returndata)
+                            vm.imgURL = '..'
                         },
                         error: function (returndata) {
                             console.log(returndata)
+                            vm.imgURL = '上传失败'
                         }
                     })
                 }
