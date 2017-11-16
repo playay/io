@@ -67,11 +67,13 @@ keywords: [feling.io]
                 if (file) {
                     this.imgType = file.type
                     this.imgSize = file.size
+                    var formData = new FormData()
+                    formData.append('file', file)
                     $.ajax({
                         url: 'http://luckyeurope.feling.io:10000/luckyEurope/resource/image/upload',
                         type: 'POST',
-                        data: new FormData(file),
-                        async: false,
+                        data: formData,
+                        async: true,
                         cache: false,
                         contentType: false,
                         processData: false,
