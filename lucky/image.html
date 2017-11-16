@@ -7,7 +7,7 @@ keywords: [feling.io]
 <style type="text/css">
 #drop_box {
     border: 1px dashed #ccc;
-    height:280px;
+    height:240px;
 }
 @media (min-width: 960px) {
     .fl-box {
@@ -68,7 +68,7 @@ keywords: [feling.io]
                     this.imgType = file.type
                     this.imgSize = file.size
                     $.ajax({
-                        url: 'https://luckyEurope.feling.io:10000/luckyEurope/resource/image/upload',
+                        url: 'http://luckyeurope.feling.io:10000/luckyEurope/resource/image/upload',
                         type: 'POST',
                         data: new FormData(file),
                         async: false,
