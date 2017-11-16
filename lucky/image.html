@@ -21,7 +21,7 @@ keywords: [feling.io]
 }
 </style>
 
-<div class="uk-width-1-1">
+<div class="uk-form-large uk-form-width-large">
     <input type="text" id="access_token">
 </div>
 <div id="main" class="uk-grid uk-grid-small">
@@ -33,7 +33,7 @@ keywords: [feling.io]
         </div>
         <form>
             <input type="file" style="display:none;" id="file_input" name="file_input" accept="image/*" 
-        v-on:change="onFileInputChange">
+        v-on:change="onFileInputChange" multiple>
         </form>
         <div id="info_box" v-show="imgType !== ''">
             <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
