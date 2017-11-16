@@ -69,7 +69,7 @@ keywords: [feling.io]
                     this.imgSize = file.size
                     var formData = new FormData()
                     formData.append('file', file)
-                    form.append("username","zxj")
+                    formData.append("username","zxj")
                     $.ajax({
                         url: 'http://luckyeurope.feling.io:10000/luckyEurope/resource/image/upload',
                         type: 'POST',
