@@ -26,7 +26,7 @@ keywords: [feling.io]
         <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="$('#file_input').click()">
             <p style="width: 100%;height: 100%;text-align: center;line-height: 270px" 
                 v-show="imgURL === ''">拖拽图片到此处 / 点击上传图片</p>
-            <img style="max-height: 280px;" v-bind:src="base64"></img>
+            <img style="max-height: 280px;" v-bind:src="imgURL"></img>
         </div>
         <input type="file" style="display:none;" id="file_input" accept="image/*" 
         v-on:change="onFileInputChange">
@@ -69,7 +69,7 @@ keywords: [feling.io]
                     this.imgSize = file.size
                     vm.imgURL = '..'
                     $.ajax({
-                        url: 'http://localhost:10000/luckyEurope/resource/image/upload' ,  /*这是处理文件上传的servlet*/  
+                        url: 'http://localhost:10000/luckyEurope/resource/image/upload',
                         type: 'POST',
                         data: new FormData(file),
                         async: false,
