@@ -22,7 +22,7 @@ keywords: [feling.io]
 </style>
 
 <div style="margin-bottom: 10px">
-    <input class="uk-form-medium uk-form-width-large" type="text" id="access_token">
+    <input class="uk-form-width-large" type="text" id="access_token">
 </div>
 <div id="main" class="uk-grid uk-grid-small">
     <div class="uk-width-1-2 fl-box">
@@ -81,7 +81,6 @@ keywords: [feling.io]
                         data: formData,
                         async: true,
                         cache: false,
-                        enctype: 'multipart/form-data',
                         contentType: false,
                         processData: false,
                         success: function (returndata) {
