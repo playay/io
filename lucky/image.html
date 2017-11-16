@@ -32,7 +32,7 @@ keywords: [feling.io]
             <img style="max-height: 240px;" v-bind:src="imgURL"></img>
         </div>
         <form>
-            <input type="file" style="display:none;" id="file_input" name="file_input" accept="image/*" 
+            <input type="file" style="display:none;" id="file_input" name="file[]" accept="image/*" 
         v-on:change="onFileInputChange" multiple>
         </form>
         <div id="info_box" v-show="imgType !== ''">
@@ -73,7 +73,7 @@ keywords: [feling.io]
                     this.imgType = file.type
                     this.imgSize = file.size
                     var formData = new FormData()
-                    formData.append('file', $('#file_input')[0].files[0])
+                    formData.append('file[]', $('#file_input')[0].files[0])
                     formData.append('accessToken', $('#access_token').val())
                     $.ajax({
                         url: 'http://feling.io/luckyEurope/resource/image/upload',
