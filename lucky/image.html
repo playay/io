@@ -85,7 +85,7 @@ keywords: [feling.io]
                         processData: false,
                         success: function (returndata) {
                             console.log(returndata)
-                            vm.imgURL = '..'
+                            vm.imgURL = returndata.data
                         },
                         error: function (returndata) {
                             console.log(returndata)
