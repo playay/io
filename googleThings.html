@@ -48,7 +48,7 @@
                 }
             }, (error) => {
                 console.log(error)
-                if (error.type === 'noCredentialsAvailable') {
+                if (error.type === 'noCredentialsAvailable' || true) {
                     localStorage.removeItem('accessToken')
 
                     const hintPromise = googleyolo.hint({
