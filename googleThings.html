@@ -13,7 +13,7 @@
     <script src="https://smartlock.google.com/client"></script>
     <script>
         function useGoogleIdTokenForAuth (idToken) {
-            localStorage.accessToken = idToken
+            // localStorage.accessToken = ''
         }
         window.onGoogleYoloLoad = (googleyolo) => {
             if (localStorage.accessToken) {
