@@ -13,20 +13,19 @@
     <script src="https://smartlock.google.com/client"></script>
     <script>
         function useGoogleIdTokenForAuth (idToken) {
-            console.log(idToken)
-            // WithFParams.postForm('/login/withGoogle',
-            //     {
-            //         "idToken": idToken
-            //     },
-            //     function loginResultHandler(result) {
-            //         if(result.success) {
-            //             localStorage.accessToken = result.data.accessToken
-            //         } else {
-            //             localStorage.removeItem('accessToken')
-            //             console.log(result.message)
-            //         }
-            //     }
-            // )
+            WithFParams.postForm('/login/withGoogle',
+                {
+                    "idToken": idToken
+                },
+                function loginResultHandler(result) {
+                    if(result.success) {
+                        localStorage.accessToken = result.data.accessToken
+                    } else {
+                        localStorage.removeItem('accessToken')
+                        console.log(result.message)
+                    }
+                }
+            )
         }
         window.onGoogleYoloLoad = (googleyolo) => {
             if (localStorage.accessToken) {
