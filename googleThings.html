@@ -47,6 +47,7 @@
                     useGoogleIdTokenForAuth(credential.idToken)
                 }
             }, (error) => {
+                console.log(error)
                 if (error.type === 'noCredentialsAvailable') {
                     localStorage.removeItem('accessToken')
 
@@ -67,9 +68,7 @@
                             useGoogleIdTokenForAuth(credential.idToken);
                         }
                     }, (error) => {
-                        switch (error.type) {
-
-                        }
+                        console.log(error)
                     });
                 }
             });
