@@ -1,6 +1,6 @@
 
 var WithFParams = {
-    apiHost: 'https://5136d4373af142bd9c76b15422794beb-cn-beijing.alicloudapi.com',
+    apiHost: 'http://5136d4373af142bd9c76b15422794beb-cn-beijing.alicloudapi.com',
     postJSON: function (path, data, resultHandler) {
         data.accessToken = localStorage.accessToken
         $.ajax({
