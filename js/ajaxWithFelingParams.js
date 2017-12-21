@@ -1,7 +1,7 @@
 
 var WithFParams = {
     apiHost: 'https://api.feling.io',
-    postJSON: function (path, data, resultHandler) {
+    postJson: function (path, data, resultHandler) {
         data.accessToken = localStorage.accessToken
         $.ajax({
             type: 'POST',
@@ -11,5 +11,15 @@ var WithFParams = {
             success: resultHandler,
             dataType: 'json'
           });
-    }
+    },
+    postForm: function (path, data, resultHandler) {
+        data.accessToken = localStorage.accessToken
+        $.ajax({
+            type: 'POST',
+            url: this.apiHost + path,
+            data: data,
+            success: resultHandler,
+            dataType: 'json'
+          });
+    },
 }
