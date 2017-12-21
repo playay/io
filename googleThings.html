@@ -33,7 +33,8 @@
             }
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
-                    "https://accounts.google.com"
+                    "https://accounts.google.com",
+                    
                 ],
                 supportedIdTokenProviders: [
                     {
@@ -47,7 +48,7 @@
                     useGoogleIdTokenForAuth(credential.idToken)
                 }
             }, (error) => {
-                console.log(error)
+                console.log('retrieve error: ', error)
                 if (error.type === 'noCredentialsAvailable' || true) {
                     localStorage.removeItem('accessToken')
 
@@ -68,7 +69,7 @@
                             useGoogleIdTokenForAuth(credential.idToken);
                         }
                     }, (error) => {
-                        console.log(error)
+                        console.log('hint error: ', error)
                     });
                 }
             });
