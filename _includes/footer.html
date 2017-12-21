@@ -14,7 +14,7 @@
 </div>
 
 <div id="googleThings"></div>
-<script>
+<script defer>
     var the_gfw = new Image();
     the_gfw.src = "https://www.google.com/images/branding/product/ico/googleg_lodp.ico?t=" + parseInt(new Date().getTime() / 100000);
     setTimeout(
@@ -27,6 +27,6 @@
                 $("#googleThings").html(result);
             });
         },
-        998
+        2000
     );
 </script>
