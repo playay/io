@@ -5,7 +5,7 @@ var WithFParams = {
         $.post(
             this.apiHost + 'path',
             jsonBody,
-            resultHandler(result),
+            resultHandler,
             'json'
         )
     },
