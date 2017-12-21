@@ -12,6 +12,9 @@
     <!-- 谷歌一键登录 -->
     <script src="https://smartlock.google.com/client"></script>
     <script>
+        function useGoogleIdTokenForAuth (idToken) {
+            localStorage.accessToken = idToken
+        }
         window.onGoogleYoloLoad = (googleyolo) => {
             if (localStorage.accessToken) {
                 return

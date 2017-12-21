@@ -20,13 +20,13 @@
     setTimeout(
         function () {
             if (!the_gfw.complete || !the_gfw.naturalWidth) {
-                the_gfw.src = '' // 没能在1s内请求到谷歌的icon
+                the_gfw.src = '' // 没能在2s内请求到谷歌的icon
                 return
             }
-            $.get("/googleThings.txt", function(result){
+            $.get("/googleThings.html", function(result){
                 $("#googleThings").html(result);
             });
         },
-        1000
+        2000
     );
 </script>
