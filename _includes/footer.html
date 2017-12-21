@@ -13,96 +13,20 @@
     <br/>
 </div>
 
-<div id="googleThings">
-    <div v-if="canAccessGoogle">
-        <!-- 谷歌分析 -->
-        <!-- Global Site Tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62897210-2"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'UA-62897210-2');
-        </script>
-
-        <!-- 谷歌一键登录 -->
-        <script src="https://smartlock.google.com/client"></script>
-        <script>
-            window.onGoogleYoloLoad = (googleyolo) => {
-                if (localStorage.accessToken) {
-                    return
-                }
-                const retrievePromise = googleyolo.retrieve({
-                    supportedAuthMethods: [
-                        "https://accounts.google.com"
-                    ],
-                    supportedIdTokenProviders: [
-                        {
-                            uri: "https://accounts.google.com",
-                            clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
-                        }
-                    ]
-                });
-                retrievePromise.then((credential) => {
-                    if (credential.idToken) {
-                        useGoogleIdTokenForAuth(credential.idToken)
-                    }
-                }, (error) => {
-                    if (error.type === 'noCredentialsAvailable') {
-                        localStorage.removeItem('accessToken')
-
-                        const hintPromise = googleyolo.hint({
-                            supportedAuthMethods: [
-                                "https://accounts.google.com"
-                            ],
-                            supportedIdTokenProviders: [
-                                {
-                                    uri: "https://accounts.google.com",
-                                    clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
-                                }
-                            ]
-                        });
-
-                        hintPromise.then((credential) => {
-                            if (credential.idToken) {
-                                useGoogleIdTokenForAuth(credential.idToken);
-                            }
-                        }, (error) => {
-                            switch (error.type) {
-
-                            }
-                        });
-                    }
-                });
-            }
-        </script>
-    </div>
-</div>
-
+<div id="googleThings"></div>
 <script>
-    var vm_googleThings = new Vue({
-        el: "#googleThings",
-        data: {
-            canAccessGoogle: false
-        },
-        mounted: function () {
-            var the_gfw = new Image();
-            the_gfw.src = "https://www.google.com/images/branding/product/ico/googleg_lodp.ico?t=" + parseInt(new Date().getTime() / 100000);
-            setTimeout(
-                function () {
-                    if (!the_gfw.complete || !the_gfw.naturalWidth) {
-                        the_gfw.src = '' // 没能在1s内请求到谷歌的icon
-                        return
-                    }
-                    vm_googleThings.canAccessGoogle = true
-                },
-                900
-            );
-        },
-        methods: {
-            useGoogleIdTokenForAuth: function (idToken) {
-                localStorage.accessToken = '111'
+    var the_gfw = new Image();
+    the_gfw.src = "https://www.google.com/images/branding/product/ico/googleg_lodp.ico?t=" + parseInt(new Date().getTime() / 100000);
+    setTimeout(
+        function () {
+            if (!the_gfw.complete || !the_gfw.naturalWidth) {
+                the_gfw.src = '' // 没能在1s内请求到谷歌的icon
+                return
             }
-        }
-    })
+            $.get("/googleThings.txt", function(result){
+                $("#googleThings").html(result);
+            });
+        },
+        1000
+    );
 </script>
