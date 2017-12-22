@@ -27,7 +27,7 @@ $(function() {
         <ul class="uk-navbar-nav">
             <li class="uk-parent" data-uk-dropdown>
                 <div class="uk-navbar-content">
-                    <img id="userAvatar" style="width:35px;height:35px;border-radius:50%;">
+                    <img id="userAvatar" style="width:35px;height:35px;border-radius:50%;display:none;">
                     <span id="userName" style="margin-left:5px;"></span>
                 </div>
                 <div class="uk-dropdown uk-dropdown-navbar">
@@ -41,6 +41,7 @@ $(function() {
         <script>
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 $("#userAvatar").attr("src", localStorage.userAvatar)
+                $("#userAvatar").show()
                 $("#userName").html(localStorage.userName)
             }
             loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
