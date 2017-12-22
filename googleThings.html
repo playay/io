@@ -44,7 +44,6 @@
                     useGoogleIdTokenForAuth(credential.idToken)
                 }
             }, (error) => {
-                console.log('xx', error)
                 $('#signInSpinner').hide()
                 if (error.type === 'requestFailed') {
                     alert('谷歌一键登录操作失败, 请确认网络环境')
