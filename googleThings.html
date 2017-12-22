@@ -45,6 +45,9 @@
                 }
             }, (error) => {
                 $('#signInSpinner').hide()
+                if (error.type === 'requestFailed') {
+                    console.log('xxxx')
+                }
                 // 必须登录时
                 // if (error.type === 'noCredentialsAvailable') {
                 //     const hintPromise = googleyolo.hint({
