@@ -15,7 +15,7 @@
     <script src="https://smartlock.google.com/client"></script>
     <script>
         function signOut () {
-            googleyolo.disableAutoSignIn()
+            googleyolo.disableAutoSignIn().then(() => {})
             WithFParams.postForm('/login/signOut', {},
                 function loginResultHandler(result) {
                     localStorage.removeItem('accessToken')
