@@ -24,6 +24,7 @@
                         localStorage.accessToken = result.data.accessToken
                         localStorage.userAvatar = result.data.userAvatar
                         localStorage.userName = result.data.userName
+                        loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
                     } else {
                         localStorage.removeItem('accessToken')
                         console.log(result.message)
