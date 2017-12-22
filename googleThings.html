@@ -15,15 +15,16 @@
     <script src="https://smartlock.google.com/client"></script>
     <script>
         function signOut () {
-            googleyolo.disableAutoSignIn().then(() => {})
-            WithFParams.postForm('/login/signOut', {},
-                function loginResultHandler(result) {
-                    localStorage.removeItem('accessToken')
-                    localStorage.removeItem('userAvatar')
-                    localStorage.removeItem('userName')
-                    loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
-                }
-            )
+            googleyolo.disableAutoSignIn().then(() => {
+                WithFParams.postForm('/login/signOut', {},
+                    function loginResultHandler(result) {
+                        localStorage.removeItem('accessToken')
+                        localStorage.removeItem('userAvatar')
+                        localStorage.removeItem('userName')
+                        loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
+                    }
+                )
+            })
         }
         function signIn () {
             const hintPromise = googleyolo.hint({
