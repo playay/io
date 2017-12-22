@@ -1,5 +1,3 @@
-
-
 <div>
     <!-- 谷歌分析 -->
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -14,7 +12,7 @@
     <!-- 谷歌一键登录 -->
     <script src="https://smartlock.google.com/client"></script>
     <script>
-        function signOut () {
+        function signOut() {
             googleyolo.disableAutoSignIn().then(() => {
                 WithFParams.postForm('/login/signOut', {},
                     function loginResultHandler(result) {
@@ -26,7 +24,7 @@
                 )
             })
         }
-        function signIn () {
+        function signIn() {
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
                     "https://accounts.google.com"
@@ -42,30 +40,33 @@
                 if (credential.idToken) {
                     useGoogleIdTokenForAuth(credential.idToken)
                 }
-            }, (error) => {});
+            }, (error) => {
+                // 必须登录时
+                // if (error.type === 'noCredentialsAvailable') {
+                //     const hintPromise = googleyolo.hint({
+                //         supportedAuthMethods: [
+                //             "https://accounts.google.com"
+                //         ],
+                //         supportedIdTokenProviders: [
+                //             {
+                //                 uri: "https://accounts.google.com",
+                //                 clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
+                //             }
+                //         ]
+                //     });
 
-            // const hintPromise = googleyolo.hint({
-            //     supportedAuthMethods: [
-            //         "https://accounts.google.com"
-            //     ],
-            //     supportedIdTokenProviders: [
-            //         {
-            //             uri: "https://accounts.google.com",
-            //             clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
-            //         }
-            //     ]
-            // });
-
-            // hintPromise.then((credential) => {
-            //     if (credential.idToken) {
-            //         useGoogleIdTokenForAuth(credential.idToken);
-            //     }
-            // }, (error) => {
-            //     console.log('hint error: ', error)
-            // });
+                //     hintPromise.then((credential) => {
+                //         if (credential.idToken) {
+                //             useGoogleIdTokenForAuth(credential.idToken);
+                //         }
+                //     }, (error) => {
+                //         console.log('hint error: ', error)
+                //     });
+                // }
+            });
         }
 
-        function useGoogleIdTokenForAuth (idToken) {
+        function useGoogleIdTokenForAuth(idToken) {
             WithFParams.postForm('/login/withGoogle',
                 {
                     "idToken": idToken
@@ -83,8 +84,6 @@
                 }
             )
         }
-        window.onGoogleYoloLoad = (googleyolo) => {
-            googleyolo = googleyolo
-        }
+        window.onGoogleYoloLoad = (googleyolo) => {googleyolo = googleyolo}
     </script>
 </div>
