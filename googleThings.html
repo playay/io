@@ -29,7 +29,8 @@
             $('#signInSpinner').show()
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
-                    "https://accounts.google.com"
+                    "https://accounts.google.com",
+                    "googleyolo://id-and-password"
                 ],
                 supportedIdTokenProviders: [
                     {
