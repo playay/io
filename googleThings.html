@@ -29,8 +29,7 @@
             $('#signInSpinner').show()
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
-                    "https://accounts.google.com",
-                    "googleyolo://id-and-password"
+                    "https://accounts.google.com"
                 ],
                 supportedIdTokenProviders: [
                     {
@@ -51,25 +50,7 @@
                     alert('谷歌一键登录操作失败, 请确认网络环境')
                 }
                 if (error.type === 'noCredentialsAvailable') {
-                    const hintPromise = googleyolo.hint({
-                        supportedAuthMethods: [
-                            "https://accounts.google.com"
-                        ],
-                        supportedIdTokenProviders: [
-                            {
-                                uri: "https://accounts.google.com",
-                                clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
-                            }
-                        ]
-                    });
-
-                    hintPromise.then((credential) => {
-                        if (credential.idToken) {
-                            useGoogleIdTokenForAuth(credential.idToken);
-                        }
-                    }, (error) => {
-                        console.log('hint error: ', error)
-                    });
+                    alert('谷歌一键登录操作失败, 未找到已登录的谷歌账号')
                 }
             });
         }
