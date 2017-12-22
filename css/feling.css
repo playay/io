@@ -11,10 +11,6 @@ body {
 a {
   background: transparent;
 }
-#click_count {
-  color: #999999;
-  text-decoration: none;
-}
 a:active,
 a:hover {
   outline: 0;
