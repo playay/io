@@ -25,6 +25,28 @@
                 }
             )
         }
+        function signIn () {
+            const hintPromise = googleyolo.hint({
+                supportedAuthMethods: [
+                    "https://accounts.google.com"
+                ],
+                supportedIdTokenProviders: [
+                    {
+                        uri: "https://accounts.google.com",
+                        clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
+                    }
+                ]
+            });
+
+            hintPromise.then((credential) => {
+                if (credential.idToken) {
+                    useGoogleIdTokenForAuth(credential.idToken);
+                }
+            }, (error) => {
+                console.log('hint error: ', error)
+            });
+        }
+
         function useGoogleIdTokenForAuth (idToken) {
             WithFParams.postForm('/login/withGoogle',
                 {
@@ -48,7 +70,6 @@
             if (localStorage.accessToken) {
                 return
             }
-
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
                     "https://accounts.google.com"
@@ -64,32 +85,7 @@
                 if (credential.idToken) {
                     useGoogleIdTokenForAuth(credential.idToken)
                 }
-            }, (error) => {
-                console.log('retrieve error: ', error)
-                if (error.type === 'noCredentialsAvailable') {
-                    localStorage.removeItem('accessToken')
-
-                    const hintPromise = googleyolo.hint({
-                        supportedAuthMethods: [
-                            "https://accounts.google.com"
-                        ],
-                        supportedIdTokenProviders: [
-                            {
-                                uri: "https://accounts.google.com",
-                                clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
-                            }
-                        ]
-                    });
-
-                    hintPromise.then((credential) => {
-                        if (credential.idToken) {
-                            useGoogleIdTokenForAuth(credential.idToken);
-                        }
-                    }, (error) => {
-                        console.log('hint error: ', error)
-                    });
-                }
-            });
+            }, (error) => {});
         }
     </script>
 </div>

@@ -40,7 +40,7 @@ $(function() {
         </ul>
         <script>
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
-                if (localStorage.userAvatar) {
+                if (localStorage.userAvatar && localStorage.accessToken) {
                     $("#userAvatar").attr("src", localStorage.userAvatar)
                     $("#userName").html(localStorage.userName)
                     $("#userAvatarAndName").show()
