@@ -46,10 +46,10 @@
             }, (error) => {
                 $('#signInSpinner').hide()
                 if (error.type === 'requestFailed') {
-                    alert('谷歌一键登录操作失败, 请确认网络环境')
+                    UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
                 }
                 if (error.type === 'noCredentialsAvailable') {
-                    alert('谷歌一键登录操作失败, 未找到已登录的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
+                    UIkit.modal.alert('谷歌一键登录操作失败, 未找到已登录的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
                 }
             });
         }
