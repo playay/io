@@ -43,6 +43,7 @@
                     useGoogleIdTokenForAuth(credential.idToken)
                 }
             }, (error) => {
+                $('#signInSpinner').hide()
                 // 必须登录时
                 // if (error.type === 'noCredentialsAvailable') {
                 //     const hintPromise = googleyolo.hint({
