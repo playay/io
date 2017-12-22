@@ -19,7 +19,8 @@
                         localStorage.removeItem('accessToken')
                         localStorage.removeItem('userAvatar')
                         localStorage.removeItem('userName')
-                        loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
+                        $("#signInButton").show()
+                        $("#userAvatarAndName").hide()
                     }
                 )
             })
