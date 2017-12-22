@@ -1,3 +1,5 @@
+
+
 <div>
     <!-- 谷歌分析 -->
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -18,8 +20,10 @@
                     "idToken": idToken
                 },
                 function loginResultHandler(result) {
-                    if(result.success) {
+                    if (result.success) {
                         localStorage.accessToken = result.data.accessToken
+                        localStorage.userAvatar = result.data.userAvatar
+                        localStorage.userName = result.data.userName
                     } else {
                         localStorage.removeItem('accessToken')
                         console.log(result.message)
