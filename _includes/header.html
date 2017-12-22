@@ -23,11 +23,11 @@ $(function() {
         <li><a href="https://pages.feling.net" target="_blank">博客</a></li>
         <!-- <li><a href="https://pages.feling.net/2015/06/donate.html" target="_blank">donate</a></li> -->
     </ul>
-    <div class="uk-navbar-flip" style="margin-right:40px;">
+    <div id="userAvatarAndName" class="uk-navbar-flip" style="margin-right:40px;display:none;">
         <ul class="uk-navbar-nav">
             <li class="uk-parent" data-uk-dropdown>
                 <div class="uk-navbar-content">
-                    <img id="userAvatar" style="width:35px;height:35px;border-radius:50%;display:none;">
+                    <img id="userAvatar" style="width:35px;height:35px;border-radius:50%;">
                     <span id="userName" style="margin-left:5px;"></span>
                 </div>
                 <div class="uk-dropdown uk-dropdown-navbar">
@@ -42,7 +42,7 @@ $(function() {
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 if (localStorage.userAvatar) {
                     $("#userAvatar").attr("src", localStorage.userAvatar)
-                    $("#userAvatar").show()
+                    $("#userAvatarAndName").show()
                 }
                 if (localStorage.userName) {
                     $("#userName").html(localStorage.userName)
