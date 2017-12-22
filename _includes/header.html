@@ -40,9 +40,13 @@ $(function() {
         </ul>
         <script>
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
-                $("#userAvatar").attr("src", localStorage.userAvatar)
-                $("#userAvatar").show()
-                $("#userName").html(localStorage.userName)
+                if (localStorage.userAvatar) {
+                    $("#userAvatar").attr("src", localStorage.userAvatar)
+                    $("#userAvatar").show()
+                }
+                if (localStorage.userName) {
+                    $("#userName").html(localStorage.userName)
+                }
             }
             loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
         </script>
