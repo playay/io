@@ -14,6 +14,17 @@
     <!-- 谷歌一键登录 -->
     <script src="https://smartlock.google.com/client"></script>
     <script>
+        function signOut () {
+            googleyolo.disableAutoSignIn()
+            WithFParams.postForm('/login/signOut', {},
+                function loginResultHandler(result) {
+                    localStorage.removeItem('accessToken')
+                    localStorage.removeItem('userAvatar')
+                    localStorage.removeItem('userName')
+                    loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
+                }
+            )
+        }
         function useGoogleIdTokenForAuth (idToken) {
             WithFParams.postForm('/login/withGoogle',
                 {
@@ -36,6 +47,7 @@
             if (localStorage.accessToken) {
                 return
             }
+
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
                     "https://accounts.google.com"

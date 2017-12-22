@@ -32,7 +32,7 @@ $(function() {
                 </div>
                 <div class="uk-dropdown uk-dropdown-navbar" style="width:120px;">
                     <ul class="uk-nav uk-nav-navbar">
-                        <li><a onClick="console.log('signOut')"><i class="uk-icon-sign-out"></i>退出登录 </a>
+                        <li><a onClick="signOut()"><i class="uk-icon-sign-out"></i>退出登录 </a>
                         </li>
                     </ul>
                 </div>
@@ -42,10 +42,10 @@ $(function() {
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 if (localStorage.userAvatar) {
                     $("#userAvatar").attr("src", localStorage.userAvatar)
-                    $("#userAvatarAndName").show()
-                }
-                if (localStorage.userName) {
                     $("#userName").html(localStorage.userName)
+                    $("#userAvatarAndName").show()
+                } else {
+                    $("#userAvatarAndName").hide()
                 }
             }
             loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
