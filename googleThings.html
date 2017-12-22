@@ -25,6 +25,7 @@
             })
         }
         function signIn() {
+            $('#signInSpinner').show()
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
                     "https://accounts.google.com"
@@ -37,6 +38,7 @@
                 ]
             });
             retrievePromise.then((credential) => {
+                $('#signInSpinner').hide()
                 if (credential.idToken) {
                     useGoogleIdTokenForAuth(credential.idToken)
                 }
