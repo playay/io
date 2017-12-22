@@ -24,11 +24,11 @@ $(function() {
         <!-- <li><a href="https://pages.feling.net/2015/06/donate.html" target="_blank">donate</a></li> -->
     </ul>
 
-    <div id="userAvatarAndName" class="uk-navbar-flip">
-        <ul class="uk-navbar-nav"  style="display:none;">
-            <li><a onClick="signIn()" style="color: #fff;text-shadow: none;">退出</a></li>
+    <div class="uk-navbar-flip">
+        <ul id="signInButton" class="uk-navbar-nav"  style="display:none;">
+            <li><a onClick="signIn()" style="color: #fff;text-shadow: none;">登录</a></li>
         </ul>
-        <ul class="uk-navbar-nav"  style="display:none;">
+        <ul id="userAvatarAndName" class="uk-navbar-nav"  style="display:none;">
             <li class="uk-parent" data-uk-dropdown>
                 <div class="uk-navbar-content">
                     <img id="userAvatar" style="width:35px;height:35px;border-radius:50%;">
