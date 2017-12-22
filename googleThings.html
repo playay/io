@@ -82,11 +82,11 @@
                     }
                 ]
             });
-            retrievePromise.then((credential) => {
-                if (credential.idToken) {
-                    useGoogleIdTokenForAuth(credential.idToken)
-                }
-            }, (error) => {});
+            // retrievePromise.then((credential) => {
+            //     if (credential.idToken) {
+            //         useGoogleIdTokenForAuth(credential.idToken)
+            //     }
+            // }, (error) => {});
         }
     </script>
 </div>
