@@ -56,12 +56,11 @@
                         supportedIdTokenProviders: [
                             {
                                 uri: "https://accounts.google.com",
-                                clientId: "YOUR_GOOGLE_CLIENT_ID"
+                                clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
                             }
                         ]
                     });
                     hintPromise.then((credential) => {
-                        console.log(credential)
                         if (credential.idToken) {
                             useGoogleIdTokenForAuth(credential.idToken);
                         }
