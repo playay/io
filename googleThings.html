@@ -49,7 +49,26 @@
                     UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
                 }
                 if (error.type === 'noCredentialsAvailable') {
-                    UIkit.modal.alert('谷歌一键登录操作失败, 未找到已登录的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
+                    // UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号')
+                    console.log("sasf")
+                    const hintPromise = googleyolo.hint({
+                        supportedAuthMethods: [
+                            "https://accounts.google.com"
+                        ],
+                        supportedIdTokenProviders: [
+                            {
+                                uri: "https://accounts.google.com",
+                                clientId: "YOUR_GOOGLE_CLIENT_ID"
+                            }
+                        ]
+                    });
+                    hintPromise.then((credential) => {
+                        if (credential.idToken) {
+                            useGoogleIdTokenForAuth(credential.idToken);
+                        }
+                    }, (error) => {
+                        console.log("sasfqwfwefsf", error)
+                    });
                 }
             });
         }
