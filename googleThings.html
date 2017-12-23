@@ -61,6 +61,7 @@
                         ]
                     });
                     hintPromise.then((credential) => {
+                        console.log(credential)
                         if (credential.idToken) {
                             useGoogleIdTokenForAuth(credential.idToken);
                         }
