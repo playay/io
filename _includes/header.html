@@ -50,19 +50,18 @@ $(function() {
                 signInWithGoogle()
             }
             function signOut() {
-                if (typeof googleyolo == undefined) {
-                    WithFParams.postForm('/login/signOut', {},
-                        function loginResultHandler(result) {
-                            localStorage.removeItem('accessToken')
-                            localStorage.removeItem('userAvatar')
-                            localStorage.removeItem('userName')
-                            $("#signInButton").show()
-                            $("#userAvatarAndName").hide()
-                        }
-                    )
-                    return
+                if (typeof googleyolo != undefined) {
+                    googleyolo.disableAutoSignIn().then(() => {})
                 }
-                googleyolo.disableAutoSignIn().then(() => {})
+                WithFParams.postForm('/login/signOut', {},
+                    function loginResultHandler(result) {
+                        localStorage.removeItem('accessToken')
+                        localStorage.removeItem('userAvatar')
+                        localStorage.removeItem('userName')
+                        $("#signInButton").show()
+                        $("#userAvatarAndName").hide()
+                    }
+                )
             }
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 if (localStorage.accessToken) {
