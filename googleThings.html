@@ -13,14 +13,13 @@
     <script src="https://smartlock.google.com/client"></script>
     <script>
         function signOut() {
+            localStorage.removeItem('accessToken')
+            localStorage.removeItem('userAvatar')
+            localStorage.removeItem('userName')
+            $("#signInButton").show()
+            $("#userAvatarAndName").hide()
             WithFParams.postForm('/login/signOut', {},
-                function loginResultHandler(result) {
-                    localStorage.removeItem('accessToken')
-                    localStorage.removeItem('userAvatar')
-                    localStorage.removeItem('userName')
-                    $("#signInButton").show()
-                    $("#userAvatarAndName").hide()
-                }
+                function loginResultHandler(result) {}
             )
         }
         function signOutWithGoogle() {
