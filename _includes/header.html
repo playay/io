@@ -43,7 +43,7 @@ $(function() {
         </ul>
         <script>
             function signOut() {
-                if (googleyolo != undefined) {
+                if (googleyolo !== undefined) {
                     googleyolo.disableAutoSignIn().then(() => {})
                 }
                 WithFParams.postForm('/login/signOut', {},
