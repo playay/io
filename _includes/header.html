@@ -37,13 +37,15 @@ $(function() {
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
                         <li><a onClick="signOut()">退出</a></li>
-                        <li><a onClick="signOutWithGoogle()">退出 &amp; 取消谷歌授权</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
         <script>
             function signOut() {
+                if (googleyolo) {
+                    googleyolo.disableAutoSignIn().then(() => {})
+                }
                 WithFParams.postForm('/login/signOut', {},
                     function loginResultHandler(result) {
                         localStorage.removeItem('accessToken')

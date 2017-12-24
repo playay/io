@@ -12,12 +12,6 @@
     <!-- 谷歌一键登录 -->
     <script src="https://smartlock.google.com/client"></script>
     <script>
-        function signOutWithGoogle() {
-            googleyolo.disableAutoSignIn().then(() => {
-                signOut()
-            })
-        }
-
         function signIn() {
             $('#signInSpinner').show()
             const retrievePromise = googleyolo.retrieve({
