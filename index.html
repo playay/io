@@ -16,10 +16,12 @@ keywords: [feling.io, 在线工具]
         <p style="text-align:left;font-size:11px;margin-top:0px;">格式化、高亮、折叠你的 json 字符串</p>
     </button> 
 
-    <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="location.href='/base64/'"> 
-        <div style="text-align:left;font-size:18px">Base64 编解码</div>
-        <hr>
-        <p style="text-align:left;font-size:11px;margin-top:0px;">支持文字、图片等</p>
+    <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="localStorage.base64_activeTab = 0;location.href='/base64/'"> 
+        <div style="text-align:left;font-size:18px">Base64 (字符串)</div>
+    </button>
+
+    <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="localStorage.base64_activeTab = 1;location.href='/base64/'"> 
+        <div style="text-align:left;font-size:18px">Base64 (图片)</div>
     </button>
 
     <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="location.href='/timestamp/'"> 
