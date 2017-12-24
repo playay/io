@@ -13,18 +13,22 @@
     <script src="https://smartlock.google.com/client"></script>
     <script>
         function signOut() {
+            WithFParams.postForm('/login/signOut', {},
+                function loginResultHandler(result) {
+                    localStorage.removeItem('accessToken')
+                    localStorage.removeItem('userAvatar')
+                    localStorage.removeItem('userName')
+                    $("#signInButton").show()
+                    $("#userAvatarAndName").hide()
+                }
+            )
+        }
+        function signOutWithGoogle() {
             googleyolo.disableAutoSignIn().then(() => {
-                WithFParams.postForm('/login/signOut', {},
-                    function loginResultHandler(result) {
-                        localStorage.removeItem('accessToken')
-                        localStorage.removeItem('userAvatar')
-                        localStorage.removeItem('userName')
-                        $("#signInButton").show()
-                        $("#userAvatarAndName").hide()
-                    }
-                )
+                signOut()
             })
         }
+
         function signIn() {
             $('#signInSpinner').show()
             const retrievePromise = googleyolo.retrieve({
@@ -72,6 +76,7 @@
         }
 
         function useGoogleIdTokenForAuth(idToken) {
+            $('#signInSpinner').show()
             WithFParams.postForm('/login/withGoogle',
                 {
                     "idToken": idToken
@@ -87,7 +92,9 @@
                         console.log(result.message)
                     }
                 }
-            )
+            ).always(() => {
+                $('#signInSpinner').hide()
+            })
         }
         window.onGoogleYoloLoad = (googleyolo) => {
             googleyolo = googleyolo
