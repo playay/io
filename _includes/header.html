@@ -42,6 +42,13 @@ $(function() {
             </li>
         </ul>
         <script>
+            function signIn() {
+                if (typeof googleyolo == undefined) {
+                    signInWithGoogle()
+                } else {
+                    UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
+                }
+            }
             function signOut() {
                 if (typeof googleyolo == undefined) {
                     googleyolo.disableAutoSignIn().then(() => {})
