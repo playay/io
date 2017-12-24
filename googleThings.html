@@ -52,7 +52,14 @@
                             useGoogleIdTokenForAuth(credential.idToken);
                         }
                     }, (error) => {
-                        UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号')
+                        switch (error.type) {
+                            case "userCanceled":
+                                break;
+                            case "noCredentialsAvailable":
+                                UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号')
+                            break;
+                            default:
+                        }
                     });
                 }
             });
