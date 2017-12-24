@@ -28,7 +28,7 @@ keywords: [feling.io, 在线工具, base64]
 
 <!-- 选项卡 -->
 <div class="uk-width-10-10" style="margin-bottom: 10px;">
-    <ul class="uk-tab uk-tab-top" data-uk-tab="{connect:'#main', active:0, animation:'fade'}">
+    <ul class="uk-tab uk-tab-top" data-uk-tab="{connect:'#main', active:localStorage.base64_activeTab, animation:'fade'}">
         <li><a id="activeTab0" onClick="localStorage.base64_activeTab = 0" href="#">文字</a></li>
         <li><a id="activeTab1" onClick="localStorage.base64_activeTab = 1" href="#">图片/文件</a></li>
     </ul>
@@ -134,11 +134,4 @@ keywords: [feling.io, 在线工具, base64]
             }
         }
     })
-
-    if (localStorage.base64_activeTab == 0) {
-        $('activeTab0').trigger('click')
-    }
-    if (localStorage.base64_activeTab == 1) {
-        $('activeTab1').trigger('click')
-    }
 </script>
