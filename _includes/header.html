@@ -43,6 +43,17 @@ $(function() {
             </li>
         </ul>
         <script>
+            function signOut() {
+                WithFParams.postForm('/login/signOut', {},
+                    function loginResultHandler(result) {
+                        localStorage.removeItem('accessToken')
+                        localStorage.removeItem('userAvatar')
+                        localStorage.removeItem('userName')
+                        $("#signInButton").show()
+                        $("#userAvatarAndName").hide()
+                    }
+                )
+            }
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 if (localStorage.accessToken) {
                     $("#userAvatar").attr("src", localStorage.userAvatar)
