@@ -1,4 +1,4 @@
-/json/
-/base64/
-/timestamp/
-/googleThings.html
+https://feling.io/json/
+https://feling.io/base64/
+https://feling.io/timestamp/
+https://feling.io/googleThings.html
