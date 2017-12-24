@@ -83,18 +83,18 @@ keywords: [feling.io, 在线工具, base64]
             base64: ''
         },
         mounted: function () {
-            if (localStorage.base64_default_tab0_origin) {
+            if (localStorage.base64_tab0_origin) {
                 this.origin = localStorage.base64_tab0_origin
             }
             this.onChangeOrigin()
         },
         methods: {
             onChangeOrigin: function() {
+                localStorage.base64_tab0_origin = this.origin
                 this.base64 = Base64.encode(this.origin)
             },
             onChangeBase64: function() {
                 this.origin = Base64.decode(this.base64)
-                localStorage.base64_tab0_origin = this.origin
             }
         }
     })
