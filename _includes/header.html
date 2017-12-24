@@ -44,24 +44,25 @@ $(function() {
         <script>
             function signIn() {
                 if (typeof googleyolo == undefined) {
-                    signInWithGoogle()
-                } else {
                     UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
+                    return
                 }
+                signInWithGoogle()
             }
             function signOut() {
                 if (typeof googleyolo == undefined) {
-                    googleyolo.disableAutoSignIn().then(() => {})
+                    WithFParams.postForm('/login/signOut', {},
+                        function loginResultHandler(result) {
+                            localStorage.removeItem('accessToken')
+                            localStorage.removeItem('userAvatar')
+                            localStorage.removeItem('userName')
+                            $("#signInButton").show()
+                            $("#userAvatarAndName").hide()
+                        }
+                    )
+                    return
                 }
-                WithFParams.postForm('/login/signOut', {},
-                    function loginResultHandler(result) {
-                        localStorage.removeItem('accessToken')
-                        localStorage.removeItem('userAvatar')
-                        localStorage.removeItem('userName')
-                        $("#signInButton").show()
-                        $("#userAvatarAndName").hide()
-                    }
-                )
+                googleyolo.disableAutoSignIn().then(() => {})
             }
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 if (localStorage.accessToken) {
