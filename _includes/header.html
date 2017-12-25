@@ -50,9 +50,6 @@ $(function() {
                 signInWithGoogle()
             }
             function signOut() {
-                if (typeof googleyolo != undefined) {
-                    googleyolo.disableAutoSignIn().then(() => { })
-                }
                 WithFParams.postForm('/login/signOut', {}, () => { })
                     .always(() => {
                         localStorage.removeItem('accessToken')
@@ -61,6 +58,9 @@ $(function() {
                         $("#signInButton").show()
                         $("#userAvatarAndName").hide()
                     })
+                if (typeof googleyolo != "undefined") {
+                    googleyolo.disableAutoSignIn().then(() => { })
+                }
             }
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 if (localStorage.accessToken) {
