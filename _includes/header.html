@@ -31,6 +31,7 @@ $(function() {
         <ul id="userAvatarAndName" class="uk-navbar-nav" style="display:none;">
             <li class="uk-parent" data-uk-dropdown>
                 <div class="uk-navbar-content">
+                    <i id="signOutSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                     <img id="userAvatar" style="width:30px;height:30px;border-radius:50%;">
                     <span id="userName" style="display:none;font-size:16px;"></span>
                 </div>
@@ -50,6 +51,7 @@ $(function() {
                 signInWithGoogle()
             }
             function signOut() {
+                $("#signOutSpinner").show()
                 WithFParams.postForm('/login/signOut', {}, () => { })
                     .always(() => {
                         localStorage.removeItem('accessToken')
@@ -57,6 +59,7 @@ $(function() {
                         localStorage.removeItem('userName')
                         $("#signInButton").show()
                         $("#userAvatarAndName").hide()
+                        $("#signOutSpinner").hide()
                     })
                 if (typeof googleyolo != "undefined") {
                     googleyolo.disableAutoSignIn().then(() => { })
