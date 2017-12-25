@@ -31,7 +31,7 @@ $(function() {
         <ul id="userAvatarAndName" class="uk-navbar-nav" style="display:none;">
             <li class="uk-parent" data-uk-dropdown>
                 <div class="uk-navbar-content">
-                    <img id="userAvatar" style="width:35px;height:35px;border-radius:50%;">
+                    <img id="userAvatar" style="width:30px;height:30px;border-radius:50%;">
                     <span id="userName" style="font-size: 16px;"></span>
                 </div>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
@@ -51,17 +51,16 @@ $(function() {
             }
             function signOut() {
                 if (typeof googleyolo != undefined) {
-                    googleyolo.disableAutoSignIn().then(() => {})
+                    googleyolo.disableAutoSignIn().then(() => { })
                 }
-                WithFParams.postForm('/login/signOut', {},
-                    function loginResultHandler(result) {
+                WithFParams.postForm('/login/signOut', {}, () => { })
+                    .always(() => {
                         localStorage.removeItem('accessToken')
                         localStorage.removeItem('userAvatar')
                         localStorage.removeItem('userName')
                         $("#signInButton").show()
                         $("#userAvatarAndName").hide()
-                    }
-                )
+                    })
             }
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
                 if (localStorage.accessToken) {
