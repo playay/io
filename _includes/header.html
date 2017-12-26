@@ -75,25 +75,29 @@ $(function() {
                     $("#userAvatarAndName").hide()
                 }
             }
-            WithFParams.postForm('/login/getLoginInfo', 
-                {
-                    accessToken: localStorage.accessToken
-                },
-                (result) => {
-                    if (result.success && result.data) {
-                        localStorage.userAvatar = result.data.userAvatar
-                        localStorage.userName = result.data.userName
-                    } else {
-                        localStorage.removeItem('accessToken')
-                        localStorage.removeItem('userAvatar')
-                        localStorage.removeItem('userName')
-                        $("#signInButton").show()
-                        $("#userAvatarAndName").hide()
+            if (localStorage.accessToken) {
+                WithFParams.postForm('/login/getLoginInfo',
+                    {
+                        accessToken: localStorage.accessToken
+                    },
+                    (result) => {
+                        if (result.success && result.data) {
+                            localStorage.userAvatar = result.data.userAvatar
+                            localStorage.userName = result.data.userName
+                        } else {
+                            localStorage.removeItem('accessToken')
+                            localStorage.removeItem('userAvatar')
+                            localStorage.removeItem('userName')
+                            $("#signInButton").show()
+                            $("#userAvatarAndName").hide()
+                        }
                     }
-                }
-            ).always(() => {
+                ).always(() => {
+                    loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
+                })
+            } else {
                 loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
-            })
+            }
         </script>
     </div>
 </nav>
