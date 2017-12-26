@@ -75,7 +75,25 @@ $(function() {
                     $("#userAvatarAndName").hide()
                 }
             }
-            loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
+            WithFParams.postForm('/login/getLoginInfo', 
+                {
+                    accessToken: localStorage.accessToken
+                },
+                (result) => {
+                    if (result.success && result.data) {
+                        localStorage.userAvatar = result.data.userAvatar
+                        localStorage.userName = result.data.userName
+                    } else {
+                        localStorage.removeItem('accessToken')
+                        localStorage.removeItem('userAvatar')
+                        localStorage.removeItem('userName')
+                        $("#signInButton").show()
+                        $("#userAvatarAndName").hide()
+                    }
+                }
+            ).always(() => {
+                loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
+            })
         </script>
     </div>
 </nav>
