@@ -3,10 +3,10 @@ the_gfw.src = "https://www.google.com/images/branding/product/ico/googleg_lodp.i
 setTimeout(
     function () {
         if (!the_gfw.complete || !the_gfw.naturalWidth) {
-            the_gfw.src = '' // 没能在2s内请求到谷歌的icon
+            the_gfw.src = '' // 没能请求到谷歌的icon
             return
         }
         $("#googleThings").load("/googleThings.html")
     },
-    2000
+    1000
 );
