@@ -8,5 +8,5 @@ setTimeout(
         }
         $("#googleThings").load("/googleThings.html")
     },
-    1000
+    1500
 );
