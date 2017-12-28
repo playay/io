@@ -222,9 +222,9 @@ keywords: [json, 在线工具, 格式化]
                         localStorage.json_jsonSrc = this.jsonSrc
                     }
                 } catch (e) {
-                    // TODO src 里标记出错的位置
                     var position = e.message.substring(e.message.lastIndexOf(' '))
-                    this.jsonResult = this.jsonSrc.substring(position - 10, position + 10)
+                    this.jsonResult = e.message + ': \n'
+                    this.jsonSrc.substring(position - 10, position + 10)
                 }
             },
             unFoldAll: function (level) {
