@@ -69,12 +69,11 @@ keywords: [json, 在线工具, 格式化]
             <button class="uk-button uk-hidden-small" v-on:click="unFoldAll(2)">2级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(3)">3级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">4级</button>
-            <!-- <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5级</button> -->
+            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5级</button>
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
             <button class="uk-button uk-visible-large">耗时: {% raw %}{{costTime}}{% endraw %}ms</button>
             <input type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
             <label class="uk-label" for="array_sampling">只解析数组的第一项</label>
-            <!-- <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button> -->
             <button class="uk-button" id="copyButton" style="float:right;" data-clipboard-target="#json_result">
             <span id="copySuccess" style="display:none;">已</span>复制</button>
         </div>
@@ -255,13 +254,6 @@ keywords: [json, 在线工具, 格式化]
                     this.traverseChildren(element.childNodes[i], func, depth + 1)
                 }
                 func(element, depth)
-            },
-            selectAll: function () {
-                var selection = window.getSelection()
-                selection.removeAllRanges()
-                var range = document.createRange()
-                range.selectNodeContents(document.getElementById("json_result"))
-                selection.addRange(range)
             },
         }
     })
