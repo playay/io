@@ -69,11 +69,11 @@ keywords: [json, 在线工具, 格式化]
             <button class="uk-button uk-hidden-small" v-on:click="unFoldAll(2)">2级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(3)">3级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">4级</button>
-            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5级</button>
+            <!-- <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5级</button> -->
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
             <button class="uk-button uk-visible-large">耗时: {% raw %}{{costTime}}{% endraw %}ms</button>
             <input type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
-            <label for="array_sampling">数组只解析首元素</label>
+            <label for="array_sampling">只解析数组的第一项</label>
             <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button>
         </div>
         <hr style="margin: 0px">
@@ -106,7 +106,7 @@ keywords: [json, 在线工具, 格式化]
             jsonResult: '',
             tab: '    ',
             keyEnd: '"</span>: ',
-            arraySampling: true,// 遇到数组，只解析一个元素
+            arraySampling: false,// 遇到数组，只解析一个元素
             costTime: '',
             defaultFold: 0
         },
@@ -223,6 +223,7 @@ keywords: [json, 在线工具, 格式化]
                     }
                 } catch (e) {
                     // TODO src 里标记出错的位置
+                    console.log(e)
                     this.jsonResult = e.message
                 }
             },
