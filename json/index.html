@@ -75,7 +75,7 @@ keywords: [json, 在线工具, 格式化]
             <input type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
             <label class="uk-label" for="array_sampling">只解析数组的第一项</label>
             <!-- <button class="uk-button" v-on:click="selectAll()" style="float: right;">全选</button> -->
-            <button class="uk-button" style="float: right;" data-clipboard-target="#json_result">复制</button>
+            <button class="uk-button" id="copyButton" style="float: right;" data-clipboard-target="#json_result">复制</button>
         </div>
         <hr style="margin: 0px">
         <div class="uk-width-1-1">
@@ -84,7 +84,10 @@ keywords: [json, 在线工具, 格式化]
     </div>
 </div>
 
-<script async defer src="/js/clipboard.js"></script>
+<script src="/js/clipboard.js"></script>
+<script>
+    new Clipboard('#copyButton')
+</script>
 <script>
     function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
