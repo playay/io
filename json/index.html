@@ -228,7 +228,7 @@ keywords: [json, 在线工具, 格式化]
                     }
                 } catch (e) {
                     var position = parseInt(e.message.substring(e.message.lastIndexOf(' ')))
-                    this.jsonResult = e.message + ': ' + this.jsonSrc.substring(position - 20, position + 20)
+                    this.jsonResult = e.message + " " + this.jsonSrc.substring(position - 20, position + 20)
                 }
             },
             unFoldAll: function (level) {
