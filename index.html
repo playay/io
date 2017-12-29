@@ -3,35 +3,31 @@ title: io
 layout: default
 keywords: [feling.io, 在线工具]
 ---
-
-<a style="display:none" href="/json/"></a>
-<a style="display:none" href="/base64/"></a>
-<a style="display:none" href="/timestamp/"></a>
 <a style="display:none" href="/googleThings.html"></a>
 
 <div class="uk-flex uk-grid">
-    <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="location.href='/json/'"> 
+    <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/json/"> 
         <div style="text-align:left;font-size:18px">Json 格式化</div> 
         <hr>
         <p style="text-align:left;font-size:11px;margin-top:0px;">格式化、高亮、折叠你的 json 字符串</p>
-    </button> 
+    </a> 
 
-    <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="localStorage.base64_activeTab = 0;location.href='/base64/'"> 
+    <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/base64/" onclick="localStorage.base64_activeTab = 0;"> 
         <div style="text-align:left;font-size:18px">Base64_字符串</div>
         <hr>
         <p style="text-align:left;font-size:11px;margin-top:0px;">base64 编解码</p>
-    </button>
+    </a>
 
-    <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="localStorage.base64_activeTab = 1;location.href='/base64/'"> 
+    <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/base64/" onclick="localStorage.base64_activeTab = 1;"> 
         <div style="text-align:left;font-size:18px">Base64_图片</div>
         <hr>
         <p style="text-align:left;font-size:11px;margin-top:0px;">base64 编解码</p>
-    </button>
+    </a>
 
-    <button class="uk-button" style="margin: 0px 0px 10px 10px;" onclick="location.href='/timestamp/'"> 
+    <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/timestamp/"> 
         <div style="text-align:left;font-size:18px">时间戳 ⇄ 时间</div>
         <hr>
         <p style="text-align:left;font-size:11px;margin-top:0px;">把 毫秒数 转成人类友好的字符串</p>
-    </button>
+    </a>
 </div>
 <br/>
