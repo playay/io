@@ -14,6 +14,10 @@ keywords: [json 格式化]
     color: #3ab54a;
     font-weight: bold;
 }
+.json_link {
+    color: #61D2D6;
+    font-weight: bold;
+}
 .json_number {
     color: #25aae2;
     font-weight: bold;
@@ -114,7 +118,7 @@ keywords: [json 格式化]
             jsonResult: '',
             tab: '    ',
             keyEnd: '"</span>: ',
-            arraySampling: false,// 遇到数组，只解析一个元素
+            arraySampling: false,// 遇到数组，只解析第一个元素
             costTime: '',
             defaultFold: 0
         },
@@ -134,6 +138,10 @@ keywords: [json 格式化]
             isArray: function (obj) {
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
             },
+            jsonLinkWarpper: function (str) {
+                var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+                return str.replace(exp, '<a class="json_link" target="_blank" href="$1">$1</a>'); 
+            },
             genKey: function (key, depth) {
                 this.jsonResultTemp.push("<br><span class='json_key'>")
                 this.jsonResultTemp.push(this.tab.repeat(depth + 1))
@@ -152,7 +160,7 @@ keywords: [json 格式化]
                 this.jsonResultTemp.push('">')
                 if (type === 'string') {
                     this.jsonResultTemp.push('"')
-                    this.jsonResultTemp.push(obj === null ? 'null' : obj)
+                    this.jsonResultTemp.push(obj === null ? 'null' : this.jsonLinkWarpper(obj))
                     this.jsonResultTemp.push('"')
                 } else {
                     this.jsonResultTemp.push(obj === null ? 'null' : obj)
