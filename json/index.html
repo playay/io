@@ -105,7 +105,7 @@ keywords: [json 格式化]
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
         icon.setAttribute('onClick', 'javascript: unFold(this, ' + itemCount + ')')
-        icon.innerHTML = '...' + itemCount
+        icon.innerHTML = 'itemCount: ' + itemCount
         icon.nextSibling.style.display = 'none'
     }
     function unFold(icon, itemCount) {
@@ -180,7 +180,7 @@ keywords: [json 格式化]
                 }
                 this.jsonResultTemp.push(start)
                 if (depth > this.defaultFold) {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this, ' + itemCount + ')">...' + itemCount + '</i>'
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this, ' + itemCount + ')">itemCount: ' + itemCount + '</i>'
                     +'<span class="foldContent" style="display:none">')
                 } else {
                     this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this, ' + itemCount + ')"></i>'
