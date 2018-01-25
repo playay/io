@@ -256,7 +256,8 @@ keywords: [json 格式化]
                     document.getElementById("json_result"),
                     function(element, depth) {
                         if(element.tagName === 'I'){
-                            if(depth = level){
+                            if(depth > level){
+                                console.log(element.onclick)
                                 this.fold(element, element.innerHTML)
                             } else {
                                 this.unFold(element, element.innerHTML)
