@@ -184,7 +184,7 @@ keywords: [json 格式化]
                     this.jsonResultTemp.push(this.tab.repeat(depth))
                 }
                 this.jsonResultTemp.push(start)
-                if (depth > this.defaultFold) {
+                if (depth > this.defaultFold || itemCount === 0) {
                     this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)">' 
                         + '<span class="fold_icon">...' + itemCount + '</span>'
                         + '</i>'
@@ -197,10 +197,10 @@ keywords: [json 格式化]
                 }
             },
             genEnd: function (end, depth) {
-                if (this.deletLastComma()) {
-                    this.jsonResultTemp.push('<br>')
-                    this.jsonResultTemp.push(this.tab.repeat(depth))
-                }
+                this.deletLastComma()
+                this.jsonResultTemp.push('<br>')
+                this.jsonResultTemp.push(this.tab.repeat(depth))
+
                 this.jsonResultTemp.push('</span>') // <span class="foldContent">
                 this.jsonResultTemp.push(end)
                 this.jsonResultTemp.push(',')
