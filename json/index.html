@@ -104,14 +104,14 @@ keywords: [json 格式化]
     function fold(icon, itemCount) {
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
-        icon.setAttribute('onClick', 'javascript: unFold(this' + itemCount + ')')
+        icon.setAttribute('onClick', 'javascript: unFold(this, ' + itemCount + ')')
         icon.innerHTML = '...' + itemCount
         icon.nextSibling.style.display = 'none'
     }
     function unFold(icon, itemCount) {
         icon.classList.remove('uk-icon-angle-right')
         icon.classList.add('uk-icon-angle-down')
-        icon.setAttribute('onClick', 'javascript: fold(this' + itemCount + ')')
+        icon.setAttribute('onClick', 'javascript: fold(this, ' + itemCount + ')')
         icon.innerHTML = ''
         icon.nextSibling.style.display = 'inline'
     }
@@ -218,7 +218,7 @@ keywords: [json 格式化]
                     return
                 }
                 if ((typeof obj) === 'object' && obj !== null) {
-                    this.genStart('{', depth)
+                    this.genStart('{', depth, Object.keys(obj).length)
                     for (key in obj) {
                         this.genKey(key, depth)
                         this.genResult(obj[key], depth + 1)
