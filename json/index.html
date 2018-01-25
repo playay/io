@@ -197,10 +197,10 @@ keywords: [json 格式化]
                 }
             },
             genEnd: function (end, depth) {
-                this.deletLastComma()
-                this.jsonResultTemp.push('<br>')
-                this.jsonResultTemp.push(this.tab.repeat(depth))
-
+                if (this.deletLastComma()) {
+                    this.jsonResultTemp.push('<br>')
+                    this.jsonResultTemp.push(this.tab.repeat(depth))
+                }
                 this.jsonResultTemp.push('</span>') // <span class="foldContent">
                 this.jsonResultTemp.push(end)
                 this.jsonResultTemp.push(',')
@@ -213,9 +213,10 @@ keywords: [json 格式化]
                 if (index > index1 && index > index2) {
                     this.jsonResultTemp.push(old.substring(0, index))
                     this.jsonResultTemp.push(old.substring(index + 1))
-                    return
+                    return true
                 }
                 this.jsonResultTemp.push(old)
+                return false
             },
             genResult: function (obj, depth) {
                 if (this.isArray(obj)) {
