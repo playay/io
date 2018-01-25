@@ -101,18 +101,16 @@ keywords: [json 格式化]
         $('#copySuccess').show()
         setTimeout(() => {$('#copySuccess').hide()} ,900)
     })
-    function fold(icon, itemCount) {
+    function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
         icon.classList.add('uk-icon-angle-right')
-        icon.setAttribute('onClick', 'javascript: unFold(this, ' + itemCount + ')')
-        icon.innerHTML = itemCount
+        icon.setAttribute('onClick', 'javascript: unFold(this)')
         icon.nextSibling.style.display = 'none'
     }
-    function unFold(icon, itemCount) {
+    function unFold(icon) {
         icon.classList.remove('uk-icon-angle-right')
         icon.classList.add('uk-icon-angle-down')
-        icon.setAttribute('onClick', 'javascript: fold(this, ' + itemCount + ')')
-        icon.innerHTML = ''
+        icon.setAttribute('onClick', 'javascript: fold(this)')
         icon.nextSibling.style.display = 'inline'
     }
     var vm = new Vue({
@@ -180,10 +178,14 @@ keywords: [json 格式化]
                 }
                 this.jsonResultTemp.push(start)
                 if (depth > this.defaultFold) {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this, ' + itemCount + ')">' + itemCount + '</i>'
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)">' 
+                    + itemCount 
+                    + '</i>'
                     +'<span class="foldContent" style="display:none">')
                 } else {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this, ' + itemCount + ')"></i>'
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)">' 
+                    + itemCount 
+                    + '</i>'
                     +'<span class="foldContent">')
                 }
             },
@@ -257,10 +259,9 @@ keywords: [json 格式化]
                     function(element, depth) {
                         if(element.tagName === 'I'){
                             if(depth > level){
-                                console.log(element.onclick)
-                                this.fold(element, element.innerHTML)
+                                this.fold(element)
                             } else {
-                                this.unFold(element, element.innerHTML)
+                                this.unFold(element)
                             }
                         }
                     },
