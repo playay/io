@@ -183,15 +183,15 @@ keywords: [json 格式化]
                 }
                 this.jsonResultTemp.push(start)
                 if (depth > this.defaultFold) {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-right fold_icon" onClick="unFold(this)">' 
-                    + itemCount 
-                    + '</i>'
-                    +'<span class="foldContent" style="display:none">')
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)">' 
+                        + '<span class="fold_icon">' + itemCount + '</span>'
+                        + '</i>'
+                        + '<span class="foldContent" style="display:none">')
                 } else {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-down fold_icon" onClick="fold(this)">' 
-                    + itemCount 
-                    + '</i>'
-                    +'<span class="foldContent">')
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)">' 
+                        + '<span class="fold_icon">' + itemCount + '</span>'
+                        + '</i>'
+                        + '<span class="foldContent">')
                 }
             },
             genEnd: function (end, depth) {
