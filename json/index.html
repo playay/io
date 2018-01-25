@@ -36,6 +36,10 @@ keywords: [json 格式化]
     color: #ccc;
     font-weight: bold;
 }
+.fold_icon{
+    color: rgb(230, 230, 230);
+    font-weight: bold;
+}
 #json_src {
     word-break: break-all;
     height: 620px;
@@ -178,12 +182,12 @@ keywords: [json 格式化]
                 }
                 this.jsonResultTemp.push(start)
                 if (depth > this.defaultFold) {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)">' 
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-right fold_icon" onClick="unFold(this)">' 
                     + itemCount 
                     + '</i>'
                     +'<span class="foldContent" style="display:none">')
                 } else {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)">' 
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-down fold_icon" onClick="fold(this)">' 
                     + itemCount 
                     + '</i>'
                     +'<span class="foldContent">')
