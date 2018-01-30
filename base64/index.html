@@ -62,7 +62,7 @@ keywords: [base64]
                         <p style="width: 100%;height: 100%;text-align: center;line-height: 270px" 
                             v-show="base64 === ''">拖拽图片到此处 / 点击上传图片</p>
                         <img style="max-height: 280px;" v-bind:src="base64" v-show="base64 != '' && base64.startsWith('data:image') "></img>
-                        <img style="max-height: 280px;" v-bind:src="'data:image;base64,' + 'base64'" v-show="base64 != '' && !base64.startsWith('data:image') "></img>
+                        <img style="max-height: 280px;" v-bind:src="'data:image;base64,' + base64" v-show="base64 != '' && !base64.startsWith('data:image') "></img>
                     </div>
                     <input type="file" style="display:none;" id="file_input" accept="image/*" 
                     v-on:change="onFileInputChange">
