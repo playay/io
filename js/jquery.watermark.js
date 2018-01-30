@@ -159,5 +159,6 @@
   
     $(function () {
       $('.jq_watermark').watermark();
+      $('.jq_watermark').removeAttr('title')
     });
   })(jQuery);
