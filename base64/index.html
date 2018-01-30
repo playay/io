@@ -138,8 +138,7 @@ keywords: [base64]
                     var reader = new FileReader()
                     reader.onload = function (o) {
                         vm_img.base64 = o.target.result
-                        $('.jq_watermark').focusin()
-                        $('.jq_watermark').focusout()
+                        $('.jq_watermark').trigger('paste')
                     }
                     reader.readAsDataURL(file);
                 }
