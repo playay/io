@@ -121,7 +121,8 @@
           height: e_height,
           lineHeight: e_height + 'px',
           textAlign: 'left',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          width: '100%'
         });
   
         $.watermarker.checkVal($elem.val(), watermark_label);
