@@ -72,7 +72,8 @@
   
         watermark_container.css({
           display: 'inline-block',
-          position: 'relative'
+          position: 'relative',
+          width: '100%'
         });
   
         if ($elem.attr('data-percent-width') === 'true') {
