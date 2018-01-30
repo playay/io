@@ -54,7 +54,7 @@ keywords: [base64]
         <li>
             <div id="img" class="uk-grid uk-grid-small">
                 <div class="uk-width-1-2 fl-box">
-                    <textarea class="uk-width-1-1" style="height: 320px;resize: none;" placeholder="输入 url地址 或 base64码" 
+                    <textarea class="uk-width-1-1 jq_watermark" style="height: 320px;resize: none;" title="输入以下任一内容: 1. 图片url地址 \n 2. 带 'data:image/...' 前缀的图片base64字符串 <br>3. 不带 'data:image/...' 前缀的图片base64字符串" 
                     autofocus spellcheck="false" v-model="base64" v-on:input="onInputBase64"></textarea>
                 </div>
                 <div class="uk-width-1-2 fl-box">
@@ -76,7 +76,9 @@ keywords: [base64]
 </div>
 
 <script src="/js/base64.min.js"></script>
+<script src="/js/jquery.watermark.js"></script>
 <script>
+
     var vm_text = new Vue({
         el: "#text",
         data: {
