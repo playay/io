@@ -26,7 +26,7 @@ keywords: [base64]
 }
 </style>
 <script>
-    if (!localStorage.base64_activeTab) {
+    if (typeof localStorage.base64_activeTab == "undefined") {
         localStorage.base64_activeTab = 1
     }
 </script>
