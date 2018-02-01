@@ -114,7 +114,11 @@ $(function() {
         mounted: function () {
             setTimeout(
                 () => {
-                    $('#navbar li.uk-active').animate({width: 0},3000,() => {this.hide()})
+                    $('#navbar li.uk-active').animate(
+                        {width: 0},
+                        3000,
+                        () => {$('#navbar li.uk-active').hide()}
+                    )
                 },
                 3000
             )
