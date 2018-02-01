@@ -116,6 +116,11 @@ description: base64 编码、解码。支持文字、图片。智能适应“dat
             imgSize: '',
             base64: ''
         },
+        mounted: function () {
+            if (localStorage.base64_tab1_base64) {
+                this.base64 = localStorage.base64_tab1_base64
+            }
+        },
         methods: {
             onInputBase64: function() {
                 this.imgType = ''
