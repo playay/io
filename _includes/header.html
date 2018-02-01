@@ -115,12 +115,12 @@ $(function() {
             setTimeout(
                 () => {
                     $('#navbar li.uk-active').animate(
-                        {width: 0},
-                        3000,
+                        {width: 0, padding: 0, margin: 0},
+                        4000,
                         () => {$('#navbar li.uk-active').hide()}
                     )
                 },
-                3000
+                5000
             )
         }
     })
