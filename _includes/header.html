@@ -19,14 +19,14 @@ $(function() {
 <nav id="navbar" class="uk-navbar">
     <a class="uk-navbar-brand" href="/">io</a>
     <ul class="uk-navbar-nav">
-            <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
-                <a href="/json/">Json</a></li>
+        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
+            <a href="/json/">Json</a></li>
 
-            <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Base64 编解码' }">
-                <a href="/base64/">Base64</a></li>
+        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Base64 编解码' }">
+            <a href="/base64/">Base64</a></li>
 
-            <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == '时间戳 转 时间' }">
-                <a href="/timestamp/">Timestamp</a></li>
+        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == '时间戳 转 时间' }">
+            <a href="/timestamp/">Timestamp</a></li>
 
         <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">feedback</a></li>
         <!-- <li><a href="https://pages.feling.net/2015/06/donate.html" target="_blank">donate</a></li> -->
