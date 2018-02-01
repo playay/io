@@ -115,9 +115,11 @@ $(function() {
         mounted: function () {
             $('#navbar li.uk-active').animate(
                 {
-                    width: 0
+                    width: 0,
+                    margin: 0,
+                    padding: 0,
                 },
-                1000,
+                2000,
                 () => {
                     $('#navbar li.uk-active').hide()
                 }
