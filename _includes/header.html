@@ -16,11 +16,13 @@ $(function() {
     <div class="stick"></div>
 </div>
 
-
-<nav class="uk-navbar">
+<nav id="navbar" class="uk-navbar">
     <a class="uk-navbar-brand" href="/">io</a>
     <ul class="uk-navbar-nav">
-        <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">feedback</a></li>
+            <li v-bind:class="{ 'uk-active': {{ page.title }} == 'Json 格式化' }"><a href="/json/" target="_blank">Json 格式化</a></li>
+            <li v-bind:class="{ 'uk-active': {{ page.title }} == 'Base64 编解码' }"><a href="/base64/" target="_blank">Base64</a></li>
+            <li v-bind:class="{ 'uk-active': {{ page.title }} == '时间戳 转 时间' }"><a href="/timestamp/" target="_blank">时间戳 ⇄ 时间</a></li>
+            <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">feedback</a></li>
         <!-- <li><a href="https://pages.feling.net" target="_blank">笔记</a></li> -->
         <!-- <li><a href="https://pages.feling.net/2015/06/donate.html" target="_blank">donate</a></li> -->
     </ul>
@@ -102,6 +104,12 @@ $(function() {
         </script>
     </div>
 </nav>
+<script>
+    var vm_navbar = new Vue({
+        el: '#navbar'
+    })
+</script>
+
 
 <div id="googleThings"></div>
 <script src="/js/googleThings.js" async defer></script>
