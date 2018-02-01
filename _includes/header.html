@@ -29,7 +29,6 @@ $(function() {
             <a href="/timestamp/">Timestamp</a></li>
 
         <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">feedback</a></li>
-        <!-- <li><a href="https://pages.feling.net/2015/06/donate.html" target="_blank">donate</a></li> -->
     </ul>
     <a class="uk-navbar-nav uk-navbar-content" href="https://pages.feling.net">笔记</a>
     <div class="uk-navbar-flip">
@@ -113,16 +112,11 @@ $(function() {
     var vm_navbar = new Vue({
         el: '#navbar',
         mounted: function () {
-            $('#navbar li.uk-active').animate(
-                {
-                    width: 0,
-                    margin: 0,
-                    padding: 0,
-                },
-                2000,
+            setTimeout(
                 () => {
-                    $('#navbar li.uk-active').hide()
-                }
+                    $('#navbar li.uk-active').animate({width: 0},3000,() => {this.hide()})
+                },
+                3000
             )
         }
     })
