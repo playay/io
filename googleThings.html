@@ -12,7 +12,7 @@
     <!-- 谷歌一键登录 -->
     <script src="https://smartlock.google.com/client"></script>
     <script>
-        function signInWithGoogle() {
+        function signInWithGoogle(userClick) {
             $('#signInSpinner').show()
             const retrievePromise = googleyolo.retrieve({
                 supportedAuthMethods: [
@@ -56,7 +56,9 @@
                             case "userCanceled":
                                 break;
                             case "noCredentialsAvailable":
-                                UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
+                                if (userClick) {
+                                    UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
+                                }
                             break;
                             default:
                         }
@@ -91,6 +93,7 @@
                 $("#signInButton").hide()
             } else {
                 $("#signInButton").show()
+                signInWithGoogle(false)
             }
         }
     </script>
