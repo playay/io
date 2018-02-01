@@ -125,7 +125,9 @@ description: base64 编码、解码。支持文字、图片。智能适应“dat
             onInputBase64: function() {
                 this.imgType = ''
                 this.imgSize = ''
-                localStorage.base64_tab1_base64 = this.base64
+                if (this.base64.length < (1024 * 128)) {
+                    localStorage.base64_tab1_base64 = this.base64
+                }
             },
             ignoreDrag: function(event) {
                 event.stopPropagation()
@@ -151,7 +153,9 @@ description: base64 编码、解码。支持文字、图片。智能适应“dat
                     var reader = new FileReader()
                     reader.onload = function (o) {
                         vm_img.base64 = o.target.result
-                        localStorage.base64_tab1_base64 = vm_img.base64
+                        if (vm_img.base64.length < (1024 * 128)) {
+                            localStorage.base64_tab1_base64 = vm_img.base64
+                        }
                         $('.jq_watermark').trigger('paste')
                     }
                     reader.readAsDataURL(file);
