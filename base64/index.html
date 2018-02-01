@@ -103,8 +103,8 @@ description: base64 编码、解码。支持文字、图片。智能适应“dat
                 this.base64 = Base64.encode(this.origin)
             },
             onChangeBase64: function() {
-                localStorage.base64_tab0_origin = this.origin
                 this.origin = Base64.decode(this.base64)
+                localStorage.base64_tab0_origin = this.origin
             }
         }
     })
