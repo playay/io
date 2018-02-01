@@ -112,8 +112,8 @@ $(function() {
 <script>
     var vm_navbar = new Vue({
         el: '#navbar',
-        mounted: function() {
-            $('li.uk-active').hide(1000)
+        mounted: function () {
+            $('li.uk-active').animate({width:0}, 1000)
         }
     })
 </script>
