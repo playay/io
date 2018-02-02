@@ -34,7 +34,7 @@
                 }
             }, (error) => {
                 $('#signInSpinner').hide()
-                if (error.type === 'requestFailed') {
+                if (error.type === 'requestFailed' && userClick) {
                     UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
                 }
                 if (error.type === 'noCredentialsAvailable') {
