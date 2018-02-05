@@ -56,6 +56,7 @@
                     }, (error) => {
                         switch (error.type) {
                             case "userCanceled":
+                                localStorage.userCanceledLogin = true
                                 break;
                             case "noCredentialsAvailable":
                                 if (userClick) {
@@ -97,7 +98,7 @@
                 $("#signInButton").show()
                 setTimeout(
                     () => {
-                        if (!localStorage.accessToken) {
+                        if (!localStorage.accessToken && !localStorage.userCanceledLogin ) {
                             signInWithGoogle(false)
                         }
                     },
