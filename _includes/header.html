@@ -24,8 +24,6 @@ $(function() {
 
         <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Base64 编解码' }">
             <a href="/base64/">Base64</a></li>
-
-        <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">feedback</a></li>
     </ul>
     <a class="uk-navbar-nav uk-navbar-content" href="https://pages.feling.net">笔记</a>
     <div class="uk-navbar-flip">
@@ -41,6 +39,7 @@ $(function() {
                 </div>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
+                        <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">意见与建议</a></li>
                         <li><a onClick="signOut()">退出</a></li>
                     </ul>
                 </div>
