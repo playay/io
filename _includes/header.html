@@ -17,7 +17,18 @@ $(function() {
 </div>
 
 <nav id="navbar" class="uk-navbar">
-    <div>
+    <a class="uk-navbar-brand" href="/">io</a>
+    <ul class="uk-navbar-nav uk-visible-large">
+        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
+            <a href="/json/">Json</a></li>
+
+        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Base64 编解码' }">
+            <a href="/base64/">Base64</a></li>
+
+        <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">feedback</a></li>
+    </ul>
+    <a class="uk-navbar-nav uk-navbar-content" href="https://pages.feling.net">笔记</a>
+    <div class="uk-navbar-flip">
         <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;" style="display:none;font-size:16px;" onClick="signIn()">
             <i id="signInSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i> <i class="uk-icon-google"> 登录</i>
         </a>
@@ -93,17 +104,6 @@ $(function() {
             }
         </script>
     </div>
-    <ul class="uk-navbar-nav uk-visible-large">
-        <li><a href="/">io</a></li>
-        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
-            <a href="/json/">Json</a></li>
-
-        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Base64 编解码' }">
-            <a href="/base64/">Base64</a></li>
-
-        <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”页面的意见与建议">feedback</a></li>
-    </ul>
-    <a class="uk-navbar-nav uk-navbar-content" href="https://pages.feling.net">笔记</a>
 </nav>
 <script>
     var vm_navbar = new Vue({
