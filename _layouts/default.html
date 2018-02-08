@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="uk-height-1-1">
 <head>
 {% include head.html %}
 </head>
-<body>
+<body class="uk-height-1-1">
     <header data-uk-sticky class="uk-modal-header">
     {% include header.html %}
     </header>
     <hr/>
     <br/>
-    <div class="uk-container">
+    <div class="uk-container" style="height:95%">
         {{ content }}
     </div>
-    <footer class="uk-modal-footer">
+    <footer class="uk-modal-footer" style="position:absolute;bottom:0;width:100%;">
     {% include footer.html %}
     </footer>
 </body>
