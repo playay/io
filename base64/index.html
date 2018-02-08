@@ -49,10 +49,10 @@ description: base64 编码、解码。支持文字、图片。智能适应“dat
         <li>
             <div id="text" class="uk-grid uk-grid-small uk-height-1-1">
                 <div class="uk-width-1-2 fl-box">
-                    <textarea class="uk-width-1-1" style="height: 240px;resize: vertical;" placeholder="编码前" spellcheck="false" v-model="origin" v-on:input="onChangeOrigin"></textarea>
+                    <textarea class="uk-width-1-1" style="resize:vertical;" placeholder="编码前" spellcheck="false" v-model="origin" v-on:input="onChangeOrigin"></textarea>
                 </div>
                 <div class="uk-width-1-2 fl-box">
-                    <textarea class="uk-width-1-1" style="height: 240px;resize: vertical;" placeholder="编码后" autofocus spellcheck="false" v-model="base64" v-on:input="onChangeBase64"></textarea>
+                    <textarea class="uk-width-1-1" style="resize:vertical;" placeholder="编码后" autofocus spellcheck="false" v-model="base64" v-on:input="onChangeBase64"></textarea>
                 </div>
             </div>
         </li>
@@ -61,7 +61,7 @@ description: base64 编码、解码。支持文字、图片。智能适应“dat
         <li>
             <div id="img" class="uk-grid uk-grid-small uk-height-1-1">
                 <div class="uk-width-1-2 fl-box">
-                    <textarea class="uk-width-1-1 jq_watermark" style="height: 320px;resize: none;" title="输入以下任一内容: <br> 1. 图片url地址 <br> 2. 带 'data:image/...' 前缀的图片 base64 <br> 3. 不带 'data:image/...' 前缀的图片 base64 " 
+                    <textarea class="uk-width-1-1 jq_watermark" style="resize:vertical;" title="输入以下任一内容: <br> 1. 图片url地址 <br> 2. 带 'data:image/...' 前缀的图片 base64 <br> 3. 不带 'data:image/...' 前缀的图片 base64 " 
                     autofocus spellcheck="false" v-model="base64" v-on:input="onInputBase64"></textarea>
                 </div>
                 <div class="uk-width-1-2 fl-box">
