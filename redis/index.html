@@ -9,7 +9,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
 <link href="https://cdn.rawgit.com/jcubic/jquery.terminal/master/css/jquery.terminal.min.css" rel="stylesheet"/>
 
 <div id="main" class="uk-height-1-1">
-    <div class="uk-flex uk-grid-small uk-height-1-1">
+    <div class="uk-flex uk-height-1-1">
         <div style="width:30%;min-width:240px;background-color:blue">
 xx
         </div>
@@ -22,8 +22,8 @@ xx
     var terminal = $('#terminal').terminal((command, terminal) => {
         redis.request(command)
     }, {
-        greetings: 'fredis powered by ws2s.js',
-        name: 'js_demo',
+        greetings: 'fredis powered by <a href="https://github.com/playlay/ws2s" target="_blank">ws2s project</a>',
+        name: 'xxx',
         height: '100%',
         width: '100%',
         prompt: 'fredis> '
