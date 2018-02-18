@@ -5,23 +5,49 @@ keywords: [redis]
 description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
 ---
 
-<script src="https://cdn.rawgit.com/jcubic/jquery.terminal/master/js/jquery.terminal.min.js"></script>
-<link href="https://cdn.rawgit.com/jcubic/jquery.terminal/master/css/jquery.terminal.min.css" rel="stylesheet"/>
-
 <div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
         <div style="width:30%;min-width:240px;">
+            <button class="uk-button">new config</button>
+            <button class="uk-button">connect</button>
         </div>
         <div id="terminal" style="width:100%;"></div>
     </div>
 </div>
 
 <script src="https://gitee.com/chenyanclyz/ws2s/raw/master/ws2s-js/ws2s.js"></script>
+<script src="https://cdn.rawgit.com/jcubic/jquery.terminal/master/js/jquery.terminal.min.js"></script>
+<link href="https://cdn.rawgit.com/jcubic/jquery.terminal/master/css/jquery.terminal.min.css" rel="stylesheet"/>
+
 <script>
+
+    var vm = new Vue({
+        el: "#main",
+        data: {
+
+        },
+        mounted: function () {
+            if (!localStorage.redis_connections) {
+                localStorage.redis_connections = JSON.stringify([{
+                    name: "feling.io",
+                    ws2sServer: "",
+                    host: "47.94.220.13",
+                    port: 6379,
+                    auth: null
+                }])
+            }
+        },
+        methods: {
+            isArray: function (obj) {
+            },
+        }
+    })
+
+
     var terminal = $('#terminal').terminal((command, terminal) => {
         redis.request(command)
     }, {
-        greetings: 'fredis powered by ws2s project: https://github.com/playlay/ws2s',
+        greetings: 'fredis\npowered by ws2s project: https://github.com/playlay/ws2s' + '\n',
         name: 'xxx',
         height: '100%',
         width: '100%',
