@@ -12,12 +12,14 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
 
             <ul>
                 <li v-for="connection in redisConnections">
+                    {% raw %}
                     {{connection.name}}
                     {{connection.name}}
                     {{connection.ws2sServer}}
                     {{connection.host}}
                     {{connection.port}}
                     {{connection.auth}}
+                    {% endraw %}
                     <button class="uk-button" v-on:click="connect(connection)">connect</button>
                     <button class="uk-button" v-on:click="deleteOne(connection)">delete</button>
                 </li>
