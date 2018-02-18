@@ -60,8 +60,11 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     var terminal = $('#terminal').terminal((command, terminal) => {
                         redis.request(command)
                     }, {
-                        greetings: 'powered by ws2s project: https://github.com/playlay/ws2s' + '\n',
-                        name: connection.name,
+                        greetings: 'powered by ws2s project: https://github.com/playlay/ws2s' 
+                                    + '\n'
+                                    + 'fredis is under developing, this is the Alpha version.'
+                                    ,
+                        name: 'redis_terminal_' + connection.name,
                         height: '100%',
                         width: '100%',
                         prompt: 'fredis> '
@@ -70,7 +73,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                         terminal.echo(String(data))
                     }
                     redis.onError = (error) => {
-                        terminal.error(String(error))
+                        terminal.error(JSON.stringify(error))
                     }
                 }
             },
