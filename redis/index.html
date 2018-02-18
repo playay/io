@@ -14,7 +14,6 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 <li v-for="connection in redisConnections">
                     {% raw %}
                     {{connection.name}}
-                    {{connection.name}}
                     {{connection.ws2sServer}}
                     {{connection.host}}
                     {{connection.port}}
@@ -54,7 +53,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             this.redisConnections = JSON.parse(localStorage.redis_connections)
         },
         methods: {
-            connect: function (config) {
+            connect: function (connection) {
                 var redis = new WS2S(connection.ws2sServer)
                                 .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
