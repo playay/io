@@ -1,0 +1,47 @@
+---
+title: fredis
+layout: default
+keywords: [redis]
+description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
+---
+
+<script src="https://cdn.rawgit.com/jcubic/jquery.terminal/master/js/jquery.terminal.min.js"></script>
+<link href="https://cdn.rawgit.com/jcubic/jquery.terminal/master/css/jquery.terminal.min.css" rel="stylesheet"/>
+
+<div id="main">
+    <div class="uk-flex uk-grid-small">
+        <div style="width:30%;min-width:240px;">
+xx
+        </div>
+        <div id="terminal" style="width:100%;"></div>
+    </div>
+</div>
+
+<script src="https://gitee.com/chenyanclyz/ws2s/raw/master/ws2s-js/ws2s.js"></script>
+<script>
+    var terminal = $('#terminal').terminal((command, terminal) => {
+        redis.request(command)
+    }, {
+        greetings: 'fredis powered by ws2s.js',
+        name: 'js_demo',
+        height: '100%',
+        width: '100%',
+        prompt: 'fredis> '
+    })
+
+    redis = new WS2S("wss://feling.io/ws2s-server/")
+                .newRedisCient("47.94.220.13", 6379)
+    redis.onResponse = (data) => {
+        if (data === null) {
+            terminal.echo('server responded a null object')
+        } else if (data === '') {
+            terminal.echo('server responded a empty string')
+        } else {
+            terminal.echo(String(data))
+        }
+    }
+    redis.onError = (error) => {
+        console.log(error)
+        terminal.error(String(error))
+    }
+</script>
