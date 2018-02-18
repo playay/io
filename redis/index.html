@@ -11,7 +11,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             <button class="uk-button">add new connection</button>
 
             <ul>
-                <li v-for="connection in localStorage.redis_connections">
+                <li v-for="connection in redisConnections">
                     {{connection.name}}
                     {{connection.name}}
                     {{connection.ws2sServer}}
@@ -37,7 +37,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
     var vm = new Vue({
         el: "#main",
         data: {
-
+            redisConnections: []
         },
         mounted: function () {
             if (!localStorage.redis_connections) {
@@ -49,6 +49,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     auth: null
                 }])
             }
+            this.redisConnections = JSON.parse(localStorage.redis_connections)
         },
         methods: {
             connect: function (config) {
