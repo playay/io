@@ -8,8 +8,21 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
 <div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
         <div style="width:30%;min-width:240px;">
-            <button class="uk-button">new config</button>
-            <button class="uk-button">connect</button>
+            <button class="uk-button">add new connection</button>
+
+            <ul>
+                <li v-for="connection in localStorage.redis_connections">
+                    {{connection.name}}
+                    {{connection.name}}
+                    {{connection.ws2sServer}}
+                    {{connection.host}}
+                    {{connection.port}}
+                    {{connection.auth}}
+                    <button class="uk-button" v-on:click="connect(connection)">connect</button>
+                    <button class="uk-button" v-on:click="deleteOne(connection)">delete</button>
+                </li>
+            </ul>
+            
         </div>
         <div id="terminal" style="width:100%;"></div>
     </div>
@@ -30,7 +43,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             if (!localStorage.redis_connections) {
                 localStorage.redis_connections = JSON.stringify([{
                     name: "feling.io",
-                    ws2sServer: "",
+                    ws2sServer: "wss://feling.io/ws2s-server/",
                     host: "47.94.220.13",
                     port: 6379,
                     auth: null
@@ -38,35 +51,29 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             }
         },
         methods: {
-            isArray: function (obj) {
+            connect: function (config) {
+                var redis = new WS2S(connection.ws2sServer)
+                                .newRedisCient(connection.host, connection.port, connection.auth)
+                redis.onReady = () => {
+                    var terminal = $('#terminal').terminal((command, terminal) => {
+                        redis.request(command)
+                    }, {
+                        greetings: 'powered by ws2s project: https://github.com/playlay/ws2s' + '\n',
+                        name: connection.name,
+                        height: '100%',
+                        width: '100%',
+                        prompt: 'fredis> '
+                    })
+                    redis.onResponse = (data) => {
+                        terminal.echo(String(data))
+                    }
+                    redis.onError = (error) => {
+                        terminal.error(String(error))
+                    }
+                }
+            },
+            deleteOne: function (connection) {
             },
         }
     })
-
-
-    var terminal = $('#terminal').terminal((command, terminal) => {
-        redis.request(command)
-    }, {
-        greetings: 'fredis\npowered by ws2s project: https://github.com/playlay/ws2s' + '\n',
-        name: 'xxx',
-        height: '100%',
-        width: '100%',
-        prompt: 'fredis> '
-    })
-
-    redis = new WS2S("wss://feling.io/ws2s-server/")
-                .newRedisCient("47.94.220.13", 6379)
-    redis.onResponse = (data) => {
-        if (data === null) {
-            terminal.echo('server responded a null object')
-        } else if (data === '') {
-            terminal.echo('server responded a empty string')
-        } else {
-            terminal.echo(String(data))
-        }
-    }
-    redis.onError = (error) => {
-        console.log(error)
-        terminal.error(String(error))
-    }
 </script>
