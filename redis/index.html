@@ -39,7 +39,10 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                         <input class="uk-form-width-medium" v-model="form.auth" type="password" placeholder="auth (optional)">
                     </div>
                     <div class="uk-form-row">
-                        <button class="uk-button uk-button-danger" v-if="redisConnections.includes(form)" v-on:click="deleteOne(form)">delete</button>
+                        <button class="uk-button uk-button-danger"
+                                style="display:node"
+                                v-show="redisConnections.includes(form)" 
+                                v-on:click="deleteOne(form)">delete</button>
                     </div>
                 </div>
             </div>
