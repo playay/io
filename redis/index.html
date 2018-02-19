@@ -9,7 +9,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
 <div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
         <div style="width:30%;min-width:240px;">
-            <button class="uk-button uk-button-primary uk-width-1-1" 
+            <button class="uk-button uk-width-1-1" 
                     v-on:click="editOne()">add new connection</button>
             <ul class="uk-nav uk-nav-bar uk-list uk-list-line">
                 <li v-for="connection in redisConnections">
@@ -21,7 +21,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 </li>
             </ul>
         </div>
-        <div id="terminals" class="uk-flex" style="width:100%;">
+        <div id="terminals" style="width:100%;">
 
             <div v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
         </div>
@@ -71,8 +71,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         methods: {
             connect: function (connection) {
                 if (this.openedConnections.includes(connection)) {
-                    //$('div[tname]').hide()
-                    //$('div[tname="fredis_' + connection.name + '"]').show()
+                    $('div[tname]').hide()
+                    $('div[tname="fredis_' + connection.name + '"]').show()
                     return
                 }
                 var redis = new WS2S(connection.ws2sServer)
@@ -99,8 +99,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                         terminal.error(JSON.stringify(error))
                     }
                     this.openedConnections.push(connection)
-                    //$('div[tname]').hide()
-                    //$('div[tname="fredis_' + connection.name + '"]').show()
+                    $('div[tname]').hide()
+                    $('div[tname="fredis_' + connection.name + '"]').show()
                 }
             },
             deleteOne: function (connection) {
