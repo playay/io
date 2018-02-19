@@ -27,16 +27,16 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                         <input v-model="form.name" placeholder="name">
                     </div>
                     <div class="uk-form-row">
-                        <input v-model="form.ws2sServer" placeholder="ws2s server">
+                        <input class="uk-form-width-medium" v-model="form.ws2sServer" placeholder="ws2s server">
                     </div>
                     <div class="uk-form-row">
-                        <input v-model="form.host" placeholder="host">
+                        <input class="uk-form-width-medium" v-model="form.host" placeholder="host">
                     </div>
                     <div class="uk-form-row">
-                        <input v-model.number="form.port" type="number" placeholder="port">
+                        <input class="uk-form-width-medium" v-model.number="form.port" type="number" placeholder="port">
                     </div>
                     <div class="uk-form-row">
-                        <input v-model="form.auth" type="password" placeholder="auth (optional)">
+                        <input class="uk-form-width-medium" v-model="form.auth" type="password" placeholder="auth (optional)">
                     </div>
                     <div class="uk-form-row">
                         <button class="uk-button uk-button-danger" v-if="redisConnections.includes(form)" v-on:click="deleteOne(form)">delete</button>
