@@ -43,7 +43,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             openedConnections: [],
         },
         mounted: function () {
-            if (!localStorage.redis_connections) {
+            if (!localStorage.redis_connections || localStorage.redis_connections === '[]') {
                 localStorage.redis_connections = JSON.stringify([{
                     name: '中文带 空ghg格？#¥。',
                     ws2sServer: "wss://feling.io/ws2s-server/",
