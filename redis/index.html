@@ -58,14 +58,17 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                                 .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
                     var terminal = $('#terminal').terminal(function(command, term) {
-                        if (command == 'exit') {
+                        if (command == 'exit1') {
+                            term.destroy()
+                        } else if (command == 'exit') {
                             term.destroy()
                         } else {
                             redis.request(command)
                         }
                     }, {
+                        exit: false,
                         greetings: 'powered by ws2s project: https://github.com/playlay/ws2s' + '\n',
-                        name: 'redis_terminal_' + connection.host + connection.port,
+                        name: 'redis_' + connection.host + '_' + connection.port,
                         height: '100%',
                         width: '100%',
                         prompt: 'fredis> '
