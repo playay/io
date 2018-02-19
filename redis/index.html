@@ -62,9 +62,9 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         },
         methods: {
             connect: function (connection) {
-                $('div[tname]').hide()
-                $('div[tname="fredis_' + connection.name+'"]').show()
                 if (this.openedConnections.includes(connection)) {
+                    $('div[tname]').hide()
+                    $('div[tname="fredis_' + connection.name+'"]').show()
                     return
                 }
                 this.openedConnections.push(connection)
@@ -91,6 +91,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     redis.onError = (error) => {
                         terminal.error(JSON.stringify(error))
                     }
+                    $('div[tname]').hide()
+                    $('div[tname="fredis_' + connection.name+'"]').show()
                 }
             },
             deleteOne: function (connection) {
