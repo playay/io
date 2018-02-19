@@ -22,15 +22,23 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         </div>
         <div id="terminals" style="width:100%;">
             <div tname="edit" class="uk-form uk-vertical-align-middle">
-                <input class="uk-form-row" v-model="form.name" placeholder="name">
-                <input class="uk-form-row" v-model="form.ws2sServer" placeholder="ws2s server">
-                <input class="uk-form-row" v-model="form.host" placeholder="host">
-                <input class="uk-form-row" v-model.number="form.port" type="number" placeholder="port">
-                <input class="uk-form-row" v-model="form.auth" type="password" placeholder="auth (optional)">
                 <div class="uk-form-row">
-                    <button class="uk-button uk-button-danger"
-                            v-if="redisConnections.includes(form)"
-                            v-on:click="deleteOne(form)">delete</button>
+                    <input v-model="form.name" placeholder="name">
+                </div>
+                <div class="uk-form-row">
+                    <input v-model="form.ws2sServer" placeholder="ws2s server">
+                </div>
+                <div class="uk-form-row">
+                    <input v-model="form.host" placeholder="host">
+                </div>
+                <div class="uk-form-row">
+                    <input v-model.number="form.port" type="number" placeholder="port">
+                </div>
+                <div class="uk-form-row">
+                    <input v-model="form.auth" type="password" placeholder="auth (optional)">
+                </div>
+                <div class="uk-form-row">
+                    <button class="uk-button uk-button-danger" v-if="redisConnections.includes(form)" v-on:click="deleteOne(form)">delete</button>
                 </div>
             </div>
             <div v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
