@@ -20,25 +20,27 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 </li>
             </ul>
         </div>
-        <div id="terminals" style="width:100%;">
-            <div tname="edit" class="uk-form uk-vertical-align-middle">
-                <div class="uk-form-row">
-                    <input v-model="form.name" placeholder="name">
-                </div>
-                <div class="uk-form-row">
-                    <input v-model="form.ws2sServer" placeholder="ws2s server">
-                </div>
-                <div class="uk-form-row">
-                    <input v-model="form.host" placeholder="host">
-                </div>
-                <div class="uk-form-row">
-                    <input v-model.number="form.port" type="number" placeholder="port">
-                </div>
-                <div class="uk-form-row">
-                    <input v-model="form.auth" type="password" placeholder="auth (optional)">
-                </div>
-                <div class="uk-form-row">
-                    <button class="uk-button uk-button-danger" v-if="redisConnections.includes(form)" v-on:click="deleteOne(form)">delete</button>
+        <div id="terminals" class="uk-width-1-1 uk-height-1-1">
+            <div class="uk-vertical-align uk-width-1-1 uk-height-1-1">
+                <div tname="edit" class="uk-form uk-vertical-align-middle">
+                    <div class="uk-form-row">
+                        <input v-model="form.name" placeholder="name">
+                    </div>
+                    <div class="uk-form-row">
+                        <input v-model="form.ws2sServer" placeholder="ws2s server">
+                    </div>
+                    <div class="uk-form-row">
+                        <input v-model="form.host" placeholder="host">
+                    </div>
+                    <div class="uk-form-row">
+                        <input v-model.number="form.port" type="number" placeholder="port">
+                    </div>
+                    <div class="uk-form-row">
+                        <input v-model="form.auth" type="password" placeholder="auth (optional)">
+                    </div>
+                    <div class="uk-form-row">
+                        <button class="uk-button uk-button-danger" v-if="redisConnections.includes(form)" v-on:click="deleteOne(form)">delete</button>
+                    </div>
                 </div>
             </div>
             <div v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
