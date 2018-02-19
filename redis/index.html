@@ -11,7 +11,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         <div style="width:24%;margin-right:10px;">
             <button class="uk-button uk-width-1-1" 
                     v-on:click="editOne()">add new connection</button>
-            <ul class="uk-list uk-list-line">
+            <ul class="uk-list uk-list-line uk-height-1-1" style="overflow:scroll">
                 <li v-for="connection in redisConnections">
                     <span>{{connection.name}}</span>
                     <button class="uk-button" style="float:right;"
