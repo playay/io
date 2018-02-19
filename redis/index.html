@@ -45,7 +45,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 localStorage.redis_connections = JSON.stringify([{
                     name: "feling.io",
                     ws2sServer: "wss://feling.io/ws2s-server/",
-                    host: "47.94.220.13",
+                    host: "172.17.248.195",
                     port: 6379,
                     auth: null
                 }])
@@ -58,13 +58,14 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                                 .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
                     var terminal = $('#terminal').terminal((command, terminal) => {
-                        redis.request(command)
+                        if (command == 'exit') {
+                            terminal.destroy()
+                        } else {
+                            redis.request(command)
+                        }
                     }, {
-                        greetings: 'powered by ws2s project: https://github.com/playlay/ws2s' 
-                                    + '\n'
-                                    + '\nfredis is under developing, this is the Alpha version.'
-                                    ,
-                        name: 'redis_terminal_' + connection.name,
+                        greetings: 'powered by ws2s project: https://github.com/playlay/ws2s' + '\n',
+                        name: 'redis_terminal_' + connection.host + connection.port,
                         height: '100%',
                         width: '100%',
                         prompt: 'fredis> '
