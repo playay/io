@@ -64,10 +64,10 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             connect: function (connection) {
                 $('div[tname]').hide()
                 $('div[tname="fredis_' + connection.name+'"]').show()
-                if (openedConnections.includes(connection)) {
+                if (this.openedConnections.includes(connection)) {
                     return
                 }
-                openedConnections.push(connection)
+                this.openedConnections.push(connection)
                 var redis = new WS2S(connection.ws2sServer)
                                 .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
