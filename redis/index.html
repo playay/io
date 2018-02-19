@@ -5,6 +5,7 @@ keywords: [redis]
 description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
 ---
 
+{% raw %}
 <div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
         <div style="width:30%;min-width:240px;">
@@ -12,13 +13,11 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
 
             <ul>
                 <li v-for="connection in redisConnections">
-                    {% raw %}
                     {{connection.name}}
                     {{connection.ws2sServer}}
                     {{connection.host}}
                     {{connection.port}}
                     {{connection.auth}}
-                    {% endraw %}
                     <button class="uk-button" v-on:click="connect(connection)">connect</button>
                     <button class="uk-button" v-on:click="deleteOne(connection)">delete</button>
                 </li>
@@ -26,7 +25,11 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             
         </div>
         <div style="width:100%;">
-            <div id="terminal"></div>
+            <ul>
+                <li v-for="connection in redisConnections">
+                    <div id="fredis_{{connection.name}}"></div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -59,7 +62,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 var redis = new WS2S(connection.ws2sServer)
                                 .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
-                    var terminal = $('#terminal').terminal(function(command, term) {
+                    var terminal = $('#fredis_' + connection.name).terminal(function(command, term) {
                         if (command == 'exit') {
                             term.destroy()
                         } else {
@@ -88,3 +91,4 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         }
     })
 </script>
+{% endraw %}
