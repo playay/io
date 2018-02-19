@@ -83,13 +83,13 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         mounted: function () {
             if (!localStorage.redis_connections || localStorage.redis_connections === '[]') {
                 localStorage.redis_connections = JSON.stringify([{
-                    name: '中文带 空ghg格？#¥。',
+                    name: '172.17.248.195:6379',
                     ws2sServer: "wss://feling.io/ws2s-server/",
                     host: "172.17.248.195",
                     port: 6379,
                     auth: null
                 }, {
-                    name: 'feling',
+                    name: '172.17.248.195:6379(1)',
                     ws2sServer: "wss://feling.io/ws2s-server/",
                     host: "172.17.248.195",
                     port: 6379,
