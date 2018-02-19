@@ -17,17 +17,22 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     <button class="uk-button" 
                             v-bind:class="{'uk-button-success': openedConnections.includes(connection)}" 
                             v-on:click="connect(connection)">connect</button>
-                    <!-- <button class="uk-button" v-on:click="deleteOne(connection)">delete</button> -->
                 </li>
             </ul>
         </div>
         <div id="terminals" style="width:100%;">
-
+            <div tname="edit" class="uk-form">
+                <input v-model="form.name" placeholder="name">
+                <input v-model="form.ws2sServer" placeholder="ws2s server">
+                <input v-model="form.host" placeholder="host">
+                <input v-model.number="form.port" type="number" placeholder="port">
+                <input v-model="form.auth" type="password" placeholder="auth (optional)">
+                <button class="uk-button uk-button-danger"
+                        v-if="redisConnections.includes(form)"
+                        v-on:click="deleteOne(form)">delete</button>
+            </div>
             <div v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
         </div>
-    </div>
-    <div tname="edit">
-
     </div>
 </div>
 
