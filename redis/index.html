@@ -20,14 +20,14 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     <!-- <button class="uk-button" v-on:click="deleteOne(connection)">delete</button> -->
                 </li>
             </ul>
-
         </div>
-        <div id="terminals" style="width:100%;">
-            <div tname="edit">
+        <div id="terminals" class="uk-flex" style="width:100%;">
 
-            </div>
             <div v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
         </div>
+    </div>
+    <div tname="edit">
+
     </div>
 </div>
 
@@ -60,7 +60,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     auth: null
                 }, {
                     name: 'feling',
-                    ws2sServer: "wss://sg.io/ws2s-server/",
+                    ws2sServer: "wss://feling.io/ws2s-server/",
                     host: "172.17.248.195",
                     port: 6379,
                     auth: ''
@@ -71,8 +71,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         methods: {
             connect: function (connection) {
                 if (this.openedConnections.includes(connection)) {
-                    $('div[tname]').hide()
-                    $('div[tname="fredis_' + connection.name + '"]').show()
+                    //$('div[tname]').hide()
+                    //$('div[tname="fredis_' + connection.name + '"]').show()
                     return
                 }
                 var redis = new WS2S(connection.ws2sServer)
@@ -99,8 +99,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                         terminal.error(JSON.stringify(error))
                     }
                     this.openedConnections.push(connection)
-                    $('div[tname]').hide()
-                    $('div[tname="fredis_' + connection.name + '"]').show()
+                    //$('div[tname]').hide()
+                    //$('div[tname="fredis_' + connection.name + '"]').show()
                 }
             },
             deleteOne: function (connection) {
