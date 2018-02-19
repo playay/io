@@ -137,6 +137,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 if (index !== -1) {
                     this.redisConnections.splice(index, 1)
                     localStorage.redis_connections = JSON.stringify(this.redisConnections)
+                    localStorage.removeItem('fredis_' + connection.name + '_0_interpreters')
+                    localStorage.removeItem('fredis_' + connection.name + '_0_commands')
                     this.editOne()
                 }
             },
