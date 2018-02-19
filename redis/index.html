@@ -43,13 +43,14 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     </div>
                     <div class="uk-form-row">
                         <button class="uk-button uk-button-danger"
-                                style="display:none"
+                                style="display:none;width:30%;"
                                 v-show="redisConnections.includes(form)" 
                                 v-on:click="deleteOne(form)">delete</button>
                         <button class="uk-button uk-button-primary"
-                                style="float:right;"
+                                style="float:right;width:30%;"
                                 v-on:click="saveOne(form)">save</button>
                     </div>
+                    <div class="uk-alert uk-alert-close" v-show="editHint">{{ editHint }}</div>
                 </div>
             </div>
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
