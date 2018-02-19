@@ -39,7 +39,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
     var vm = new Vue({
         el: "#main",
         data: {
-            redisConnections: []
+            redisConnections: [],
+            openedConnections: [],
         },
         mounted: function () {
             if (!localStorage.redis_connections) {
@@ -62,10 +63,14 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         methods: {
             connect: function (connection) {
                 $('div[tname]').hide()
+                $('div[tname="fredis_' + connection.name+'"]').show()
+                if (openedConnections.includes(connection)) {
+                    return
+                }
+                openedConnections.push(connection)
                 var redis = new WS2S(connection.ws2sServer)
                                 .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
-                    $('div[tname="fredis_' + connection.name+'"]').show()
                     var terminal = $('div[tname="fredis_' + connection.name+'"]').terminal(function(command, term) {
                         redis.request(command)
                     }, {
