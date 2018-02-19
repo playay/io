@@ -65,6 +65,8 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         data: {
             redisConnections: [],
             openedConnections: [],
+            editingConnection: {},
+            editHint: '',
             form: {
                 name: '',
                 ws2sServer: '',
@@ -131,16 +133,38 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 if (index !== -1) {
                     this.redisConnections.splice(index, 1)
                     localStorage.redis_connections = JSON.stringify(this.redisConnections)
+                    this.editOne()
                 }
             },
             editOne: function (connection) {
+                this.editHint = ''
                 if (connection) {
+                    this.editingConnection = connection
                     this.form = connection
                 } else {
+                    this.editingConnection = { name: '', ws2sServer: '', host: '', port: 6379, auth: '' }
                     this.form = { name: '', ws2sServer: '', host: '', port: 6379, auth: '' }
                 }
                 $('div[tname]').hide()
                 $('div[tname="edit"]').show()
+            },
+            saveOne: function (connection) {
+                this.editHint = ''
+                if (!connection.host || !connection.ws2sServer) {
+                    this.editHint = '信息不完整'
+                    return
+                }
+                if (!connection.name) {
+                    connection.name = connection.host + ':' + connection.port
+                }
+                var index = this.redisConnections.indexOf(this.editingConnection)
+                if (index !== -1) {
+                    this.redisConnections.splice(index, 1, connection)
+                } else {
+                    this.redisConnections.push(connection)
+                }
+                localStorage.redis_connections = JSON.stringify(this.redisConnections)
+                this.editHint = '保存成功'
             },
         }
     })
