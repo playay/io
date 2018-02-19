@@ -168,7 +168,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     this.redisConnections.push(connection)
                 }
                 localStorage.redis_connections = JSON.stringify(this.redisConnections)
-                this.editHint = '保存成功'
+                this.editOne()
             },
         }
     })
