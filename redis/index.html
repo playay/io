@@ -24,7 +24,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
             </ul>
             
         </div>
-        <div style="width:100%;">
+        <div id="terminals" style="width:100%;">
             <div v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
         </div>
     </div>
@@ -61,9 +61,11 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
         },
         methods: {
             connect: function (connection) {
+                $('div[tname]').hide()
                 var redis = new WS2S(connection.ws2sServer)
                                 .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
+                    $('div[tname="fredis_' + connection.name+'"]').show()
                     var terminal = $('div[tname="fredis_' + connection.name+'"]').terminal(function(command, term) {
                         redis.request(command)
                     }, {
@@ -72,7 +74,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                                     + '\n\n'
                                     + 'connected to ' + connection.name 
                                     + '('+ connection.host +':'+ connection.port + ')'
-                                    + ', you can now exec redis command.',
+                                    + ', you can now exec redis commands.',
                         name: 'fredis_' + connection.name,
                         height: '100%',
                         width: '100%',
