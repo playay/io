@@ -96,10 +96,10 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 }
             },
             deleteOne: function (connection) {
-                var index = redisConnections.indexOf(connection)
+                var index = this.redisConnections.indexOf(connection)
                 if (index !== -1) {
-                    redisConnections.splice(index, 1)
-                    localStorage.redis_connections = JSON.stringify(redisConnections)
+                    this.redisConnections.splice(index, 1)
+                    localStorage.redis_connections = JSON.stringify(this.redisConnections)
                 }
             },
         }
