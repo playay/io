@@ -75,7 +75,6 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     $('div[tname="fredis_' + connection.name + '"]').show()
                     return
                 }
-                this.openedConnections.push(connection)
                 var redis = new WS2S(connection.ws2sServer)
                     .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
@@ -99,6 +98,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                     redis.onError = (error) => {
                         terminal.error(JSON.stringify(error))
                     }
+                    this.openedConnections.push(connection)
                     $('div[tname]').hide()
                     $('div[tname="fredis_' + connection.name + '"]').show()
                 }
