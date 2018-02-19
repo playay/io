@@ -60,7 +60,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                 redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name+'"]').terminal(function(command, term) {
                         if (command == 'exit') {
-                            term.destroy()
+                            term.disabled()
                         } else {
                             redis.request(command)
                         }
