@@ -15,10 +15,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 style="overflow:scroll;">
                 <li v-for="connection in redisConnections">
                     <span>{{connection.name}}</span>
-                    <button class="uk-button" style="float:right;"
+                    <button class="uk-button uk-button-small" style="float:right;"
                             v-bind:class="{'uk-button-success': openedConnections.includes(connection)}" 
                             v-on:click="connect(connection)">connect</button>
-                    <button class="uk-button" style="float:right;"
+                    <button class="uk-button uk-button-small" style="float:right;"
                             v-on:click="editOne(connection)">edit</button>
                 </li>
             </ul>
