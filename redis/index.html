@@ -14,11 +14,11 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             <ul class="uk-list uk-list-line uk-height-1-1" 
                 style="overflow:scroll;">
                 <li v-for="connection in redisConnections">
-                    <span>{{connection.name}}</span>
-                    <button class="uk-button uk-button-small" style="float:right;"
+                    <span>{{connection.name}}<br>{{connection.host}}:{{connection.port}}</span>
+                    <button class="uk-button" style="float:right;"
                             v-bind:class="{'uk-button-success': openedConnections.includes(connection)}" 
                             v-on:click="connect(connection)">connect</button>
-                    <button class="uk-button uk-button-small" style="float:right;"
+                    <button class="uk-button" style="float:right;"
                             v-on:click="editOne(connection)">edit</button>
                 </li>
             </ul>
@@ -55,7 +55,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 v-on:click="saveOne(form)">save</button>
                     </div>
                     <div class="uk-alert uk-alert-close" v-show="editHint">{{ editHint }}</div>
-                    <div class="uk-alert uk-alert-close" v-show="ws2sServerFormIsFocus">xx</div>
+                    <div class="uk-alert uk-alert-close" v-show="ws2sServerFormIsFocus">
+                        什么是ws2s。。。未完待续
+                    </div>
                 </div>
             </div>
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
