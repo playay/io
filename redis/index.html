@@ -31,7 +31,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         <input class="uk-form-width-large" v-model="form.name" placeholder="name">
                     </div>
                     <div class="uk-form-row">
-                        <input class="uk-form-width-large" v-model="form.ws2sServer" id="ws2sServerForm" placeholder="ws2s server">
+                        <input class="uk-form-width-large" v-model="form.ws2sServer" placeholder="ws2s server"
+                                id="ws2sServerForm" 
+                                onfocus="onWs2sServerFormFocusChange()" 
+                                onblur="onWs2sServerFormFocusChange()">
                     </div>
                     <div class="uk-form-row">
                         <input class="uk-form-width-large" v-model="form.host" placeholder="host">
@@ -52,7 +55,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 v-on:click="saveOne(form)">save</button>
                     </div>
                     <div class="uk-alert uk-alert-close" v-show="editHint">{{ editHint }}</div>
-                    <div class="uk-alert uk-alert-close" v-show="$('#ws2sServerForm').is(':focus')">xx</div>
+                    <div class="uk-alert uk-alert-close" v-show="ws2sServerFormIsFocus">xx</div>
                 </div>
             </div>
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
@@ -79,7 +82,8 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 host: '',
                 port: 6379,
                 auth: ''
-            }
+            },
+            ws2sServerFormIsFocus: false,
         },
         mounted: function () {
             if (!localStorage.redis_connections || localStorage.redis_connections === '[]') {
@@ -174,6 +178,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 localStorage.redis_connections = JSON.stringify(this.redisConnections)
                 this.editOne()
             },
+            onWs2sServerFormFocusChange: function () {
+                this.ws2sServerFormIsFocus = $('#ws2sServerForm').is(':focus')
+            }
         }
     })
 </script>
