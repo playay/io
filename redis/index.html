@@ -1,8 +1,8 @@
 ---
 title: fredis
 layout: default
-keywords: [redis]
-description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
+keywords: [redis, redis GUI, redis client]
+description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”开发。有基本的GUI图形界面，能编辑保存服务器信息、打开 redis 命令行终端、保存历史命令。所有数据存储在 localStorage。
 ---
 
 {% raw %}
@@ -31,7 +31,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                         <input class="uk-form-width-large" v-model="form.name" placeholder="name">
                     </div>
                     <div class="uk-form-row">
-                        <input class="uk-form-width-large" v-model="form.ws2sServer" placeholder="ws2s server">
+                        <input class="uk-form-width-large" v-model="form.ws2sServer" id="ws2sServerForm" placeholder="ws2s server">
                     </div>
                     <div class="uk-form-row">
                         <input class="uk-form-width-large" v-model="form.host" placeholder="host">
@@ -52,6 +52,7 @@ description: web 版 redis 客户端--fredis，基于 ws2s.js 开发。
                                 v-on:click="saveOne(form)">save</button>
                     </div>
                     <div class="uk-alert uk-alert-close" v-show="editHint">{{ editHint }}</div>
+                    <div class="uk-alert uk-alert-close" v-show="$('#ws2sServerForm').is(':focus')">xx</div>
                 </div>
             </div>
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" v-for="connection in redisConnections" :tname="'fredis_'+connection.name"></div>
