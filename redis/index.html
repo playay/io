@@ -33,8 +33,8 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     <div class="uk-form-row">
                         <input class="uk-form-width-large" v-model="form.ws2sServer" placeholder="ws2s server"
                                 id="ws2sServerForm" 
-                                onfocus="onWs2sServerFormFocusChange()" 
-                                onblur="onWs2sServerFormFocusChange()">
+                                v-on:focus="onWs2sServerFormFocusChange()" 
+                                v-on:blur="onWs2sServerFormFocusChange()">
                     </div>
                     <div class="uk-form-row">
                         <input class="uk-form-width-large" v-model="form.host" placeholder="host">
