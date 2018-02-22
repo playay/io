@@ -37,14 +37,13 @@ $(function() {
         <ul id="userAvatarAndName" class="uk-navbar-nav" style="display:none;">
             <li class="uk-parent" data-uk-dropdown>
                 <div class="uk-navbar-content">
-                    <i id="signOutSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                     <img id="userAvatar" style="width:30px;height:30px;border-radius:50%;">
                     <span id="userName" style="font-size:16px;"></span>
                 </div>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
                         <li><a href="mailto:chenyan@feling.net?subject=对“{{ page.title }}”的意见与建议">意见与建议</a></li>
-                        <li><a onClick="signOut()">退出</a></li>
+                        <li><a onClick="signOut()">退出<i id="signOutSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i></a></li>
                     </ul>
                 </div>
             </li>
