@@ -58,7 +58,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     <div class="uk-alert uk-alert-close" v-show="editHint">{{ editHint }}</div>
                     <div class="uk-alert uk-alert-close" v-show="ws2sServerFormIsFocus">
                         什么是ws2s？<br><br>
-                        运行在浏览器上的 javaScript，只能使用 http、websocket 协议发出网络请求。然而，redis 客户端需要使用 socket 与服务端通信。<br><br>
+                        运行在浏览器上的 js，只能使用 http、websocket 协议发出网络请求。然而，redis 客户端需要使用 socket 与服务端通信。<br><br>
                         ws2s server 是一个 websocket 服务端。使用 websocket 协议，按约定的数据格式与 ws2s server 通信。它就能帮你与 redis 服务端建立 socket 连接、使用这个 socket 连接发送数据、当这个 socket 连接收到数据时，ws2s server 也会把收到的数据通知给你。<br><br>
                         在能访问到你的 redis 服务端的机器上，<a href="https://github.com/playlay/ws2s#install" target="_blank">安装 ws2s</a>, 就能正常使用 fredis。
                     </div>
