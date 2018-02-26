@@ -185,7 +185,7 @@ class WS2S {
                                 itemStatus = itemHandler.push(byteList)
                             }
                             if (itemStatus.complete) {
-                                var prefixIndex = '   '.repeat(itemStatus.depth) + (this.status.arrayIndex + 1) + ') '
+                                var prefixIndex = (this.status.arrayIndex + 1) + ') '
                                 for (let i = 0; i < prefixIndex.length; i++) {
                                     this.status.resultByteList.push(prefixIndex.charCodeAt(i))
                                 }
@@ -194,6 +194,11 @@ class WS2S {
                                 }
                                 if (this.status.arrayIndex < this.status.arraySize - 1) {
                                     this.status.resultByteList.push('\n'.charCodeAt(0))
+                                }
+                                for (let i = 0; i < itemStatus.depth; i++){
+                                    this.status.resultByteList.push(' '.charCodeAt(0))
+                                    this.status.resultByteList.push(' '.charCodeAt(0))
+                                    this.status.resultByteList.push(' '.charCodeAt(0))
                                 }
                                 this.status.arrayIndex = this.status.arrayIndex + 1
                             }
