@@ -200,10 +200,13 @@ class WS2S {
                     if (this.status.arraySize === -2) {// get length
                         var stopByte = '\r'.charCodeAt(0)
                         var b = byteList.shift()
+                        console.log("*** ing")
+                        let startTime = new Date().getTime()
                         while (b !== stopByte && b !== undefined) {
                             this.status.arraySizeByteList.push(b)
                             b = byteList.shift()
                         }
+                        console.log("*** done ", new Date().getTime() - startTime)
                         if (b == stopByte) {
                             if (byteList.length > 0) {
                                 byteList.shift()
@@ -218,6 +221,8 @@ class WS2S {
                         this.status.isNullResult = true
                     }
                     if (this.status.arraySize > -1) {
+                        console.log("****-- ing")
+                        let startTime = new Date().getTime()
                         while(this.status.arrayIndex < this.status.arraySize && byteList.length > 0) {
                             var itemHandler = new ResponseHandler(this.status.childrenStatus)
                             var itemStatus = itemHandler.push(byteList)
@@ -241,6 +246,7 @@ class WS2S {
                                 this.status.childrenStatus = itemStatus
                             }
                         }
+                        console.log("****-- done ", new Date().getTime() - startTime)
                         if (this.status.arrayIndex === this.status.arraySize) {
                             this.status.complete = true
                         }
