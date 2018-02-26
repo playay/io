@@ -156,7 +156,7 @@ class WS2S {
                         while (b !== stopByte && b !== undefined) {
                             this.status.stringLengthByteList.push(b)
                             b = byteList.shift()
-                            
+                            console.log(this)
                         }
                         if (b == stopByte) {
                             if (byteList.length > 0) {
