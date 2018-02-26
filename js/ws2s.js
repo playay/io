@@ -136,10 +136,13 @@ class WS2S {
                     || this.status.rootType === ':') {
                     var stopByte = '\r'.charCodeAt(0)
                     var b = byteList.shift()
+                    console.log("+++ ing")
+                    let startTime = new Date().getTime()
                     while (b !== stopByte && b !== undefined) {
                         this.status.resultByteList.push(b)
                         b = byteList.shift()
                     }
+                    console.log("+++ done ", new Date().getTime() - startTime)
                     if (b == stopByte) {
                         if (byteList.length > 0) {
                             byteList.shift()
@@ -158,7 +161,6 @@ class WS2S {
                         while (b !== stopByte && b !== undefined) {
                             this.status.stringLengthByteList.push(b)
                             b = byteList.shift()
-                            console.log(this)
                         }
                         console.log("$$$ done ", new Date().getTime() - startTime)
                         if (b == stopByte) {
@@ -176,11 +178,14 @@ class WS2S {
                     }
                     if (this.status.stringLength > -1) {
                         var b = byteList.shift()
+                        console.log("¥¥¥¥ ing")
+                        let startTime = new Date().getTime()
                         while (this.status.stringIndex < this.status.stringLength && b !== undefined) {
                             this.status.resultByteList.push(b)
                             b = byteList.shift()
                             this.status.stringIndex  = this.status.stringIndex  + 1
                         }
+                        console.log("¥¥¥¥ done ", new Date().getTime() - startTime)
                         if (this.status.stringIndex === this.status.stringLength) {
                             if (byteList.length > 0) {
                                 byteList.shift()
