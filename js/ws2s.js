@@ -91,6 +91,7 @@ class WS2S {
                 }
                 this.status = {
                     rootType: '',
+                    shiftOne: false,
 
                     arraySizeByteList: [],
                     arraySize: -2,
@@ -108,6 +109,10 @@ class WS2S {
             }
 
             push(byteList) {
+                if (this.status.shiftOne) {
+                    byteList.shift()
+                    this.status.shiftOne = false
+                }
                 if (this.status.complete) {
                     this.init()
                 }
@@ -124,7 +129,11 @@ class WS2S {
                         b = byteList.shift()
                     }
                     if (b == stopByte) {
-                        byteList.shift()
+                        if (byteList.length > 0) {
+                            byteList.shift()
+                        } else {
+                            this.status.shiftOne = true
+                        }
                         this.status.complete = true
                     }
                 }
@@ -137,7 +146,11 @@ class WS2S {
                             b = byteList.shift()
                         }
                         if (b == stopByte) {
-                            byteList.shift()
+                            if (byteList.length > 0) {
+                                byteList.shift()
+                            } else {
+                                this.status.shiftOne = true
+                            }
                             this.status.stringLength = parseInt(utf8Decoder.decode(new Uint8Array(this.status.stringLengthByteList)))
                         }
                     }
@@ -153,7 +166,11 @@ class WS2S {
                             this.status.stringIndex  = this.status.stringIndex  + 1
                         }
                         if (this.status.stringIndex === this.status.stringLength) {
-                            byteList.shift()
+                            if (byteList.length > 0) {
+                                byteList.shift()
+                            } else {
+                                this.status.shiftOne = true
+                            }
                             this.status.complete = true
                         }
                     }
@@ -167,7 +184,11 @@ class WS2S {
                             b = byteList.shift()
                         }
                         if (b == stopByte) {
-                            byteList.shift()
+                            if (byteList.length > 0) {
+                                byteList.shift()
+                            } else {
+                                this.status.shiftOne = true
+                            }
                             this.status.arraySize = parseInt(utf8Decoder.decode(new Uint8Array(this.status.arraySizeByteList)))
                         }
                     }
