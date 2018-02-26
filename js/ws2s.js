@@ -54,10 +54,20 @@ class WS2S {
         ws.onerror = (error) => {
             socket.onError(error)
         }
+        var receiving = false
+        var toReceive = []
         ws.onmessage = (event) => {
             var response = JSON.parse(event.data)
             if (response.code < 0) {
-                socket.onRecv(response.data)
+                if (receiving) {
+                    toReceive.push(response.data)
+                } else {
+                    receiving = true
+                    while (toReceive.length > 0) {
+                        socket.onRecv(toReceive.pop())
+                    }
+                    receiving = false
+                }
                 return
             }
             if (response.code == 0) {
