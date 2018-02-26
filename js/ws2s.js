@@ -85,8 +85,6 @@ class WS2S {
             }
 
             init(oldStatus){
-                this.functionLock = false;
-                this.functionCallbacks = [];
                 if (oldStatus) {
                     this.status = oldStatus
                     return
@@ -108,22 +106,6 @@ class WS2S {
                     isNullResult: false,
                     resultByteList: [],
                 }
-            }
-            
-            lockingFunction (callback) {
-                if (this.functionLock) {
-                    this.functionCallbacks.push(callback);
-                } else {
-                    $.longRunning(function(response) {
-                         while(this.functionCallbacks.length){
-                             var thisCallback = this.functionCallbacks.pop();
-                             thisCallback(response);
-                         }
-                    });
-                }
-            }
-            syncPush(byteList) {
-                this.lockingFunction(this.push(byteList))
             }
 
             push(byteList) {
@@ -274,7 +256,7 @@ class WS2S {
                 redisClient.onReady()
             }
             socket.onRecv = (data) => {
-                var status = responseHandler.syncPush(data)
+                var status = responseHandler.push(data)
                 if (status.complete) {
                     if (status.isNullResult) {
                         redisClient.onError("a null object is recevied form redis server")
