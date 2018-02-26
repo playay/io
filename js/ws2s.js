@@ -125,7 +125,7 @@ class WS2S {
                 if (this.status.complete) {
                     this.init()
                 }
-                if (this.status.rootType === '') {
+                if (!this.status.rootType) {
                     this.status.rootType = String.fromCharCode(byteList.shift())
                 }
                 if (this.status.rootType === '+' 
