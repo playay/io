@@ -226,9 +226,13 @@ class WS2S {
                         while(this.status.arrayIndex < this.status.arraySize && byteList.length > 0) {
                             var itemHandler = new ResponseHandler(this.status.childrenStatus)
                             var itemStatus = itemHandler.push(byteList)
+                            console.log("****++ ing")
                             while (!itemStatus.complete && byteList.length > 0) {
                                 itemStatus = itemHandler.push(byteList)
+                                console.log(byteList)
+                                console.log(itemStatus)
                             }
+                            console.log("****++ done ")
                             if (itemStatus.complete) {
                                 var prefixIndex = (this.status.arrayIndex + 1) + ') '
                                 for (let i = 0; i < prefixIndex.length; i++) {
