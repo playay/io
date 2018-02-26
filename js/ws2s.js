@@ -62,7 +62,6 @@ class WS2S {
                 toReceive.push(response.data)
                 if (!receiving) {
                     receiving = true
-                    toReceive.push(response.data)
                     while (toReceive.length > 0) {
                         socket.onRecv(toReceive.pop())
                     }
