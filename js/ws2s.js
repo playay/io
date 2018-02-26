@@ -63,7 +63,10 @@ class WS2S {
                 if (!receiving) {
                     receiving = true
                     while (toReceive.length > 0) {
+                        console.log("recving")
+                        let startTime = new Date().getTime()
                         socket.onRecv(toReceive.pop())
+                        console.log("recv done ", new Date().getTime() - startTime)
                     }
                     receiving = false
                 }
@@ -153,6 +156,7 @@ class WS2S {
                         while (b !== stopByte && b !== undefined) {
                             this.status.stringLengthByteList.push(b)
                             b = byteList.shift()
+                            
                         }
                         if (b == stopByte) {
                             if (byteList.length > 0) {
