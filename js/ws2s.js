@@ -185,7 +185,7 @@ class WS2S {
                                 itemStatus = itemHandler.push(byteList)
                             }
                             if (itemStatus.complete) {
-                                var prefixIndex = '   '.repeat(this.status.depth) + (this.status.arrayIndex + 1) + ') '
+                                var prefixIndex = '   '.repeat(itemStatus.depth) + (this.status.arrayIndex + 1) + ') '
                                 for (let i = 0; i < prefixIndex.length; i++) {
                                     this.status.resultByteList.push(prefixIndex.charCodeAt(i))
                                 }
