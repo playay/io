@@ -153,11 +153,14 @@ class WS2S {
                     if (this.status.stringLength === -2) {// get length
                         var stopByte = '\r'.charCodeAt(0)
                         var b = byteList.shift()
+                        console.log("$$$ing")
+                        let startTime = new Date().getTime()
                         while (b !== stopByte && b !== undefined) {
                             this.status.stringLengthByteList.push(b)
                             b = byteList.shift()
                             console.log(this)
                         }
+                        console.log("$$$ done ", new Date().getTime() - startTime)
                         if (b == stopByte) {
                             if (byteList.length > 0) {
                                 byteList.shift()
