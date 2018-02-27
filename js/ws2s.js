@@ -125,20 +125,18 @@ class WS2S {
                 if (this.status.complete) {
                     this.init()
                 }
-                // while (this.status.rootType !== '+' 
-                //         && this.status.rootType !== '-'
-                //         && this.status.rootType !== ':'
-                //         && this.status.rootType !== '$'
-                //         && this.status.rootType !== '*') {
-                //     let x = byteList.shift()
-                //     if (x === undefined || byteList.length === 0) {
-                //         return this.status
-                //     }
-                //     this.status.rootType = String.fromCharCode(x)
-                // }
-                if (this.status.rootType !== '') {
-                    this.status.rootType = String.fromCharCode(byteList.shift())
+                while (this.status.rootType !== '+' 
+                        && this.status.rootType !== '-'
+                        && this.status.rootType !== ':'
+                        && this.status.rootType !== '$'
+                        && this.status.rootType !== '*') {
+                    let x = byteList.shift()
+                    if (x === undefined || byteList.length === 0) {
+                        return this.status
+                    }
+                    this.status.rootType = String.fromCharCode(x)
                 }
+
                 if (this.status.rootType === '+' 
                     || this.status.rootType === '-' 
                     || this.status.rootType === ':') {
