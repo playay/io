@@ -63,10 +63,7 @@ class WS2S {
                 if (!receiving) {
                     receiving = true
                     while (toReceive.length > 0) {
-                        console.log("recving")
-                        let startTime = new Date().getTime()
-                        socket.onRecv(toReceive.pop())
-                        console.log("recv done ", new Date().getTime() - startTime)
+                        socket.onRecv(toReceive.shift())
                     }
                     receiving = false
                 }
@@ -103,6 +100,7 @@ class WS2S {
                 }
                 this.status = {
                     rootType: '',
+                    shiftOne: false,
 
                     arraySizeByteList: [],
                     arraySize: -2,
@@ -120,30 +118,39 @@ class WS2S {
             }
 
             push(byteList) {
+                if (this.status.shiftOne) {
+                    byteList.shift()
+                    this.status.shiftOne = false
+                }
                 if (this.status.complete) {
                     this.init()
                 }
-                if (this.status.shiftOne) {
-                    byteList.shift()
-                }
-                while (!this.status.rootType
-                        || this.status.rootType === '\n' 
-                        || this.status.rootType === '\r') {
-                    this.status.rootType = String.fromCharCode(byteList.shift())
+                while (this.status.rootType !== '+' 
+                        && this.status.rootType !== '-'
+                        && this.status.rootType !== ':'
+                        && this.status.rootType !== '$'
+                        && this.status.rootType !== '*') {
+                    let x = byteList.shift()
+                    if (x === undefined || byteList.length === 0) {
+                        return this.status
+                    }
+                    this.status.rootType = String.fromCharCode(x)
                 }
                 if (this.status.rootType === '+' 
                     || this.status.rootType === '-' 
                     || this.status.rootType === ':') {
                     var stopByte = '\r'.charCodeAt(0)
                     var b = byteList.shift()
-                    console.log("+++ ing")
-                    let startTime = new Date().getTime()
                     while (b !== stopByte && b !== undefined) {
                         this.status.resultByteList.push(b)
                         b = byteList.shift()
                     }
-                    console.log("+++ done ", new Date().getTime() - startTime)
                     if (b == stopByte) {
+                        if (byteList.length > 0) {
+                            byteList.shift()
+                        } else {
+                            this.status.shiftOne = true
+                        }
                         this.status.complete = true
                     }
                 }
@@ -151,14 +158,16 @@ class WS2S {
                     if (this.status.stringLength === -2) {// get length
                         var stopByte = '\r'.charCodeAt(0)
                         var b = byteList.shift()
-                        console.log("$$$ing")
-                        let startTime = new Date().getTime()
                         while (b !== stopByte && b !== undefined) {
                             this.status.stringLengthByteList.push(b)
                             b = byteList.shift()
                         }
-                        console.log("$$$ done ", new Date().getTime() - startTime)
                         if (b == stopByte) {
+                            if (byteList.length > 0) {
+                                byteList.shift()
+                            } else {
+                                this.status.shiftOne = true
+                            }
                             this.status.stringLength = parseInt(utf8Decoder.decode(new Uint8Array(this.status.stringLengthByteList)))
                         }
                     }
@@ -168,15 +177,17 @@ class WS2S {
                     }
                     if (this.status.stringLength > -1) {
                         var b = byteList.shift()
-                        console.log("¥¥¥¥ ing")
-                        let startTime = new Date().getTime()
                         while (this.status.stringIndex < this.status.stringLength && b !== undefined) {
                             this.status.resultByteList.push(b)
                             b = byteList.shift()
                             this.status.stringIndex  = this.status.stringIndex  + 1
                         }
-                        console.log("¥¥¥¥ done ", new Date().getTime() - startTime)
                         if (this.status.stringIndex === this.status.stringLength) {
+                            if (byteList.length > 0) {
+                                byteList.shift()
+                            } else {
+                                this.status.shiftOne = true
+                            }
                             this.status.complete = true
                         }
                     }
@@ -185,14 +196,16 @@ class WS2S {
                     if (this.status.arraySize === -2) {// get length
                         var stopByte = '\r'.charCodeAt(0)
                         var b = byteList.shift()
-                        console.log("*** ing")
-                        let startTime = new Date().getTime()
                         while (b !== stopByte && b !== undefined) {
                             this.status.arraySizeByteList.push(b)
                             b = byteList.shift()
                         }
-                        console.log("*** done ", new Date().getTime() - startTime)
                         if (b == stopByte) {
+                            if (byteList.length > 0) {
+                                byteList.shift()
+                            } else {
+                                this.status.shiftOne = true
+                            }
                             this.status.arraySize = parseInt(utf8Decoder.decode(new Uint8Array(this.status.arraySizeByteList)))
                         }
                     }
@@ -201,18 +214,12 @@ class WS2S {
                         this.status.isNullResult = true
                     }
                     if (this.status.arraySize > -1) {
-                        console.log("****-- ing")
-                        let startTime = new Date().getTime()
                         while(this.status.arrayIndex < this.status.arraySize && byteList.length > 0) {
                             var itemHandler = new ResponseHandler(this.status.childrenStatus)
                             var itemStatus = itemHandler.push(byteList)
-                            console.log("****++ ing")
                             while (!itemStatus.complete && byteList.length > 0) {
                                 itemStatus = itemHandler.push(byteList)
-                                console.log(byteList)
-                                console.log(itemStatus)
                             }
-                            console.log("****++ done ")
                             if (itemStatus.complete) {
                                 var prefixIndex = (this.status.arrayIndex + 1) + ') '
                                 for (let i = 0; i < prefixIndex.length; i++) {
@@ -230,7 +237,6 @@ class WS2S {
                                 this.status.childrenStatus = itemStatus
                             }
                         }
-                        console.log("****-- done ", new Date().getTime() - startTime)
                         if (this.status.arrayIndex === this.status.arraySize) {
                             this.status.complete = true
                         }
