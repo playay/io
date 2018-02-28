@@ -63,6 +63,7 @@ class WS2S {
                 if (!receiving) {
                     receiving = true
                     while (toReceive.length > 0) {
+                        console.log("toReceive.length ", toReceive.length)
                         socket.onRecv(toReceive.shift())
                     }
                     receiving = false
@@ -89,11 +90,11 @@ class WS2S {
 
     newRedisCient(host, port, auth) {
         class ResponseHandler {
-            constructor(oldStatus) {
-                this.init(oldStatus)
+            constructor(oldStatus, oldStatusParents) {
+                this.init(oldStatus, oldStatusParents)
             }
 
-            init(oldStatus){
+            init(oldStatus, oldStatusParents){
                 if (oldStatus) {
                     this.status = oldStatus
                     return
@@ -105,6 +106,7 @@ class WS2S {
                     arraySizeByteList: [],
                     arraySize: -2,
                     arrayIndex: 0,
+                    depth: 0,
                     childrenStatus: null,
 
                     stringLengthByteList: [],
@@ -114,6 +116,9 @@ class WS2S {
                     complete: false,
                     isNullResult: false,
                     resultByteList: [],
+                }
+                if (oldStatusParents) {
+                    this.status.depth = oldStatusParents.depth + 1
                 }
             }
 
@@ -216,7 +221,7 @@ class WS2S {
                     }
                     if (this.status.arraySize > -1) {
                         while(this.status.arrayIndex < this.status.arraySize && byteList.length > 0) {
-                            var itemHandler = new ResponseHandler(this.status.childrenStatus)
+                            var itemHandler = new ResponseHandler(this.status.childrenStatus, this.status)
                             var itemStatus = itemHandler.push(byteList)
                             while (!itemStatus.complete && byteList.length > 0) {
                                 itemStatus = itemHandler.push(byteList)
