@@ -236,6 +236,11 @@ class WS2S {
                                 }
                                 if (this.status.arrayIndex < this.status.arraySize - 1) {
                                     this.status.resultByteList.push('\n'.charCodeAt(0))
+                                    for (let i = 0; i < this.status.depth; i++) {
+                                        this.status.resultByteList.push(' '.charCodeAt(0))
+                                        this.status.resultByteList.push(' '.charCodeAt(0))
+                                        this.status.resultByteList.push(' '.charCodeAt(0))
+                                    }
                                 }
                                 this.status.arrayIndex = this.status.arrayIndex + 1
                             }
