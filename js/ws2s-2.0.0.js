@@ -306,9 +306,6 @@ class WS2S {
             },
             onError: (error) => {
                 console.log('redisClient onError: ', error)
-            },
-            resetResponseHandler: () => {
-                responseHandler.init()
             }
         }
 

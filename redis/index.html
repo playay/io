@@ -70,7 +70,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" 
                 v-for="connection in redisConnections" :tname="'fredis_'+connection.name">
                 <div class="uk-width-1-1">
-                    <button class="uk-button" style="float:right;" v-on:click="resetResponseHandler(connection)">reset the response handler</button>
+                    <button class="uk-button" style="float:right;" v-on:click="">copy last response (つづく)</button>
                 </div>
                 <div class="uk-width-1-1 uk-height-1-1" style="padding-bottom:30px;">
                     <div class="terminals"></div>
@@ -98,7 +98,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 auth: ''
             },
             ws2sServerFormIsFocus: false,
-            redisClientMap: new Map(),
         },
         mounted: function () {
             if (!localStorage.redis_connections || localStorage.redis_connections === '[]') {
@@ -144,15 +143,8 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         terminal.error(JSON.stringify(error))
                     }
                     this.openedConnections.push(connection)
-                    this.redisClientMap.set(connection.name, redis)
                     $('[tname]').hide()
                     $('[tname="fredis_' + connection.name + '"]').show()
-                }
-            },
-            resetResponseHandler: function (connection) {
-                var redis = this.redisClientMap.get(connection.name)
-                if (redis) {
-                    redis.resetResponseHandler()
                 }
             },
             deleteOne: function (connection) {
