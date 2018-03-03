@@ -69,7 +69,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             </div>
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" 
                 v-for="connection in redisConnections" :tname="'fredis_'+connection.name">
-                <div class="uk-height-1-1">
+                <div class="uk-width-1-1">
                     <button class="uk-button" style="float:right;" v-on:click="resetResponseHandler(connection)">reset the response handler</button>
                 </div>
                 <div class="terminals"></div>
