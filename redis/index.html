@@ -72,7 +72,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 <div class="uk-width-1-1">
                     <button class="uk-button" style="float:right;" v-on:click="resetResponseHandler(connection)">reset the response handler</button>
                 </div>
-                <div class="terminals"></div>
+                <div class="uk-width-1-1 uk-height-1-1" style="padding-bottom:40px;">
+                    <div class="terminals"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -121,7 +123,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 var redis = new WS2S(connection.ws2sServer)
                     .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
-                    var terminal = $('div[tname="fredis_' + connection.name + '"]').children(".terminals").terminal(function (command, term) {
+                    var terminal = $('div[tname="fredis_' + connection.name + '"]').find(".terminals").terminal(function (command, term) {
                         redis.request(command)
                     }, {
                             exit: false,
