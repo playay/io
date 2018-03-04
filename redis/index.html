@@ -138,18 +138,26 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
-                        if (command) {
-                            let historyKey = 'fredis_' + connection.name + '_history'
-                            let history = JSON.parse(localStorage.getItem(historyKey))
-                            history.push(command)
-                            localStorage.setItem(historyKey, 
-                                JSON.stringify(history)
-                            )
-                        }
                         redis.request(command)
                     }, {
                         exit: false,
                         memory: true,
+                        onBeforeCommand: (command) => {
+                            if (command) {
+                                let historyKey = 'fredis_' + connection.name + '_history'
+                                let history = JSON.parse(localStorage.getItem(historyKey))
+                                history.push(command)
+                                localStorage.setItem(historyKey, JSON.stringify(history))
+                            }
+                            return true
+                        },
+                        onInit: (terminal) => {
+                            let historyKey = 'fredis_' + connection.name + '_history'
+                            if(localStorage.getItem(historyKey) === null){
+                                localStorage.setItem(historyKey, '[]')
+                            }
+                            terminal.history().set(JSON.parse(localStorage.getItem(historyKey)))
+                        },
                         greetings: 'fredis, powered by ws2s project: https://github.com/playlay/ws2s'
                             + '\n\n'
                             + 'connected to ' + connection.name
@@ -160,12 +168,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         width: '100%',
                         prompt: '> '
                     })
-                    let historyKey = 'fredis_' + connection.name + '_history'
-                    if(localStorage.getItem(historyKey) === null){
-                        localStorage.setItem(historyKey, '[]')
-                    }
-                    terminal.history().set(JSON.parse(localStorage.getItem(historyKey)))
-                    terminal.history().last()
                     redis.onResponse = (data) => {
                         vm.lastResponse.set(connection.name, data)
                         terminal.echo(String(data))
