@@ -88,7 +88,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
 <script src="/js/clipboard.min.js"></script>
 
 <script>
-    new Clipboard('.copy-last-response', {
+    new ClipboardJS('.copy-last-response', {
         text: function(trigger) {
             console.log(trigger)
             return 'xx'

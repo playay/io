@@ -101,7 +101,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
 
 <script src="/js/clipboard.min.js"></script>
 <script>
-    new Clipboard('#copyButton').on('success', function(e) {
+    new ClipboardJS('#copyButton').on('success', function(e) {
         $('#copySuccess').show()
         setTimeout(() => {$('#copySuccess').hide()} ,900)
     })
