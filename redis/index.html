@@ -143,7 +143,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         exit: false,
                         memory: true,
                         history: false,
-                        importHistory: true,
                         onBeforeCommand: (terminal, command) => {
                             if (command) {
                                 let historyKey = 'fredis_' + connection.name + '_history'
