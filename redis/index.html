@@ -70,9 +70,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" 
                 v-for="connection in redisConnections" :tname="'fredis_'+connection.name">
                 <div class="uk-width-1-1">
-                    <button class="uk-button copy-last-response" style="float:right;">
+                    <button class="uk-button copy-last-response" style="float:right;"
+                        v-bind:responseKey="connection.name">
                         copy last response
-                        <span id="copySuccess" style="display:none;"> done</span
+                        <span class="copySuccess" style="display:none;"> done</span
                     ></button>
                 </div>
                 <div class="uk-width-1-1 uk-height-1-1" style="padding-bottom:30px;">
@@ -86,16 +87,15 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
 <script src="/js/ws2s-2.0.0.js"></script>
 <script src="/js/jquery.terminal.min.js"></script>
 <script src="/js/clipboard.min.js"></script>
-
 <script>
     new ClipboardJS('.copy-last-response', {
         text: function(trigger) {
             console.log(trigger)
-            return 'xx'
+            return vm.lastResponse.get(trigger.responseKey)
         }
     }).on('success', function(e) {
-        $('#copySuccess').show()
-        setTimeout(() => {$('#copySuccess').hide()} ,900)
+        $('.copySuccess').show()
+        setTimeout(() => {$('.copySuccess').hide()} ,900)
     })
     var vm = new Vue({
         el: "#main",
