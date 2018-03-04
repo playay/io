@@ -140,6 +140,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         redis.request(command)
                     }, {
                             exit: false,
+                            history: false,
                             greetings: 'fredis, powered by ws2s project: https://github.com/playlay/ws2s'
                                 + '\n\n'
                                 + 'connected to ' + connection.name
@@ -167,8 +168,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 if (index !== -1) {
                     this.redisConnections.splice(index, 1)
                     localStorage.redis_connections = JSON.stringify(this.redisConnections)
-                    localStorage.removeItem('fredis_' + connection.name + '_0_interpreters')
-                    localStorage.removeItem('fredis_' + connection.name + '_0_commands')
                     this.editOne()
                 }
             },
