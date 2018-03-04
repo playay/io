@@ -71,7 +71,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 v-for="connection in redisConnections" :tname="'fredis_'+connection.name">
                 <div class="uk-width-1-1">
                     <button class="uk-button copy-last-response" style="float:left;"
-                        v-bind:responseKey="connection.name">
+                        v-bind:responseKey="'fredis_'+connection.name">
                         copy last response
                         <span class="copySuccess" style="display:none;"> done</span
                     ></button>
@@ -136,21 +136,30 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 var redis = new WS2S(connection.ws2sServer)
                     .newRedisCient(connection.host, connection.port, connection.auth)
                 redis.onReady = () => {
-                    var terminal = $('div[tname="fredis_' + connection.name + '"]').find(".terminals").terminal(function (command, term) {
+                    var terminal = $('div[tname="fredis_' + connection.name + '"]')
+                                    .find(".terminals").terminal(function (command, term) {
+
+                        localStorage.setItem('fredis_' + connection.name + '_history', 
+                            JSON.stringify(
+                                JSON.parse(localStorage.getItem('fredis_' + connection.name + '_history'))
+                                    .push(command)
+                            )
+                        )
                         redis.request(command)
                     }, {
-                            exit: false,
-                            memory: true,
-                            greetings: 'fredis, powered by ws2s project: https://github.com/playlay/ws2s'
-                                + '\n\n'
-                                + 'connected to ' + connection.name
-                                + '(' + connection.host + ':' + connection.port + ')'
-                                + ', you can now exec redis commands.',
-                            name: 'fredis_' + connection.name,
-                            height: '100%',
-                            width: '100%',
-                            prompt: '> '
-                        })
+                        exit: false,
+                        memory: true,
+                        greetings: 'fredis, powered by ws2s project: https://github.com/playlay/ws2s'
+                            + '\n\n'
+                            + 'connected to ' + connection.name
+                            + '(' + connection.host + ':' + connection.port + ')'
+                            + ', you can now exec redis commands.',
+                        name: 'fredis_' + connection.name,
+                        height: '100%',
+                        width: '100%',
+                        prompt: '> '
+                    })
+                    terminal.history().set(JSON.parse(localStorage.getItem('fredis_' + connection.name + '_history')))
                     redis.onResponse = (data) => {
                         vm.lastResponse.set(connection.name, data)
                         terminal.echo(String(data))
