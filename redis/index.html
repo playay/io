@@ -156,7 +156,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             if(localStorage.getItem(historyKey) === null){
                                 localStorage.setItem(historyKey, '[]')
                             }
-                            terminal.history().set(JSON.parse(localStorage.getItem(historyKey)))
+                            JSON.parse(localStorage.getItem(historyKey)).forEach(command => {
+                                terminal.history().append(command)
+                            })
                         },
                         greetings: 'fredis, powered by ws2s project: https://github.com/playlay/ws2s'
                             + '\n\n'
