@@ -153,7 +153,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             }
                             return true
                         },
-                        onInit: (terminal) => {
+                        onImport: (terminal) => {
                             let historyKey = 'fredis_' + connection.name + '_history'
                             if(localStorage.getItem(historyKey) === null){
                                 localStorage.setItem(historyKey, '[]')
