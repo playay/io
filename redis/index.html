@@ -138,11 +138,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
+                        let history = JSON.parse(localStorage.getItem('fredis_' + connection.name + '_history'))
+                        history.push(command)
                         localStorage.setItem('fredis_' + connection.name + '_history', 
-                            JSON.stringify(
-                                JSON.parse(localStorage.getItem('fredis_' + connection.name + '_history'))
-                                    .push(command)
-                            )
+                            JSON.stringify(history)
                         )
                         redis.request(command)
                     }, {
