@@ -171,7 +171,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         prompt: '> '
                     })
                     redis.onResponse = (data) => {
-                        vm.lastResponse.set(connection.name, data)
+                        vm.lastResponse.set('fredis_' + connection.name, data)
                         terminal.echo(String(data))
                     }
                     redis.onError = (error) => {
