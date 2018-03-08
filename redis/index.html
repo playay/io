@@ -63,7 +63,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         1. 与 redis 服务端建立 socket 连接. <br>
                         2. 使用这个 socket 连接发送数据. <br>
                         3. 当这个 socket 连接收到数据时, 把收到的数据通知给你. <br><br>
-                        在能访问到你的 redis 服务端的机器上, <a href="https://github.com/playlay/ws2s#install" target="_blank">安装 ws2s</a>, 就能正常使用 fredis. 
+                        在能访问到你的 redis 服务端的机器上, <a href="https://github.com/playay/ws2s#install" target="_blank">安装 ws2s</a>, 就能正常使用 fredis. 
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
-                        redis.request(command)
+                            redis.request(command)
                     }, {
                         exit: false,
                         memory: true,
@@ -160,7 +160,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 terminal.history().append(command)
                             })
                         },
-                        greetings: 'fredis, powered by ws2s project: https://github.com/playlay/ws2s'
+                        greetings: 'fredis, powered by ws2s project: https://github.com/playay/ws2s'
                             + '\n\n'
                             + 'connected to ' + connection.name
                             + '(' + connection.host + ':' + connection.port + ')'
