@@ -165,11 +165,12 @@ class WS2S {
                 }
                 if (!this.status.rootType) {
                     let byte = byteList.shift()
-                    if (byte === undefined || byteList.length === 0) {
+                    if (byte === undefined) {
                         return this.status
                     }
                     this.status.rootType = String.fromCharCode(byte)
                 }
+                console.log(this.status.rootType)
 
                 if (this.status.rootType === '+' 
                     || this.status.rootType === '-' 
@@ -323,25 +324,28 @@ class WS2S {
                 if (data.length < 16384) {
                     console.log('last')
                 }
-                var status = responseHandler.push(Array.from(data))
-                if (status.complete) {
-                    if (status.isNullResult) {
-                        redisClient.onError("a null object is recevied form redis server")
-                        return
-                    }
-                    if (status.isEmptyResult) {
-                        redisClient.onError("an empty result is recevied form redis server")
-                        return
-                    }
-                    var parsedString = utf8Decoder.decode(new Uint8Array(status.resultByteList))
-                    if (status.rootType === '+' || status.rootType === '$' || status.rootType === '*') {
-                        redisClient.onResponse(parsedString)
-                    }
-                    if (status.rootType === '-') {
-                        redisClient.onError(parsedString)
-                    }
-                    if (status.rootType === ':') {
-                        redisClient.onResponse(parseInt(parsedString))
+                let dataList = Array.from(data)
+                while (dataList.length > 0) {
+                    var status = responseHandler.push(dataList)
+                    if (status.complete) {
+                        if (status.isNullResult) {
+                            redisClient.onError("a null object is recevied form redis server")
+                            return
+                        }
+                        if (status.isEmptyResult) {
+                            redisClient.onError("an empty result is recevied form redis server")
+                            return
+                        }
+                        var parsedString = utf8Decoder.decode(new Uint8Array(status.resultByteList))
+                        if (status.rootType === '+' || status.rootType === '$' || status.rootType === '*') {
+                            redisClient.onResponse(parsedString)
+                        }
+                        if (status.rootType === '-') {
+                            redisClient.onError(parsedString)
+                        }
+                        if (status.rootType === ':') {
+                            redisClient.onResponse(parseInt(parsedString))
+                        }
                     }
                 }
             }
