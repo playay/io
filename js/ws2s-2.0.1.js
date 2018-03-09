@@ -264,11 +264,7 @@ class WS2S {
                                 itemStatus = itemHandler.push(byteList)
                             }
                             if (itemStatus.complete && itemStatus.shiftOne) {
-                                if (byteList.length > 0) {
-                                    byteList.shift()
-                                } else {
-                                    this.status.shiftOne = true
-                                }
+                                this.status.shiftOne = true
                             }
                             if (itemStatus.complete) {
                                 var prefixIndex = (this.status.arrayIndex + 1) + ') '
@@ -328,6 +324,9 @@ class WS2S {
                 redisClient.onReady()
             }
             socket.onRecv = (data) => {
+                if (data.length < 20000) {
+                    console.log('last')
+                }
                 var status = responseHandler.push(Array.from(data))
                 if (status.complete) {
                     if (status.isNullResult) {
