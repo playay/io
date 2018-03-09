@@ -75,6 +75,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         copy last response
                         <span class="copySuccess" style="display:none;"> done</span
                     ></button>
+                    <a id="dl" style="display:none;"></a>
                 </div>
                 <div class="uk-width-1-1 uk-height-1-1" style="padding-bottom:30px;">
                     <div class="terminals"></div>
@@ -128,7 +129,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
         },
         methods: {
             download: function(text, name, type) {
-                var a = document.getElementById("a")
+                var a = document.getElementById("dl")
                 var file = new Blob([text], {type: type})
                 a.href = URL.createObjectURL(file)
                 a.download = name
