@@ -172,7 +172,11 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     })
                     redis.onResponse = (data) => {
                         vm.lastResponse.set('fredis_' + connection.name, data)
-                        terminal.echo(String(data))
+                        if (data.length > 1024) {
+                            terminal.echo('response is too large to print. try "dl" command to download last response.')
+                        } else {
+                            terminal.echo(String(data))
+                        }
                     }
                     redis.onError = (error) => {
                         terminal.error(JSON.stringify(error))
