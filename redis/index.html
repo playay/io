@@ -128,13 +128,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             $('#main').show()
         },
         methods: {
-            download: function(text, name, type) {
-                var a = document.getElementById("dl")
-                var file = new Blob([text], {type: type})
-                a.href = URL.createObjectURL(file)
-                a.download = name
-                a.click()
-            },
             connect: function (connection) {
                 if (this.openedConnections.includes(connection)) {
                     $('[tname]').hide()
@@ -152,7 +145,11 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 terminal.error('last response is empty. note that the response: "OK" is not considered as a last response')
                                 return
                             }
-                            vm.download(lastResponse, 'fredis_response.txt', 'text/plain')
+                            let a = document.getElementById("dl")
+                            let file = new Blob([lastResponse], {type: 'text/plain'})
+                            a.href = URL.createObjectURL(file)
+                            a.download = 'fredis_response.txt'
+                            a.click()
                             terminal.echo('dl done')
                             return
                         }
@@ -162,7 +159,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 terminal.error('last response is empty. note that the response: "OK" is not considered as a last response')
                                 return
                             }
-                            $('[responseKey=fredis_' + connection.name +']').click()
+                            $('button[responseKey="fredis_' + connection.name +'"]').click()
                             terminal.echo('cp done')
                             return
                         }
