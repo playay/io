@@ -136,7 +136,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         if (command === 'dl') {
                             let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
                             if (!lastResponse) {
-                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response.')
+                                terminal.error('last response is empty.')
                                 return
                             }
                             let a = document.getElementById("dl")
@@ -150,7 +150,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         if (command === 'cp') {
                             let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
                             if (!lastResponse) {
-                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response.')
+                                terminal.error('last response is empty.')
                                 return
                             }
                             if (lastResponse.length > 1024 * 16) {
@@ -187,7 +187,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             + '\n\n'
                             + 'connected to ' + connection.name
                             + '(' + connection.host + ':' + connection.port + ')'
-                            + ', you can now exec redis commands.',
+                            + ', you can now exec redis commands.\n'
+                            + 'fredis specific commands: \n'
+                            + '"cp": copy last response. note that the response: "OK" is not considered as a last response.\n'
+                            + '"dl": download last response.\n',
                         name: 'fredis_' + connection.name,
                         height: '100%',
                         width: '100%',
