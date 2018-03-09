@@ -170,7 +170,7 @@ class WS2S {
                     }
                     this.status.rootType = String.fromCharCode(byte)
                 }
-                console.log(this.status.rootType)
+                console.log(this.status.rootType, typeof this.status.rootType, this.status.rootType.charCodeAt(0))
 
                 if (this.status.rootType === '+' 
                     || this.status.rootType === '-' 
@@ -321,9 +321,6 @@ class WS2S {
                 redisClient.onReady()
             }
             socket.onRecv = (data) => {
-                if (data.length < 16384) {
-                    console.log('last')
-                }
                 let dataList = Array.from(data)
                 while (dataList.length > 0) {
                     var status = responseHandler.push(dataList)
