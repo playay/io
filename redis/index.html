@@ -161,6 +161,20 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             terminal.echo('cp done')
                             return
                         }
+                        if (command === 'jq') {
+                            let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
+                            if (!lastResponse) {
+                                terminal.error('last response is empty.')
+                                return
+                            }
+                            if (lastResponse.length > 1024 * 128) {
+                                terminal.error('response is too large. please try "dl" command.')
+                                return
+                            }
+                            localStorage.json_jsonSrc = lastResponse
+                            window.open("/json/", "_blank")
+                            return
+                        }
                         redis.request(command)
                     }, {
                         exit: false,
@@ -191,6 +205,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             + 'specific commands: \n'
                             + 'cp    copy last response. note that the response: "OK" is not considered as a last response.\n'
                             + 'dl    download last response.\n'
+                            + 'jq    open the online json format tool on new tab and format last response.'
                             + '--------------------------------------------------------------------------------------------',
                         name: 'fredis_' + connection.name,
                         height: '100%',
