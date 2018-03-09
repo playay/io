@@ -163,11 +163,7 @@ class WS2S {
                 if (this.status.complete) {
                     this.init()
                 }
-                while (this.status.rootType !== '+' 
-                        && this.status.rootType !== '-'
-                        && this.status.rootType !== ':'
-                        && this.status.rootType !== '$'
-                        && this.status.rootType !== '*') {
+                if (!this.status.rootType) {
                     let byte = byteList.shift()
                     if (byte === undefined || byteList.length === 0) {
                         return this.status
