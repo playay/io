@@ -133,10 +133,16 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
+                        if (command === 'help') {
+                            term.echo('cp    copy last response. note that the response: "OK" is not considered as a last response.')
+                            term.echo('dl    download last response.')
+                            term.echo('jq    open the online json format tool on new tab and format last response.')
+                            return
+                        }
                         if (command === 'dl') {
                             let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
                             if (!lastResponse) {
-                                terminal.error('last response is empty.')
+                                term.error('last response is empty.')
                                 return
                             }
                             let a = document.getElementById("dl")
@@ -144,31 +150,31 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             a.href = URL.createObjectURL(file)
                             a.download = 'fredis_response.txt'
                             a.click()
-                            terminal.echo('dl done')
+                            term.echo('dl done')
                             return
                         }
                         if (command === 'cp') {
                             let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
                             if (!lastResponse) {
-                                terminal.error('last response is empty.')
+                                term.error('last response is empty.')
                                 return
                             }
                             if (lastResponse.length > 1024 * 16) {
-                                terminal.error('response is too large to copy. please try "dl" command.')
+                                term.error('response is too large to copy. please try "dl" command.')
                                 return
                             }
                             $('button[responseKey="fredis_' + connection.name +'"]').click()
-                            terminal.echo('cp done')
+                            term.echo('cp done')
                             return
                         }
                         if (command === 'jq') {
                             let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
                             if (!lastResponse) {
-                                terminal.error('last response is empty.')
+                                term.error('last response is empty.')
                                 return
                             }
                             if (lastResponse.length > 1024 * 128) {
-                                terminal.error('response is too large. please try "dl" command.')
+                                term.error('response is too large. please try "dl" command.')
                                 return
                             }
                             localStorage.json_jsonSrc = lastResponse
@@ -201,12 +207,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             + '\n\n'
                             + 'connected to ' + connection.name
                             + '(' + connection.host + ':' + connection.port + ')'
-                            + ', you can now exec redis commands.\n\n'
-                            + 'specific commands: \n'
-                            + 'cp    copy last response. note that the response: "OK" is not considered as a last response.\n'
-                            + 'dl    download last response.\n'
-                            + 'jq    open the online json format tool on new tab and format last response.\n'
-                            + '--------------------------------------------------------------------------------------------',
+                            + ', you can now exec redis commands. try "help" to get more specific commands.',
                         name: 'fredis_' + connection.name,
                         height: '100%',
                         width: '100%',
