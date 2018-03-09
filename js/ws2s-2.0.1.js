@@ -173,7 +173,6 @@ class WS2S {
                     }
                     this.status.rootType = String.fromCharCode(byte)
                 }
-                console.log(this.status.rootType, typeof this.status.rootType, this.status.rootType.charCodeAt(0))
 
                 if (this.status.rootType === '+' 
                     || this.status.rootType === '-' 
