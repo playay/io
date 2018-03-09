@@ -165,6 +165,9 @@ class WS2S {
                 }
                 if (!this.status.rootType) {
                     let byte = byteList.shift()
+                    if (byte === 10) {
+                        byte = byteList.shift()
+                    }
                     if (byte === undefined) {
                         return this.status
                     }
