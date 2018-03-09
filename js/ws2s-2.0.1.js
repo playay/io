@@ -263,6 +263,13 @@ class WS2S {
                             while (!itemStatus.complete && byteList.length > 0) {
                                 itemStatus = itemHandler.push(byteList)
                             }
+                            if (itemStatus.complete && itemStatus.shiftOne) {
+                                if (byteList.length > 0) {
+                                    byteList.shift()
+                                } else {
+                                    this.status.shiftOne = true
+                                }
+                            }
                             if (itemStatus.complete) {
                                 var prefixIndex = (this.status.arrayIndex + 1) + ') '
                                 for (let i = 0; i < prefixIndex.length; i++) {
