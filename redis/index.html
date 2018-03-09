@@ -147,11 +147,26 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
                         if (command === 'dl') {
-                            vm.download(vm.lastResponse.get('fredis_' + connection.name), 
-                                            'fredis_response.txt', 'text/plain')
-                        } else {
-                            redis.request(command)
+                            let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
+                            if (!lastResponse) {
+                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response')
+                                return
+                            }
+                            vm.download(lastResponse, 'fredis_response.txt', 'text/plain')
+                            terminal.echo('dl done')
+                            return
                         }
+                        if (command === 'cp') {
+                            let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
+                            if (!lastResponse) {
+                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response')
+                                return
+                            }
+                            $('[responseKey=fredis_' + connection.name +']').click()
+                            terminal.echo('cp done')
+                            return
+                        }
+                        redis.request(command)
                     }, {
                         exit: false,
                         memory: true,
