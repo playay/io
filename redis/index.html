@@ -69,13 +69,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             </div>
             <div style="display:none" class="uk-width-1-1 uk-height-1-1" 
                 v-for="connection in redisConnections" :tname="'fredis_'+connection.name">
-                <div class="uk-width-1-1">
+                <div class="uk-width-1-1" style="display:none">
                     <button class="uk-button copy-last-response" style="float:left;"
-                        v-bind:responseKey="'fredis_'+connection.name">
-                        copy last response
-                        <span class="copySuccess" style="display:none;"> done</span
-                    ></button>
-                    <a id="dl" style="display:none;"></a>
+                        v-bind:responseKey="'fredis_'+connection.name">copy last response</button>
+                    <a id="dl"></a>
                 </div>
                 <div class="uk-width-1-1 uk-height-1-1" style="padding-bottom:30px;">
                     <div class="terminals"></div>
@@ -93,9 +90,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
         text: function(trigger) {
             return vm.lastResponse.get(trigger.getAttribute('responseKey'))
         }
-    }).on('success', function(e) {
-        $('.copySuccess').show()
-        setTimeout(() => {$('.copySuccess').hide()} ,900)
     })
     var vm = new Vue({
         el: "#main",
@@ -142,7 +136,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         if (command === 'dl') {
                             let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
                             if (!lastResponse) {
-                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response')
+                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response.')
                                 return
                             }
                             let a = document.getElementById("dl")
@@ -156,7 +150,11 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         if (command === 'cp') {
                             let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
                             if (!lastResponse) {
-                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response')
+                                terminal.error('last response is empty. note that the response: "OK" is not considered as a last response.')
+                                return
+                            }
+                            if (lastResponse.length > 1024 * 16) {
+                                terminal.error('response is too large to copy. please try "dl" command.')
                                 return
                             }
                             $('button[responseKey="fredis_' + connection.name +'"]').click()
@@ -199,7 +197,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         if (data !== 'OK') {
                             vm.lastResponse.set('fredis_' + connection.name, data)
                         }
-                        if (data.length > 1024) {
+                        if (data.length > 1024 * 16) {
                             terminal.error('response is too large to print. try "dl" command to download last response.')
                         } else {
                             terminal.echo(String(data))
