@@ -127,6 +127,12 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             $('#main').show()
         },
         methods: {
+            download: function(text, name, type) {
+                var a = document.getElementById("a")
+                var file = new Blob([text], {type: type})
+                a.href = URL.createObjectURL(file)
+                a.download = name
+            },
             connect: function (connection) {
                 if (this.openedConnections.includes(connection)) {
                     $('[tname]').hide()
@@ -138,7 +144,12 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
+                        if (command === 'dl') {
+                            vm.download(vm.lastResponse.get('fredis_' + connection.name), 
+                                            'fredis_response.txt', 'text/plain')
+                        } else {
                             redis.request(command)
+                        }
                     }, {
                         exit: false,
                         memory: true,
@@ -173,7 +184,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     redis.onResponse = (data) => {
                         vm.lastResponse.set('fredis_' + connection.name, data)
                         if (data.length > 1024) {
-                            terminal.echo('response is too large to print. try "dl" command to download last response.')
+                            terminal.error('response is too large to print. try "dl" command to download last response.')
                         } else {
                             terminal.echo(String(data))
                         }
