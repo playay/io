@@ -324,7 +324,7 @@ class WS2S {
                 redisClient.onReady()
             }
             socket.onRecv = (data) => {
-                if (data.length < 20000) {
+                if (data.length < 16384) {
                     console.log('last')
                 }
                 var status = responseHandler.push(Array.from(data))
