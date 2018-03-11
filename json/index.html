@@ -306,9 +306,9 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
         methods: {
             next: function() {
                 if (this.ad.title) {
-                    ads.push(ad)
+                    this.ads.push(this.ad)
                 }
-                ad = ads.shift()
+                this.ad = this.ads.shift()
             }
         },
     })
