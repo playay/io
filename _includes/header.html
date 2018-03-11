@@ -16,9 +16,9 @@ $(function() {
     <div class="stick"></div>
 </div>
 
-<nav id="navbar" class="uk-navbar">
+<nav class="uk-navbar">
     <a class="uk-navbar-brand" href="/">io</a>
-    <ul class="uk-navbar-nav uk-visible-large">
+    <ul id="navbar-nav" class="uk-navbar-nav uk-visible-large">
         <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
             <a href="/json/">Json</a></li>
 
@@ -115,8 +115,8 @@ $(function() {
     </div>
 </nav>
 <script>
-    var vm_navbar = new Vue({
-        el: '#navbar'
+    var vm_navbar_nav = new Vue({
+        el: '#navbar-nav'
     })
 </script>
 
