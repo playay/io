@@ -291,12 +291,25 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             ads: [
                 {
                     title: "问：如何用 Json 传输二进制数据？    答：Base64 了解一下？",
-                    url: "https://pages.feling.net/2018/02/why-base64.html"
+                    href: "https://pages.feling.net/2018/02/why-base64.html",
                 },
-            ]
+            ],
+            ad: {
+                title: "",
+                href: "",
+            }
         },
         mounted: function () {
-            // $("#navbar-ad").show()
+            setInterval(this.next(), 30 * 1000)
+            $("#navbar-ad").show()
+        },
+        methods: {
+            next: function() {
+                if (this.ad.title) {
+                    ads.push(ad)
+                }
+                ad = ads.shift()
+            }
         },
     })
 </script>
