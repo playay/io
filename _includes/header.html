@@ -18,7 +18,7 @@ $(function() {
 
 <nav class="uk-navbar">
     <a class="uk-navbar-brand" href="/">io</a>
-    
+
     <ul id="navbar-nav" class="uk-navbar-nav uk-visible-large">
         <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
             <a href="/json/">Json</a></li>
@@ -110,7 +110,7 @@ $(function() {
     </div>
     <div id="navbar-ad" style="display:none;" class="uk-navbar-content uk-navbar-center">
         {% raw %}
-         <a href="{{ ad.href }}" target="_blank" 
+         <a :href="ad.href" target="_blank" 
             style="background: transparent;color:#444444">{{ ad.title }}</a>
         {% endraw %}
     </div>
