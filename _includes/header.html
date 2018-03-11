@@ -28,8 +28,9 @@ $(function() {
         <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'fredis' }">
                 <a href="/redis/">Redis</a></li>
     </ul>
+
     <a class="uk-navbar-nav uk-navbar-content" href="https://pages.feling.net">笔记</a>
-    
+
     <div class="uk-navbar-flip">
         <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;" style="display:none;font-size:16px;" onClick="signIn()">
             <i id="signInSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i> <i class="uk-icon-google"> 登录</i>
@@ -105,6 +106,12 @@ $(function() {
                 loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
             }
         </script>
+    </div>
+
+    <div id="navbar-ad" style="display:none;" class="uk-navbar-content uk-navbar-center">
+        <ul>
+            <li><a href="https://pages.feling.net/2018/02/why-base64.html" target="_blank">问：如何用 Json 传输二进制数据？    答：Base64 了解一下？</a></li>
+        </ul>
     </div>
 </nav>
 <script>
