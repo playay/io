@@ -107,11 +107,11 @@ $(function() {
             }
         </script>
     </div>
-
     <div id="navbar-ad" style="display:none;" class="uk-navbar-content uk-navbar-center">
+        {% raw %}
          <a href="{{ vm_navbar_ad.ad.href}}" target="_blank" 
-            style="background: transparent;color:#444444">
-             {{ vm_navbar_ad.ad.title}}</a>
+            style="background: transparent;color:#444444">{{ vm_navbar_ad.ad.title}}</a>
+        {% endraw %}
     </div>
 </nav>
 <script>
