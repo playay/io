@@ -1,5 +1,4 @@
-<script>
-    var WithFParams = {
+var WithFParams = {
     apiHost: 'https://api.feling.io',
     postJson: function (path, data, resultHandler) {
         data.accessToken = localStorage.accessToken
@@ -23,4 +22,3 @@
         })
     },
 }
-</script>
