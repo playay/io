@@ -6,9 +6,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
 ---
 
 {% raw %}
-<div id="main" style="display:none;" class="uk-height-1-1">
+<div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
-        <div style="width:24%;margin-right:10px;padding-bottom:50px;" class="uk-height-1-1">
+        <div style="width:24%;margin-right:10px;padding-bottom:50px;display:none;" 
+            class="uk-height-1-1" id="connection-list">
             <button class="uk-button uk-width-1-1" 
                     v-on:click="editOne()">add new connection</button>
             <ul class="uk-list uk-list-line uk-height-1-1" 
@@ -121,7 +122,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 }])
             }
             this.redisConnections = JSON.parse(localStorage.redis_connections)
-            $('#main').show()
+            $('#connection-list').show()
         },
         methods: {
             connect: function (connection) {
@@ -137,7 +138,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                     .find(".terminals").terminal(function (command, term) {
                         command = command.trim()
                         if (command === 'help') {
-                            term.echo('cp    copy last response. note that the response: "OK" is not considered as a last response.')
+                            term.echo('cp    copy last response. note that the response "OK" is not considered as a last response.')
                             term.echo('dl    download last response.')
                             term.echo('jq    format last response as json by the online json format tool on a new tab.')
                             return
