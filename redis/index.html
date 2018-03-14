@@ -8,12 +8,12 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
 {% raw %}
 <div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
-        <div style="width:24%;margin-right:10px;padding-bottom:50px;display:none;" 
-            class="uk-height-1-1" id="connection-list">
+        <div style="width:24%;margin-right:10px;padding-bottom:50px;" 
+            class="uk-height-1-1">
             <button class="uk-button uk-width-1-1" 
                     v-on:click="editOne()">add new connection</button>
-            <ul class="uk-list uk-list-line uk-height-1-1" 
-                style="overflow:scroll;">
+            <ul class="uk-list uk-list-line uk-height-1-1" id="connection-list"
+                style="overflow:scroll;display:none;">
                 <li v-for="connection in redisConnections">
                     <span>{{connection.name}}</span>
                     <button class="uk-button" style="float:right;"
