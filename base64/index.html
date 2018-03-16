@@ -148,7 +148,11 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
             processImg: function(file) {
                 if (file) {
                     this.imgType = file.type
-                    this.imgSize = parseInt(file.size / 1000) + ' KB'
+                    if (file.size < 1000) {
+                        this.imgSize = file.size + ' B'
+                    } else {
+                        this.imgSize = parseInt(file.size / 1000) + ' KB'
+                    }
                     var reader = new FileReader()
                     reader.onload = function (o) {
                         vm_img.base64 = o.target.result
