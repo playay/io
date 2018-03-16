@@ -54,3 +54,17 @@
         text-decoration: none
     }
 </style>
+<script>
+    var btns = document.querySelectorAll('.btnCopy');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('mouseleave', function (e) {
+            e.currentTarget.setAttribute('class', 'btnCopy');
+            e.currentTarget.removeAttribute('aria-label');
+        });
+    }
+
+    function showTooltip(elem, msg) {
+        elem.setAttribute('class', 'btnCopy tooltipped');
+        elem.setAttribute('aria-label', msg);
+    }
+</script>
