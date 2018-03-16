@@ -90,7 +90,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
     var vm_text = new Vue({
         el: "#text",
         data: {
-            origin: 'base64 编码解码',
+            origin: 'Base64 编码解码',
             base64: ''
         },
         mounted: function () {
@@ -151,7 +151,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
             processImg: function(file) {
                 if (file) {
                     this.imgType = file.type
-                    this.imgSize = file.size
+                    this.imgSize = (file.size / 1000) + 'KB'
                     var reader = new FileReader()
                     reader.onload = function (o) {
                         vm_img.base64 = o.target.result
