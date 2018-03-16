@@ -49,7 +49,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
         <!-- 文字 -->
         <li class="uk-height-1-1">
             <div id="text" class="uk-grid uk-grid-small uk-height-1-1">
-                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;">
+                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;padding-right:10px;">
                     <textarea class="uk-width-1-1 uk-height-1-1" style="resize:vertical;" placeholder="编码前" spellcheck="false" v-model="origin" v-on:input="onChangeOrigin"></textarea>
                 </div>
                 <div class="uk-width-1-2 fl-box uk-height-1-1">
@@ -60,7 +60,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
         <!-- 图片 -->
         <li class="uk-height-1-1">
             <div id="img" class="uk-grid uk-grid-small uk-height-1-1">
-                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;">
+                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;padding-right:10px;">
                     <textarea class="uk-width-1-1 uk-height-1-1 jq_watermark" style="resize:none;" title="输入以下任一内容: <br> 1. 图片url地址 <br> 2. 带 'data:image/...' 前缀的图片 base64 <br> 3. 不带 'data:image/...' 前缀的图片 base64 " 
                     autofocus spellcheck="false" v-model="base64" v-on:input="onInputBase64"></textarea>
                 </div>
