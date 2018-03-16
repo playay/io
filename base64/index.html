@@ -70,12 +70,12 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
                             v-show="base64 === ''">拖拽图片到此处 / 点击上传图片</p>
                         <img style="max-height:512px;" v-bind:src="base64" v-if="base64.startsWith('data:image') || base64.startsWith('http')"></img>
                         <img style="max-height:512px;" v-bind:src="'data:image;base64,' + base64" v-if="base64 != '' && !base64.startsWith('data:image') && !base64.startsWith('http') "></img>
+                        <div id="info_box" v-show="imgType !== ''">
+                            <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
+                        </div>
                     </div>
                     <input type="file" style="display:none;" id="file_input" accept="image/*" 
                     v-on:change="onFileInputChange">
-                    <div id="info_box" v-show="imgType !== ''">
-                        <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
-                    </div>
                 </div>
             </div>
         </li>
