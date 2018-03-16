@@ -33,6 +33,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
     }
 </script>
 
+<div class="uk-width-10-10 uk-height-1-1" style="padding-bottom: 60px;">
 <!-- 选项卡 -->
 <div class="uk-width-10-10" style="margin-bottom: 10px;">
     <ul class="uk-tab uk-tab-top" data-uk-tab="{connect:'#main', active:localStorage.base64_activeTab, animation:'fade'}">
@@ -42,17 +43,17 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
 </div>
 
 <!-- 表单、结果 -->
-<div class="uk-width-10-10">
-    <ul id="main" class="uk-switcher">
+<div class="uk-width-10-10 uk-height-1-1">
+    <ul id="main" class="uk-switcher uk-height-1-1">
 
         <!-- 文字 -->
         <li>
-            <div id="text" class="uk-grid uk-grid-small">
-                <div class="uk-width-1-2 fl-box" style="padding-left:0;">
-                    <textarea class="uk-width-1-1" style="height: 240px;resize: vertical;" placeholder="编码前" spellcheck="false" v-model="origin" v-on:input="onChangeOrigin"></textarea>
+            <div id="text" class="uk-grid uk-grid-small uk-height-1-1">
+                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;">
+                    <textarea class="uk-width-1-1 uk-height-1-1" style="resize:vertical;" placeholder="编码前" spellcheck="false" v-model="origin" v-on:input="onChangeOrigin"></textarea>
                 </div>
-                <div class="uk-width-1-2 fl-box">
-                    <textarea class="uk-width-1-1" style="height: 240px;resize: vertical;" placeholder="编码后" autofocus spellcheck="false" v-model="base64" v-on:input="onChangeBase64"></textarea>
+                <div class="uk-width-1-2 fl-box uk-height-1-1">
+                    <textarea class="uk-width-1-1 uk-height-1-1" style="resize:vertical;" placeholder="编码后" autofocus spellcheck="false" v-model="base64" v-on:input="onChangeBase64"></textarea>
                 </div>
             </div>
         </li>
@@ -80,6 +81,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
             </div>
         </li>
     </ul>
+</div>
 </div>
 
 <script>{% include js/base64.min.js %}</script>
