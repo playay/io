@@ -33,7 +33,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
     }
 </script>
 
-<div class="uk-width-10-10 uk-height-1-1" style="padding-bottom: 60px;">
+<div class="uk-width-10-10 uk-height-1-1" style="padding-bottom: 50px;">
 <!-- 选项卡 -->
 <div class="uk-width-10-10" style="margin-bottom: 10px;">
     <ul class="uk-tab uk-tab-top" data-uk-tab="{connect:'#main', active:localStorage.base64_activeTab, animation:'fade'}">
@@ -60,13 +60,13 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
 
         <!-- 图片 -->
         <li class="uk-height-1-1">
-            <div id="img" class="uk-grid uk-grid-small">
-                <div class="uk-width-1-2 fl-box" style="padding-left:0;">
-                    <textarea class="uk-width-1-1 jq_watermark" style="height: 320px;resize: none;" title="输入以下任一内容: <br> 1. 图片url地址 <br> 2. 带 'data:image/...' 前缀的图片 base64 <br> 3. 不带 'data:image/...' 前缀的图片 base64 " 
+            <div id="img" class="uk-grid uk-grid-small uk-height-1-1">
+                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;">
+                    <textarea class="uk-width-1-1 uk-height-1-1 jq_watermark" style="height: 320px;resize: none;" title="输入以下任一内容: <br> 1. 图片url地址 <br> 2. 带 'data:image/...' 前缀的图片 base64 <br> 3. 不带 'data:image/...' 前缀的图片 base64 " 
                     autofocus spellcheck="false" v-model="base64" v-on:input="onInputBase64"></textarea>
                 </div>
-                <div class="uk-width-1-2 fl-box">
-                    <div id="drop_box" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="clickDropBox">
+                <div class="uk-width-1-2 fl-box uk-height-1-1">
+                    <div id="drop_box uk-height-1-1" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="clickDropBox">
                         <p style="width: 100%;height: 100%;text-align: center;line-height: 270px" 
                             v-show="base64 === ''">拖拽图片到此处 / 点击上传图片</p>
                         <img style="max-height: 280px;" v-bind:src="base64" v-if="base64.startsWith('data:image') || base64.startsWith('http')"></img>
