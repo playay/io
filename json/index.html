@@ -89,9 +89,10 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             <input type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
             <label class="uk-label" for="array_sampling">数组只显示第一项</label>
             <div style="float:right;">
-                <button id="copy-success" class="uk-button uk-button-success" style="display:none;">copied</button>
+                <p id="copy-success" class="uk-button uk-button-success" style="display:none;">copied</p>
                 <button class="uk-button copy-button" data-clipboard-target="#json_result">复制</button>
-                <button class="uk-button copy-button" @click="unFoldAll(998)" data-clipboard-target="#json_result">n级 &amp; 复制</button>
+                <button class="uk-button copy-button" data-clipboard-target="#json_result" 
+                    @click="unFoldAll(998)">n级 &amp; 复制</button>
             </div>
         </div>
         <hr style="margin: 0px">
