@@ -86,7 +86,6 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">4级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5级</button>
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
-            <!-- <button class="uk-button uk-visible-large">耗时: {% raw %}{{costTime}}{% endraw %}ms</button> -->
             <input type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
             <label class="uk-label" for="array_sampling">数组只显示第一项</label>
             <button class="uk-button tooltipped" id="copyButton" style="float:right;" aria-label="已复制"
@@ -102,7 +101,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
 </div>
 
 <script>{% include js/clipboard.min.js %}</script>
-{% include css/tooltips.html %}
+{% include tooltips.html %}
 <script>
     new ClipboardJS('#copyButton').on('success', function(e) {
     })
@@ -129,7 +128,6 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             tab: '    ',
             keyEnd: '"</span>: ',
             arraySampling: false,// 遇到数组，只解析第一个元素
-            costTime: '',
             defaultFold: 998
         },
         mounted: function () {
@@ -244,13 +242,11 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                     return
                 }
                 try {
-                    var startTime = new Date().getTime()
                     var obj = JSON.parse(this.jsonSrc)
                     this.jsonResultTemp = []
                     this.genResult(obj, 0)
                     this.deletLastComma()
                     this.jsonResult = this.jsonResultTemp.join("")
-                    this.costTime = new Date().getTime() - startTime
                     if (this.jsonSrc.length < (1024 * 128)) {
                         localStorage.json_jsonSrc = this.jsonSrc
                     }
