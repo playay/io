@@ -62,7 +62,7 @@
   
         attr_name = $elem.attr('placeholder') !== undefined && $elem.attr('placeholder') !== '' ? 'placeholder' : 'title';
         label_text = text === undefined || text === '' ? $(this).attr(attr_name) : text;
-        watermark_container = $('<span class="watermark_container"></span>');
+        watermark_container = $('<span class="watermark_container uk-height-1-1"></span>');
         watermark_label = $('<label class="watermark" for="' + control_id + '">' + label_text + '</label>');
   
         // If used, remove the placeholder attribute to prevent conflicts
