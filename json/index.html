@@ -85,13 +85,13 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(3)">3级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">4级</button>
             <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5级</button>
-            <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
+            <button class="uk-button" v-on:click="unFoldAll(998)">n级</button>
             <input type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
             <label class="uk-label" for="array_sampling">数组只显示第一项</label>
             <div style="float:right;">
-                <button id="copy-success" class="uk-button uk-button-success" disabled style="display:none;">copied</buttonp>
+                <button id="copy-success" class="uk-button uk-button-success" style="display:none;">copied</buttonp>
                 <button class="uk-button copy-button" data-clipboard-target="#json_result">复制</button>
-                <button class="uk-button copy-button" @click="unFoldAll(999)" data-clipboard-target="#json_result">n级 &amp; 复制</button>
+                <button class="uk-button copy-button" @click="unFoldAll(998)" data-clipboard-target="#json_result">n级 &amp; 复制</button>
             </div>
         </div>
         <hr style="margin: 0px">
@@ -106,6 +106,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
     new ClipboardJS('.copy-button').on('success', function(e) {
         $('#copy-success').show()
         setTimeout(() => {$('#copy-success').hide()} ,900)
+        e.clearSelection()
     })
     function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
