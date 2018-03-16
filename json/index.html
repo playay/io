@@ -88,7 +88,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             <button class="uk-button" v-on:click="unFoldAll(999)">n级</button>
             <input type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
             <label class="uk-label" for="array_sampling">数组只显示第一项</label>
-            <button class="uk-button tooltipped" id="copyButton" style="float:right;" aria-label="已复制"
+            <button class="uk-button tooltipped" style="float:right;" aria-label="已复制"
                     data-clipboard-target="#json_result">复制</button>
             <button class="uk-button tooltipped" style="float:right;" aria-label="已复制" @click="unFoldAll(999)"
                     data-clipboard-target="#json_result">n级&amp;复制</button>
@@ -103,7 +103,8 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
 <script>{% include js/clipboard.min.js %}</script>
 {% include tooltips.html %}
 <script>
-    new ClipboardJS('#copyButton').on('success', function(e) {
+    new ClipboardJS('.tooltipped').on('success', function(e) {
+        console.log(e)
     })
     function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
