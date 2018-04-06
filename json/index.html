@@ -295,39 +295,21 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
     var vm_navbar_ad = new Vue({
         el: '#navbar-ad',
         data: {
-            ads: [],
             ad: {
-                title: "",
+                title: "登录, 解锁更多功能",
                 href: "",
             }
         },
         mounted: function () {
-            if (!localStorage.accessToken) {
-                this.ads.push({title: "登录, 解锁更多功能", href:""})
-            }
-            this.next()
-        },
-        methods: {
-            next: function() {
-                setTimeout(() => {
-                    if (localStorage.accessToken) {
-                        $("#navbar-ad").hide()
-                        vm.showMoreFeatures = true
-                    } else {
-                        $("#navbar-ad").show()
-                        vm.showMoreFeatures = false
-                    }
-                    vm_navbar_ad.next()
-                }, 1 * 1000)
-
-                if (this.ad.title) {
-                    this.ads.push(this.ad)
+            setInterval(() => {
+                if ($('#signInButton').is(":hidden")) {
+                    $("#navbar-ad").hide()
+                    vm.showMoreFeatures = true
+                } else {
+                    $("#navbar-ad").show()
+                    vm.showMoreFeatures = false
                 }
-                this.ad = this.ads.shift()
-                if (!this.ad) {
-                    this.ad = {title: "", href:""}
-                }
-            }
+            }, 1 * 1000)
         },
     })
 </script>
