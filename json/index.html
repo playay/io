@@ -296,7 +296,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
         data: {
             ads: [
                 {
-                    title: "登录, 解锁更多功能 &rarr;"
+                    title: "登录, 解锁更多功能 →"
                 },
             ],
             ad: {
@@ -305,10 +305,12 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             }
         },
         mounted: function () {
-            setInterval(this.next(), 30 * 1000)
-            setTimeout(() => {
-                $("#navbar-ad").show()
-            }, 6 * 1000)
+            if (!localStorage.accessToken) {
+                setInterval(this.next(), 30 * 1000)
+                setTimeout(() => {
+                    $("#navbar-ad").show()
+                }, 6 * 1000)
+            }
         },
         methods: {
             next: function() {
