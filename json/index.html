@@ -294,22 +294,15 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
     var vm_navbar_ad = new Vue({
         el: '#navbar-ad',
         data: {
-            ads: [
-                {
-                    title: "",
-                    href: "",
-                }
-            ],
+            ads: [],
             ad: {
                 title: "",
                 href: "",
             }
         },
         mounted: function () {
-            if (typeof googleyolo != "undefined") {
-                this.ads.push({title: "登录, 解锁更多功能", href:""})
-            }
-            if (!localStorage.accessToken) {
+            this.ads.push({title: "登录, 解锁更多功能", href:""})
+            if (this.ads.length > 0 && !localStorage.accessToken) {
                 setInterval(this.next(), 30 * 1000)
                 setTimeout(() => {$("#navbar-ad").show()}, 6 * 1000)
             }
