@@ -302,12 +302,16 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
         },
         mounted: function () {
             if (!localStorage.accessToken) {
-                setInterval(vm_navbar_ad.next(), 10 * 1000)
                 $("#navbar-ad").show()
+                this.next()
             }
         },
         methods: {
             next: function() {
+                setTimeout(() => {
+                    vm_navbar_ad.next()
+                }, 10 * 1000)
+                
                 if (this.ad.title) {
                     this.ads.push(this.ad)
                 }
