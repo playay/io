@@ -138,7 +138,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             keyEnd: '"</span>: ',
             arraySampling: false,// 遇到数组，只解析第一个元素
             defaultFold: 998,
-            showMoreFeatures: localStorage.accessToken
+            showMoreFeatures: false
         },
         mounted: function () {
             if (localStorage.json_arraySampling !== undefined) {
@@ -150,6 +150,18 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             if (localStorage.json_defaultFold) {
                 this.defaultFold = localStorage.json_defaultFold
             }
+            if (localStorage.accessToken) {
+                this.showMoreFeatures = true
+            } else {
+                this.showMoreFeatures = false
+            }
+            setInterval(() => {
+                if (localStorage.accessToken) {
+                    vm.showMoreFeatures = true
+                } else {
+                    vm.showMoreFeatures = false
+                }
+            }, 1500)
             this.jsonSrcChange()
         },
         methods: {
@@ -302,11 +314,6 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
         },
         mounted: function () {
             setInterval(() => {
-                if (localStorage.accessToken) {
-                    vm.showMoreFeatures = true
-                } else {
-                    vm.showMoreFeatures = false
-                }
                 if ($("#signInButton").is(":hidden")) {
                     $("#navbar-ad").hide()
                 } else {
