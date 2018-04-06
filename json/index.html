@@ -315,9 +315,11 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                         $("#navbar-ad").hide()
                         vm.hasAccessToken = true
                     } else {
-                        vm_navbar_ad.next()
+                        $("#navbar-ad").show()
+                        vm.hasAccessToken = false
                     }
-                }, 10 * 1000)
+                    vm_navbar_ad.next()
+                }, 2 * 1000)
 
                 if (this.ad.title) {
                     this.ads.push(this.ad)
