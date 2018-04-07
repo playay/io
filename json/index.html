@@ -94,8 +94,10 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             <label class="uk-label uk-visible-large" for="array_sampling">数组只显示第一项</label>
             <div style="float:right;">
                 <p id="copy-success" class="uk-button uk-button-success" style="display:none;">copied</p>
-                <button v-show="showMoreFeatures" class="uk-button uk-visible-large" v-on:click="share">分享当前JSON</button>
-                <button id="copy-share-link" style="display:none;">实际触发复制当前JSON的分享链接</button>
+                <button v-show="showMoreFeatures" class="uk-button uk-visible-large" v-on:click="share">
+                        <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
+                        分享当前JSON(开发中)</button>
+                <button id="copy-share-link" style="display:none;">实际触发“复制”当前JSON的分享链接</button>
                 <button class="uk-button copy-button" data-clipboard-target="#json_result">复制</button>
                 <button class="uk-button copy-button uk-visible-large" v-show="showMoreFeatures" 
                     data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
@@ -117,7 +119,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
     })
     new ClipboardJS('#copy-share-link', {
         text: function() {
-            return 'xxxx';
+            return localStorage.json_shareLink;
         }
     }).on('success', function(e) {
         $('#copy-success').show()
@@ -302,14 +304,35 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                 }
                 func(element, depth)
             },
+            genShareLink: function() {
+                $('#genShareLinkSpinner').show()
+                WithFParams.postForm('/login/withGoogle',
+                    {
+                        "jsonSrc": this.jsonSrc
+                    },
+                    (result) => {
+                        if (result.success) {
+                            localStorage.json_shareLink = "https://feling.io/json/?shareId=" + result.data
+                            $('#copy-share-link').click()
+                            if (!localStorage.json_notFirstTimeGenShareLink) {
+                                localStorage.json_notFirstTimeGenShareLink = true
+                                UIkit.modal.alert("分享链接已复制。")
+                            }
+                        } else {
+                            UIkit.modal.alert(result.message)
+                        }
+                    }
+                )
+                .always(() => {
+                    $('#genShareLinkSpinner').hide()
+                })
+            },
             share: function() {
                 if (localStorage.json_notFirstTimeGenShareLink) {
-                    $('#copy-share-link').click()
+                    this.genShareLink()
                 } else {
-                    UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续? ', function(){
-                        localStorage.json_notFirstTimeGenShareLink = true
-                        $('#copy-share-link').click()
-                        UIkit.modal.alert("分享链接已经复制到剪切板")
+                    UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续?', () => {
+                        this.genShareLink()
                     })
                 }
             },
