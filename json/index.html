@@ -124,10 +124,10 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
     }).on('success', function(e) {
         $('#copy-success').show()
         setTimeout(() => {$('#copy-success').hide()} ,900)
-    }).on('error', function(e) {
+    }).on('error', function(e,ee,eee) {
         console.error('Action:', e.action);
         console.error('Trigger:', e.trigger);
-        console.error(e)
+        console.error(e,ee,eee)
     });
     function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
