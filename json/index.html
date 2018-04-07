@@ -97,7 +97,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                 <button v-show="showMoreFeatures" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                         分享当前JSON(开发中)</button>
-                <button id="copy-share-link" >实际触发“复制”当前JSON的分享链接</button>
+                <button id="copy-share-link" style="display:none;">实际触发“复制”当前JSON的分享链接</button>
                 <button class="uk-button copy-button" data-clipboard-target="#json_result">复制</button>
                 <button class="uk-button copy-button uk-visible-large" v-show="showMoreFeatures" 
                     data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
@@ -120,7 +120,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
     new ClipboardJS('#copy-share-link', {
         text: function() {
             console.log('ggg')
-            return localStorage.json_shareLink
+            return localStorage.getItem('json_shareLink')
         }
     }).on('success', function(e) {
         $('#copy-success').show()
