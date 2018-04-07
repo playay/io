@@ -303,9 +303,15 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                 func(element, depth)
             },
             share: function() {
-                UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续? ', function(){
+                if (localStorage.json_notFirstTimeGenShareLink) {
                     $('#copy-share-link').click()
-                });
+                } else {
+                    UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续? ', function(){
+                        localStorage.json_notFirstTimeGenShareLink = true
+                        $('#copy-share-link').click()
+                        UIkit.modal.alert("分享链接已经复制到剪切板")
+                    })
+                }
             },
         }
     })
