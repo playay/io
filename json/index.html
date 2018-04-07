@@ -120,7 +120,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
     new ClipboardJS('#copy-share-link', {
         text: function() {
             console.log('ggg')
-            return localStorage.getItem('json_shareLink')
+            return vm.shareLink
         }
     }).on('success', function(e) {
         $('#copy-success').show()
@@ -150,7 +150,8 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             keyEnd: '"</span>: ',
             arraySampling: false,// 遇到数组，只解析第一个元素
             defaultFold: 998,
-            showMoreFeatures: false
+            showMoreFeatures: false,
+            shareLink: '',
         },
         mounted: function () {
             if (localStorage.json_arraySampling !== undefined) {
@@ -313,11 +314,11 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                     },
                     (result) => {
                         if (result.success) {
-                            localStorage.json_shareLink = "https://feling.io/json/?shareId=" + result.data
+                            vm.shareLink = "https://feling.io/json/?shareId=" + result.data
                             $('#copy-share-link').click()
                             if (!localStorage.json_notFirstTimeGenShareLink) {
                                 localStorage.json_notFirstTimeGenShareLink = true
-                                UIkit.modal.alert("分享链接:<br>" + localStorage.json_shareLink + "<br>已复制。")
+                                UIkit.modal.alert("分享链接:<br>" + vm.shareLink + "<br>已复制。")
                             }
                         } else {
                             UIkit.modal.alert(result.message)
