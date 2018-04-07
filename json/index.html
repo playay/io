@@ -316,7 +316,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                             $('#copy-share-link').click()
                             if (!localStorage.json_notFirstTimeGenShareLink) {
                                 localStorage.json_notFirstTimeGenShareLink = true
-                                UIkit.modal.alert("分享链接:\n" + localStorage.json_shareLink + "\n已复制。")
+                                UIkit.modal.alert("分享链接:<br>" + localStorage.json_shareLink + "<br>已复制。")
                             }
                         } else {
                             UIkit.modal.alert(result.message)
