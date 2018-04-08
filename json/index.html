@@ -77,6 +77,14 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
 
 
 <div id="main" class="uk-grid uk-grid-collapse uk-height-1-1">
+
+    <a href="#loading-shared-json" id="show-loading-shared-json" data-uk-modal></a>
+    <div id="loading-shared-json" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-spinner">...</div>
+        </div>
+    </div>
+
     <div id="json_src_box" class="uk-width-10-10">
         <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" v-on:input="jsonSrcChange">
         </textarea>
@@ -168,7 +176,11 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             } else {
                 this.showMoreFeatures = false
             }
-            this.jsonSrcChange()
+            if (this.getQueryParam('shareId')) {
+                this.loadJsonSrcByShareId(shareId)
+            } else {
+                this.jsonSrcChange()
+            }
         },
         methods: {
             isArray: function (obj) {
@@ -335,6 +347,30 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                         this.genShareLink()
                     })
                 }
+            },
+            getQueryParam: function(key) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            },
+            loadJsonSrcByShareId: function(shareId) {
+                $('#show-loading-shared-json').click()
+                WithFParams.postForm('/unclassified/jsonShare/get',
+                    {
+                        "shareId": shareId
+                    },
+                    (result) => {
+                        if (result.success) {
+                            vm.json_jsonSrc = result.data.jsonSrc
+                        } else {
+                            UIkit.modal.alert(result.message)
+                        }
+                    }
+                )
+                .always(() => {
+                    $('#show-loading-shared-json').click()
+                    this.jsonSrcChange()
+                })
             },
         }
     })
