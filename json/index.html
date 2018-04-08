@@ -78,7 +78,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
 
 <div id="main" class="uk-grid uk-grid-collapse uk-height-1-1">
 
-    <a href="#loading-shared-json" id="show-loading-shared-json" data-uk-modal></a>
+    <a href="#loading-shared-json" id="show-loading-shared-json" data-uk-modal="{bgclose:false, keyboard:false}"></a>
     <div id="loading-shared-json" class="uk-modal">
         <div class="uk-modal-dialog">
             <div class="uk-modal-spinner">...</div>
@@ -355,7 +355,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                 if (r != null) return unescape(r[2]); return null;
             },
             loadJsonSrcByShareId: function(shareId) {
-                $('#show-loading-shared-json').click()
+                UIkit.modal("#show-loading-shared-json").show()
                 WithFParams.postForm('/unclassified/jsonShare/get',
                     {
                         "shareId": shareId
@@ -369,7 +369,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                     }
                 )
                 .always(() => {
-                    $('#show-loading-shared-json').click()
+                    UIkit.modal("#show-loading-shared-json").hide()
                     this.jsonSrcChange()
                 })
             },
