@@ -355,11 +355,11 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                         if (result.success) {
                             localStorage.json_jsonSrc = result.data.jsonSrc
                         } else {
-                            localStorage.json_jsonSrc = '{"提示":"shareId: ' + shareId + '对应的 json 加载失败"}'
+                            localStorage.json_jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 json 加载失败"}'
                         }
                     }
                 ).always(() => {
-                    location.href = 'https://feling.io/json/'
+                    location.href = location.pathname
                 })
             },
         }
