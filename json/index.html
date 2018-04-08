@@ -97,7 +97,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                 <button v-show="showMoreFeatures && !shareLink" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                         分享当前JSON</button>
-                <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success">再点一次,复制分享链接</button>
+                <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制分享链接</button>
                 <button class="uk-button copy-button" data-clipboard-target="#json_result">复制</button>
                 <button class="uk-button copy-button uk-visible-large" v-show="showMoreFeatures" 
                     data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
@@ -122,11 +122,9 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             return vm.shareLink
         }
     }).on('success', function(e) {
+        vm.shareLink = ''
         $('#copy-success').show()
-        setTimeout(() => {
-            $('#copy-success').hide()
-            vm.shareLink = ''
-        } ,900)
+        setTimeout(() => {$('#copy-success').hide()} ,900)
     })
     function fold(icon) {
         icon.classList.remove('uk-icon-angle-down')
