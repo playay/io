@@ -154,19 +154,20 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             shareLink: ''
         },
         mounted: function () {
-            if (localStorage.json_arraySampling !== undefined) {
-                this.arraySampling = localStorage.json_arraySampling === 'true'
-            }
-            if (localStorage.json_jsonSrc) {
-                this.jsonSrc = localStorage.json_jsonSrc
-            }
-            if (localStorage.json_defaultFold) {
-                this.defaultFold = localStorage.json_defaultFold
-            }
             if (localStorage.accessToken) {
                 this.showMoreFeatures = true
             } else {
                 this.showMoreFeatures = false
+            }
+
+            if (localStorage.json_arraySampling !== undefined) {
+                this.arraySampling = localStorage.json_arraySampling === 'true'
+            }
+            if (localStorage.json_defaultFold) {
+                this.defaultFold = localStorage.json_defaultFold
+            }
+            if (localStorage.json_jsonSrc) {
+                this.jsonSrc = localStorage.json_jsonSrc
             }
             let shareId = this.getQueryParam('shareId')
             if (this.getQueryParam('shareId')) {
@@ -359,6 +360,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                         }
                     }
                 ).always(() => {
+                    this.jsonSrc = localStorage.json_jsonSrc
                     this.jsonSrcChange()
                     history.replaceState(null, null, location.pathname)
                 })
