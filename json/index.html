@@ -324,7 +324,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
                                 localStorage.json_notFirstTimeGenShareLink = true
                             }
                         } else {
-                            UIkit.modal.alert(result.message)
+                            UIkit.modal.alert("生成分享链接失败")
                         }
                     }
                 )
@@ -365,6 +365,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
         }
     })
 </script>
+
 <script>
     var vm_navbar_ad = new Vue({
         el: '#navbar-ad',
