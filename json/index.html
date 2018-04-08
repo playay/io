@@ -176,6 +176,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             } else {
                 this.showMoreFeatures = false
             }
+            let shareId = this.getQueryParam('shareId')
             if (this.getQueryParam('shareId')) {
                 this.loadJsonSrcByShareId(shareId)
             } else {
