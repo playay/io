@@ -2,7 +2,7 @@
 title: fredis
 layout: default
 keywords: [redis, redis GUI, redis client]
-description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”开发。有基本的GUI图形界面，能编辑保存服务器信息、提供 redis 命令行终端、保存历史命令。所有数据存储在 localStorage。
+description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”开发。有基本的GUI图形界面，能编辑保存服务器信息、提供 redis 命令行终端、保存历史命令。所有数据存储在 localStorage, 保证数据安全。
 ---
 
 {% raw %}
@@ -60,11 +60,21 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 2. 使用这个 socket 连接发送数据. <br>
                                 3. 当这个 socket 连接收到数据时, 把收到的数据通知给你.
                             </li>
+                            <li>
+                                一开始, 作者使用 [RDM](https://redisdesktop.com/) 。但是这个redis图形界面的客户端, 默认情况下有很多让人难受的地方: <br><br>
+                                &nbsp;&nbsp;1. 双击打开一个连接, 会自动 select 所有的db。要等待扫描完成后才能进行下一步操作。这一过程可能会持续很长时间。<br>
+                                &nbsp;&nbsp;2. 还是自动扫描。双击打开一个 db, 会扫描所有的 key, 这一操作不仅仅是扫描, 还会真实删除已经过期的 key。占用大量服务器资源, 导致过线上服务要执行的命令执行超时。<br>
+                                &nbsp;&nbsp;3. 命令行终端的交互极不友好: 光标位置必需在最后一行、窗口大小被限制在非常小的比例、...<br><br>
+                                fredis 的初心, 就只是单纯的希望有个地方能: <br><br>
+                                &nbsp;&nbsp;1. 保存账号密码。<br>
+                                &nbsp;&nbsp;2. 快速打开连接, 执行一条命令。<br>
+                            </li>
                         </ul>
                     </div>
                     <div class="uk-width-2-10">
                         <ul class="uk-tab uk-tab-right" data-uk-switcher="{connect:'#faq'}">
                             <li><a href="#">什么是ws2s?</a></li>
+                            <li><a href="#">为什么开发fredis?</a></li>
                         </ul>
                     </div>
                 </div>
