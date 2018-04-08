@@ -352,7 +352,7 @@ description: 格式化、高亮、折叠你的 json 字符串。支持一键复�
             getQueryParam: function(key) {
                 var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
                 var r = window.location.search.substr(1).match(reg);
-                if (r != null) return r[2]; return null;
+                if (r != null) return decodeURIComponent(r[2]); return null;
             },
             loadJsonSrcByShareId: function(shareId) {
                 $("#show-loading-shared-json").click()
