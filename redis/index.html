@@ -11,6 +11,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
         <div style="width:24%;min-width:260px;margin-right:10px;padding-bottom:50px;" 
             class="uk-height-1-1">
             <button class="uk-button uk-width-1-1" v-on:click="editOne()">add new connection</button>
+            <draggable v-model="redisConnections" @start="drag=true" @end="drag=false">
             <ul class="uk-list uk-list-line uk-height-1-1" id="connection-list" style="overflow-y:scroll;display:none;">
                 <li v-for="connection in redisConnections">
                     <span>{{connection.name}}</span>
@@ -21,8 +22,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     <button class="uk-button" style="float:right;" v-on:click="editOne(connection)">edit</button>
                 </li>
             </ul>
+            </draggable>
         </div>
-        <div style="width:75%;min-width:480px;" class="uk-height-1-1">
+        <div style="width:75%;min-width:512px;" class="uk-height-1-1">
             <div tname="edit" class="uk-width-1-1">
                 <div class="uk-form uk-width-1-1" 
                      style="padding-top:10px;padding-left:20%;padding-right:35%;">
@@ -66,7 +68,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 &nbsp;&nbsp;&nbsp;&nbsp;2. 双击打开一个 db, 会扫描所有的 key, 这一操作不仅仅是扫描, 还会真实删除已经过期的 key, 占用大量服务器资源。<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;3. 命令行终端的交互极不友好: 光标位置必需在最后一行、窗口大小被限制在非常小的比例、<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;...<br><br>
-                                fredis 的初心, 只是希望有个地方能单纯的: <br>
+                                fredis 的初心, 是希望有个地方能单纯的: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 保存账号密码。<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;2. 快速打开连接, 执行一条命令<br>
                             </li>
@@ -99,6 +101,8 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
 <script>{% include js/ws2s-2.0.1.js %}</script>
 <script src="/js/clipboard.min.js"></script>
 <script src="/js/jquery.terminal.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.16.0/vuedraggable.min.js"></script>
 <script>
     new ClipboardJS('.copy-last-response', {
         text: function(trigger) {
@@ -263,15 +267,15 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 $('[tname]').hide()
                 $('[tname="edit"]').show()
             },
-            saveOne: function (connection) {
-                if (!connection.name) {
-                    connection.name = connection.host + ':' + connection.port
+            saveOne: function (formConnection) {
+                if (!formConnection.name) {
+                    formConnection.name = formConnection.host + ':' + formConnection.port
                 }
                 var index = this.redisConnections.indexOf(this.editingConnection)
                 if (index !== -1) {
-                    this.redisConnections.splice(index, 1, connection)
+                    this.redisConnections.splice(index, 1, formConnection)
                 } else {
-                    this.redisConnections.push(JSON.parse(JSON.stringify(connection)))
+                    this.redisConnections.push(JSON.parse(JSON.stringify(formConnection)))
                 }
                 localStorage.redis_connections = JSON.stringify(this.redisConnections)
                 this.editOne()
