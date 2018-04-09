@@ -56,7 +56,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     <div class="uk-form-row">
                         <button class="uk-button uk-button-danger"
                                 style="display:none;width:30%;"
-                                v-show="redisConnections.includes(form)" 
+                                v-show="redisConnections.includes(editingConnection)" 
                                 v-on:click="deleteOne(form)">delete</button>
                         <button class="uk-button uk-button-primary"
                                 style="float:right;width:30%;"
@@ -260,8 +260,8 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     $('[tname="fredis_' + connection.name + '"]').show()
                 }
             },
-            deleteOne: function (connection) {
-                var index = this.redisConnections.indexOf(connection)
+            deleteOne: function () {
+                var index = this.redisConnections.indexOf(this.editingConnection)
                 if (index !== -1) {
                     this.redisConnections.splice(index, 1)
                     localStorage.redis_connections = JSON.stringify(this.redisConnections)
