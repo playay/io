@@ -4,22 +4,21 @@ layout: default
 keywords: [redis, redis GUI, redis client]
 description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”开发。有基本的GUI图形界面，能编辑保存服务器信息、提供 redis 命令行终端、保存历史命令。所有数据存储在 localStorage, 保证数据安全。
 ---
-
+<style type="text/css">
+    .sortable-ghost {
+        background:black;
+    }
+    .sortable-drag {
+        background: red;
+        border: 1px solid #E5E5E5;
+    }
+</style>
 {% raw %}
 <div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
         <div style="width:24%;min-width:260px;margin-right:10px;padding-bottom:50px;" 
             class="uk-height-1-1">
             <button class="uk-button uk-width-1-1" v-on:click="editOne()">add new connection</button>
-            <style type="text/css">
-                .sortable-ghost {
-                    background:black;
-                }
-                .sortable-drag {
-                    background: red;
-                    border: 1px solid #E5E5E5;
-                }
-            </style>
             <draggable v-model="redisConnections" element="ul" @sort="onConnectionsSorted"
                     :options="{delay:100, ghostClass:'sortable-ghost', dragClass:'sortable-drag'}" 
                     class="uk-list uk-height-1-1" id="connection-list" style="overflow-y:scroll;display:none;">
