@@ -285,6 +285,12 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 }
                 var index = this.redisConnections.indexOf(this.editingConnection)
                 if (index !== -1) {
+                    if (this.editingConnection.name != formConnection.name) {
+                        let oldHistory = 'fredis_' + this.editingConnection.name + '_history'
+                        let newHistory = 'fredis_' + formConnection.name + '_history'
+                        localStorage.setItem(newHistory, localStorage.getItem(oldHistory))
+                        localStorage.removeItem(oldHistory)
+                    }
                     this.redisConnections.splice(index, 1, formConnection)
                 } else {
                     this.redisConnections.push(JSON.parse(JSON.stringify(formConnection)))
