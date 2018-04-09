@@ -11,14 +11,15 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
         <div style="width:24%;min-width:260px;margin-right:10px;padding-bottom:50px;" 
             class="uk-height-1-1">
             <button class="uk-button uk-width-1-1" v-on:click="editOne()">add new connection</button>
-            <draggable v-model="redisConnections" :options="{draggable:'li'}" @start="drag=true" @end="drag=false">
+            <draggable v-model="redisConnections" :options="{draggable:'.draggable'}" @start="drag=true" @end="drag=false">
             <ul class="uk-list uk-list-line uk-height-1-1" id="connection-list" style="overflow-y:scroll;display:none;">
-                <li v-for="connection in redisConnections">
+                <li v-for="connection in redisConnections" class="draggable">
                     <span>{{connection.name}}</span>
                     <button class="uk-button" style="float:right;"
                             v-bind:class="{'uk-button-success': openedConnections.includes(connection)}" 
-                            v-on:click="connect(connection)">connect
-                            <span style="display:none" v-bind:tname="'fredis_'+connection.name">..</span></button>
+                            v-on:click="connect(connection)">
+                            connect<span style="display:none" v-bind:tname="'fredis_'+connection.name">..</span>
+                    </button>
                     <button class="uk-button" style="float:right;" v-on:click="editOne(connection)">edit</button>
                 </li>
             </ul>
