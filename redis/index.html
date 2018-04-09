@@ -23,7 +23,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             <draggable v-model="redisConnections" element="ul" @sort="onConnectionsSorted"
                     :options="{delay:100, ghostClass:'sortable-ghost', dragClass:'sortable-drag'}" 
                     class="uk-list uk-height-1-1" id="connection-list" style="overflow-y:scroll;display:none;">
-                <li v-for="connection in redisConnections" >
+                <li v-for="connection in redisConnections" style="padding-bottom:5px;padding-top:5px;">
                     <span>{{connection.name}}</span>
                     <button class="uk-button" style="float:right;"
                             v-bind:class="{'uk-button-success': openedConnections.includes(connection)}" 
