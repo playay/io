@@ -57,7 +57,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         <button class="uk-button uk-button-danger"
                                 style="display:none;width:30%;"
                                 v-show="redisConnections.includes(editingConnection)" 
-                                v-on:click="deleteOne(form)">delete</button>
+                                v-on:click="deleteOne()">delete</button>
                         <button class="uk-button uk-button-primary"
                                 style="float:right;width:30%;"
                                 v-on:click="saveOne(form)">save</button>
