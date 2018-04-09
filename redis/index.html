@@ -24,7 +24,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             <button class="uk-button uk-width-1-1" v-on:click="editOne()">add new connection</button>
             <draggable v-model="redisConnections" element="ul" @sort="onConnectionsSorted"
                     :options="{delay:100, ghostClass:'sortable-ghost', dragClass:'sortable-drag'}" 
-                    class="uk-list uk-height-1-1" id="connection-list" style="overflow-y:scroll;display:none;">
+                    class="uk-list uk-height-1-1" id="connection-list" style="overflow-y:scroll;display:none;margin-top:0px;">
                 <li v-for="connection in redisConnections" style="padding-bottom:5px;padding-top:5px;">
                     <span>{{connection.name}}</span>
                     <button class="uk-button" style="float:right;"
@@ -35,6 +35,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     <button class="uk-button" style="float:right;" v-on:click="editOne(connection)">edit</button>
                 </li>
             </draggable>
+            <p>drag to sort connections</p>
         </div>
         <div style="width:75%;min-width:512px;" class="uk-height-1-1">
             <div tname="edit" class="uk-width-1-1">
