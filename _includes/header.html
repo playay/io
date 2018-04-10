@@ -10,8 +10,8 @@
 
         <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'fredis' }">
                 <a href="/redis/index.html">Redis</a></li>
-        <li class="uk-parent" data-uk-dropdown="{mode:'click'}">
-            <a class="uk-navbar-content uk-visible-large">more<i class="uk-icon-caret-down"></i></a>
+        <li v-if="'{{ page.title }}' != 'feling.io'" class="uk-parent" data-uk-dropdown="{mode:'click'}">
+            <a class="uk-navbar-content">more <i class="uk-icon-caret-down"></i></a>
             <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
                 <ul class="uk-nav uk-nav-navbar">
                     <li><a href="/timestamp/index.html">timestamp</a></li>
