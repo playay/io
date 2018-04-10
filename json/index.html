@@ -47,10 +47,10 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
     resize: vertical;
     padding: 10px;
     font-size: 13px;
-    font-family: Consolas, monospace, serif;
+    font-family: Consolas, monospace;
 }
 #json_result {
-    font-family: Consolas, monospace, serif;
+    font-family: Consolas, monospace;
 }
 @media (min-width: 960px) {
     #json_src_box {
@@ -149,15 +149,15 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
             keyEnd: '"</span>: ',
             arraySampling: false,// 遇到数组，只解析第一个元素
             defaultFold: 998,
-            showMoreFeatures: false,
+            showMoreFeatures: true,
             shareLink: ''
         },
         mounted: function () {
-            if (localStorage.accessToken) {
-                this.showMoreFeatures = true
-            } else {
-                this.showMoreFeatures = false
-            }
+            // if (localStorage.accessToken) {
+            //     this.showMoreFeatures = true
+            // } else {
+            //     this.showMoreFeatures = false
+            // }
 
             if (localStorage.json_arraySampling !== undefined) {
                 this.arraySampling = localStorage.json_arraySampling === 'true'
@@ -367,7 +367,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
     })
 </script>
 
-<script>
+<!-- <script>
     var vm_navbar_ad = new Vue({
         el: '#navbar-ad',
         data: {
@@ -391,4 +391,4 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
             }, 1500)
         },
     })
-</script>
+</script> -->
