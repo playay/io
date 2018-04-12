@@ -313,7 +313,6 @@ class WS2S {
         var socketList = []
         var redisClient = {
             reconnectCount: 0,
-            isReady: false,
             onSocketReady: () => {
                 console.log('redisClient onSocketReady')
             },
@@ -371,7 +370,7 @@ class WS2S {
                 }
             }
             socket.onClose = () => {
-                if (redisClient.reconnectCount < 9) {
+                if (redisClient.reconnectCount < 90) {
                     responseHandler.init()
                     socketList[0] = initNewSocket(thisInstance)
                     redisClient.reconnectCount = redisClient.reconnectCount + 1
