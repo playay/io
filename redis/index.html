@@ -144,7 +144,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
 </div>
 {% endraw %}
 
-<script src="//cdn.feling.io/js/ws2s-2.1.0.js"></script>
+<script src="//cdn.feling.io/js/ws2s-2.1.1.js"></script>
 <script src="//cdn.feling.io/js/clipboard.min.js"></script>
 <script src="//cdn.feling.io/js/jquery.terminal.min.js"></script>
 <script src="//cdn.feling.io/js/Sortable.min.js"></script>
@@ -208,7 +208,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         connection.sshUsername, connection.sshPassword, 
                         connection.sshPrivateKey, connection.sshPrivateKeyPassword
                     )
-                redis.onSocketReady = () => {
+                redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
                         command = command.trim()
@@ -303,7 +303,11 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         }
                     }
                     redis.onError = (error) => {
-                        terminal.error(JSON.stringify(error))
+                        if (redis.isReady) {
+                            terminal.error(JSON.stringify(error))
+                        } else {
+                            UIkit.modal.alert(error)
+                        }
                     }
                     this.openedConnections.push(connection)
                     $('[tname]').hide()

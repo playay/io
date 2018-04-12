@@ -313,6 +313,7 @@ class WS2S {
         var socketList = []
         var redisClient = {
             reconnectCount: 0,
+            isReady: false,
             onSocketReady: () => {
                 console.log('redisClient onSocketReady')
             },
@@ -341,6 +342,7 @@ class WS2S {
                     redisClient.request("auth " + auth)
                 }
                 redisClient.onReady()
+                redisClient.isReady = true
             }
             socket.onRecv = (data) => {
                 let dataList = Array.from(data)
