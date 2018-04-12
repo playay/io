@@ -66,13 +66,13 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                     <input class="uk-width-1-1" v-model="form.sshUsername" placeholder="ssh username">
                                 </div>
                                 <div class="uk-form-row">
-                                    <input class="uk-width-1-1" v-model="form.sshPassword" type="password" placeholder="ssh password if need">
+                                    <input class="uk-width-1-1" v-model="form.sshPassword" type="password" placeholder="ssh password (if need)">
                                 </div>
                                 <div class="uk-form-row">
-                                    <input class="uk-width-1-1" v-model="form.sshPrivateKey" type="text" placeholder="file path of ssh_private_key, ws2s server will access this file locally">
+                                    <input class="uk-width-1-1" v-model="form.sshPrivateKey" type="text" placeholder="file path of ssh_private_key (if need), ws2s server will access this file locally">
                                 </div>
                                 <div class="uk-form-row">
-                                    <input class="uk-width-1-1" v-model="form.sshPrivateKeyPassword" type="text" placeholder="password for an encrypted ssh_private_key">
+                                    <input class="uk-width-1-1" v-model="form.sshPrivateKeyPassword" type="text" placeholder="password for an encrypted ssh_private_key (if need)">
                                 </div>
                             </li>
                         </ul>
@@ -114,12 +114,16 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 保存账号密码。<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;2. 快速打开连接, 执行一条命令<br>
                             </li>
+                            <li>ws2s 安装实践(一)...待续</li>
+                            <li>ws2s 安装实践(二)...待续</li>
                         </ul>
                     </div>
                     <div class="uk-width-2-10">
                         <ul class="uk-tab uk-tab-right" style="font-size: 12px;" data-uk-switcher="{connect:'#faq'}">
                             <li><a href="#">什么是ws2s?</a></li>
                             <li><a href="#">为什么开发fredis?</a></li>
+                            <li><a href="#">ws2s 安装实践(一)</a></li>
+                            <li><a href="#">ws2s 安装实践(二)</a></li>
                         </ul>
                     </div>
                 </div>
@@ -204,7 +208,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         connection.sshUsername, connection.sshPassword, 
                         connection.sshPrivateKey, connection.sshPrivateKeyPassword
                     )
-                redis.onReady = () => {
+                redis.onSocketReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
                         command = command.trim()
