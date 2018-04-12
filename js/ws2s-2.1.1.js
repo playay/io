@@ -380,8 +380,8 @@ class WS2S {
                 }
             }
             socket.onError = (error) => {
-                socketList[0].close()
                 redisClient.onError(error)
+                socketList[0].close()
             }
             return socket
         }
