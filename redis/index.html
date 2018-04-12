@@ -36,10 +36,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 </li>
             </draggable>
         </div>
-        <div style="width:75%;min-width:512px;" class="uk-height-1-1">
+        <div style="width:75%;min-width:860px;" class="uk-height-1-1">
             <div tname="edit" class="uk-width-1-1">
-                <div class="uk-grid uk-grid-small uk-form uk-height-1-2 uk-width-1-1" 
-                     style="padding-top:10px;padding-left:15%;padding-right:25%;">
+                <div class="uk-grid uk-grid-small uk-form uk-width-1-1" 
+                     style="padding-top:10px;padding-left:12%;padding-right:20%;height:265px;">
                      <div class="uk-width-8-10">
                         <ul id="edit-form" class="uk-switcher" style="font-size: 12px;">
                             <li>
@@ -69,7 +69,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                     <input class="uk-width-1-1" v-model="form.sshPassword" type="password" placeholder="ssh password if need">
                                 </div>
                                 <div class="uk-form-row">
-                                    <input class="uk-width-1-1" v-model="form.sshPrivateKey" type="text" placeholder="file path of ssh_private_key">
+                                    <input class="uk-width-1-1" v-model="form.sshPrivateKey" type="text" placeholder="file path of ssh_private_key, ws2s server will access this file locally">
                                 </div>
                                 <div class="uk-form-row">
                                     <input class="uk-width-1-1" v-model="form.sshPrivateKeyPassword" type="text" placeholder="password for an encrypted ssh_private_key">
