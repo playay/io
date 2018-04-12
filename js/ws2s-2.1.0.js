@@ -43,11 +43,20 @@ class WS2S {
              * @param host a string
              * @param port an int
              */
-            connect: (host, port) => {
+            connect: (host, port, 
+                ssh_host, ssh_port, 
+                ssh_username, ssh_password, 
+                ssh_private_key, ssh_private_key_password) => {
                 ws.send(JSON.stringify({
                     command: "connect",
                     host: host,
-                    port: port
+                    port: port,
+                    ssh_host: ssh_host,
+                    ssh_port: ssh_port,
+                    ssh_username: ssh_username,
+                    ssh_password: ssh_password,
+                    ssh_private_key: ssh_private_key,
+                    ssh_private_key_password: ssh_private_key_password
                 }))
             },
             send: (string) => {
@@ -120,7 +129,10 @@ class WS2S {
         return socket
     }
 
-    newRedisCient(host, port, auth) {
+    newRedisCient(host, port, auth,
+        ssh_host, ssh_port, 
+        ssh_username, ssh_password, 
+        ssh_private_key, ssh_private_key_password) {
         class ResponseHandler {
             constructor(oldStatus, oldStatusParents) {
                 this.init(oldStatus, oldStatusParents)
@@ -300,6 +312,10 @@ class WS2S {
         var utf8Decoder = new TextDecoder('utf-8')
         var socketList = []
         var redisClient = {
+            reconnectCount: 0,
+            onSocketReady: () => {
+                console.log('redisClient onSocketReady')
+            },
             onReady: () => {
                 console.log('redisClient onReady')
             },
@@ -314,7 +330,11 @@ class WS2S {
         var initNewSocket = function (thisInstance) {
             var socket = thisInstance.newSocket()
             socket.onReady = () => {
-                socket.connect(host, port)
+                redisClient.onSocketReady()
+                socket.connect(host, port,
+                    ssh_host, ssh_port, 
+                    ssh_username, ssh_password, 
+                    ssh_private_key, ssh_private_key_password)
             }
             socket.onOpen = () => {
                 if (auth) {
@@ -349,8 +369,13 @@ class WS2S {
                 }
             }
             socket.onClose = () => {
-                responseHandler.init()
-                socketList[0] = initNewSocket(thisInstance)
+                if (redisClient.reconnectCount < 9) {
+                    responseHandler.init()
+                    socketList[0] = initNewSocket(thisInstance)
+                    redisClient.reconnectCount = redisClient.reconnectCount + 1
+                } else {
+                    redisClient.onError('connection loss, max reconnect times reached')
+                }
             }
             socket.onError = (error) => {
                 socketList[0].close()

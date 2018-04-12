@@ -39,7 +39,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
         <div style="width:75%;min-width:512px;" class="uk-height-1-1">
             <div tname="edit" class="uk-width-1-1">
                 <div class="uk-form uk-width-1-1" 
-                     style="padding-top:10px;padding-left:20%;padding-right:35%;">
+                     style="padding-top:10px;padding-left:10%;padding-right:20%;">
                     <div class="uk-form-row">
                         <input class="uk-width-1-1" v-model="form.name" placeholder="name">
                     </div>
@@ -53,6 +53,24 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     <div class="uk-form-row">
                         <input class="uk-width-1-1" v-model="form.auth" type="password" placeholder="auth (optional)">
                     </div>
+
+                    <div class="uk-form-row">
+                        <input class="uk-width-7-10" v-model="form.sshHost" placeholder="ssh host">
+                        <input class="uk-width-2-10" style="float:right;" v-model.number="form.sshPort" type="number" placeholder="ssh port">
+                    </div>
+                    <div class="uk-form-row">
+                        <input class="uk-width-1-1" v-model="form.sshUsername" placeholder="ssh username">
+                    </div>
+                    <div class="uk-form-row">
+                        <input class="uk-width-1-1" v-model="form.sshPassword" type="password" placeholder="ssh password if need">
+                    </div>
+                    <div class="uk-form-row">
+                        <input class="uk-width-1-1" v-model="form.sshPrivateKey" type="text" placeholder="file path of ssh_private_key">
+                    </div>
+                    <div class="uk-form-row">
+                        <input class="uk-width-1-1" v-model="form.sshPrivateKeyPassword" type="text" placeholder="password for an encrypted ssh_private_key">
+                    </div>
+
                     <div class="uk-form-row">
                         <button class="uk-button uk-button-danger"
                                 style="display:none;width:30%;"
@@ -129,10 +147,16 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             editingConnection: {},
             form: {
                 name: '',
-                ws2sServer: '',
+                ws2sServer: 'ws://localhost:3613/',
                 host: '',
                 port: 6379,
-                auth: ''
+                auth: '',
+                sshHost: '',
+                sshPort: 22,
+                sshUsername: '',
+                sshPassword: '',
+                sshPrivateKey: '',
+                sshPrivateKeyPassword: '',
             },
             lastResponse: new Map(),
         },
@@ -143,7 +167,13 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     ws2sServer: "wss://ws2s.feling.io/",
                     host: "172.17.248.195",
                     port: 6379,
-                    auth: ''
+                    auth: '',
+                    sshHost: '',
+                    sshPort: '',
+                    sshUsername: '',
+                    sshPassword: '',
+                    sshPrivateKey: '',
+                    sshPrivateKeyPassword: '',
                 }])
             }
             this.redisConnections = JSON.parse(localStorage.redis_connections)
@@ -157,7 +187,11 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     return
                 }
                 var redis = new WS2S(connection.ws2sServer)
-                    .newRedisCient(connection.host, connection.port, connection.auth)
+                    .newRedisCient(connection.host, connection.port, connection.auth,
+                        connection.sshHost, connection.sshPort, 
+                        connection.sshUsername, connection.sshPassword, 
+                        connection.sshPrivateKey, connection.sshPrivateKeyPassword
+                    )
                 redis.onReady = () => {
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
@@ -273,8 +307,32 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     this.editingConnection = connection
                     this.form = JSON.parse(JSON.stringify(connection))
                 } else {
-                    this.editingConnection = { name: '', ws2sServer: '', host: '', port: 6379, auth: '' }
-                    this.form = { name: '', ws2sServer: '', host: '', port: 6379, auth: '' }
+                    this.editingConnection = {
+                        name: '',
+                        ws2sServer: 'ws://localhost:3613/',
+                        host: '',
+                        port: 6379,
+                        auth: '',
+                        sshHost: '',
+                        sshPort: 22,
+                        sshUsername: '',
+                        sshPassword: '',
+                        sshPrivateKey: '',
+                        sshPrivateKeyPassword: '',
+                    }
+                    this.form = {
+                        name: '',
+                        ws2sServer: 'ws://localhost:3613/',
+                        host: '',
+                        port: 6379,
+                        auth: '',
+                        sshHost: '',
+                        sshPort: 22,
+                        sshUsername: '',
+                        sshPassword: '',
+                        sshPrivateKey: '',
+                        sshPrivateKeyPassword: '',
+                    }
                 }
                 $('[tname]').hide()
                 $('[tname="edit"]').show()
