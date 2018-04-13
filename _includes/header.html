@@ -4,16 +4,14 @@
     <ul id="navbar-nav" class="uk-navbar-nav uk-visible-large">
         <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
             <a href="/json/">Json</a></li>
-
-        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Base64 编解码' }">
-            <a href="/base64/">Base64</a></li>
-
         <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'fredis' }">
                 <a href="/redis/">Redis</a></li>
+                
         <li v-if="'{{ page.title }}' != 'feling.io'" class="uk-parent" data-uk-dropdown="{mode:'click'}">
             <a class="uk-navbar-content">more <i class="uk-icon-caret-down"></i></a>
             <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
                 <ul class="uk-nav uk-nav-navbar">
+                    <li><a href="/base64/">base64</a></li>
                     <li><a href="/timestamp/">timestamp</a></li>
                 </ul>
             </div>
