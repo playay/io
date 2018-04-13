@@ -129,16 +129,19 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 2018-04-12: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 支持 ssh 隧道 <br>
                                 2018-04-10: <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;1. Windows 上, terminal 里的字体等宽 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 解决 Windows 上, jquery.terminal 字体等宽问题 <br>
                                 2018-04-09: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 已保存的连接信息, 支持拖拽排序 <br>
                                 更早以前、记不清日期的: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;0. 去<a href="https://github.com/jcubic/jquery.terminal" target="_blank">jquery.terminal</a> 记录历史命令的坑, 自己实现记录历史命令的功能<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 数组里的元素有数组的 redis 响应（如 `scan 0` 命令), 展示更友好的缩进 <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;2. 优化对超大 redis 响应的处理: 不直接打印在页面上、新增了 下载/复制 最后一个 redis 响应的命令 <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;3. 最后一个 redis 响应是 json 字符串的话, 可以执行 `jq` 命令, 在新窗口用在线 json 格式化工具打开 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;4. 解决 python-websocket-server 并发地向同一个客户端发送数据时, 多条数据的内容交织在一起的问题<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;5. 解决<a href="https://github.com/playay/python-websocket-server" target="_blank">python-websocket-server</a> 接收中文时乱码的问题, 并获得`人生第一个 Pull Requests` 成就 <br>
                             </li>
                             <li>
-                                fredis 还有很多不足的地方, 功能上、代码上, 让我们 github 上见: <br>
+                                fredis 还有很多不足的地方, 功能上、代码上。希望能在 github 上见: <br><br>
                                 前端: <a href="https://github.com/playay/io/blob/master/redis/index.html" target="_blank">https://github.com/playay/io/blob/master/redis/index.html</a><br>
                                 ws2s: <a href="https://github.com/playay/ws2s" target="_blank">https://github.com/playay/ws2s</a><br>
                                 redis协议解析: <a href="https://github.com/playay/ws2s/tree/master/ws2s-js" target="_blank">https://github.com/playay/ws2s/tree/master/ws2s-js</a><br>
