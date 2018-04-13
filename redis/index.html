@@ -98,13 +98,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     <div class="uk-width-8-10">
                         <ul id="faq" class="uk-switcher" style="font-size: 12px;">
                             <li>
-                                运行在浏览器上的 js, 只能使用 http、websocket 协议发出网络请求. 然而, redis 客户端需要使用 socket 与服务端通信. <br><br>
-                                <a href="https://github.com/playay/ws2s" target="_blank">ws2s server</a> 是一个 websocket 服务端. 按约定的数据格式与它通信. 它就能帮你: <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;1. 与 redis 服务端建立 socket 连接. <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;2. 使用这个 socket 连接发送数据. <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;3. 当这个 socket 连接收到数据时, 把收到的数据通知给你.
-                            </li>
-                            <li>
                                 一开始, 作者使用 <a href="https://redisdesktop.com/" target="_blank">RDM</a>。 但是这个 redis 图形界面的客户端, 默认情况下有很多让人难受的地方: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 双击打开一个连接, 会自动 select 所有的 db。 要等待扫描完成后才能进行下一步操作。这一过程可能会持续很长时间。<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;2. 双击打开一个 db, 会扫描所有的 key, 这一操作不仅仅是扫描, 还会真实删除已经过期的 key, 占用大量服务器资源。<br>
@@ -112,18 +105,52 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 &nbsp;&nbsp;&nbsp;&nbsp;...<br><br>
                                 fredis 的初心, 是希望有个地方能单纯的: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 保存账号密码。<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;2. 快速打开连接, 执行一条命令<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 快速打开连接, 执行一条命令。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。于是, 给这个网页版客户端取名叫 fredis: <b>fr</b>iendly r<b>edis</b>。<br>
+                                遗憾的是:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 由于浏览器的限制。它必须借助 <a href="https://github.com/playay/ws2s" target="_blank">ws2s</a> 之类的服务, 才能与 redis 服务端建立连接。
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 由于个人水平的限制, 目前只能保证 macOS + chrome 上的体验。ws2s-python 不支持 windows。ws2s.js 不支持微软家的浏览器。
                             </li>
-                            <li>ws2s 安装实践(一)...待续</li>
-                            <li>ws2s 安装实践(二)...待续</li>
+                            <li>
+                                运行在浏览器上的 js, 只能使用 http、websocket 协议发出网络请求. 然而, redis 客户端需要使用 socket 与服务端通信. <br><br>
+                                <a href="https://github.com/playay/ws2s" target="_blank">ws2s server</a> 是一个 websocket 服务端. 按约定的数据格式与它通信. 它就能帮你: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 与 redis 服务端建立 socket 连接. <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 使用这个 socket 连接发送数据. <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 当这个 socket 连接收到数据时, 把收到的数据通知给你 .<br>
+                            </li>
+                            <li>ws2s 安装实践(一)、(二)...待续...介绍两种不同的部署方案, 安装在本地、安装在远程</li>
+                            <li>
+                                github 上见: <br>
+                                前端: <a href="https://github.com/playay/io/blob/master/redis/index.html" target="_blank">https://github.com/playay/io/blob/master/redis/index.html</a><br>
+                                ws2s: <a href="https://github.com/playay/ws2s" target="_blank">https://github.com/playay/ws2s</a><br>
+                                redis协议解析: <a href="https://github.com/playay/ws2s/tree/master/ws2s-js" target="_blank">https://github.com/playay/ws2s/tree/master/ws2s-js</a><br>
+                            </li>
+                            <li>
+                                TODO: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 连接编辑区, 新增 `test connection` 按钮 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 点击 `connect` 按钮, 建立连接失败时, 还没有友好的提示 <br>
+                                2018-04-12: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 支持 ssh 隧道 <br>
+                                2018-04-10: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. Windows 上, terminal 里的字体等宽 <br>
+                                2018-04-09: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 已保存的连接信息, 支持拖拽排序 <br>
+                                更早以前、记不清日期的: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 数组里的元素有数组的 redis 响应（如 `scan 0` 命令), 展示更友好的缩进 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 优化对超大 redis 响应的处理: 不直接打印在页面上、新增了 下载/复制 最后一个 redis 响应的命令 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 最后一个 redis 响应是 json 字符串的话, 可以执行 `jq` 命令, 在新窗口用在线 json 格式化工具打开 <br>
+                            </li>
                         </ul>
                     </div>
                     <div class="uk-width-2-10">
                         <ul class="uk-tab uk-tab-right" style="font-size: 12px;" data-uk-switcher="{connect:'#faq'}">
-                            <li><a href="#">什么是ws2s?</a></li>
                             <li><a href="#">为什么开发fredis?</a></li>
-                            <li><a href="#">ws2s 安装实践(一)</a></li>
-                            <li><a href="#">ws2s 安装实践(二)</a></li>
+                            <li><a href="#">什么是ws2s?</a></li>
+                            <li><a href="#">ws2s 安装实践(一)、(二)</a></li>
+                            <li><a href="#">一起参与 fredis 的开发</a></li>
+                            <li><a href="#">近期更新的功能</a></li>
                         </ul>
                     </div>
                 </div>
