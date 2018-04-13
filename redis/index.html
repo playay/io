@@ -209,6 +209,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         connection.sshPrivateKey, connection.sshPrivateKeyPassword
                     )
                 redis.onReady = () => {
+                    if (this.openedConnections.includes(connection)) {
+                        return
+                    }
                     var terminal = $('div[tname="fredis_' + connection.name + '"]')
                                     .find(".terminals").terminal(function (command, term) {
                         command = command.trim()
@@ -305,6 +308,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     redis.onError = (error) => {
                         terminal.error(JSON.stringify(error))
                     }
+                    
                     this.openedConnections.push(connection)
                     $('[tname]').hide()
                     $('[tname="fredis_' + connection.name + '"]').show()
