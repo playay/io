@@ -179,7 +179,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                 this.jsonResultTemp.push('">')
                 if (type === 'string') {
                     this.jsonResultTemp.push('"')
-                    this.jsonResultTemp.push($('<div/>').text(obj === null ? 'null' : this.jsonLinkWarpper(obj)).html())
+                    this.jsonResultTemp.push(this.jsonLinkWarpper($('<div/>').text(obj === null ? 'null' : obj).html()))
                     this.jsonResultTemp.push('"')
                 } else {
                     this.jsonResultTemp.push(obj === null ? 'null' : obj)
