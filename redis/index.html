@@ -110,15 +110,15 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。<br><br>
                                 于是, 给这个网页版客户端取名叫 fredis: <b>fr</b>iendly r<b>edis</b>。遗憾的是:<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;1. 由于浏览器的限制。它必须借助 <a href="https://github.com/playay/ws2s" target="_blank">ws2s</a> 之类的服务, 才能与 redis 服务端建立连接。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 由于浏览器的限制, 它必须借助 <a href="https://github.com/playay/ws2s" target="_blank">ws2s</a> 之类的服务, 才能与 redis 服务端建立连接。<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;2. 由于个人水平的限制, 目前只能保证 macOS + chrome 上的体验。<br>
                             </li>
                             <li>
-                                运行在浏览器上的 js, 只能使用 http、websocket 协议发出网络请求. 然而, redis 客户端需要使用 socket 与服务端通信. <br><br>
-                                <a href="https://github.com/playay/ws2s" target="_blank">ws2s server</a> 是一个 websocket 服务端. 按约定的数据格式与它通信. 它就能帮你: <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;1. 与 redis 服务端建立 socket 连接. <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;2. 使用这个 socket 连接发送数据. <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;3. 当这个 socket 连接收到数据时, 把收到的数据通知给你 .<br>
+                                运行在浏览器上的 js, 只能使用 http、websocket 协议发出网络请求。然而, redis 客户端需要使用 socket 与服务端通信。<br><br>
+                                <a href="https://github.com/playay/ws2s" target="_blank">ws2s server</a> 是一个 websocket 服务端。按约定的数据格式与它通信。它就能帮你: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 与 redis 服务端建立 socket 连接。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 使用这个 socket 连接发送数据。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 当这个 socket 连接收到数据时, 把收到的数据通知给你。<br>
                             </li>
                             <li>ws2s 安装实践(一)、(二)...待续...介绍两种不同的部署方案, 安装在本地、安装在远程</li>
                             <li>
