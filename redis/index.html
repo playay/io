@@ -40,6 +40,13 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             </button>
         </div>
         
+        <div style="width:24%;min-width:280px;margin-right:10px;padding-bottom:100px;" 
+            class="uk-height-1-1" v-show="!showLeft">
+            <button class="uk-button" v-on:click="showLeft = !showLeft" style="float:right;">
+                <i class="angle-double-right"></i> unFold
+            </button>
+        </div>
+        
         <div style="width:75%;min-width:840px;" class="uk-height-1-1">
             <div tname="edit" class="uk-width-1-1">
                 <div class="uk-grid uk-grid-small uk-form uk-width-1-1" 
