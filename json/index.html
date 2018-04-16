@@ -128,7 +128,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
         el: "#main",
         data: {
             reLink: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
-            reLastComma: /,\s*([\}\]])/g,
+            reLastComma: /,\s*([}\]])/g,
             jsonSrc: '{"hello":"json 格式化","siteList":["https://feling.io","https://pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}]}',
             jsonResultTemp:[],
             jsonResult: '',
@@ -145,15 +145,16 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
             if (localStorage.json_defaultFold) {
                 this.defaultFold = localStorage.json_defaultFold
             }
-            if (localStorage.json_jsonSrc) {
-                this.jsonSrc = localStorage.json_jsonSrc
-            }
+
             let shareId = this.getQueryParam('shareId')
             if (this.getQueryParam('shareId')) {
                 this.loadJsonSrcByShareId(shareId)
-            } else {
-                this.jsonSrcChange()
+                return
             }
+            if (localStorage.json_jsonSrc) {
+                this.jsonSrc = localStorage.json_jsonSrc
+            }
+            this.jsonSrcChange()
         },
         methods: {
             isArray: function (obj) {
