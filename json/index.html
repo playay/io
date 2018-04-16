@@ -128,7 +128,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
         el: "#main",
         data: {
             reLink: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
-            reLastComma: /,\s+([}\]])/,
+            reLastComma: /,\s*([}\]])/,
             jsonSrc: '{"hello":"json 格式化","siteList":["https://feling.io","https://pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}]}',
             jsonResultTemp:[],
             jsonResult: '',
