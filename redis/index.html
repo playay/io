@@ -17,6 +17,15 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
     width: 6px;
     border-left: 1px solid #ccc;
 }
+.ia-splitter-handle {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: -6px;
+    width: 11px;
+    z-index: 11;
+    cursor: col-resize;
+}
 .sortable-ghost {
     padding-left: 10px;
     background:#eee;
@@ -31,7 +40,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
 {% raw %}
 <div id="main" class="uk-height-1-1">
     <div class="uk-flex uk-height-1-1">
-        <div style="width:24%;min-width:280px;margin-right:10px;padding-bottom:50px;" 
+        <div style="width:24%;min-width:280px;padding-bottom:50px;" 
             class="uk-height-1-1" v-show="showLeft">
             <button class="uk-button uk-width-1-1" v-on:click="editOne()">add new connection</button>
             <draggable v-model="redisConnections" element="ul" @sort="onConnectionsSorted"
@@ -48,7 +57,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 </li>
             </draggable>
         </div>
-        <div class="ia-splitter-handle-highlight" v-on:click="showLeft = !showLeft"></div>
+        <div class="ia-splitter-handle">
+            <div class="ia-splitter-handle-highlight" v-on:click="showLeft = !showLeft"></div>
+        </div>
         <div style="width:75%;min-width:840px;" class="uk-height-1-1">
             <div tname="edit" class="uk-width-1-1">
                 <div class="uk-grid uk-grid-small uk-form uk-width-1-1" 
