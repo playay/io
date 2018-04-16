@@ -254,8 +254,8 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                     return
                 }
                 try {
-                    this.jsonSrc = this.jsonSrc.replace(this.reLastComma, "$1")
-                    var obj = JSON.parse(this.jsonSrc)
+                    jsonSrcWithoutLastComma = this.jsonSrc.replace(this.reLastComma, "$1")
+                    var obj = JSON.parse(jsonSrcWithoutLastComma)
                     this.jsonResultTemp = []
                     this.genResult(obj, 0)
                     this.deletLastComma()
@@ -264,8 +264,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                         localStorage.json_jsonSrc = this.jsonSrc
                     }
                 } catch (e) {
-                    var position = parseInt(e.message.substring(e.message.lastIndexOf(' ')))
-                    this.jsonResult = e.message + " " + this.jsonSrc.substring(position - 20, position + 20)
+                    this.jsonResult = e.message
                 }
             },
             unFoldAll: function (level) {
