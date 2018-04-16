@@ -11,17 +11,19 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
     background-repeat: no-repeat;
 
     width: 10px;
-    cursor: e-resize;
+    cursor: w-resize;
 }
-
 .left-when-hide-left {
     display: none;
 }
 .center-when-hide-left {
-    cursor: w-resize;
+    cursor: e-resize;
 }
 .right-when-hide-left {
     width:100%;
+}
+.right-when-show-left {
+    width:75%;min-width:840px;
 }
 
 .sortable-hover {
@@ -59,7 +61,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             </draggable>
         </div>
         <div class="center-to-hide-left" v-on:click="hideLeft = !hideLeft" v-bind:class="{'center-when-hide-left':hideLeft}"></div>
-        <div style="width:75%;min-width:840px;" class="uk-height-1-1" v-bind:class="{'right-when-hide-left':hideLeft}">
+        <div class="uk-height-1-1" v-bind:class="{'right-when-hide-left':hideLeft,'right-when-show-left':!hideLeft}">
             <div tname="edit" class="uk-width-1-1">
                 <div class="uk-grid uk-grid-small uk-form uk-width-1-1" 
                      style="padding-top:10px;padding-left:12%;padding-right:24%;">
