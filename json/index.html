@@ -165,7 +165,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                 this.jsonResultTemp.push("<br><span class='json_key'>")
                 this.jsonResultTemp.push(this.tab.repeat(depth + 1))
                 this.jsonResultTemp.push("\"")
-                this.jsonResultTemp.push(key)
+                this.jsonResultTemp.push($('<div/>').text(key).html())
                 this.jsonResultTemp.push(this.keyEnd)
             },
             genValue: function (obj, depth) {
