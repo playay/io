@@ -145,16 +145,16 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
             if (localStorage.json_defaultFold) {
                 this.defaultFold = localStorage.json_defaultFold
             }
-
-            let shareId = this.getQueryParam('shareId')
-            if (this.getQueryParam('shareId')) {
-                this.loadJsonSrcByShareId(shareId)
-                return
-            }
             if (localStorage.json_jsonSrc) {
                 this.jsonSrc = localStorage.json_jsonSrc
             }
-            this.jsonSrcChange()
+            let shareId = this.getQueryParam('shareId')
+            if (shareId) {
+                this.jsonSrc = '{"提示": "shareId: ' + shareId + ' 对应的 JSON 加载中..."}'
+                this.loadJsonSrcByShareId(shareId)
+            } else {
+                this.jsonSrcChange()
+            }
         },
         methods: {
             isArray: function (obj) {
