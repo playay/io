@@ -150,7 +150,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
             }
             let shareId = this.getQueryParam('shareId')
             if (shareId) {
-                this.jsonSrc = '{"提示": "shareId: ' + shareId + ' 对应的 JSON 加载中..."}'
+                this.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 JSON 加载中..."}'
                 this.jsonSrcChange()
                 this.loadJsonSrcByShareId(shareId)
             } else {
@@ -262,7 +262,8 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                     this.genResult(obj, 0)
                     this.deletLastComma()
                     this.jsonResult = this.jsonResultTemp.join("")
-                    if (this.jsonSrc.length < (1024 * 128)) {
+                    if (this.jsonSrc.length < (1024 * 128) 
+                        && !this.jsonSrc.startsWith('{"提示":"shareId: ')) {
                         localStorage.json_jsonSrc = this.jsonSrc
                     }
                 } catch (e) {
