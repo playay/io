@@ -269,12 +269,10 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                 } catch (e) {
                     this.jsonResult = e.message
                     var position = parseInt(e.message.substring(e.message.lastIndexOf(' ')))
-                    $('#json_src').focus()
-                    setTimeout(() => {
-                        document.getElementById('json_src').setSelectionRange(position - 10, position + 10)
-                        $('#json_src').blur()
+                    if (position !== NaN) {
                         $('#json_src').focus()
-                    }, 600)
+                        setTimeout(() => {document.getElementById('json_src').setSelectionRange(position - 10, position + 10)}, 600)
+                    }
                 }
             },
             unFoldAll: function (level) {
