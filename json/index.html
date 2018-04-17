@@ -269,6 +269,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                     this.jsonResult = e.message
                     var position = parseInt(e.message.substring(e.message.lastIndexOf(' ')))
                     document.getElementById('json_src').setSelectionRange(position - 10, position + 10)
+                    $('#json_src').focus()
                 }
             },
             unFoldAll: function (level) {
