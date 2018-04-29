@@ -99,6 +99,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                 <button class="uk-button copy-button" data-clipboard-target="#json_result" title="复制结果框当前显示的文本, 折叠的内容依然折叠">复制</button>
                 <button class="uk-button copy-button uk-visible-large" title="完全展开结果框的内容, 然后复制" 
                     data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
+                <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" title="复制压缩后的 json" >{}</button>
             </div>
         </div>
         <hr style="margin: 0px">
@@ -255,8 +256,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                     return
                 }
                 try {
-                    jsonSrcWithoutLastComma = this.jsonSrc.replace(this.reLastComma, "$1")
-                    var obj = JSON.parse(jsonSrcWithoutLastComma)
+                    var obj = JSON.parse(this.jsonSrc.replace(this.reLastComma, "$1"))
                     this.jsonResultTemp = []
                     this.genResult(obj, 0)
                     this.deletLastComma()
@@ -355,6 +355,15 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
 
 <script src="//cdn.feling.io/js/clipboard.min.js"></script>
 <script>
+
+    new ClipboardJS('#copy-compression-jsonSrc', {
+        text: function(trigger) {
+            return JSON.stringify(JSON.parse(vm.jsonSrc.replace(vm.reLastComma, "$1")))
+        }
+    }).on('success', function(e) {
+        $('#copy-success').show()
+        setTimeout(() => {$('#copy-success').hide()} ,900)
+    })
     new ClipboardJS('.copy-button').on('success', function(e) {
         $('#copy-success').show()
         setTimeout(() => {$('#copy-success').hide()} ,900)
