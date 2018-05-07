@@ -74,26 +74,10 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
 }
 </style>
 
-<style>
-    .fl-body-padding-bottom {
-        padding-bottom:190px;
-    }
-</style>
-
 <div id="main" class="uk-grid uk-grid-collapse uk-height-1-1">
     <div id="json_src_box" class="uk-width-10-10">
         <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" v-on:input="jsonSrcChange">
         </textarea>
-        <div class="uk-width-1-1" style="height:115px;">
-            <img src="//cdn.feling.io/images/nova_inv.png" 
-            style="width: 115px; height: 115px;" />
-            <span>来 Nova 星球, 玩游戏, 赢比特币 
-                <img 
-                style="width: 25px; height: 25px;"
-                src="//cdn.feling.io/images/Expression_109.png"
-                /> 
-            </span> 
-        </div>
     </div>
 
     <div id="json_result_box" class="uk-width-10-10">
