@@ -12,25 +12,6 @@
     <!-- 谷歌登录 -->
     <script src="https://apis.google.com/js/platform.js?onload=onGapiLoad" async defer></script>
     <script>
-        function signInWithGoogle(userClick) {
-            if (userClick) {
-                $('#signInSpinner').show()
-            }
-                    // function signInWithGoogle(userClick) {
-        //         $('#signInSpinner').hide()
-        //             UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
-            
-        //     switch (error.type) {
-        //         case "userCanceled":
-        //             localStorage.userCanceledLogin = true
-        //             break;
-        //         case "noCredentialsAvailable":
-        //             if (userClick) {
-        //                 UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
-        //             }
-        // }
-            // useGoogleIdTokenForAuth(credential.idToken)
-        }
         function useGoogleIdTokenForAuth(idToken) {
             $('#signInSpinner').show()
             WithFParams.postForm('/login/withGoogle',
