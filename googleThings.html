@@ -9,67 +9,28 @@
         gtag('config', 'UA-62897210-2');
     </script>
 
-    <!-- 谷歌一键登录 -->
-    <script src="https://smartlock.google.com/client"></script>
+    <!-- 谷歌登录 -->
+    <script src="https://apis.google.com/js/platform.js?onload=onGapiLoad" async defer></script>
     <script>
         function signInWithGoogle(userClick) {
             if (userClick) {
                 $('#signInSpinner').show()
             }
-            const retrievePromise = googleyolo.retrieve({
-                supportedAuthMethods: [
-                    "https://accounts.google.com"
-                ],
-                supportedIdTokenProviders: [
-                    {
-                        uri: "https://accounts.google.com",
-                        clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
-                    }
-                ]
-            });
-            retrievePromise.then((credential) => {
-                $('#signInSpinner').hide()
-                if (credential.idToken) {
-                    useGoogleIdTokenForAuth(credential.idToken)
-                }
-            }, (error) => {
-                $('#signInSpinner').hide()
-                if (error.type === 'requestFailed' && userClick) {
-                    UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
-                }
-                if (error.type === 'noCredentialsAvailable') {
-                    const hintPromise = googleyolo.hint({
-                        supportedAuthMethods: [
-                            "https://accounts.google.com"
-                        ],
-                        supportedIdTokenProviders: [
-                            {
-                                uri: "https://accounts.google.com",
-                                clientId: "1093205252929-cm3ev302entgv6kutudb7i077je31g3r.apps.googleusercontent.com"
-                            }
-                        ]
-                    });
-                    hintPromise.then((credential) => {
-                        if (credential.idToken) {
-                            useGoogleIdTokenForAuth(credential.idToken);
-                        }
-                    }, (error) => {
-                        switch (error.type) {
-                            case "userCanceled":
-                                localStorage.userCanceledLogin = true
-                                break;
-                            case "noCredentialsAvailable":
-                                if (userClick) {
-                                    UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
-                                }
-                            break;
-                            default:
-                        }
-                    });
-                }
-            });
+                    // function signInWithGoogle(userClick) {
+        //         $('#signInSpinner').hide()
+        //             UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
+            
+        //     switch (error.type) {
+        //         case "userCanceled":
+        //             localStorage.userCanceledLogin = true
+        //             break;
+        //         case "noCredentialsAvailable":
+        //             if (userClick) {
+        //                 UIkit.modal.alert('谷歌一键登录操作失败, 未找到可授权的谷歌账号。请先在浏览器其他窗口登录任一谷歌产品，然后刷新本页面')
+        //             }
+        // }
+            // useGoogleIdTokenForAuth(credential.idToken)
         }
-
         function useGoogleIdTokenForAuth(idToken) {
             $('#signInSpinner').show()
             WithFParams.postForm('/login/withGoogle',
@@ -90,21 +51,32 @@
                 $('#signInSpinner').hide()
             })
         }
-        window.onGoogleYoloLoad = (googleyolo) => {
-            googleyolo = googleyolo
+
+        function onGapiLoad() {
+            gapi.load('auth2', () => {
+                var auth2 = gapi.auth2.init({
+                    client_id: '1093205252929-r3fj3lliprgso4nrbtan10ugl4d7a1cl.apps.googleusercontent.com'
+                })
+                auth2.attachClickHandler('signInButton', {}, 
+                    (googleUser) => {
+                        console.log(googleUser.getBasicProfile())
+                        //useGoogleIdTokenForAuth(credential.idToken)
+                        //$('#signInSpinner').hide()
+                    }, 
+                    (error) => {
+                        alert(JSON.stringify(error, undefined, 2))
+                        //UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
+                        //$('#signInSpinner').hide()
+                    }
+                )
+            })
+
             if (localStorage.accessToken) {
                 $("#signInButton").hide()
             } else {
                 $("#signInButton").show()
-                setTimeout(
-                    () => {
-                        if (!localStorage.accessToken && !localStorage.userCanceledLogin) {
-                            signInWithGoogle(false)
-                        }
-                    },
-                    24 * 1000
-                )
             }
         }
     </script>
+
 </div>

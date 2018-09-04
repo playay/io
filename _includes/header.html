@@ -19,7 +19,7 @@
     </ul>
 
     <div class="uk-navbar-flip">
-        <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;" onClick="signIn()"
+        <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
             style="display:none;font-weight:bold;font-size:16px;">
             <i id="signInSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
             Sign In With Google
@@ -39,13 +39,6 @@
             </li>
         </ul>
         <script>
-            function signIn() {
-                if (typeof googleyolo == "undefined") {
-                    UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
-                    return
-                }
-                signInWithGoogle(true)
-            }
             function signOut() {
                 $("#signOutSpinner").show()
                 WithFParams.postForm('/login/signOut', {}, () => { })
@@ -57,8 +50,9 @@
                         $("#userAvatarAndName").hide()
                         $("#signOutSpinner").hide()
                     })
-                if (typeof googleyolo != "undefined") {
-                    googleyolo.disableAutoSignIn().then(() => { })
+                if (typeof gapi != "undefined") {
+                    var auth2 = gapi.auth2.getAuthInstance()
+                    auth2.signOut().then(() => {})
                 }
             }
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
@@ -95,14 +89,6 @@
                 loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
             }
         </script>
-    </div>
-
-    <div id="navbar-ad" style="display:none;float:right;" 
-            class="uk-navbar-content uk-visible-large">
-        {% raw %}
-        <a v-if="ad.href" style="color:#444444;font-size:10px;" target="_blank" :href="ad.href">{{ ad.title }}</a>
-        <span v-else style="color:#444444;font-size:10px;">{{ ad.title }}</span>
-        {% endraw %}
     </div>
 
     <ul id="navbar-donate" class="uk-navbar-nav uk-navbar-content uk-navbar-center uk-visible-large">
@@ -146,5 +132,5 @@
         el: '#navbar-nav',
     })
 </script>
-<!-- <div id="googleThings"></div> -->
-<!-- <script src="//cdn.feling.io/js/googleThings.js" async defer></script> -->
+<div id="googleThings"></div>
+<script src="//cdn.feling.io/js/googleThings.js" async defer></script>
