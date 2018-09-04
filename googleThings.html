@@ -62,8 +62,6 @@
                         useGoogleIdTokenForAuth(googleUser.getAuthResponse().id_token)
                     }, 
                     (error) => {
-                        UIkit.modal.alert('谷歌登录操作失败, ' + error.error)
-
                         switch (error.error) {
                             case "popup_closed_by_user":
                                 localStorage.userCanceledLogin = true
