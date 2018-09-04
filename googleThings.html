@@ -59,14 +59,11 @@
                 })
                 auth2.attachClickHandler('signInButton', {}, 
                     (googleUser) => {
-                        console.log(googleUser.getBasicProfile())
-                        //useGoogleIdTokenForAuth(credential.idToken)
-                        //$('#signInSpinner').hide()
+                        useGoogleIdTokenForAuth(googleUser.getAuthResponse().id_token)
                     }, 
                     (error) => {
                         alert(JSON.stringify(error, undefined, 2))
                         //UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
-                        //$('#signInSpinner').hide()
                     }
                 )
             })
