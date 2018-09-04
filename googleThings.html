@@ -62,8 +62,13 @@
                         useGoogleIdTokenForAuth(googleUser.getAuthResponse().id_token)
                     }, 
                     (error) => {
-                        console.log(error)
-                        //UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
+                        switch (error.error) {
+                            case "popup_closed_by_user":
+                                localStorage.userCanceledLogin = true
+                                break
+                            default:
+                                UIkit.modal.alert('谷歌登录操作失败, ' + error.error)
+                        }
                     }
                 )
             })
