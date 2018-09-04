@@ -62,7 +62,7 @@
                         useGoogleIdTokenForAuth(googleUser.getAuthResponse().id_token)
                     }, 
                     (error) => {
-                        alert(JSON.stringify(error, undefined, 2))
+                        console.log(error)
                         //UIkit.modal.alert('谷歌一键登录操作失败, 请确认网络环境')
                     }
                 )
