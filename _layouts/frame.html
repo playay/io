@@ -6,7 +6,10 @@
 <body class="uk-height-1-1">
     {% include goTop.html %}
     {{ content }}
-    <script>window.top.UIkit.offcanvas.hide([force = false])</script>
+    <script>
+        window.top.UIkit.offcanvas.hide([force = false])
+        window.top.document.title = window.document.title
+    </script>
     {% include baidu_tongji.html %}
 </body>
 </html>
