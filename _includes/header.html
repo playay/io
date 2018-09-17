@@ -1,22 +1,16 @@
 <nav class="uk-navbar">
-    <a class="uk-navbar-brand uk-hidden-large" href="/">/</a>
 
-    <ul id="navbar-nav" class="uk-navbar-nav uk-visible-large">
-        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'Json 格式化' }">
-            <a href="/json/">Json</a></li>
-        <li v-if="'{{ page.title }}' != 'feling.io'" v-bind:class="{ 'uk-active': '{{ page.title }}' == 'fredis' }">
-                <a href="/redis/">Redis</a></li>
-                
-        <li v-if="'{{ page.title }}' != 'feling.io'" class="uk-parent" data-uk-dropdown="{mode:'click'}">
-            <a class="uk-navbar-content">more <i class="uk-icon-caret-down"></i></a>
-            <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
-                <ul class="uk-nav uk-nav-navbar">
-                    <li><a href="/base64/">base64</a></li>
-                    <li><a href="/timestamp/">timestamp</a></li>
-                </ul>
-            </div>
-        </li>
-    </ul>
+    <button class="uk-button" data-uk-offcanvas="{target:'#offcanvas-nav'}">...</button>
+    <div id="offcanvas-nav" class="uk-offcanvas">
+        <div class="uk-offcanvas-bar">
+            <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+                    <li><a href="/json/">json 格式化</a></li>
+                    <li><a href="/redis/">网页版 redis 客户端</a></li>
+                    <li><a href="/base64/">base64 编解码</a></li>
+                    <li><a href="/timestamp/">时间戳 ⇄ 时间</a></li>
+            </ul>
+        </div>
+    </div>
 
     <div class="uk-navbar-flip">
         <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
@@ -133,4 +127,4 @@
     })
 </script>
 <div id="googleThings"></div>
-<script src="//cdn.feling.io/js/googleThings.js" async defer></script>
+<script src="//cdn.feling.io/js/googleThings-2.0.0.js" async defer></script>
