@@ -158,6 +158,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
             } else {
                 this.jsonSrcChange()
             }
+            window.top.history.replaceState(null, null, "/json/")
         },
         methods: {
             isArray: function (obj) {
@@ -348,7 +349,6 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                     }
                 ).always(() => {
                     this.jsonSrcChange()
-                    window.top.history.replaceState(null, null, "/json/")
                 })
             },
         }

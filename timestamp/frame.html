@@ -22,6 +22,7 @@ var DateFormat={};!function(a){var b=["Sunday","Monday","Tuesday","Wednesday","T
         },
         mounted: function () {
             this.onChangeTimestamp()
+            window.top.history.replaceState(null, null, "/timestamp/")
         },
         methods: {
             onChangeTimestamp: function() {

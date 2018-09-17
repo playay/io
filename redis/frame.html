@@ -259,6 +259,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             }
             this.redisConnections = JSON.parse(localStorage.redis_connections)
             $('#connection-list').show()
+            window.top.history.replaceState(null, null, "/redis/")
         },
         methods: {
             connect: function (connection) {

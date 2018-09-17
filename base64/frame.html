@@ -265,6 +265,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
                 this.origin = localStorage.base64_tab0_origin
             }
             this.onChangeOrigin()
+            window.top.history.replaceState(null, null, "/base64/")
         },
         methods: {
             onChangeOrigin: function() {
