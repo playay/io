@@ -15,7 +15,11 @@
     </header>
     <hr>
     <div class="uk-height-1-1" style="margin:10px 10px 0px 10px;">
-        {{ content }}
+        <iframe 
+        name="content-frame" 
+        class="uk-height-1-1 uk-width-1-1"
+        src="{{content}}"
+        ></iframe>
     </div>
     <footer>
     {% include footer.html %}
