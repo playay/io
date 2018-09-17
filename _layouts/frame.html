@@ -4,12 +4,9 @@
 {% include head.html %}
 </head>
 <body class="uk-height-1-1">
+    {% include goTop.html %}
     {{ content }}
+    <script>window.top.UIkit.offcanvas.hide([force = false])</script>
+    {% include baidu_tongji.html %}
 </body>
-<script>
-    window.top.UIkit.offcanvas.hide([force = false])
-</script>
-
-{% include baidu_tongji.html %}
-
 </html>
