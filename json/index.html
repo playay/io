@@ -13,8 +13,8 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
     }
     let shareId = this.getQueryParam("shareId")
     if (shareId) {
-        $("#content-frame").attr("src", "/json/frame.html?shareId=" + shareId)
+        window.open("/json/frame.html?shareId=" + shareId, "content-frame");
     } else {
-        $("#content-frame").attr("src", "/json/frame.html")
+        window.open("/json/frame.html", "content-frame");
     }
 </script>
