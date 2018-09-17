@@ -6,7 +6,7 @@ setTimeout(
             the_gfw.src = '' // 没能请求到谷歌的icon
             return
         }
-        $("#googleThings").load("/googleThings.html")
+        $("#googleThings").load("//cdn.feling.io/googleThings-2.0.0.html")
     },
     1500
 );
