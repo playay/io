@@ -149,7 +149,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                 this.jsonSrc = localStorage.json_jsonSrc
             }
             let shareId = this.getQueryParam('shareId')
-            console.log("window.location2: ", window.location)
+            console.log("window.location2: ", window.top.location)
             console.log("shareId2: ", shareId)
             if (shareId) {
                 this.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 JSON 加载中..."}'
@@ -331,7 +331,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
             },
             getQueryParam: function(key) {
                 var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
-                var r = window.location.search.substr(1).match(reg);
+                var r = window.top.location.search.substr(1).match(reg);
                 if (r != null) return decodeURIComponent(r[2]); return null;
             },
             loadJsonSrcByShareId: function(shareId) {
