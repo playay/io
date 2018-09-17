@@ -6,14 +6,18 @@
     <div id="offcanvas-nav" class="uk-offcanvas">
         <div class="uk-offcanvas-bar">
             <ul class="uk-nav uk-nav-offcanvas uk-list" data-uk-nav>
-                <li><a href="/" style="margin-top:10px" target="_blank">首页</a></li>
+                <li><a href="/" style="margin-top:10px" 
+                    v-bind:target="{ '_blank': '{{ page.title }}' == 'fredis' }">首页</a></li>
                 <li class="uk-nav-divider"></li>
-                <li><a href="/redis/" target="_blank">网页版 redis 客户端</a></li>
+                <li><a href="/redis/" >网页版 redis 客户端</a></li>
 
                 <li class="uk-nav-divider"></li>
-                <li><a href="/json/" target="_blank">Json 格式化</a></li>
-                <li><a href="/base64/" target="_blank">Base64 编解码</a></li>
-                <li><a href="/timestamp/" target="_blank">时间戳 ⇄ 时间</a></li>
+                <li><a href="/json/" 
+                    v-bind:target="{ '_blank': '{{ page.title }}' == 'fredis' }">Json 格式化</a></li>
+                <li><a href="/base64/" 
+                    v-bind:target="{ '_blank': '{{ page.title }}' == 'fredis' }">Base64 编解码</a></li>
+                <li><a href="/timestamp/" 
+                    v-bind:target="{ '_blank': '{{ page.title }}' == 'fredis' }">时间戳 ⇄ 时间</a></li>
 
                 <li class="uk-nav-divider"></li>
                 <li><a href="mailto:chenyan@feling.net?subject=对 feling.io 的建议与反馈">建议与反馈</a></li>
@@ -131,8 +135,8 @@
 
 </nav>
 <script>
-    var vm_navbar_nav = new Vue({
-        el: '#navbar-nav',
+    var vm_offcanvas_nav = new Vue({
+        el: '#offcanvas-nav',
     })
 </script>
 <div id="googleThings"></div>
