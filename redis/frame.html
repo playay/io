@@ -1,0 +1,457 @@
+---
+title: fredis
+layout: default
+keywords: [redis, redis GUI, redis client]
+description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”开发。有基本的GUI图形界面，能编辑保存服务器信息、提供 redis 命令行终端、保存历史命令。所有数据存储在 localStorage, 保证数据安全。
+---
+<style type="text/css">
+.center-to-hide-left {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAMCAYAAABIvGxUAAADHmlDQ1BJQ0MgUHJvZmlsZQAAeAGFVN9r01AU/tplnbDhizpnEQk+aJFuZFN0Q5y2a1e6zVrqNrchSJumbVyaxiTtfrAH2YtvOsV38Qc++QcM2YNve5INxhRh+KyIIkz2IrOemzRNJ1MDufe73/nuOSfn5F6g+XFa0xQvDxRVU0/FwvzE5BTf8gFeHEMr/GhNi4YWSiZHQA/Tsnnvs/MOHsZsdO5v36v+Y9WalQwR8BwgvpQ1xCLhWaBpXNR0E+DWie+dMTXCzUxzWKcECR9nOG9jgeGMjSOWZjQ1QJoJwgfFQjpLuEA4mGng8w3YzoEU5CcmqZIuizyrRVIv5WRFsgz28B9zg/JfsKiU6Zut5xCNbZoZTtF8it4fOX1wjOYA1cE/Xxi9QbidcFg246M1fkLNJK4RJr3n7nRpmO1lmpdZKRIlHCS8YlSuM2xp5gsDiZrm0+30UJKwnzS/NDNZ8+PtUJUE6zHF9fZLRvS6vdfbkZMH4zU+pynWf0D+vff1corleZLw67QejdX0W5I6Vtvb5M2mI8PEd1E/A0hCgo4cZCjgkUIMYZpjxKr4TBYZIkqk0ml0VHmyONY7KJOW7RxHeMlfDrheFvVbsrj24Pue3SXXjrwVhcW3o9hR7bWB6bqyE5obf3VhpaNu4Te55ZsbbasLCFH+iuWxSF5lyk+CUdd1NuaQU5f8dQvPMpTuJXYSWAy6rPBe+CpsCk+FF8KXv9TIzt6tEcuAcSw+q55TzcbsJdJM0utkuL+K9ULGGPmQMUNanb4kTZyKOfLaUAsnBneC6+biXC/XB567zF3h+rkIrS5yI47CF/VFfCHwvjO+Pl+3b4hhp9u+02TrozFa67vTkbqisXqUj9sn9j2OqhMZsrG+sX5WCCu0omNqSrN0TwADJW1Ol/MFk+8RhAt8iK4tiY+rYleQTysKb5kMXpcMSa9I2S6wO4/tA7ZT1l3maV9zOfMqcOkb/cPrLjdVBl4ZwNFzLhegM3XkCbB8XizrFdsfPJ63gJE722OtPW1huos+VqvbdC5bHgG7D6vVn8+q1d3n5H8LeKP8BqkjCtbCoV8yAAAACXBIWXMAAAsSAAALEgHS3X78AAABZ2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNC40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iPgogICAgICAgICA8eG1wOkNyZWF0b3JUb29sPkFkb2JlIEZpcmV3b3JrcyBDUzY8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CsO3s+UAAAAsSURBVAgdY7x69ep/BgaGRpZNmzYBaQYGxv//QQIMDExgEpnBcu3aNQoUAwChKRhfrNwRnQAAAABJRU5ErkJggg==");
+    background-position: center;
+    background-repeat: no-repeat;
+
+    width: 10px;
+    min-width: 10px;
+    cursor: w-resize;
+}
+.left-when-hide-left {
+    display: none;
+}
+.center-when-hide-left {
+    cursor: e-resize;
+    background-color: #eee;
+}
+.right-when-hide-left {
+    width:100%;
+    min-width:840px;
+}
+.right-when-show-left {
+    width:76%;
+    min-width:840px;
+}
+
+.sortable-hover {
+    cursor: move;
+}
+.sortable-ghost {
+    padding-left: 10px;
+    background:#eee;
+}
+.sortable-drag {
+    padding-left: 10px;
+    background: #eee;
+    border: 1px solid #E5E5E5;
+    transform:rotate(3deg);
+}
+</style>
+{% raw %}
+<div id="main" class="uk-height-1-1">
+    <div class="uk-flex uk-height-1-1">
+        <div style="width:24%;min-width:280px;padding-bottom:50px;" 
+            class="uk-height-1-1" v-bind:class="{'left-when-hide-left':hideLeft}">
+            <button class="uk-button uk-width-1-1" v-on:click="editOne()">add new connection</button>
+            <draggable v-model="redisConnections" element="ul" @sort="onConnectionsSorted"
+                    :options="{disabled: openedConnections.length > 0, delay:100, ghostClass:'sortable-ghost', dragClass:'sortable-drag'}" 
+                    class="uk-list uk-height-1-1" id="connection-list" style="overflow-y:scroll;display:none;margin-top:0px;">
+                <li v-for="connection in redisConnections" style="padding-bottom:5px;padding-top:5px;">
+                    <span v-bind:class="{'sortable-hover':0 >= openedConnections.length}">{{connection.name}}</span>
+                    <button class="uk-button" style="float:right;"
+                            v-bind:class="{'uk-button-success': openedConnections.includes(connection)}" 
+                            v-on:click="connect(connection)">
+                            connect<span style="display:none" v-bind:tname="'fredis_'+connection.name">..</span>
+                    </button>
+                    <button class="uk-button" style="float:right;" v-on:click="editOne(connection)">edit</button>
+                </li>
+            </draggable>
+        </div>
+        <div class="center-to-hide-left" v-on:click="hideLeft = !hideLeft" v-bind:class="{'center-when-hide-left':hideLeft}"></div>
+        <div class="uk-height-1-1" v-bind:class="{'right-when-hide-left':hideLeft,'right-when-show-left':!hideLeft}">
+            <div tname="edit" class="uk-width-1-1">
+                <div class="uk-grid uk-grid-small uk-form uk-width-1-1" 
+                     style="padding-top:10px;padding-left:20%;padding-right:20%;">
+                     <div class="uk-width-8-10" style="height:210px;">
+                        <ul id="edit-form" class="uk-switcher" style="font-size:12px;">
+                            <li>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-1-1" v-model="form.name" placeholder="name">
+                                </div>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-1-1" v-model="form.ws2sServer" placeholder="ws2s server">
+                                </div>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-7-10" v-model="form.host" placeholder="host">
+                                    <input class="uk-width-2-10" style="float:right;" v-model.number="form.port" type="number" placeholder="port">
+                                </div>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-1-1" v-model="form.auth" type="password" placeholder="auth (optional)">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-7-10" v-model="form.sshHost" placeholder="ssh host">
+                                    <input class="uk-width-2-10" style="float:right;" v-model.number="form.sshPort" type="number" placeholder="ssh port">
+                                </div>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-1-1" v-model="form.sshUsername" placeholder="ssh username">
+                                </div>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-1-1" v-model="form.sshPassword" type="password" placeholder="ssh password (if need)">
+                                </div>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-1-1" v-model="form.sshPrivateKey" type="text" placeholder="file path of ssh_private_key (if need), ws2s server will access this file locally">
+                                </div>
+                                <div class="uk-form-row">
+                                    <input class="uk-width-1-1" v-model="form.sshPrivateKeyPassword" type="password" placeholder="password for an encrypted ssh_private_key (if need)">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-2-10">
+                        <ul class="uk-tab uk-tab-right" style="font-size: 12px;" data-uk-switcher="{connect:'#edit-form'}">
+                            <li><a href="#">base</a></li>
+                            <li><a href="#">ssh tunnel</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-form-row uk-width-8-10" style="margin-top:15px;">
+                        <button class="uk-button uk-button-danger"
+                                style="display:none;width:20%;"
+                                v-show="redisConnections.includes(editingConnection)" 
+                                v-on:click="deleteOne()">delete</button>
+                        <button class="uk-button uk-button-primary"
+                                style="float:right;width:20%;"
+                                v-on:click="saveOne(form)">save</button>
+                    </div>
+                </div>
+                <hr style="margin-top:20px;margin-bottom:20px;">
+                <div class="uk-grid uk-grid-small">
+                    <div class="uk-width-8-10">
+                        <ul id="faq" class="uk-switcher" style="font-size: 12px;">
+                            <li>
+                                一开始, 作者使用 <a href="https://redisdesktop.com/" target="_blank">RDM</a>。 但是这个 redis 图形界面的客户端, 默认情况下有很多让人难受的地方: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 双击打开一个连接, 会自动 select 所有的 db。 要等待扫描完成后才能进行下一步操作。这一过程可能会持续很长时间。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 双击打开一个 db, 会扫描所有的 key, 这一操作不仅仅是扫描, 还会真实删除已经过期的 key, 占用大量服务器资源。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 命令行终端的交互极不友好: 光标位置必需在最后一行、窗口大小被限制在非常小的比例、<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;...<br><br>
+                                fredis 的初心, 是希望有个地方能单纯的: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 保存账号密码。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 快速打开连接, 执行一条命令。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 用户体验友好点。<br><br>
+                                于是, 给这个网页版客户端取名叫 fredis: <b>fr</b>iendly r<b>edis</b>。遗憾的是:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 由于浏览器的限制, 它必须借助 <a href="https://github.com/playay/ws2s" target="_blank">ws2s</a> 之类的服务, 才能与 redis 服务端建立连接。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 由于个人水平的限制, 目前只能保证 macOS + chrome 上的体验。<br>
+                            </li>
+                            <li>
+                                运行在浏览器上的 js, 只能使用 http、websocket 协议发出网络请求。然而, redis 客户端需要使用 socket 与服务端通信。<br><br>
+                                <a href="https://github.com/playay/ws2s" target="_blank">ws2s server</a> 是一个 websocket 服务端。按约定的数据格式与它通信。它就能帮你: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 与 redis 服务端建立 socket 连接。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 使用这个 socket 连接发送数据。<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 当这个 socket 连接收到数据时, 把收到的数据通知给你。<br>
+                            </li>
+                            <!-- <li>ws2s 安装实践(一)、(二)...待续...介绍两种不同的部署方案, 安装在本地、安装在远程</li> -->
+                            <!-- <li>
+                                TODO: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 连接编辑区, 新增 `test connection` 按钮 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 点击 `connect` 按钮, 建立连接失败时, 还没有友好的提示 <br>
+                                <br>
+                                2018-04-16: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 左侧的 连接信息列表, 可折叠 <br>
+                                2018-04-15: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 存在已经打开的 ternimal 时, 禁用 连接信息列表的拖拽排序功能 <br>
+                                2018-04-12: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 支持 ssh 隧道 <br>
+                                2018-04-10: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 解决 Windows 上, jquery.terminal 字体等宽问题 <br>
+                                2018-04-09: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 已保存的连接信息, 支持拖拽排序 <br>
+                                更早以前、记不清日期的: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;0. 去 <a href="https://github.com/jcubic/jquery.terminal" target="_blank">jquery.terminal</a> 记录历史命令的坑, 自己实现记录历史命令的功能<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. array in array 的 redis 响应（如 `scan 0` 命令), 展示更友好的缩进 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 优化对超大 redis 响应的处理: 不直接打印在页面上、新增了 下载/复制 最后一个 redis 响应的命令 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 最后一个 redis 响应是 json 字符串的话, 可以执行 `jq` 命令, 在新窗口用在线 json 格式化工具打开 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;4. 解决 python-websocket-server 并发地向同一个客户端发送数据时, 多条数据的内容交织在一起的问题<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;5. 解决 <a href="https://github.com/playay/python-websocket-server" target="_blank">python-websocket-server</a> 接收中文时乱码的问题, 并获得 `人生第一个 Pull Requests` 成就 <br>
+                            </li> -->
+                            <li>
+                                fredis 还有很多不足的地方, 功能上、代码上。希望能在 github 上见: <br><br>
+                                前端: <a href="https://github.com/playay/io/blob/master/redis/index.html" target="_blank">https://github.com/playay/io/blob/master/redis/index.html</a><br>
+                                ws2s: <a href="https://github.com/playay/ws2s" target="_blank">https://github.com/playay/ws2s</a><br>
+                                redis协议解析: <a href="https://github.com/playay/ws2s/tree/master/ws2s-js" target="_blank">https://github.com/playay/ws2s/tree/master/ws2s-js</a><br>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-2-10">
+                        <ul class="uk-tab uk-tab-right" style="font-size: 12px;" data-uk-switcher="{connect:'#faq'}">
+                            <li><a href="#">为什么开发fredis?</a></li>
+                            <li><a href="#">什么是ws2s?</a></li>
+                            <!-- <li><a href="#">ws2s 安装实践</a></li> -->
+                            <!-- <li><a href="#">近期更新的功能</a></li> -->
+                            <li><a href="#">一起参与 fredis 的开发</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="display:none" class="uk-width-1-1 uk-height-1-1" 
+                v-for="connection in redisConnections" :tname="'fredis_'+connection.name">
+                <div class="uk-width-1-1" style="display:none">
+                    <button class="uk-button copy-last-response" style="float:left;"
+                        v-bind:responseKey="'fredis_'+connection.name">copy last response</button>
+                    <a id="dl"></a>
+                </div>
+                <div class="uk-width-1-1 uk-height-1-1">
+                    <div class="terminals"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endraw %}
+
+<script src="//cdn.feling.io/js/ws2s-2.1.2.js"></script>
+<script src="//cdn.feling.io/js/clipboard.min.js"></script>
+<script src="//cdn.feling.io/js/jquery.terminal.min.js"></script>
+<script src="//cdn.feling.io/js/Sortable.min.js"></script>
+<script src="//cdn.feling.io/js/vuedraggable.min.js"></script>
+<script>
+    new ClipboardJS('.copy-last-response', {
+        text: function(trigger) {
+            return vm.lastResponse.get(trigger.getAttribute('responseKey'))
+        }
+    })
+    var vm = new Vue({
+        el: "#main",
+        data: {
+            hideLeft: false,
+            redisConnections: [],
+            openedConnections: [],
+            editingConnection: {},
+            form: {
+                name: '',
+                ws2sServer: 'ws://localhost:3613/',
+                host: '',
+                port: 6379,
+                auth: '',
+                sshHost: '',
+                sshPort: 22,
+                sshUsername: '',
+                sshPassword: '',
+                sshPrivateKey: '',
+                sshPrivateKeyPassword: '',
+            },
+            lastResponse: new Map(),
+        },
+        mounted: function () {
+            if (!localStorage.redis_connections || localStorage.redis_connections === '[]') {
+                localStorage.redis_connections = JSON.stringify([{
+                    name: 'try fredis',
+                    ws2sServer: "wss://ws2s.feling.io/",
+                    host: "172.17.248.195",
+                    port: 6379,
+                    auth: '',
+                    sshHost: '',
+                    sshPort: '',
+                    sshUsername: '',
+                    sshPassword: '',
+                    sshPrivateKey: '',
+                    sshPrivateKeyPassword: '',
+                }])
+            }
+            this.redisConnections = JSON.parse(localStorage.redis_connections)
+            $('#connection-list').show()
+        },
+        methods: {
+            connect: function (connection) {
+                if (this.openedConnections.includes(connection)) {
+                    $('[tname]').hide()
+                    $('[tname="fredis_' + connection.name + '"]').show()
+                    return
+                }
+                var redis = new WS2S(connection.ws2sServer)
+                    .newRedisCient(connection.host, connection.port, connection.auth,
+                        connection.sshHost, connection.sshPort, 
+                        connection.sshUsername, connection.sshPassword, 
+                        connection.sshPrivateKey, connection.sshPrivateKeyPassword
+                    )
+                redis.onReady = () => {
+                    if (this.openedConnections.includes(connection)) {
+                        return
+                    }
+                    var terminal = $('div[tname="fredis_' + connection.name + '"]')
+                                    .find(".terminals").terminal(function (command, term) {
+                        command = command.trim()
+                        if (command === 'help') {
+                            term.echo('cp    copy last response. note that the response "OK" is not considered as a last response.')
+                            term.echo('dl    download last response.')
+                            term.echo('jq    format last response as json by the online json format tool on a new tab.')
+                            return
+                        }
+                        if (command === 'dl') {
+                            let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
+                            if (!lastResponse) {
+                                term.error('last response is empty.')
+                                return
+                            }
+                            let a = document.getElementById("dl")
+                            let file = new Blob([lastResponse], {type: 'text/plain'})
+                            a.href = URL.createObjectURL(file)
+                            a.download = 'fredis_response.txt'
+                            a.click()
+                            term.echo('dl done')
+                            return
+                        }
+                        if (command === 'cp') {
+                            let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
+                            if (!lastResponse) {
+                                term.error('last response is empty.')
+                                return
+                            }
+                            if (lastResponse.length > 1024 * 16) {
+                                term.error('response is too large to copy. please try "dl" command.')
+                                return
+                            }
+                            $('button[responseKey="fredis_' + connection.name +'"]').click()
+                            term.echo('cp done')
+                            return
+                        }
+                        if (command === 'jq') {
+                            let lastResponse = vm.lastResponse.get('fredis_' + connection.name)
+                            if (!lastResponse) {
+                                term.error('last response is empty.')
+                                return
+                            }
+                            if (lastResponse.length > 1024 * 128) {
+                                term.error('response is too large. please try "dl" command.')
+                                return
+                            }
+                            localStorage.json_jsonSrc = lastResponse
+                            window.open("/json/", "_blank")
+                            return
+                        }
+                        redis.request(command)
+                    }, {
+                        exit: false,
+                        memory: true,
+                        history: false,
+                        onBeforeCommand: (terminal, command) => {
+                            if (command) {
+                                let historyKey = 'fredis_' + connection.name + '_history'
+                                terminal.history().append(command)
+                                localStorage.setItem(historyKey, JSON.stringify(terminal.history().data()))
+                            }
+                            return true
+                        },
+                        onInit: (terminal) => {
+                            let historyKey = 'fredis_' + connection.name + '_history'
+                            if(localStorage.getItem(historyKey) === null 
+                                || localStorage.getItem(historyKey) === 'null'
+                                || localStorage.getItem(historyKey) === ''){
+                                localStorage.setItem(historyKey, '[]')
+                            }
+                            JSON.parse(localStorage.getItem(historyKey)).forEach(command => {
+                                terminal.history().append(command)
+                            })
+                        },
+                        greetings: 'fredis, powered by ws2s project: https://github.com/playay/ws2s'
+                            + '\n\n'
+                            + 'connected to ' + connection.name
+                            + '(' + connection.host + ':' + connection.port + ')'
+                            + ', you can now exec redis commands.\ntry `help` to get more specific commands.',
+                        name: 'fredis_' + connection.name,
+                        height: '100%',
+                        width: '100%',
+                        prompt: '> '
+                    })
+                    redis.onResponse = (data) => {
+                        if (data !== 'OK') {
+                            vm.lastResponse.set('fredis_' + connection.name, data)
+                        }
+                        if (data.length > 1024 * 16) {
+                            terminal.error('response is too large to print. try "dl" command to download last response.')
+                        } else {
+                            terminal.echo(String(data))
+                        }
+                    }
+                    redis.onError = (error) => {
+                        terminal.error(JSON.stringify(error))
+                    }
+                    
+                    this.openedConnections.push(connection)
+                    $('[tname]').hide()
+                    $('[tname="fredis_' + connection.name + '"]').show()
+                }
+            },
+            deleteOne: function () {
+                var index = this.redisConnections.indexOf(this.editingConnection)
+                if (index !== -1) {
+                    this.redisConnections.splice(index, 1)
+                    localStorage.redis_connections = JSON.stringify(this.redisConnections)
+                    this.editOne()
+                }
+            },
+            editOne: function (connection) {
+                if (connection) {
+                    this.editingConnection = connection
+                    this.form = JSON.parse(JSON.stringify(connection))
+                } else {
+                    this.editingConnection = {
+                        name: '',
+                        ws2sServer: 'ws://localhost:3613/',
+                        host: '',
+                        port: 6379,
+                        auth: '',
+                        sshHost: '',
+                        sshPort: 22,
+                        sshUsername: '',
+                        sshPassword: '',
+                        sshPrivateKey: '',
+                        sshPrivateKeyPassword: '',
+                    }
+                    this.form = {
+                        name: '',
+                        ws2sServer: 'ws://localhost:3613/',
+                        host: '',
+                        port: 6379,
+                        auth: '',
+                        sshHost: '',
+                        sshPort: 22,
+                        sshUsername: '',
+                        sshPassword: '',
+                        sshPrivateKey: '',
+                        sshPrivateKeyPassword: '',
+                    }
+                }
+                $('[tname]').hide()
+                $('[tname="edit"]').show()
+            },
+            saveOne: function (formConnection) {
+                if (!formConnection.name) {
+                    formConnection.name = formConnection.host + ':' + formConnection.port
+                }
+                var index = this.redisConnections.indexOf(this.editingConnection)
+                if (index !== -1) {
+                    if (this.editingConnection.name != formConnection.name) {
+                        let oldHistory = 'fredis_' + this.editingConnection.name + '_history'
+                        let newHistory = 'fredis_' + formConnection.name + '_history'
+                        localStorage.setItem(newHistory, localStorage.getItem(oldHistory))
+                        localStorage.removeItem(oldHistory)
+                    }
+                    this.redisConnections.splice(index, 1, formConnection)
+                } else {
+                    this.redisConnections.push(JSON.parse(JSON.stringify(formConnection)))
+                }
+                localStorage.redis_connections = JSON.stringify(this.redisConnections)
+                this.editOne()
+            },
+            onConnectionsSorted: function () {
+                localStorage.redis_connections = JSON.stringify(this.redisConnections)
+            },
+        }
+    })
+</script>
+<link rel="stylesheet" href="//cdn.feling.io/css/jquery.terminal.min.css" media="all">
+<style>
+.terminal, .cmd {
+    font-family: Consolas, monospace;
+}
+</style>

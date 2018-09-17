@@ -1,0 +1,339 @@
+---
+title: Base64 编解码
+layout: frame
+keywords: [base64图片, base64编码, base64解码]
+description: 在线 Base64 编码、解码。支持文字、图片。智能适应“data:image/…”前缀，有无前缀都能解码出图片。实时显示结果，无需手动确认。自动保存偏好设置。开源的纯本地应用，保证数据安全。
+---
+
+
+<style type="text/css">
+#drop_box {
+    border: 1px dashed #ccc;
+}
+#info_box {
+    height:20px;
+    padding: 10px;
+    font-size: 14px;
+}
+@media (min-width: 960px) {
+    .fl-box {
+        width: 50%;
+        padding-left: 5px;
+    }
+}
+@media (max-width: 960px) {
+    .fl-box {
+        width: 100%;
+        height: 256px;
+        padding-left:0;
+        padding-right:5px;
+    }
+}
+</style>
+<script>
+    if (typeof localStorage.base64_activeTab == "undefined") {
+        localStorage.base64_activeTab = 1
+    }
+</script>
+
+<div class="uk-width-10-10 uk-height-1-1" style="padding-bottom: 50px;">
+<!-- 选项卡 -->
+<div class="uk-width-10-10" style="margin-bottom: 10px;">
+    <ul class="uk-tab uk-tab-top" data-uk-tab="{connect:'#main', active:localStorage.base64_activeTab, animation:'fade'}">
+        <li><a id="activeTab0" onClick="localStorage.base64_activeTab = 0" href="#">文字</a></li>
+        <li><a id="activeTab1" onClick="localStorage.base64_activeTab = 1" href="#">图片</a></li>
+    </ul>
+</div>
+
+<!-- 表单、结果 -->
+<div class="uk-width-10-10 uk-height-1-1">
+    <ul id="main" class="uk-switcher uk-height-1-1">
+        <!-- 文字 -->
+        <li class="uk-height-1-1">
+            <div id="text" class="uk-grid uk-height-1-1">
+                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;padding-right:5px;">
+                    <textarea class="uk-width-1-1 uk-height-1-1" style="resize:vertical;" placeholder="编码前" spellcheck="false" v-model="origin" v-on:input="onChangeOrigin"></textarea>
+                </div>
+                <div class="uk-width-1-2 fl-box uk-height-1-1">
+                    <textarea class="uk-width-1-1 uk-height-1-1" style="resize:vertical;" placeholder="编码后" autofocus spellcheck="false" v-model="base64" v-on:input="onChangeBase64"></textarea>
+                </div>
+            </div>
+        </li>
+        <!-- 图片 -->
+        <li class="uk-height-1-1">
+            <div id="img" class="uk-grid uk-grid-small uk-height-1-1">
+                <div class="uk-width-1-2 fl-box uk-height-1-1" style="padding-left:0;padding-right:5px;">
+                    <textarea class="uk-width-1-1 uk-height-1-1 jq_watermark" style="resize:none;" title="输入以下任一内容: <br> 1. 图片url地址 <br> 2. 带 'data:image/...' 前缀的图片 base64 <br> 3. 不带 'data:image/...' 前缀的图片 base64 " 
+                    autofocus spellcheck="false" v-model="base64" v-on:input="onInputBase64"></textarea>
+                </div>
+                <div class="uk-width-1-2 fl-box uk-height-1-1">
+                    <div id="drop_box" class="uk-height-1-1" v-on:dragenter="ignoreDrag" v-on:dragover="ignoreDrag" v-on:drop="drop" v-on:click="clickDropBox">
+                        <p style="width:100%;height:100%;text-align:center;line-height:320px;" 
+                            v-show="base64 === ''">拖拽图片到此处 / 点击上传图片</p>
+                        <img style="max-height:512px;" v-bind:src="base64" v-if="base64.startsWith('data:image') || base64.startsWith('http')"></img>
+                        <img style="max-height:512px;" v-bind:src="'data:image;base64,' + base64" v-if="base64 != '' && !base64.startsWith('data:image') && !base64.startsWith('http') "></img>
+                        <div id="info_box" v-show="imgType !== ''">
+                            <span>{% raw %}类型:&nbsp;{{ imgType }}&nbsp;&nbsp;&nbsp;&nbsp;大小:&nbsp;{{ imgSize }}{% endraw %}</span>
+                        </div>
+                    </div>
+                    <input type="file" style="display:none;" id="file_input" accept="image/*" 
+                    v-on:change="onFileInputChange">
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+
+<script>
+(function(global){"use strict";var _Base64=global.Base64;var version="2.3.2";var buffer;if(typeof module!=="undefined"&&module.exports){try{buffer=require("buffer").Buffer}catch(err){}}var b64chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";var b64tab=function(bin){var t={};for(var i=0,l=bin.length;i<l;i++)t[bin.charAt(i)]=i;return t}(b64chars);var fromCharCode=String.fromCharCode;var cb_utob=function(c){if(c.length<2){var cc=c.charCodeAt(0);return cc<128?c:cc<2048?fromCharCode(192|cc>>>6)+fromCharCode(128|cc&63):fromCharCode(224|cc>>>12&15)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}else{var cc=65536+(c.charCodeAt(0)-55296)*1024+(c.charCodeAt(1)-56320);return fromCharCode(240|cc>>>18&7)+fromCharCode(128|cc>>>12&63)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}};var re_utob=/[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g;var utob=function(u){return u.replace(re_utob,cb_utob)};var cb_encode=function(ccc){var padlen=[0,2,1][ccc.length%3],ord=ccc.charCodeAt(0)<<16|(ccc.length>1?ccc.charCodeAt(1):0)<<8|(ccc.length>2?ccc.charCodeAt(2):0),chars=[b64chars.charAt(ord>>>18),b64chars.charAt(ord>>>12&63),padlen>=2?"=":b64chars.charAt(ord>>>6&63),padlen>=1?"=":b64chars.charAt(ord&63)];return chars.join("")};var btoa=global.btoa?function(b){return global.btoa(b)}:function(b){return b.replace(/[\s\S]{1,3}/g,cb_encode)};var _encode=buffer?buffer.from&&buffer.from!==Uint8Array.from?function(u){return(u.constructor===buffer.constructor?u:buffer.from(u)).toString("base64")}:function(u){return(u.constructor===buffer.constructor?u:new buffer(u)).toString("base64")}:function(u){return btoa(utob(u))};var encode=function(u,urisafe){return!urisafe?_encode(String(u)):_encode(String(u)).replace(/[+\/]/g,function(m0){return m0=="+"?"-":"_"}).replace(/=/g,"")};var encodeURI=function(u){return encode(u,true)};var re_btou=new RegExp(["[À-ß][-¿]","[à-ï][-¿]{2}","[ð-÷][-¿]{3}"].join("|"),"g");var cb_btou=function(cccc){switch(cccc.length){case 4:var cp=(7&cccc.charCodeAt(0))<<18|(63&cccc.charCodeAt(1))<<12|(63&cccc.charCodeAt(2))<<6|63&cccc.charCodeAt(3),offset=cp-65536;return fromCharCode((offset>>>10)+55296)+fromCharCode((offset&1023)+56320);case 3:return fromCharCode((15&cccc.charCodeAt(0))<<12|(63&cccc.charCodeAt(1))<<6|63&cccc.charCodeAt(2));default:return fromCharCode((31&cccc.charCodeAt(0))<<6|63&cccc.charCodeAt(1))}};var btou=function(b){return b.replace(re_btou,cb_btou)};var cb_decode=function(cccc){var len=cccc.length,padlen=len%4,n=(len>0?b64tab[cccc.charAt(0)]<<18:0)|(len>1?b64tab[cccc.charAt(1)]<<12:0)|(len>2?b64tab[cccc.charAt(2)]<<6:0)|(len>3?b64tab[cccc.charAt(3)]:0),chars=[fromCharCode(n>>>16),fromCharCode(n>>>8&255),fromCharCode(n&255)];chars.length-=[0,0,2,1][padlen];return chars.join("")};var atob=global.atob?function(a){return global.atob(a)}:function(a){return a.replace(/[\s\S]{1,4}/g,cb_decode)};var _decode=buffer?buffer.from&&buffer.from!==Uint8Array.from?function(a){return(a.constructor===buffer.constructor?a:buffer.from(a,"base64")).toString()}:function(a){return(a.constructor===buffer.constructor?a:new buffer(a,"base64")).toString()}:function(a){return btou(atob(a))};var decode=function(a){return _decode(String(a).replace(/[-_]/g,function(m0){return m0=="-"?"+":"/"}).replace(/[^A-Za-z0-9\+\/]/g,""))};var noConflict=function(){var Base64=global.Base64;global.Base64=_Base64;return Base64};global.Base64={VERSION:version,atob:atob,btoa:btoa,fromBase64:decode,toBase64:encode,utob:utob,encode:encode,encodeURI:encodeURI,btou:btou,decode:decode,noConflict:noConflict};if(typeof Object.defineProperty==="function"){var noEnum=function(v){return{value:v,enumerable:false,writable:true,configurable:true}};global.Base64.extendString=function(){Object.defineProperty(String.prototype,"fromBase64",noEnum(function(){return decode(this)}));Object.defineProperty(String.prototype,"toBase64",noEnum(function(urisafe){return encode(this,urisafe)}));Object.defineProperty(String.prototype,"toBase64URI",noEnum(function(){return encode(this,true)}))}}if(global["Meteor"]){Base64=global.Base64}if(typeof module!=="undefined"&&module.exports){module.exports.Base64=global.Base64}else if(typeof define==="function"&&define.amd){define([],function(){return global.Base64})}})(typeof self!=="undefined"?self:typeof window!=="undefined"?window:typeof global!=="undefined"?global:this);
+</script>
+<script>
+/*
+* jQuery Watermark plugin
+* @requires jQuery v1.3 or later
+*
+* Examples at: http://mario.ec/static/jq-watermark/
+* Copyright (c) 2010 Mario Estrada
+* Licensed under the MIT license:
+* http://www.opensource.org/licenses/mit-license.php
+*
+*/
+;(function ($) {
+    var old_ie = /MSIE [1-7]\./.test(navigator.userAgent);
+    var hard_left = 4;
+    $.watermarker = function () { };
+    $.extend($.watermarker, {
+      defaults: {
+        color: '#999',
+        left: 0,
+        top: 0,
+        fallback: false,
+        animDuration: 300,
+        minOpacity: 0.6
+      },
+      setDefaults: function (settings) {
+        $.extend($.watermarker.defaults, settings);
+      },
+      checkVal: function (val, label) {
+        if (val.length === 0) {
+          $(label).show();
+        } else {
+          $(label).hide();
+        }
+  
+        return val.length > 0;
+      },
+      html5_support: function () {
+        var i = document.createElement('input');
+        return 'placeholder' in i;
+      }
+    });
+  
+    $.fn.watermark = function (text, options) {
+      var elems;
+      options = $.extend({}, $.watermarker.defaults, options);
+      elems = this.filter('textarea, input:not(:checkbox,:radio,:file,:submit,:reset)');
+  
+      if (options.fallback && $.watermarker.html5_support()) {
+        return this;
+      }
+  
+      elems.each(function () {
+        var $elem, attr_name, label_text, watermark_container, watermark_label, control_id;
+        var e_margin_left, e_top = 0, e_height;
+  
+        $elem = $(this);
+        control_id = $elem.attr('id');
+  
+        if ($elem.attr('data-jq-watermark') === 'processed') {
+          return;
+        }
+  
+        attr_name = $elem.attr('placeholder') !== undefined && $elem.attr('placeholder') !== '' ? 'placeholder' : 'title';
+        label_text = text === undefined || text === '' ? $(this).attr(attr_name) : text;
+        watermark_container = $('<span class="watermark_container uk-height-1-1"></span>');
+        watermark_label = $('<label class="watermark" for="' + control_id + '">' + label_text + '</label>');
+  
+        // If used, remove the placeholder attribute to prevent conflicts
+        if (attr_name === 'placeholder') {
+          $elem.removeAttr('placeholder');
+        }
+  
+        watermark_container.css({
+          display: 'inline-block',
+          position: 'relative',
+          width: '100%'
+        });
+  
+        if ($elem.attr('data-percent-width') === 'true') {
+          watermark_container.css('width', '100%');
+        }
+  
+        if ($elem.attr('data-percent-height') === 'true') {
+          watermark_container.css('height', '100%');
+        }
+  
+        if (old_ie) {
+          watermark_container.css({
+            zoom: 1,
+            display: 'inline'
+          });
+        }
+  
+        $elem.wrap(watermark_container).attr('data-jq-watermark', 'processed');
+  
+        if (this.nodeName.toLowerCase() === 'textarea') {
+          e_height = parseInt($elem.css('line-height'), 10);
+          e_height = e_height === 'normal' ? parseInt($elem.css('font-size'), 10) : e_height;
+          e_top = ($elem.css('padding-top') !== 'auto' ? parseInt($elem.css('padding-top'), 10) : 0);
+        } else {
+          e_height = $elem.outerHeight();
+          if (e_height <= 0) {
+            e_height = ($elem.css('padding-top') !== 'auto' ? parseInt($elem.css('padding-top'), 10) : 0);
+            e_height += ($elem.css('padding-bottom') !== 'auto' ? parseInt($elem.css('padding-bottom'), 10) : 0);
+            e_height += ($elem.css('height') !== 'auto' ? parseInt($elem.css('height'), 10) : 0);
+          }
+        }
+  
+        e_top += ($elem.css('margin-top') !== 'auto' ? parseInt($elem.css('margin-top'), 10) : 0);
+  
+        e_margin_left = $elem.css('margin-left') !== 'auto' ? parseInt($elem.css('margin-left'), 10) : 0;
+        e_margin_left += $elem.css('padding-left') !== 'auto' ? parseInt($elem.css('padding-left'), 10) : 0;
+  
+        watermark_label.css({
+          position: 'absolute',
+          display: 'block',
+          fontFamily: $elem.css('font-family'),
+          fontSize: $elem.css('font-size'),
+          color: options.color,
+          left: hard_left + options.left + e_margin_left,
+          top: options.top + e_top,
+          height: e_height,
+          lineHeight: e_height + 'px',
+          textAlign: 'left',
+          pointerEvents: 'none'
+        });
+  
+        $.watermarker.checkVal($elem.val(), watermark_label);
+  
+        if (!control_id) {
+          watermark_label
+            .data('jq_watermark_element', $elem)
+            .click(function () {
+              $($(this).data('jq_watermark_element')).trigger('click').trigger('focus');
+            });
+        }
+  
+        $elem.before(watermark_label)
+          .bind('focus.jq_watermark', function () {
+            if (!$.watermarker.checkVal($(this).val(), watermark_label)){
+              watermark_label.stop().fadeTo(options.animDuration, options.minOpacity);
+            }
+          })
+          .bind('blur.jq_watermark change.jq_watermark', function () {
+            if (!$.watermarker.checkVal($(this).val(), watermark_label)){
+              watermark_label.stop().fadeTo(options.animDuration, 1);
+            }
+          })
+          .bind('keydown.jq_watermark, paste.jq_watermark', function (e) {
+            $(watermark_label).hide();
+          })
+          .bind('keyup.jq_watermark', function (e) {
+            $.watermarker.checkVal($(this).val(), watermark_label);
+          });
+      });
+  
+      return this;
+    };
+  
+    $(function () {
+      $('.jq_watermark').watermark();
+      $('.jq_watermark').removeAttr('title')
+    });
+  })(jQuery);
+</script>
+<script>
+    var vm_text = new Vue({
+        el: "#text",
+        data: {
+            origin: 'Base64 编码解码',
+            base64: ''
+        },
+        mounted: function () {
+            if (localStorage.base64_tab0_origin) {
+                this.origin = localStorage.base64_tab0_origin
+            }
+            this.onChangeOrigin()
+        },
+        methods: {
+            onChangeOrigin: function() {
+                localStorage.base64_tab0_origin = this.origin
+                this.base64 = Base64.encode(this.origin)
+            },
+            onChangeBase64: function() {
+                this.origin = Base64.decode(this.base64)
+                localStorage.base64_tab0_origin = this.origin
+            }
+        }
+    })
+
+    var vm_img = new Vue({
+        el: "#img",
+        data: {
+            imgType: '',
+            imgSize: '',
+            base64: ''
+        },
+        mounted: function () {
+            if (localStorage.base64_tab1_base64) {
+                this.base64 = localStorage.base64_tab1_base64
+            }
+        },
+        methods: {
+            onInputBase64: function() {
+                this.imgType = ''
+                this.imgSize = ''
+                if (this.base64.length < (1024 * 128)) {
+                    localStorage.base64_tab1_base64 = this.base64
+                }
+            },
+            ignoreDrag: function(event) {
+                event.stopPropagation()
+                event.preventDefault()
+            },
+            drop: function (event) {
+                event.stopPropagation()
+                event.preventDefault()
+                var files = event.dataTransfer.files
+                this.processImg(files[0])
+            },
+            onFileInputChange: function (event) {
+                var files = event.target.files
+                this.processImg(files[0])
+            },
+            clickDropBox: function(file) {
+                $('#file_input').click()
+            },
+            processImg: function(file) {
+                if (file) {
+                    this.imgType = file.type
+                    if (file.size < 1000) {
+                        this.imgSize = file.size + ' B'
+                    } else {
+                        this.imgSize = parseInt(file.size / 1000) + ' KB'
+                    }
+                    var reader = new FileReader()
+                    reader.onload = function (o) {
+                        vm_img.base64 = o.target.result
+                        if (vm_img.base64.length < (1024 * 128)) {
+                            localStorage.base64_tab1_base64 = vm_img.base64
+                        }
+                        $('.jq_watermark').trigger('paste')
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+    })
+</script>

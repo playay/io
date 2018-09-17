@@ -1,0 +1,381 @@
+---
+title: Json 格式化
+layout: frame
+keywords: [json,json在线解析,json格式化,json格式验证]
+description: 格式化、高亮、折叠、转发你的json 字符串。支持一键复制、一键折叠。转发当前json 字符串的功能, 让沟通交流更加方便。还有SMode 模式, 对于数组, 只解析它的第一项, json 结构更清晰。
+---
+
+<style type="text/css">
+.json_key {
+    color: #92278f;
+    font-weight: bold;
+}
+.json_string {
+    color: #3ab54a;
+    font-weight: bold;
+}
+.json_link {
+    color: #61D2D6;
+    font-weight: bold;
+    text-decoration:none;
+}
+.json_link:hover {
+    color: #005599;
+    font-weight: bold;
+    text-decoration:none;
+}
+.json_number {
+    color: #25aae2;
+    font-weight: bold;
+}
+.json_boolean {
+    color: #f98280;
+    font-weight: bold;
+}
+.json_null {
+    color: #ccc;
+    font-weight: bold;
+}
+.fold_icon{
+    font-size: 13px;
+    color: #ccc;
+    font-weight: bold;
+}
+#json_src {
+    word-break: break-all;
+    height: 100%;
+    resize: vertical;
+    padding: 10px;
+    font-size: 13px;
+    font-family: Consolas, monospace;
+}
+#json_result {
+    font-family: Consolas, monospace;
+}
+@media (min-width: 960px) {
+    #json_src_box {
+        width: 38%;
+    }
+    #json_result_box {
+        padding-left: 10px;
+        width: 62%;
+    }
+}
+@media (max-width: 960px) {
+    #json_src {
+        height: 200px;
+    }
+    #json_src_box {
+        width: 100%;
+    }
+    #json_result_box {
+        width: 100%;
+    }
+}
+</style>
+
+<div id="main" class="uk-grid uk-grid-collapse uk-height-1-1">
+    <div id="json_src_box" class="uk-width-10-10">
+        <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" v-on:input="jsonSrcChange">
+        </textarea>
+    </div>
+
+    <div id="json_result_box" class="uk-width-10-10">
+        <div class="uk-width-1-1">
+            <button class="uk-button" v-on:click="unFoldAll(1)">1级</button>
+            <button class="uk-button uk-hidden-small" v-on:click="unFoldAll(2)">2</button>
+            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(3)">3</button>
+            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">4</button>
+            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5</button>
+            <button class="uk-button" v-on:click="unFoldAll(998)">n级</button>
+            <input class="uk-visible-large" type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
+            <label class="uk-label uk-visible-large" for="array_sampling" title="对于数组，只显示它的第一项">SMode</label>
+            <div style="float:right;">
+                <p id="copy-success" class="uk-button uk-button-success" style="display:none;">copied</p>
+                <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
+                        <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
+                        转发当前JSON</button>
+                <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
+                <button class="uk-button copy-button" data-clipboard-target="#json_result" title="复制结果框当前显示的文本, 折叠的内容依然折叠">复制</button>
+                <button class="uk-button copy-button uk-visible-large" title="完全展开结果框的内容, 然后复制" 
+                    data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
+                <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" title="复制压缩后的 json" >{}</button>
+            </div>
+        </div>
+        <hr style="margin: 0px">
+        <div class="uk-width-1-1">
+            <pre><code v-html="jsonResult" id="json_result"></code></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    function fold(icon) {
+        icon.classList.remove('uk-icon-angle-down')
+        icon.classList.add('uk-icon-angle-right')
+        icon.setAttribute('onClick', 'javascript: unFold(this)')
+        icon.childNodes[0].style.display = 'inline'
+        icon.nextSibling.style.display = 'none'
+    }
+    function unFold(icon) {
+        icon.classList.remove('uk-icon-angle-right')
+        icon.classList.add('uk-icon-angle-down')
+        icon.setAttribute('onClick', 'javascript: fold(this)')
+        icon.childNodes[0].style.display = 'none'
+        icon.nextSibling.style.display = 'inline'
+    }
+    var vm = new Vue({
+        el: "#main",
+        data: {
+            reLink: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+            reLastComma: /,\s*([}\]])/g,
+            jsonSrc: '{"hello":"json 格式化","siteList":["https://feling.io","https://pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}]}',
+            jsonResultTemp:[],
+            jsonResult: '',
+            tab: '    ',
+            keyEnd: '"</span>: ',
+            arraySampling: false,// 遇到数组，只解析第一个元素
+            defaultFold: 998,
+            shareLink: ''
+        },
+        mounted: function () {
+            if (localStorage.json_arraySampling !== undefined) {
+                this.arraySampling = localStorage.json_arraySampling === 'true'
+            }
+            if (localStorage.json_defaultFold) {
+                this.defaultFold = localStorage.json_defaultFold
+            }
+            if (localStorage.json_jsonSrc) {
+                this.jsonSrc = localStorage.json_jsonSrc
+            }
+            let shareId = this.getQueryParam('shareId')
+            if (shareId) {
+                this.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 JSON 加载中..."}'
+                this.jsonSrcChange()
+                this.loadJsonSrcByShareId(shareId)
+            } else {
+                this.jsonSrcChange()
+            }
+        },
+        methods: {
+            isArray: function (obj) {
+                return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
+            },
+            jsonLinkWarpper: function (str) {
+                return str.replace(this.reLink, '<a class="json_link" target="_blank" href="$1">$1</a>'); 
+            },
+            genKey: function (key, depth) {
+                this.jsonResultTemp.push("<br><span class='json_key'>")
+                this.jsonResultTemp.push(this.tab.repeat(depth + 1))
+                this.jsonResultTemp.push("\"")
+                this.jsonResultTemp.push($('<div/>').text(key).html())
+                this.jsonResultTemp.push(this.keyEnd)
+            },
+            genValue: function (obj, depth) {
+                if (!this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
+                    this.jsonResultTemp.push('<br>')
+                    this.jsonResultTemp.push(this.tab.repeat(depth))
+                }
+                var type = obj === null ? 'null' : typeof obj
+                this.jsonResultTemp.push('<span class="json_')
+                this.jsonResultTemp.push(type)
+                this.jsonResultTemp.push('">')
+                if (type === 'string') {
+                    this.jsonResultTemp.push('"')
+                    this.jsonResultTemp.push(this.jsonLinkWarpper($('<div/>').text(obj === null ? 'null' : obj).html()))
+                    this.jsonResultTemp.push('"')
+                } else {
+                    this.jsonResultTemp.push(obj === null ? 'null' : obj)
+                }
+                this.jsonResultTemp.push('</span>,')
+            },
+            genStart: function (start, depth, itemCount) {
+                if (this.jsonResultTemp.length > 0 
+                    && !this.jsonResultTemp[this.jsonResultTemp.length - 1].endsWith(this.keyEnd)) { // 冒号后面不换行
+                    this.jsonResultTemp.push('<br>')
+                    this.jsonResultTemp.push(this.tab.repeat(depth))
+                }
+                this.jsonResultTemp.push(start)
+                if (depth > this.defaultFold || itemCount === 0) {
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)">' 
+                        + '<span class="fold_icon">...' + itemCount + '</span>'
+                        + '</i>'
+                        + '<span class="foldContent" style="display:none">')
+                } else {
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-down" onClick="fold(this)">' 
+                        + '<span class="fold_icon" style="display:none;">...' + itemCount + '</span>'
+                        + '</i>'
+                        + '<span class="foldContent">')
+                }
+            },
+            genEnd: function (end, depth) {
+                this.deletLastComma()
+                this.jsonResultTemp.push('<br>')
+                this.jsonResultTemp.push(this.tab.repeat(depth))
+
+                this.jsonResultTemp.push('</span>') // <span class="foldContent">
+                this.jsonResultTemp.push(end)
+                this.jsonResultTemp.push(',')
+            },
+            deletLastComma: function () {
+                var old = this.jsonResultTemp.pop()
+                var index = old.lastIndexOf(',')
+                var index1 = old.lastIndexOf('{')
+                var index2 = old.lastIndexOf('[')
+                if (index > index1 && index > index2) {
+                    this.jsonResultTemp.push(old.substring(0, index))
+                    this.jsonResultTemp.push(old.substring(index + 1))
+                    return true
+                }
+                this.jsonResultTemp.push(old)
+                return false
+            },
+            genResult: function (obj, depth) {
+                if (this.isArray(obj)) {
+                    this.genStart('[', depth, obj.length)
+                    for(var i = 0; i < (this.arraySampling ? Math.min(obj.length, 1) : obj.length); i++) {
+                        this.genResult(obj[i], depth + 1)
+                    }
+                    this.genEnd(']', depth)
+                    return
+                }
+                if ((typeof obj) === 'object' && obj !== null) {
+                    this.genStart('{', depth, Object.keys(obj).length)
+                    for (key in obj) {
+                        this.genKey(key, depth)
+                        this.genResult(obj[key], depth + 1)
+                    }
+                    this.genEnd('}', depth)
+                    return
+                }
+                this.genValue(obj, depth)
+            },
+            jsonSrcChange: function () {
+                localStorage.json_arraySampling = this.arraySampling
+                if (this.jsonSrc === '') {
+                    return
+                }
+                try {
+                    var obj = JSON.parse(this.jsonSrc.replace(this.reLastComma, "$1"))
+                    this.jsonResultTemp = []
+                    this.genResult(obj, 0)
+                    this.deletLastComma()
+                    this.jsonResult = this.jsonResultTemp.join("")
+                    if (this.jsonSrc.length < (1024 * 128) 
+                        && !this.jsonSrc.startsWith('{"提示":"shareId: ')) {
+                        localStorage.json_jsonSrc = this.jsonSrc
+                    }
+                } catch (e) {
+                    this.jsonResult = e.message
+                    var position = parseInt(e.message.substring(e.message.lastIndexOf(' ')))
+                    if (position) {
+                        // $('#json_src').focus()
+                        // setTimeout(() => {document.getElementById('json_src').setSelectionRange(position - 10, position + 10)}, 500)
+                    }
+                }
+            },
+            unFoldAll: function (level) {
+                localStorage.json_defaultFold = level - 1
+                this.defaultFold = level - 1
+                this.traverseChildren(
+                    document.getElementById("json_result"),
+                    function(element, depth) {
+                        if(element.tagName === 'I'){
+                            if(depth > level){
+                                this.fold(element)
+                            } else {
+                                this.unFold(element)
+                            }
+                        }
+                    },
+                    0
+                )
+            },
+            traverseChildren: function (element, func, depth) {
+                for(var i = 0; i < element.childNodes.length; i++){
+                    this.traverseChildren(element.childNodes[i], func, depth + 1)
+                }
+                func(element, depth)
+            },
+            genShareLink: function() {
+                $('#genShareLinkSpinner').show()
+                WithFParams.postForm('/unclassified/jsonShare/create',
+                    {
+                        "jsonSrc": this.jsonSrc
+                    },
+                    (result) => {
+                        if (result.success) {
+                            vm.shareLink = "https://feling.io/json/?shareId=" + result.data
+                            if (!localStorage.json_notFirstTimeGenShareLink) {
+                                localStorage.json_notFirstTimeGenShareLink = true
+                            }
+                        } else {
+                            UIkit.modal.alert("生成分享链接失败")
+                        }
+                    }
+                )
+                .always(() => {
+                    $('#genShareLinkSpinner').hide()
+                })
+            },
+            share: function() {
+                if (localStorage.json_notFirstTimeGenShareLink) {
+                    this.genShareLink()
+                } else {
+                    UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续?', () => {
+                        this.genShareLink()
+                    })
+                }
+            },
+            getQueryParam: function(key) {
+                var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return decodeURIComponent(r[2]); return null;
+            },
+            loadJsonSrcByShareId: function(shareId) {
+                WithFParams.postForm('/unclassified/jsonShare/get',
+                    {
+                        "shareId": shareId
+                    },
+                    (result) => {
+                        if (result.success) {
+                            this.jsonSrc = result.data.jsonSrc
+                        } else {
+                            this.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 json 加载失败"}'
+                        }
+                    }
+                ).always(() => {
+                    this.jsonSrcChange()
+                    history.replaceState(null, null, location.pathname)
+                })
+            },
+        }
+    })
+</script>
+
+<script src="//cdn.feling.io/js/clipboard.min.js"></script>
+<script>
+
+    new ClipboardJS('#copy-compression-jsonSrc', {
+        text: function(trigger) {
+            return JSON.stringify(JSON.parse(vm.jsonSrc.replace(vm.reLastComma, "$1")))
+        }
+    }).on('success', function(e) {
+        $('#copy-success').show()
+        setTimeout(() => {$('#copy-success').hide()} ,900)
+    })
+    new ClipboardJS('.copy-button').on('success', function(e) {
+        $('#copy-success').show()
+        setTimeout(() => {$('#copy-success').hide()} ,900)
+        e.clearSelection()
+    })
+    new ClipboardJS('#copy-share-link', {
+        text: function(trigger) {
+            return vm.shareLink
+        }
+    }).on('success', function(e) {
+        vm.shareLink = ''
+        $('#copy-success').show()
+        setTimeout(() => {$('#copy-success').hide()} ,900)
+    })
+</script>
