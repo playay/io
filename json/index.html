@@ -11,7 +11,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
         if (r != null) return decodeURIComponent(r[2]); return null;
     }
     let shareId = this.getQueryParam("shareId")
-    console.log("shareId: ", shareId)
+    console.log("shareId1: ", shareId)
     if (shareId) {
         window.open("/json/frame.html?shareId=" + shareId, "content-frame");
     } else {
