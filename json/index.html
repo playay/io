@@ -392,33 +392,34 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
     hotkeys('ctrl+s+m', function(event,handler) {
         $('#array_sampling').click()
     })
-    window.top.$("#header-extend").html('\
-        <li class="uk-parent" data-uk-dropdown="{delay:1500}">\
-            <a class="uk-navbar-content">快捷键一览 <i class="uk-icon-caret-down"></i></a>\
-            <div class="uk-dropdown uk-dropdown-navbar" style="width:480px;">\
-                <table class="uk-table">\
-                    <tbody>\
-                        <tr>\
-                            <td class="uk-text-left uk-text-bold">ctrl+b, ⌘+b</td><td class="uk-text-left">打开/关闭 左侧菜单栏</td>\
-                        </tr>\
-                        <tr>\
-                            <td class="uk-text-left uk-text-bold">ctrl+s+m</td><td class="uk-text-left">打开/关闭 SMode (对于数组, 只解析它的第一项)</td>\
-                        </tr>\
-                        <tr>\
-                            <td class="uk-text-left uk-text-bold">ctrl+0</td><td class="uk-text-left">完全展开</td>\
-                        </tr>\
-                        <tr>\
-                            <td class="uk-text-left uk-text-bold">ctrl+1, ..., ctrl+5</td><td class="uk-text-left">展开至 1~5 级</td>\
-                        </tr>\
-                    </tbody>\
-                </table>\
-            </div>\
-        </li>\
-        <li style="float:right">\
-            <div id="copy-success" class="uk-alert uk-alert-success" \
-                style="display:none;margin-bottom:0px;">\
-                copied\
-            </div>\
-        </li>\
-    ')
 </script>
+
+
+<li class="header-extend-item uk-parent" data-uk-dropdown="{delay:1500}">
+    <a class="uk-navbar-content">快捷键一览 <i class="uk-icon-caret-down"></i></a>
+    <div class="uk-dropdown uk-dropdown-navbar" style="width:480px;">
+        <table class="uk-table">
+            <tbody>
+                <tr>
+                    <td class="uk-text-left uk-text-bold">ctrl+b, ⌘+b</td><td class="uk-text-left">打开/关闭 左侧菜单栏</td>
+                </tr>
+                <tr>
+                    <td class="uk-text-left uk-text-bold">ctrl+s+m</td><td class="uk-text-left">打开/关闭 SMode (对于数组, 只解析它的第一项)</td>
+                </tr>
+                <tr>
+                    <td class="uk-text-left uk-text-bold">ctrl+0</td><td class="uk-text-left">完全展开</td>
+                </tr>
+                <tr>
+                    <td class="uk-text-left uk-text-bold">ctrl+1, ..., ctrl+5</td><td class="uk-text-left">展开至 1~5 级</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</li>
+<li class="header-extend-item" style="float:right">
+    <div id="copy-success" class="uk-alert uk-alert-success" 
+        style="display:none;margin-bottom:0px;">
+        copied
+    </div>
+</li>
+<script>$('.header-extend-item').appendTo('#header-extend')</script>
