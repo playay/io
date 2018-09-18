@@ -82,12 +82,12 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
 
     <div id="json_result_box" class="uk-width-10-10">
         <div class="uk-width-1-1">
-            <button class="uk-button" v-on:click="unFoldAll(1)">1级</button>
-            <button class="uk-button uk-hidden-small" v-on:click="unFoldAll(2)">2</button>
-            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(3)">3</button>
-            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">4</button>
-            <button class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5</button>
-            <button class="uk-button" v-on:click="unFoldAll(998)">n级</button>
+            <button id="button-unFoldAll-1" class="uk-button" v-on:click="unFoldAll(1)">1级</button>
+            <button id="button-unFoldAll-2" class="uk-button uk-hidden-small" v-on:click="unFoldAll(2)">2</button>
+            <button id="button-unFoldAll-3" class="uk-button uk-visible-large" v-on:click="unFoldAll(3)">3</button>
+            <button id="button-unFoldAll-4" class="uk-button uk-visible-large" v-on:click="unFoldAll(4)">4</button>
+            <button id="button-unFoldAll-5" class="uk-button uk-visible-large" v-on:click="unFoldAll(5)">5</button>
+            <button id="button-unFoldAll-n" class="uk-button" v-on:click="unFoldAll(998)">n级</button>
             <input class="uk-visible-large" type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
             <label class="uk-label uk-visible-large" for="array_sampling" title="对于数组，只显示它的第一项">SMode</label>
             <div style="float:right;">
@@ -384,12 +384,12 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
 <script>
     hotkeys('ctrl+1,ctrl+2,ctrl+3,ctrl+4,ctrl+5,ctrl+6', function(event,handler) {
         switch(handler.key){
-            case "ctrl+1": vm.unFoldAll(1);break;
-            case "ctrl+2": vm.unFoldAll(2);break;
-            case "ctrl+3": vm.unFoldAll(3);break;
-            case "ctrl+4": vm.unFoldAll(4);break;
-            case "ctrl+5": vm.unFoldAll(5);break;
-            case "ctrl+6": vm.unFoldAll(998);break;
+            case "ctrl+1": $('button-unFoldAll-1').click();break;
+            case "ctrl+2": $('button-unFoldAll-2').click();break;
+            case "ctrl+3": $('button-unFoldAll-3').click();break;
+            case "ctrl+4": $('button-unFoldAll-4').click();break;
+            case "ctrl+5": $('button-unFoldAll-5').click();break;
+            case "ctrl+6": $('button-unFoldAll-n').click();break;
         }
     })
 </script>
