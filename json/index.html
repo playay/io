@@ -98,7 +98,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                 <button class="uk-button copy-button" data-clipboard-target="#json_result" title="复制结果框当前显示的文本, 折叠的内容依然折叠">复制</button>
                 <button class="uk-button copy-button uk-visible-large" title="完全展开结果框的内容, 然后复制" 
                     data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
-                <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" title="复制压缩后的 json" >{}</button>
+                <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" title="复制压缩后的 json" >压缩 &amp; 复制</button>
             </div>
         </div>
         <hr style="margin: 0px">
@@ -402,7 +402,7 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                             <td class="uk-text-left uk-text-bold">ctrl+b,⌘+b</td><td class="uk-text-left">打开/关闭 左侧菜单栏</td>\
                         </tr>\
                         <tr>\
-                            <td class="uk-text-left uk-text-bold">ctrl+s+m</td><td class="uk-text-left">打开/关闭 SMode</td>\
+                            <td class="uk-text-left uk-text-bold">ctrl+s+m</td><td class="uk-text-left">打开/关闭 SMode(对于数组, 只解析它的第一项)</td>\
                         </tr>\
                         <tr>\
                             <td class="uk-text-left uk-text-bold">ctrl+0</td><td class="uk-text-left">完全展开</td>\
@@ -414,8 +414,8 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                 </table>\
             </div>\
         </li>\
-        <li>\
-        <p id="copy-success" class="uk-button uk-button-success" style="display:none;">copied</p>\
+        <li style="float:right">\
+            <p id="copy-success" class="uk-button-success" style="display:none;">copied</p>\
         </li>\
     ')
 </script>
