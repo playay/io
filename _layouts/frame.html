@@ -4,8 +4,6 @@
 {% include head.html %}
 </head>
 <body class="uk-height-1-1">
-    {% include goTop.html %}
-    {{ content }}
     <script>
         window.top.UIkit.offcanvas.hide([force = false])
         window.top.document.title = window.document.title
@@ -16,7 +14,10 @@
                 window.top.UIkit.offcanvas.show('#offcanvas-nav')
             }
         })
+        window.top.$("#header-extend")
     </script>
+    {% include goTop.html %}
+    {{ content }}
     {% include baidu_tongji.html %}
 </body>
 </html>
