@@ -9,6 +9,13 @@
     <script>
         window.top.UIkit.offcanvas.hide([force = false])
         window.top.document.title = window.document.title
+        hotkeys('⌘+b', function(event,handler) {
+            if (window.top.$('#offcanvas-nav').is(":visible")) {
+                window.top.UIkit.offcanvas.hide()
+            } else {
+                window.top.UIkit.offcanvas.show('#offcanvas-nav')
+            }
+        })
     </script>
     {% include baidu_tongji.html %}
 </body>
