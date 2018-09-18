@@ -393,8 +393,8 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
     hotkeys('ctrl+s+m', function(event,handler) {
         $('#array_sampling').click()
     })
-    window.top.$("#header-extend").append('\
-        <li class="uk-parent" data-uk-dropdown="{mode:\'click\'}">\
+    window.top.$("#header-extend").html('\
+        <li class="uk-parent" data-uk-dropdown="{delay:2000}">\
             <a class="uk-navbar-content">快捷键一览</a>\
             <div class="uk-dropdown uk-dropdown-navbar">\
                 <table class="uk-table">\
@@ -403,10 +403,13 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
                             <td>ctrl+b</td><td>打开/关闭 左侧菜单栏</td>\
                         </tr>\
                         <tr>\
-                            <td>ctrl+b</td><td>打开/关闭 左侧菜单栏</td>\
+                            <td>ctrl+s+m</td><td>打开/关闭 SMode</td>\
                         </tr>\
                         <tr>\
-                            <td>ctrl+b</td><td>打开/关闭 左侧菜单栏</td>\
+                            <td>ctrl+6</td><td>完全展开</td>\
+                        </tr>\
+                        <tr>\
+                            <td>ctrl+1, ..., ctrl+5</td><td>展开至 1～5 级</td>\
                         </tr>\
                     </tbody>\
                 </table>\
