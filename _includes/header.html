@@ -1,7 +1,7 @@
 <nav class="uk-navbar">
 
     <div class="uk-navbar-brand" data-uk-offcanvas="{target:'#offcanvas-nav',mode:'push'}">
-        <i class="uk-icon-bars"></i>
+        <i class="uk-icon-bars" title="⌘+b"></i>
     </div>
     <div id="offcanvas-nav" class="uk-offcanvas">
         <div class="uk-offcanvas-bar">
@@ -22,6 +22,11 @@
             </ul>
         </div>
     </div>
+    <script>
+        hotkeys('⌘+b', function(event,handler) {
+            UIkit.offcanvas.show('#offcanvas-nav')
+        })
+    </script>
 
     <div class="uk-navbar-flip">
         <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
