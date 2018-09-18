@@ -25,9 +25,9 @@
     <script>
         hotkeys('⌘+b', function(event,handler) {
             if ($('#offcanvas-nav').is(":visible")) {
-                UIkit.offcanvas.hide([force = false])
+                window.top.UIkit.offcanvas.hide([force = false])
             } else {
-                UIkit.offcanvas.show('#offcanvas-nav')
+                window.top.UIkit.offcanvas.show('#offcanvas-nav')
             }
         })
     </script>
