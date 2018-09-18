@@ -9,7 +9,7 @@
     <script>
         window.top.UIkit.offcanvas.hide([force = false])
         window.top.document.title = window.document.title
-        hotkeys('⌘+b', function(event,handler) {
+        hotkeys('ctrl+b', function(event,handler) {
             if (window.top.$('#offcanvas-nav').is(":visible")) {
                 window.top.UIkit.offcanvas.hide()
             } else {
