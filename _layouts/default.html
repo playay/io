@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="uk-height-1-1">
+<head>
+{% include head.html %}
+</head>
+<style>
+    .fl-body-padding-bottom {
+        padding-bottom:60px;
+    }
+</style>
+<body class="uk-height-1-1 fl-body-padding-bottom">
+    <header>
+    {% include header.html %}
+    </header>
+    <hr>
+    <div class="uk-height-1-1 uk-width-1-1" style="padding:10px 10px 0px 10px;">
+        {{content}}
+    </div>
+    <footer>
+    {% include footer.html %}
+    {% include baidu_tongji.html %}
+    </footer>
+</body>
+</html>
