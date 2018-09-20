@@ -64,7 +64,8 @@
                                 </table>
                                 <ul class="uk-list">
                                     <li>1. 重新登录, 即可重置 accessToken .</li>
-                                    <li>2. 调用获取用户信息接口 (如: 登录状态下刷新页面 等), 能延长 accessToken 的有效期至 当前时间+30天. </li>
+                                    <li>2. 调用获取用户信息接口, 能延长 accessToken 的有效期至 当前时间+30天. </li>
+                                    <li>3. 登录状态下刷新页面、调用需要 accessToken 作参数的接口 等, 均会间接触发调用获取用户信息接口.</li>
                                 </ul>
                             </div>
                         </div>
