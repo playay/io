@@ -21,6 +21,7 @@
                 function loginResultHandler(result) {
                     if (result.success) {
                         localStorage.accessToken = result.data.accessToken
+                        localStorage.accessTokenExpiredAt = result.data.accessTokenExpiredAt
                         localStorage.userAvatar = result.data.userAvatar
                         localStorage.userName = result.data.userName
                         loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
