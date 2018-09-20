@@ -48,7 +48,7 @@
                     <ul class="uk-nav uk-nav-navbar">
                         <li><a href="#showAccessToken" data-uk-modal>查看 accessToken</a></li>
                         <div id="showAccessToken" class="uk-modal">
-                            <div class="uk-modal-dialog">
+                            <div class="uk-modal-dialog" style="width:700px;">
                                 <a class="uk-modal-close uk-close"></a>
                                 <table class="uk-table">
                                     <tbody>
@@ -65,7 +65,7 @@
                                 <ul class="uk-list">
                                     <li>1. 重新登录, 即可重置 accessToken .</li>
                                     <li>2. 调用获取用户信息接口, 能延长 accessToken 的有效期至 当前时间+30天. </li>
-                                    <li>3. 触发调用获取用户信息接口的操作有: 登录状态下刷新页面、调用需要 accessToken 作参数的接口 等.</li>
+                                    <li>3. 登录状态下刷新页面、调用需要 accessToken 作参数的接口 等, 均会间接触发调用获取用户信息接口.</li>
                                 </ul>
                             </div>
                         </div>
