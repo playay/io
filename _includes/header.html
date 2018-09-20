@@ -50,8 +50,19 @@
                         <div id="showAccessToken" class="uk-modal">
                             <div class="uk-modal-dialog">
                                 <a class="uk-modal-close uk-close"></a>
-                                <p id="showAccessToken_0"></p>
-                                <p id="showAccessToken_1"></p>
+                                <table class="uk-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="uk-text-right uk-text-bold">accessToken</td>
+                                            <td id="showAccessToken_0" class="uk-text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="uk-text-right uk-text-bold">过期时间</td>
+                                            <td id="showAccessToken_1" class="uk-text-right"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
                             </div>
                         </div>
                         <li><a onClick="signOut()">退出登录<i id="signOutSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i></a></li>
@@ -82,7 +93,7 @@
                     $("#userAvatar").attr("src", localStorage.userAvatar)
                     $("#userName").html(localStorage.userName)
                     $("#showAccessToken_0").html(localStorage.accessToken)
-                    $("#showAccessToken_1").html(localStorage.accessTokenExpiredAt)
+                    $("#showAccessToken_1").html(new Date(localStorage.accessTokenExpiredAt).toLocaleString())
                     $("#userAvatarAndName").show()
                     $("#signInButton").hide()
                 } else {
