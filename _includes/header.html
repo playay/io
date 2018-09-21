@@ -46,7 +46,7 @@
                 </div>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
-                        <li><a href="#showAccessToken" data-uk-modal>查看 accessToken</a></li>
+                        <!-- <li><a href="#showAccessToken" data-uk-modal>查看 accessToken</a></li> -->
                         <li><a onClick="signOut()">退出登录<i id="signOutSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i></a></li>
                     </ul>
                 </div>
@@ -111,7 +111,29 @@
     </div>
 
     <ul id="header-extend" class="uk-navbar-nav uk-navbar-content uk-navbar-center uk-hidden-small">
-        
+        <li class="header-extend-item" style="float:right">
+            <div id="header-notify" v-bind:class="{'uk-alert':true, 'uk-alert-danger':level=='danger', 'uk-alert-warning':level=='warning', 'uk-alert-success':level=='success'}" 
+                style="display:none;margin-bottom:0px;" v-show="msg">
+                {{msg}}
+            </div>
+            <script>
+                vm_header_notify = new Vue({
+                    el: '#header-notify',
+                    data: {
+                        level:'',
+                        msg: '',
+                    },
+                    methods: {
+                        notify: function(msg, level) {
+                            // msg: 字符串不能太长
+                            // level: 'danger' 红色, 'warning'黄色,'success'绿色, '' 蓝色
+                            this.msg = msg
+                            this.level = level
+                        }
+                    }
+                })
+            </script>
+        </li>
     </ul>
     <!-- 
     <p><i class="uk-icon-wechat"></i> 微信 </p>
@@ -129,7 +151,7 @@
 </script>
 <div id="googleThings"></div>
 <script src="//cdn.feling.io/js/googleThings-2.0.1.js" async defer></script>
-<div id="showAccessToken" class="uk-modal">
+<!-- <div id="showAccessToken" class="uk-modal">
     <div class="uk-modal-dialog" style="width:700px;">
         <table class="uk-table">
             <tbody>
@@ -149,4 +171,4 @@
             <li>3. 登录状态下刷新页面、调用需要 accessToken 作参数的接口 等, 均会间接触发调用获取用户信息接口</li>
         </ul>
     </div>
-</div>
+</div> -->
