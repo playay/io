@@ -65,6 +65,7 @@ description: 快速配置公网可访问的 mock http 接口
             },
             methods: {
                 deleteOne: function(accessItem) {
+                    console.log(accessItem)
                     WithFParams.postForm('/accessManage/deleteOne', 
                         {
                             from: 'mock',
