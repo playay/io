@@ -17,17 +17,17 @@ description: 快速配置公网可访问的 mock http 接口
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="accessItem in accessItemList" :key="accessItem.accessKey">
-                    <td>{{ alias }}</td> 
-                    <td>{{ accessKey }}</td> 
-                    <td>{{ statusName }}</td>
+                <tr v-for="item in accessItemList" :key="item.accessKey">
+                    <td>{{ item.alias }}</td> 
+                    <td>{{ item.accessKey }}</td> 
+                    <td>{{ item.statusName }}</td>
                     <td>
-                        <button class="uk-button uk-button-small" v-show="accessItem.status == 1"
-                            v-on:click="disableOne(accessItem)">停用</button>
-                        <button class="uk-button uk-button-small" v-show="accessItem.status == 0"
-                            v-on:click="enableOne(accessItem)">启用</button>
+                        <button class="uk-button uk-button-small" v-show="item.status == 1"
+                            v-on:click="disableOne(item)">停用</button>
+                        <button class="uk-button uk-button-small" v-show="item.status == 0"
+                            v-on:click="enableOne(item)">启用</button>
                         <button class="uk-button uk-button-small uk-button-danger" 
-                            v-on:click="deleteOne(accessItem)">删除</button>
+                            v-on:click="deleteOne(item)">删除</button>
                     </td> 
                 </tr>
             </tbody>
