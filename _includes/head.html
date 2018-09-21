@@ -25,10 +25,14 @@
     apiHost: 'https://api.feling.io',
     postJson: function (path, data, resultHandler) {
         data.accessToken = localStorage.accessToken
+        var url = apiHost + path
+        if (path.startsWith('http')) {
+            url = path
+        }
         return $.ajax({
             type: 'POST',
             contentType: 'application/json;charset=utf-8',
-            url: this.apiHost + path,
+            url: url,
             data: JSON.stringify(data),
             success: resultHandler,
             dataType: 'json'
@@ -36,9 +40,13 @@
     },
     postForm: function (path, data, resultHandler) {
         data.accessToken = localStorage.accessToken
+        var url = apiHost + path
+        if (path.startsWith('http')) {
+            url = path
+        }
         return $.ajax({
             type: 'POST',
-            url: this.apiHost + path,
+            url: url,
             data: data,
             success: resultHandler,
             dataType: 'json'
