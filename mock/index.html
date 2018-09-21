@@ -17,7 +17,7 @@ description: 快速配置公网可访问的 mock http 接口
             </thead>
             <tbody>
                 <tr v-for="item in accessItemList" :key="item.accessKey">
-                    <td>{{item.alias}}</td> <td>{{item.accessKey}}</td> <td>{{item.statusName}}</td>
+                    <td>{{ item.alias }}</td> <td>{{ item.accessKey }}</td> <td>{{ item.statusName }}</td>
                     <td>
                         <button class="uk-button uk-button-small" 
                             v-on:click="deleteOne(item)">删除</button>
