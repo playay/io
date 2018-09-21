@@ -19,8 +19,12 @@ description: 快速配置公网可访问的 mock http 接口
                 <tr v-for="item in accessItemList" :key="item.accessKey">
                     <td>{{item.alias}}</td> <td>{{item.accessKey}}</td> <td>{{item.statusName}}</td>
                     <td>
-                        <button class="uk-button uk-button-small uk-button-danger" 
+                        <button class="uk-button uk-button-small" 
                             v-on:click="deleteOne(item)">删除</button>
+                        <button class="uk-button uk-button-small" v-show="item.status == 1"
+                            v-on:click="disableOne(item)">停用</button>
+                        <button class="uk-button uk-button-small" v-show="item.status == 0"
+                            v-on:click="enableOne(item)">启用</button>
                     </td> 
                 </tr>
             </tbody>
@@ -34,18 +38,22 @@ description: 快速配置公网可访问的 mock http 接口
                 {
                         alias: 'nihao',
                         accessKey: 'awfewhvgkwjglqwibvlqebnvlqevaqev',
+                        status:'1',
                         statusName: '使用中'
                     },{
                         alias: 'nihao',
                         accessKey: 'awfewhvgkwjglqwibvlqebnvlqevaqev',
+                        status:'0',
                         statusName: '使用中'
                     },{
                         alias: 'nihao',
                         accessKey: 'awfewhvgkwjglqwibvlqebnvlqevaqev',
+                        status:'0',
                         statusName: '使用中'
                     },{
                         alias: 'nihao',
                         accessKey: 'awfewhvgkwjglqwibvlqebnvlqevaqev',
+                        status:'1',
                         statusName: '使用中'
                     }
                 ],
