@@ -18,10 +18,10 @@ description: 快速配置公网可访问的 mock http 接口
             </thead>
             <tbody>
                 <tr v-for="item in accessItemList" :key="item.accessKey">
-                    <td>{{ item.alias }}</td> 
-                    <td>{{ item.accessKey }}</td> 
-                    <td>{{ item.statusName }}</td>
-                    <td>
+                    <td class="uk-text-left">{{ item.alias }}</td> 
+                    <td class="uk-text-left">{{ item.accessKey }}</td> 
+                    <td class="uk-text-left">{{ item.statusName }}</td>
+                    <td class="uk-text-left">
                         <button class="uk-button uk-button-small" v-show="item.status == 1"
                             v-on:click="disableOne(item)">停用</button>
                         <button class="uk-button uk-button-small" v-show="item.status == 0"
