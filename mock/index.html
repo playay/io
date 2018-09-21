@@ -85,6 +85,11 @@ description: 快速配置公网可访问的 mock http 接口
                 addOne: function() {
                     if (this.newAlias === '') {
                         vm_header_notify.notify('请输入要新增的 accessKey 的别名', 'warning')
+                        return
+                    }
+                    if (this.newAlias.length > 2) {
+                        vm_header_notify.notify('别名 要取得足够短才好', 'warning')
+                        return
                     }
                     WithFParams.postForm('/accessManage/addOne', 
                         {
