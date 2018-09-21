@@ -17,9 +17,9 @@ description: 快速配置公网可访问的 mock http 接口
             </thead>
             <tbody>
                 <tr v-for="accessItem in accessItemList" :key="accessItem.accessKey">
-                    <td>{{ accessItem.alias }}</td> 
-                    <td>{{ accessItem.accessKey }}</td> 
-                    <td>{{ accessItem.statusName }}</td>
+                    <td>{{ alias }}</td> 
+                    <td>{{ accessKey }}</td> 
+                    <td>{{ statusName }}</td>
                     <td>
                         <button class="uk-button uk-button-small" v-show="accessItem.status == 1"
                             v-on:click="disableOne(accessItem)">停用</button>
