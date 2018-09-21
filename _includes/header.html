@@ -125,11 +125,14 @@
                         msg: '',
                     },
                     methods: {
-                        notify: function(msg, level) {
+                        notify: function(msg, level, duration) {
                             // msg: 字符串不能太长
                             // level: 'danger' 红色, 'warning'黄色,'success'绿色, '' 蓝色
+                            console.log(duration)
+                            duration= 900
                             this.msg = msg
                             this.level = level
+                            setTimeout(() => {this.msg = ''; this.level = ''}, duration)
                         }
                     }
                 })
