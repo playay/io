@@ -62,10 +62,17 @@ description: 快速配置公网可访问的 mock http 接口
                 
             },
             mounted: function () {
+                WithFParams.postForm('/accessManage/listAll', 
+                    {
+                        from: 'mock'
+                    },
+                    (result) => {
+                        vm_access_manage.accessItemList = result.data
+                    }
+                )
             },
             methods: {
                 deleteOne: function(accessItem) {
-                    console.log(accessItem)
                     WithFParams.postForm('/accessManage/deleteOne', 
                         {
                             from: 'mock',

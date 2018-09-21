@@ -26,7 +26,7 @@
     apiHost: 'https://api.feling.io',
     postJson: function (path, data, resultHandler) {
         data.accessToken = localStorage.accessToken
-        var url = apiHost + path
+        var url = this.apiHost + path
         if (path.startsWith('http')) {
             url = path
         }
@@ -41,7 +41,7 @@
     },
     postForm: function (path, data, resultHandler) {
         data.accessToken = localStorage.accessToken
-        var url = apiHost + path
+        var url = this.apiHost + path
         if (path.startsWith('http')) {
             url = path
         }
