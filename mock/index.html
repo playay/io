@@ -87,7 +87,7 @@ description: 快速配置公网可访问的 mock http 接口
                         vm_header_notify.notify('请输入要新增的 accessKey 的别名', 'warning')
                         return
                     }
-                    if (this.newAlias.length > 20) {
+                    if (this.newAlias.length > 15) {
                         vm_header_notify.notify('别名 要取得足够短才好', 'warning')
                         return
                     }
@@ -99,6 +99,8 @@ description: 快速配置公网可访问的 mock http 接口
                         (result) => {
                             if (result.success) {
                                 this.listAll()
+                                this.newAlias = ''
+                                vm_header_notify.notify('新增成功')
                             } else if (result.code == 'E100000') {
                                 vm_header_notify.notify('新增失败, 别名已被使用', 'danger')
                             } else {
