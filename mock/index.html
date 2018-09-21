@@ -12,7 +12,7 @@ description: 快速配置公网可访问的 mock http 接口
         {% raw %}
         <table class="uk-table uk-table-hover">
             <div class="uk-form uk-form-row" style="float:right;">
-                <input type="text" placeholder="请输入要新增的 accessKey 的别名" v-model="newAlias"/>
+                <input class="uk-form-width-large" type="text" placeholder="请输入要新增的 accessKey 的别名" v-model="newAlias"/>
                 <button class="uk-button uk-button-small uk-button-primary" v-on:click="addOne()">新增</button>
             </div>
             <thead>
@@ -81,7 +81,7 @@ description: 快速配置公网可访问的 mock http 接口
             methods: {
                 addOne: function() {
                     if (this.newAlias === '') {
-                        vm_header_notify.notify('请输入要新增的 accessKey 的别名')
+                        vm_header_notify.notify('请输入要新增的 accessKey 的别名', 'warning')
                     }
                 },
                 deleteOne: function(accessItem) {
