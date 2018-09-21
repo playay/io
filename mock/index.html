@@ -8,7 +8,7 @@ description: 快速配置公网可访问的 mock http 接口
 <li class="header-extend-item uk-parent" data-uk-dropdown="{mode:click}">
     <a class="uk-navbar-content">访问控制</a>
     <div id="access-manage" class="uk-dropdown uk-dropdown-navbar uk-dropdown-scrollable" 
-        style="width:600px;height:400px;max-height:400px;">
+        style="width:700px;height:400px;max-height:400px;">
         {% raw %}
         <div class="uk-form uk-form-row" style="float:right;">
             <input style="width:260px;" type="text" placeholder="请输入要新增的 accessKey 的别名" v-model="newAlias"/>
@@ -87,7 +87,7 @@ description: 快速配置公网可访问的 mock http 接口
                         vm_header_notify.notify('请输入要新增的 accessKey 的别名', 'warning')
                         return
                     }
-                    if (this.newAlias.length > 2) {
+                    if (this.newAlias.length > 20) {
                         vm_header_notify.notify('别名 要取得足够短才好', 'warning')
                         return
                     }
@@ -116,6 +116,7 @@ description: 快速配置公网可访问的 mock http 接口
                         (result) => {
                             if (result.success) {
                                 this.listAll()
+                                vm_header_notify.notify('操作成功')
                             } else {
                                 vm_header_notify.notify('操作失败(' + result.message + ')', 'danger')
                             }
@@ -131,6 +132,7 @@ description: 快速配置公网可访问的 mock http 接口
                         (result) => {
                             if (result.success) {
                                 this.listAll()
+                                vm_header_notify.notify('操作成功')
                             } else {
                                 vm_header_notify.notify('操作失败(' + result.message + ')', 'danger')
                             }
