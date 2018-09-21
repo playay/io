@@ -111,12 +111,31 @@
     </div>
 
     <ul id="header-extend" class="uk-navbar-nav uk-navbar-content uk-navbar-center uk-hidden-small">
+        {% raw %}
         <li class="header-extend-item" style="float:right">
             <div id="header-notify" v-bind:class="{'uk-alert':true, 'uk-alert-danger':level=='danger', 'uk-alert-warning':level=='warning', 'uk-alert-success':level=='success'}" 
                 style="display:none;margin-bottom:0px;" v-show="msg">
-                {% {{msg}} %}
+                {{msg}}
             </div>
+            <script>
+                vm_header_notify = new Vue({
+                    el: '#header-notify',
+                    data: {
+                        level:'',
+                        msg: '',
+                    },
+                    methods: {
+                        notify: function(msg, level) {
+                            // msg: 字符串不能太长
+                            // level: 'danger' 红色, 'warning'黄色,'success'绿色, '' 蓝色
+                            this.msg = msg
+                            this.level = level
+                        }
+                    }
+                })
+            </script>
         </li>
+        {% endraw %}
     </ul>
     <!-- 
     <p><i class="uk-icon-wechat"></i> 微信 </p>
@@ -127,23 +146,6 @@
     -->
 
 </nav>
-<script>
-        vm_header_notify = new Vue({
-            el: '#header-notify',
-            data: {
-                level:'',
-                msg: 'mmm',
-            },
-            methods: {
-                notify: function(msg, level) {
-                    // msg: 字符串不能太长
-                    // level: 'danger' 红色, 'warning'黄色,'success'绿色, '' 蓝色
-                    this.msg = msg
-                    this.level = level
-                }
-            }
-        })
-    </script>
 <script>
     var vm_offcanvas_nav = new Vue({
         el: '#offcanvas-nav',

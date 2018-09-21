@@ -9,6 +9,7 @@ description: 快速配置公网可访问的 mock http 接口
     <a class="uk-navbar-content">访问控制</a>
     <div id="access-manage" class="uk-dropdown uk-dropdown-navbar uk-dropdown-scrollable" 
         style="width:600px;height:400px;max-height:400px;">
+        {% raw %}
         <table class="uk-table uk-table-hover">
             <button class="uk-button uk-button-small uk-button-primary" style="float:right;">新增</button>
             <thead>
@@ -32,6 +33,7 @@ description: 快速配置公网可访问的 mock http 接口
                 </tr>
             </tbody>
         </table>
+        {% endraw %}
     </div>
     <script>
         vm_access_manage = new Vue({
