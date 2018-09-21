@@ -131,6 +131,9 @@
                             if (isNaN(duration)) {
                                 duration= 3000
                             }
+                            if (msg.length > 110) {
+                                msg = msg.substring(0, 100)
+                            }
                             this.msg = msg
                             this.level = level
                             setTimeout(() => {this.msg = ''; this.level = ''}, duration)

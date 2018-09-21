@@ -11,7 +11,7 @@ description: 快速配置公网可访问的 mock http 接口
         style="width:600px;height:400px;max-height:400px;">
         {% raw %}
         <div class="uk-form uk-form-row" style="float:right;">
-            <input class="uk-form-width-large" type="text" placeholder="请输入要新增的 accessKey 的别名" v-model="newAlias"/>
+            <input style="width:260px;" type="text" placeholder="请输入要新增的 accessKey 的别名" v-model="newAlias"/>
             <button class="uk-button uk-button-small uk-button-primary" v-on:click="addOne()">新增</button>
         </div>
         <table class="uk-table uk-table-hover">
@@ -69,20 +69,68 @@ description: 快速配置公网可访问的 mock http 接口
                 
             },
             mounted: function () {
-                WithFParams.postForm('/accessManage/listAll', 
-                    {
-                        from: 'mock'
-                    },
-                    (result) => {
-                        vm_access_manage.accessItemList = result.data
-                    }
-                )
+                this.listAll()
             },
             methods: {
+                listAll: function () {
+                    WithFParams.postForm('/accessManage/listAll', 
+                        {
+                            from: 'mock'
+                        },
+                        (result) => {
+                            vm_access_manage.accessItemList = result.data
+                        }
+                    )
+                },
                 addOne: function() {
                     if (this.newAlias === '') {
                         vm_header_notify.notify('请输入要新增的 accessKey 的别名', 'warning')
                     }
+                    WithFParams.postForm('/accessManage/addOne', 
+                        {
+                            from: 'mock',
+                            alias: this.newAlias,
+                        },
+                        (result) => {
+                            if (result.success) {
+                                this.listAll()
+                            } else if (result.code == 'E100000') {
+                                vm_header_notify.notify('新增失败, 别名已被使用', 'danger')
+                            } else {
+                                vm_header_notify.notify('新增失败(' + result.message + ')', 'danger')
+                            }
+                        }
+                    )
+                },
+                disableOne: function (accessItem) {
+                    WithFParams.postForm('/accessManage/disableOne', 
+                        {
+                            from: 'mock',
+                            accessKey: accessItem.accessKey,
+                        },
+                        (result) => {
+                            if (result.success) {
+                                this.listAll()
+                            } else {
+                                vm_header_notify.notify('操作失败(' + result.message + ')', 'danger')
+                            }
+                        }
+                    )
+                },
+                enableOne: function (accessItem) {
+                    WithFParams.postForm('/accessManage/enableOne', 
+                        {
+                            from: 'mock',
+                            accessKey: accessItem.accessKey,
+                        },
+                        (result) => {
+                            if (result.success) {
+                                this.listAll()
+                            } else {
+                                vm_header_notify.notify('操作失败(' + result.message + ')', 'danger')
+                            }
+                        }
+                    )
                 },
                 deleteOne: function(accessItem) {
                     WithFParams.postForm('/accessManage/deleteOne', 
