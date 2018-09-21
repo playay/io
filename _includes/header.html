@@ -114,7 +114,7 @@
         <li class="header-extend-item" style="float:right">
             <div id="header-notify" v-bind:class="{'uk-alert':true, 'uk-alert-danger':level=='danger', 'uk-alert-warning':level=='warning', 'uk-alert-success':level=='success'}" 
                 style="display:none;margin-bottom:0px;" v-show="msg">
-                {{msg}}
+                {% {{msg}} %}
             </div>
         </li>
     </ul>
