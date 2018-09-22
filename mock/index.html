@@ -21,11 +21,16 @@ description: 快速配置公网可访问的 mock http 接口
                 </tr>
             </thead>
             <tbody>
+                <style>
+                    .fl-no-hover:hover {
+                    }
+                </style>
                 <tr v-for="item in accessItemList" :key="item.accessKey">
                     <td class="uk-text-left"><p>{{ item.alias }}</p></td> 
                     <td class="uk-text-left">{{ item.accessKey }}</td> 
                     <td class="uk-text-left">
-                        <button class="uk-button uk-button-small" :class="{'uk-button-success':item.status == 1}">{{ item.statusName }}</button>
+                        <button class="uk-button uk-button-small fl-no-hover" 
+                            :class="{'uk-button-success':item.status == 1}">{{ item.statusName }}</button>
                     </td>
                     <td class="uk-text-left">
                         <button class="uk-button uk-button-small" v-show="item.status == 1"
