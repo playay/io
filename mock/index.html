@@ -43,30 +43,7 @@ description: 快速配置公网可访问的 mock http 接口
             el:'#access-manage',
             data: {
                 newAlias: '',
-                accessItemList: [
-                {
-                        'alias': 'nihao',
-                        accessKey: 'awfewhvgwjglqwibvlqebnvlqevaqev',
-                        status:1,
-                        statusName: '使用中'
-                    },{
-                        'alias': 'nihao',
-                        accessKey: 'awfewhvgkwjglqwibvlqebnlqevaqev',
-                        status:0,
-                        statusName: '使用中'
-                    },{
-                        'alias': 'nihao',
-                        accessKey: 'awfewhvgkwjglqwibvlqebnvlqevaev',
-                        status:'0',
-                        statusName: '使用中'
-                    },{
-                        'alias': 'nihao',
-                        accessKey: 'awfewhvgkwjlqwibvlqebnvlqevaqev',
-                        status:'1',
-                        statusName: '使用中'
-                    }
-                ],
-                
+                accessItemList: [],
             },
             mounted: function () {
                 this.listAll()
