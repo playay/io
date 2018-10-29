@@ -8,7 +8,7 @@ setTimeout(
             return
         }
         $("#ss-affiliates").hide()
-        $("#googleThings").load("//cdn.feling.io/googleThings-2.0.1.html")
+        $("#googleThings").load("//cdn.feling.io/googleThings-2.0.2.html")
     },
     1500
 );
