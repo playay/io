@@ -4,8 +4,10 @@ setTimeout(
     function () {
         if (!the_gfw.complete || !the_gfw.naturalWidth) {
             the_gfw.src = '' // 没能请求到谷歌的icon
+            $("#ss-affiliates").show()
             return
         }
+        $("#ss-affiliates").hide()
         $("#googleThings").load("//cdn.feling.io/googleThings-2.0.1.html")
     },
     1500
