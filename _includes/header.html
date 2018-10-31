@@ -5,7 +5,40 @@
     </div>
     <ul class="uk-navbar-nav">
         <li class="uk-parent" data-uk-dropdown="{'remaintime':50}">
-            <a>每日扫码领红包</a>
+            <style>
+                .red-point{
+                    position: relative;
+                }
+                .red-point::before{
+                    content: " ";
+                    border: 4px solid red;
+                    border-radius:4px;
+                    position: absolute;
+                    z-index: 1000;
+                    right: 0%;
+                    margin-right: -8px;
+                }
+            </style>
+            <a id="alipay-red-bao" class="red-point" v-on:mouseover="view()">每日扫码领红包</a>
+            <script>
+                var vm_alipay_red_bao = new Vue({
+                    el: '#alipay-red-bao',
+                    mounted: function () {
+                        if (new Date().setHours(0,0,0,0) < localStorage.alipayRedBaoViewTime
+                            || localStorage.alipayRedBaoViewTime < new Date().setHours(23,59,59,0)) {
+                            $('#alipay-red-bao').removeClass('red-point')
+                        } else {
+                            $('#alipay-red-bao').addClass('red-point')
+                        }
+                    },
+                    methods: {
+                        view: function() {
+                            localStorage.alipayRedBaoViewTime = new Date().getTime()
+                            $('#alipay-red-bao').removeClass('red-point')
+                        }
+                    }
+                })
+            </script>
             <div class="uk-dropdown uk-dropdown-small" style="width:288px;">
                 <img src="https://cdn.feling.io/images/alipay-red-bao.png">
             </div>
@@ -166,11 +199,7 @@
     -->
 
 </nav>
-<script>
-    var vm_offcanvas_nav = new Vue({
-        el: '#offcanvas-nav',
-    })
-</script>
+
 <div id="googleThings"></div>
 <script src="//cdn.feling.io/js/googleThings-2.0.2.js" async defer></script>
 <!-- <div id="showAccessToken" class="uk-modal">
