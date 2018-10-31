@@ -415,13 +415,13 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
         </table>
     </div>
 </li>
-<li class="header-extend-item uk-navbar-nav uk-hidden-small">
-    <button id="button-unFoldAll-10" class="uk-button" v-on:click="vm.unFoldAll(1)">1级</button>
-    <button id="button-unFoldAll-20" class="uk-button" v-on:click="vm.unFoldAll(2)">2</button>
-    <button id="button-unFoldAll-30" class="uk-button" v-on:click="vm.unFoldAll(3)">3</button>
-    <button id="button-unFoldAll-40" class="uk-button" v-on:click="vm.unFoldAll(4)">4</button>
-    <button id="button-unFoldAll-50" class="uk-button" v-on:click="vm.unFoldAll(5)">5</button>
-    <button id="button-unFoldAll-n0" class="uk-button" v-on:click="vm.unFoldAll(998)">n级</button>
+<li class="header-extend-item uk-navbar-content uk-hidden-small">
+    <button id="button-unFoldAll-10" class="uk-button" onclick=vm.unFoldAll(1)>1级</button>
+    <button id="button-unFoldAll-20" class="uk-button" onclick=vm.unFoldAll(2)>2</button>
+    <button id="button-unFoldAll-30" class="uk-button" onclick=vm.unFoldAll(3)>3</button>
+    <button id="button-unFoldAll-40" class="uk-button" onclick=vm.unFoldAll(4)>4</button>
+    <button id="button-unFoldAll-50" class="uk-button" onclick=vm.unFoldAll(5)>5</button>
+    <button id="button-unFoldAll-n0" class="uk-button" onclick=vm.unFoldAll(998)>n级</button>
 </li>
 <li class="header-extend-item" style="float:right">
     <div id="copy-success" class="uk-alert uk-alert-success" 
