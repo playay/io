@@ -26,7 +26,7 @@
                     el: '#alipay-red-bao',
                     mounted: function () {
                         if (new Date().setHours(0,0,0,0) < localStorage.alipayRedBaoViewTime
-                            || localStorage.alipayRedBaoViewTime < new Date().setHours(23,59,59,0)) {
+                            && localStorage.alipayRedBaoViewTime < new Date().setHours(23,59,59,0)) {
                             $('#alipay-red-bao').removeClass('red-point')
                         } else {
                             $('#alipay-red-bao').addClass('red-point')
