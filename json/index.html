@@ -84,10 +84,8 @@ description: 格式化、高亮、折叠、转发你的json 字符串。支持�
         <div class="uk-width-1-1" style="height:30px;">
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(1)">1级</button>
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(998)">n级</button>
-            <div>
                 <input class="uk-visible-large" type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
-                <label class="uk-label uk-visible-large" for="array_sampling" title="对于数组，只显示它的第一项">SMode</label>    
-            </div>
+                <label class="uk-label uk-visible-large" for="array_sampling" title="对于数组，只显示它的第一项">SMode</label>
             <div style="float:right;">
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
