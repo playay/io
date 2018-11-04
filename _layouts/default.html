@@ -4,22 +4,18 @@
 {% include head.html %}
 </head>
 
-<body style="height:calc(100% + 50px);">
+<body style="height:calc(100% + 50px);overflow:visible;">
     <header>
     {% include header.html %}
     {% include goTop.html %}
     </header>
     <hr>
     <div id="content" class="uk-width-1-1" 
-        style="padding:10px; height:calc(100% - 90px); overflow: auto;">
+        style="padding:10px;height:calc(100% - 90px);overflow:visible;">
         {{content}}
     </div>
 
-    <div 
-    style="height:50px; 
-        background-color:#ccc;">
-    
-    </div>
+    {% include footer.html %}
     {% include baidu_tongji.html %}
 </body>
 
