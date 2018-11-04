@@ -428,6 +428,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 if (!formConnection.name) {
                     formConnection.name = formConnection.host + ':' + formConnection.port
                 }
+                if (formConnection.name.startsWith(':')) {
+                    vm_header_notify.notify('连接名称不能以“:”开头' , 'danger')
+                    return
+                }
                 var index = this.redisConnections.indexOf(this.editingConnection)
                 if (index !== -1) {
                     if (this.editingConnection.name != formConnection.name) {
