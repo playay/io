@@ -3,24 +3,19 @@
 <head>
 {% include head.html %}
 </head>
-<style>
-    .fl-body-padding-bottom {
-        padding-bottom: 50px;
-        height: calc(100% + 50px);
-    }
-</style>
-<body class="fl-body-padding-bottom">
+
+<body style="height:calc(100% + 50px);">
     <header>
     {% include header.html %}
     {% include goTop.html %}
     </header>
     <hr>
     <div class="uk-width-1-1" 
-        style="padding:10px;height:calc(100% - 100px);">
+        style="padding:10px; height:calc(100% - 100px);">
         {{content}}
     </div>
 
-    <div style="height:50px;background-color:gray"></div>
+    <div style="height:50px; background-color:gray"></div>
     {% include baidu_tongji.html %}
 </body>
 
