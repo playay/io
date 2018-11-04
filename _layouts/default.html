@@ -5,18 +5,20 @@
 </head>
 <style>
     .fl-body-padding-bottom {
-        padding-bottom:60px;
+        padding-bottom: 60px;
+        height: calc(100% + 50px)
     }
 </style>
-<body class="uk-height-1-1 fl-body-padding-bottom">
+<body class="fl-body-padding-bottom">
     <header>
     {% include header.html %}
     {% include goTop.html %}
     </header>
     <hr>
-    <div class="uk-height-1-1 uk-width-1-1" style="padding:10px 10px 0px 10px;">
+    <div class="uk-height-1-1 uk-width-1-1" style="padding:10px;">
         {{content}}
     </div>
+    <div style="height:50px;background-color:red"></div>
     {% include baidu_tongji.html %}
 </body>
 
