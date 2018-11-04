@@ -4,18 +4,38 @@
 {% include head.html %}
 </head>
 
-<body style="height:calc(100% + 50px);overflow:visible;">
+<style>
+body {
+    height: calc(100% + 50px);
+    overflow: visible;
+}
+
+#content {
+    padding: 10px 10px 0px 10px;
+    height: calc(100% - 90px);
+    width: 100%;
+    overflow: visible;
+}
+
+footer {
+    margin-top: 10px; 
+    height: 50px; 
+    background-color: #ccc;
+}
+</style>
+<body>
     <header>
-    {% include header.html %}
-    {% include goTop.html %}
+        {% include header.html %}
+        {% include goTop.html %}
     </header>
     <hr>
-    <div id="content" class="uk-width-1-1" 
-        style="padding:10px;height:calc(100% - 90px);overflow:visible;">
+
+    <div id="content">
         {{content}}
     </div>
-
-    {% include footer.html %}
+    <footer>
+        {% include footer.html %}
+    </footer>
     {% include baidu_tongji.html %}
 </body>
 
