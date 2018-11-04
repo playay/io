@@ -425,6 +425,10 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 $('[tname="edit"]').show()
             },
             saveOne: function (formConnection) {
+                if (!formConnection.host) {
+                    vm_header_notify.notify('主机地址不能为空' , 'danger')
+                    return
+                }
                 if (!formConnection.name) {
                     formConnection.name = formConnection.host + ':' + formConnection.port
                 }
