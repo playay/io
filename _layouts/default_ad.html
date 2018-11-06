@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="uk-height-1-1">
+
+<head>
+{% include head.html %}
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3779740765441924",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+
+<style>
+body {
+    height: calc(100% + 55px);/* footer 高度50 + 5px */
+}
+
+#content {
+    padding: 10px 10px 20px 10px;
+    height: calc(100% - 127px);/* footer 高度50 + 5px, header 40px, body底部空白 20 + 12? px */
+    overflow: auto;
+}
+
+footer {
+    margin-top: 5px; 
+    height: 50px; 
+    background-color: #eee;
+}
+</style>
+<body>
+    <header>
+        {% include header.html %}
+        {% include goTop.html %}
+    </header>
+    <hr>
+
+    <div id="content">
+        {{content}}
+    </div>
+    <footer>
+        {% include footer.html %}
+    </footer>
+    {% include baidu_tongji.html %}
+</body>
+
+</html>
