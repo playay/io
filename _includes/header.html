@@ -2,48 +2,56 @@
     <a class="uk-navbar-brand" data-uk-offcanvas="{target:'#offcanvas-nav',mode:'push'}">
         <i class="uk-icon-bars" title="ctrl+b"></i>
     </a>
-    <ul class="uk-navbar-nav">
+    <ul id="alipay-red-bao-ul" class="uk-navbar-nav uk-visible-large" style="display:none;">
         <li class="uk-parent" data-uk-dropdown="{'remaintime':200}">
-            <style>
-                .red-point{
-                    position: relative;
-                }
-                .red-point::before{
-                    content: " ";
-                    border: 4px solid red;
-                    border-radius:4px;
-                    position: absolute;
-                    z-index: 1000;
-                    right: 0%;
-                    margin-right: 10px;
-                    margin-top: 8px;
-                }
-            </style>
-            <a id="alipay-red-bao" class="red-point uk-visible-large" v-on:mouseover="view()">领支付宝红包</a>
-            <script>
-                var vm_alipay_red_bao = new Vue({
-                    el: '#alipay-red-bao',
-                    mounted: function () {
-                        if (new Date().setHours(0,0,0,0) < localStorage.alipayRedBaoViewTime
-                            && localStorage.alipayRedBaoViewTime < new Date().setHours(23,59,59,0)) {
-                            $('#alipay-red-bao').removeClass('red-point')
-                        } else {
-                            $('#alipay-red-bao').addClass('red-point')
-                        }
-                    },
-                    methods: {
-                        view: function() {
-                            localStorage.alipayRedBaoViewTime = new Date().getTime()
-                            $('#alipay-red-bao').removeClass('red-point')
-                        }
-                    }
-                })
-            </script>
+            <a id="alipay-red-bao" class="red-point" v-on:mouseover="view()">领支付宝红包</a>
             <div class="uk-dropdown uk-dropdown-small" style="width:240px;">
                 <img src="https://cdn.feling.io/images/alipay-red-bao.png">
+                <button class="uk-button uk-button-primary" v-on:click="doNotShow()">我不想再看见这个东西</button>
             </div>
         </li>
     </ul>
+    <style>
+        .red-point{
+            position: relative;
+        }
+        .red-point::before{
+            content: " ";
+            border: 4px solid red;
+            border-radius:4px;
+            position: absolute;
+            z-index: 1000;
+            right: 0%;
+            margin-right: 10px;
+            margin-top: 8px;
+        }
+    </style>
+    <script>
+        var vm_alipay_red_bao = new Vue({
+            el: '#alipay-red-bao-ul',
+            mounted: function () {
+                if (localStorage.alipayRedBaoNeedShow != '0') {
+                    $('#alipay-red-bao-ul').show()
+                    if (new Date().setHours(0,0,0,0) < localStorage.alipayRedBaoViewTime
+                        && localStorage.alipayRedBaoViewTime < new Date().setHours(23,59,59,0)) {
+                        $('#alipay-red-bao').removeClass('red-point')
+                    } else {
+                        $('#alipay-red-bao').addClass('red-point')
+                    }
+                }
+            },
+            methods: {
+                view: function() {
+                    localStorage.alipayRedBaoViewTime = new Date().getTime()
+                    $('#alipay-red-bao').removeClass('red-point')
+                },
+                doNotShow: function() {
+                    localStorage.alipayRedBaoNeedShow = '0'
+                    $('#alipay-red-bao-ul').hide(1000)
+                }
+            }
+        })
+    </script>
 
     <div id="offcanvas-nav" class="uk-offcanvas">
         <div class="uk-offcanvas-bar">
