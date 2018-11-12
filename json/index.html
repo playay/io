@@ -77,7 +77,9 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
 <div id="main" class="uk-grid uk-grid-collapse uk-height-1-1">
     <div id="json_src_box" class="uk-width-10-10">
         <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" 
-            v-on:input="jsonSrcChange" v-on:click="cursorPosition = $('#json_src').prop('selectionStart')">
+        v-on:click="cursorPosition = $('#json_src').prop('selectionStart')"
+        v-on:keydown="cursorPosition = $('#json_src').prop('selectionStart')"
+        v-on:input="jsonSrcChange">
         </textarea>
     </div>
 
@@ -132,7 +134,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             reLink: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
             reLastComma: /,(\s*[}\]])/g,
             cursorPosition: '?',
-            jsonSrc: '{"hello":"json 格式化","特性列表":["支持 多种复制模式","支持 生成转发当前内容的链接","支持 快捷键","支持 URL 地址可点击","支持 折叠后显示数组的长度 或 对象的包含的属性个数","支持 对数组只解析第一项 —— SMode","支持 显示输入框光标位置。方便在输入的json格式有问题时，根据 chrome 的提示位置信息定位错误位置","兼容 最后一项后面多出一个逗号: ,"],"obj":{"num":-24,"null":null,"boolean":true},"objList":[{},{"key":"value"}]}',
+            jsonSrc: '{"hello":"json 格式化","特性列表":["多种复制模式、URL 地址可点击、快捷键","支持 生成转发当前内容的链接","支持 折叠后显示数组的长度 或 对象的包含的属性个数","支持 对数组只解析第一项 —— SMode","支持 显示输入框光标位置。方便在输入的json格式有问题时，根据 chrome 的提示位置信息定位错误位置","兼容 最后一项后面多出一个逗号: ,"],"obj":{"num":-24,"null":null,"boolean":true},"objList":[{},{"key":"value"}]}',
             jsonResultTemp:[],
             jsonResult: '',
             tab: '    ',
@@ -255,6 +257,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 this.genValue(obj, depth)
             },
             jsonSrcChange: function () {
+                this.cursorPosition = $('#json_src').prop('selectionStart')
                 localStorage.json_arraySampling = this.arraySampling
                 if (this.jsonSrc === '') {
                     return
