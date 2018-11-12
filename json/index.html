@@ -80,7 +80,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         v-on:click="$('#cursor-position').show();cursorPosition = $('#json_src').prop('selectionStart')"
         v-on:keydown="cursorPosition = $('#json_src').prop('selectionStart')"
         v-on:blur="cursorPosition = '?'"
-        v-on:input="jsonSrcChange">
+        v-on:input="cursorPosition = $('#json_src').prop('selectionStart');jsonSrcChange()">
         </textarea>
     </div>
 
