@@ -6,13 +6,13 @@
     </div>
 
 
-    <div id="ad-footer" class="uk-visible-large uk-width-medium-2-3">
+    <div id="ad-footer" style="display:none;" class="uk-visible-large uk-width-medium-2-3">
             <figure class="uk-overlay" style="float:right;">
                 <a target="_blank" href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=b6wzfjp8">
                     <img src="//cdn.feling.io/images/ad_aliyun_20per_1.png">
                 </a>
-                <figcaption class="uk-overlay-panel uk-overlay-bottom" style="padding:0;">
-                    <button class="uk-button" style="float:right;" v-on:click="doNotShow()">不再显示</button>
+                <figcaption class="uk-overlay-panel uk-overlay-bottom" style="padding:0;width:80px;">
+                    <button class="uk-button" v-on:click="doNotShow()">不再显示</button>
                 </figcaption>
             </figure>
     </div>
@@ -20,13 +20,13 @@
         vm_ad_footer = new Vue({
             el: '#ad-footer',
             mounted: function () {
-                if (localStorage.alipayRedBaoNeedShow != '0') {
+                if (localStorage.adFooterNeedShow != '0') {
                     $('#ad-footer').show()
                 }
             },
             methods: {
                 doNotShow: function() {
-                    localStorage.alipayRedBaoNeedShow = '0'
+                    localStorage.adFooterNeedShow = '0'
                     $('#ad-footer').hide()
                 }
             }
