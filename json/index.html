@@ -85,16 +85,16 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(1)">1级</button>
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(998)">n级</button>
                 <input class="uk-visible-large" type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
-                <label class="uk-label uk-visible-large" for="array_sampling" title="对于数组，只显示它的第一项">SMode</label>
+                <label class="uk-label uk-visible-large" for="array_sampling" data-uk-tooltip title="对于数组，只显示它的第一项">SMode</label>
             <div style="float:right;">
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                         转发当前JSON</button>
                 <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
-                <button class="uk-button copy-button" data-clipboard-target="#json_result" title="复制结果框当前显示的文本, 折叠的内容依然折叠">复制</button>
-                <button class="uk-button copy-button uk-visible-large" title="完全展开结果框的内容, 然后复制" 
+                <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip title="复制结果框当前显示的文本, 折叠的内容依然折叠">复制</button>
+                <button class="uk-button copy-button uk-visible-large" data-uk-tooltip title="完全展开结果框的内容, 然后复制" 
                     data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
-                <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" title="复制压缩后的 json" >压缩 &amp; 复制</button>
+                <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" data-uk-tooltip title="复制压缩后的 json, 不影响结果框的内容" >压缩 &amp; 复制</button>
             </div>
         </div>
         <hr style="margin: 0px">

@@ -1,10 +1,10 @@
 <nav class="uk-navbar">
     <a class="uk-navbar-brand" data-uk-offcanvas="{target:'#offcanvas-nav',mode:'push'}">
-        <i class="uk-icon-bars" title="ctrl+b"></i>
+        <i class="uk-icon-bars" data-uk-tooltip title="ctrl+b"></i>
     </a>
     <ul id="alipay-red-bao-ul" class="uk-navbar-nav uk-visible-large" style="display:none;">
         <li class="uk-parent" data-uk-dropdown="{'remaintime':200}">
-            <a id="alipay-red-bao" class="red-point" v-on:mouseover="view()">领支付宝红包</a>
+            <a id="alipay-red-bao" class="red-point" v-on:mouseover="view()">支付宝红包</a>
             <div class="uk-dropdown uk-dropdown-small" style="width:240px;">
                 <img src="https://cdn.feling.io/images/alipay-red-bao.png"><br>
                 <button class="uk-button uk-width-1-1" v-on:click="doNotShow()">不再显示</button>
