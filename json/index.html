@@ -76,20 +76,21 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
 
 <div id="main" class="uk-grid uk-grid-collapse uk-height-1-1">
     <div id="json_src_box" class="uk-width-10-10">
-        <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" v-on:input="jsonSrcChange">
+        <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" 
+            v-on:input="jsonSrcChange" v-on:fouce="cursorPosition = $('#json_src').selectionStart">
         </textarea>
     </div>
 
     <div id="json_result_box" class="uk-width-10-10">
         <div class="uk-width-1-1" style="height:30px;">
             {% raw %}
-            <span id="cursor-position"> {{ cursorPosition }} / {{ jsonSrc.length }} </span>
+            <span data-uk-tooltip title="输入框中 光标的位置"> {{ cursorPosition }} / {{ jsonSrc.length }} </span>
             {% endraw %}
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(1)">1级</button>
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(998)">n级</button>
             <div style="float:right;">
                 <input class="uk-visible-large" type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
-                <label class="uk-label uk-visible-large" for="array_sampling" data-uk-tooltip title="对于数组，只显示它的第一项">SMode</label>
+                <label class="uk-label uk-visible-large" for="array_sampling" data-uk-tooltip title="对于数组，只显示它的第一项">SMode  </label>
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                         转发当前JSON</button>
