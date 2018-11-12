@@ -84,7 +84,9 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     <div id="json_result_box" class="uk-width-10-10">
         <div class="uk-width-1-1" style="height:30px;">
             {% raw %}
-            <span data-uk-tooltip title="输入框中 光标的位置"> {{ cursorPosition }} / {{ jsonSrc.length }} </span>
+            <span id="cursor-position" style="display:none;" data-uk-tooltip title="输入框中 光标的位置">
+                {{ cursorPosition }} / {{ jsonSrc.length }} 
+            </span>
             {% endraw %}
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(1)">1级</button>
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(998)">n级</button>
@@ -157,6 +159,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             } else {
                 this.jsonSrcChange()
             }
+            $('#cursor-position').show()
         },
         methods: {
             isArray: function (obj) {
