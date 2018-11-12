@@ -150,11 +150,14 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 &nbsp;&nbsp;&nbsp;&nbsp;3. 当这个 socket 连接收到数据时, 把收到的数据通知给你。<br>
                             </li>
                             <!-- <li>ws2s 安装实践(一)、(二)...待续...介绍两种不同的部署方案, 安装在本地、安装在远程</li> -->
-                            <!-- <li>
+                            <li>
                                 TODO: <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;1. 连接编辑区, 新增 `test connection` 按钮 <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;2. 点击 `connect` 按钮, 建立连接失败时, 还没有友好的提示 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 不允许创建同名的连接信息 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 删除连接信息、修改连接名称时，历史记录未同步处理的问题 <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. 点击 `connect` 按钮, 建立连接失败时, 还没有友好的提示 <br>
                                 <br>
+                                2018-09-21: <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. 有提示信息时，能在header 中显示 <br>
                                 2018-04-16: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 左侧的 连接信息列表, 可折叠 <br>
                                 2018-04-15: <br>
@@ -166,13 +169,13 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                                 2018-04-09: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 已保存的连接信息, 支持拖拽排序 <br>
                                 更早以前、记不清日期的: <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;0. 去 <a href="https://github.com/jcubic/jquery.terminal" target="_blank">jquery.terminal</a> 记录历史命令的坑, 自己实现记录历史命令的功能<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;0. 填 <a href="https://github.com/jcubic/jquery.terminal" target="_blank">jquery.terminal</a> 记录历史命令的坑, 自己实现记录历史命令的功能<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. array in array 的 redis 响应（如 `scan 0` 命令), 展示更友好的缩进 <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;2. 优化对超大 redis 响应的处理: 不直接打印在页面上、新增了 下载/复制 最后一个 redis 响应的命令 <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;3. 最后一个 redis 响应是 json 字符串的话, 可以执行 `jq` 命令, 在新窗口用在线 json 格式化工具打开 <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;4. 解决 python-websocket-server 并发地向同一个客户端发送数据时, 多条数据的内容交织在一起的问题<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;5. 解决 <a href="https://github.com/playay/python-websocket-server" target="_blank">python-websocket-server</a> 接收中文时乱码的问题, 并获得 `人生第一个 Pull Requests` 成就 <br>
-                            </li> -->
+                            </li>
                             <li>
                                 fredis 还有很多不足的地方, 功能上、代码上。希望能在 github 上见: <br><br>
                                 前端: <a href="https://github.com/playay/io/blob/master/redis/index.html" target="_blank">https://github.com/playay/io/blob/master/redis/index.html</a><br>
@@ -186,7 +189,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             <li><a href="#">为什么开发fredis?</a></li>
                             <li><a href="#">什么是ws2s?</a></li>
                             <!-- <li><a href="#">ws2s 安装实践</a></li> -->
-                            <!-- <li><a href="#">近期更新的功能</a></li> -->
+                            <li><a href="#">近期更新的功能</a></li>
                             <li><a href="#">一起参与 fredis 的开发</a></li>
                         </ul>
                     </div>
