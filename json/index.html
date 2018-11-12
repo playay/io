@@ -82,11 +82,14 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
 
     <div id="json_result_box" class="uk-width-10-10">
         <div class="uk-width-1-1" style="height:30px;">
+            {% raw %}
+            <span id="cursor-position"> {{ cursorPosition }} / {{ jsonSrc.length }} </span>
+            {% endraw %}
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(1)">1级</button>
             <button class="uk-button uk-visible-small" v-on:click="unFoldAll(998)">n级</button>
+            <div style="float:right;">
                 <input class="uk-visible-large" type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
                 <label class="uk-label uk-visible-large" for="array_sampling" data-uk-tooltip title="对于数组，只显示它的第一项">SMode</label>
-            <div style="float:right;">
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                         转发当前JSON</button>
@@ -124,8 +127,9 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         el: "#main",
         data: {
             reLink: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
-            reLastComma: /,\s*([}\]])/g,
-            jsonSrc: '{"hello":"json 格式化","siteList":["https://feling.io","https://pages.feling.net"],"obj":{"num":24,"null":null,"boolean":true},"objList":[{},{"key":"value"}]}',
+            reLastComma: /,(\s*[}\]])/g,
+            cursorPosition: '?',
+            jsonSrc: '{"hello":"json 格式化","特性列表":["支持 多种复制模式","支持 生成转发当前内容的链接","支持 快捷键","支持 URL 地址可点击","支持 折叠后显示数组的长度 或 对象的包含的属性个数","支持 对数组只解析第一项 —— SMode","支持 显示输入框光标位置。方便在输入的json格式有问题时，根据 chrome 的提示位置信息定位错误位置","兼容 最后一项后面多出一个逗号: ,"],"obj":{"num":-24,"null":null,"boolean":true},"objList":[{},{"key":"value"}]}',
             jsonResultTemp:[],
             jsonResult: '',
             tab: '    ',
@@ -252,7 +256,10 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     return
                 }
                 try {
-                    var obj = JSON.parse(this.jsonSrc.replace(this.reLastComma, "$1"))
+                    var obj = JSON.parse(
+                        this.jsonSrc
+                        .replace(this.reLastComma, " $1")
+                    )
                     this.jsonResultTemp = []
                     this.genResult(obj, 0)
                     this.deletLastComma()
