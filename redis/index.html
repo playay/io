@@ -151,11 +151,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                             </li>
                             <!-- <li>ws2s 安装实践(一)、(二)...待续...介绍两种不同的部署方案, 安装在本地、安装在远程</li> -->
                             <li>
-                                TODO: <br>
+                                2018-11-13: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 不允许创建同名的连接信息 <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;2. 删除连接信息、修改连接名称时，历史记录未同步处理的问题 <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;3. 点击 `connect` 按钮, 建立连接失败时, 还没有友好的提示 <br>
-                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. 删除连接信息时，对应的历史记录未同步处理的问题 <br>
                                 2018-09-21: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;1. 有提示信息时, 能在 header 中显示 <br>
                                 2018-04-16: <br>
@@ -387,6 +385,8 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             deleteOne: function () {
                 var index = this.redisConnections.indexOf(this.editingConnection)
                 if (index !== -1) {
+                    let historyKey = 'fredis_' + this.editingConnection.name + '_history'
+                    localStorage.removeItem(historyKey)
                     this.redisConnections.splice(index, 1)
                     localStorage.redis_connections = JSON.stringify(this.redisConnections)
                     this.editOne()
@@ -435,10 +435,6 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 if (!formConnection.name) {
                     formConnection.name = formConnection.host + ':' + formConnection.port
                 }
-                if (formConnection.name.startsWith(':')) {
-                    vm_header_notify.notify('连接名称不能以“:”开头' , 'danger')
-                    return
-                }
                 var index = this.redisConnections.indexOf(this.editingConnection)
                 if (index !== -1) {
                     if (this.editingConnection.name != formConnection.name) {
@@ -449,6 +445,12 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     }
                     this.redisConnections.splice(index, 1, formConnection)
                 } else {
+                    for (item in this.redisConnections) {
+                        if (item.name == formConnection.name) {
+                            vm_header_notify.notify('已经存在相同名称的连接信息, 换个 name 吧' , 'danger')
+                            return
+                        }
+                    }
                     this.redisConnections.push(JSON.parse(JSON.stringify(formConnection)))
                 }
                 localStorage.redis_connections = JSON.stringify(this.redisConnections)
