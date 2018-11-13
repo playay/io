@@ -445,9 +445,8 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     }
                     this.redisConnections.splice(index, 1, formConnection)
                 } else {
-                    for (item in this.redisConnections) {
-                        console.log(item, '   ', formConnection)
-                        if (item.name == formConnection.name) {
+                    for (i in this.redisConnections) {
+                        if (redisConnections[i].name == formConnection.name) {
                             vm_header_notify.notify('已经存在相同名称的连接信息, 换个 name 吧' , 'danger')
                             return
                         }
