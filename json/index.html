@@ -95,7 +95,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             {% endraw %}
             <div style="float:right;">
                 <input class="uk-visible-large" type="checkbox" style="display:none;"
-                    id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange()">
+                    id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange();jsonSrcChange()">
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                         转发当前JSON</button>
@@ -148,6 +148,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             if (localStorage.json_arraySampling !== undefined) {
                 this.arraySampling = localStorage.json_arraySampling === 'true'
             }
+            this.SModeStatusChange()
             if (localStorage.json_defaultFold) {
                 this.defaultFold = localStorage.json_defaultFold
             }
@@ -291,7 +292,6 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     $('#array-sampling-off').show()
                 }
                 localStorage.json_arraySampling = this.arraySampling
-                this.jsonSrcChange()
             },
             unFoldAll: function (level) {
                 localStorage.json_defaultFold = level - 1
