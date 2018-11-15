@@ -451,6 +451,17 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         <span id="array-sampling-on" style="display:none;">已开启</span>
         <span id="array-sampling-off" style="display:none;">已关闭</span>
     </label>
+    <script>
+        if (localStorage.json_arraySampling) {
+            $('#array-sampling-on').show()
+            $('#array-sampling-label').addClass('uk-button-success')
+            $('#array-sampling-off').hide()
+        } else {
+            $('#array-sampling-on').hide()
+            $('#array-sampling-label').removeClass('uk-button-success')
+            $('#array-sampling-off').show()
+        }
+    </script>
 </li>
 <li class="header-extend-item" style="float:right">
     <div id="copy-success" class="uk-alert uk-alert-success" 
