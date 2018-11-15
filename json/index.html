@@ -284,14 +284,16 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 }
             },
             SModeStatusChange: function () {
+                localStorage.json_arraySampling = this.arraySampling
                 if (this.arraySampling) {
                     $('#array-sampling-on').show()
+                    $('#array-sampling-label').addClass('uk-button-success')
                     $('#array-sampling-off').hide()
                 } else {
                     $('#array-sampling-on').hide()
+                    $('#array-sampling-label').removeClass('uk-button-success')
                     $('#array-sampling-off').show()
                 }
-                localStorage.json_arraySampling = this.arraySampling
             },
             unFoldAll: function (level) {
                 localStorage.json_defaultFold = level - 1
@@ -444,7 +446,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     <button id="button-unFoldAll-n" class="uk-button" onclick=vm.unFoldAll(998)>n级</button>
 </li>
 <li class="header-extend-item uk-navbar-content">
-    <label class="uk-label uk-visible-large" for="array_sampling" 
+    <label class="uk-label uk-visible-large uk-button" id="array-sampling-label" for="array_sampling" 
         data-uk-tooltip title="对于数组，只显示它的第一项">SMode: 
         <span id="array-sampling-on" style="display:none;">已开启</span>
         <span id="array-sampling-off" style="display:none;">已关闭</span>
