@@ -452,7 +452,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         <span id="array-sampling-off" style="display:none;">已关闭</span>
     </label>
     <script>
-        if (localStorage.json_arraySampling) {
+        if (localStorage.json_arraySampling == 'true') {
             $('#array-sampling-on').show()
             $('#array-sampling-label').addClass('uk-button-success')
             $('#array-sampling-off').hide()
