@@ -95,7 +95,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             {% endraw %}
             <div style="float:right;">
                 <input class="uk-visible-large" type="checkbox" style="display:none;"
-                    id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
+                    id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange()">
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
                         <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                         转发当前JSON</button>
@@ -257,7 +257,6 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 this.genValue(obj, depth)
             },
             jsonSrcChange: function () {
-                localStorage.json_arraySampling = this.arraySampling
                 if (this.jsonSrc === '') {
                     return
                 }
@@ -282,6 +281,17 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                         // setTimeout(() => {document.getElementById('json_src').setSelectionRange(position - 10, position + 10)}, 500)
                     }
                 }
+            },
+            SModeStatusChange: function () {
+                if (this.arraySampling) {
+                    $('#array-sampling-on').show()
+                    $('#array-sampling-off').hide()
+                } else {
+                    $('#array-sampling-on').hide()
+                    $('#array-sampling-off').show()
+                }
+                localStorage.json_arraySampling = this.arraySampling
+                this.jsonSrcChange()
             },
             unFoldAll: function (level) {
                 localStorage.json_defaultFold = level - 1
@@ -434,7 +444,11 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     <button id="button-unFoldAll-n" class="uk-button" onclick=vm.unFoldAll(998)>n级</button>
 </li>
 <li class="header-extend-item uk-navbar-content">
-    <label class="uk-label uk-visible-large" for="array_sampling" data-uk-tooltip title="对于数组，只显示它的第一项">SMode</label>
+    <label class="uk-label uk-visible-large" for="array_sampling" 
+        data-uk-tooltip title="对于数组，只显示它的第一项">SMode: 
+        <span id="array-sampling-on" style="display:none;">已开启</span>
+        <span id="array-sampling-off" style="display:none;">已关闭</span>
+    </label>
 </li>
 <li class="header-extend-item" style="float:right">
     <div id="copy-success" class="uk-alert uk-alert-success" 
