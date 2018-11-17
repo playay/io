@@ -1,6 +1,6 @@
 title:          feling.io
 exclude:        ['README.md']
 include:        ['.well-known']
-timezone:       Asia/shanghai
+timezone:       'Asia/shanghai'
 encoding:       'utf-8'
 url:            https://feling.io
