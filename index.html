@@ -12,6 +12,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     <a href="/mock/"></a>
 </div>
 
+
 <style type="text/css">
     .json_key {
         color: #92278f;
@@ -88,7 +89,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             v-on:keydown="cursorPosition = $('#json_src').prop('selectionStart')"
             v-on:blur="cursorPosition = '?'"
             v-on:input="cursorPosition = $('#json_src').prop('selectionStart');jsonSrcChange()">
-        </textarea>
+            </textarea>
         </div>
     
         <div id="json_result_box" class="uk-width-10-10">
@@ -101,14 +102,14 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 </span>
                 {% endraw %}
                 <div style="float:right;">
-                    <input class="uk-visible-large" type="checkbox" id="array_sampling" v-model="arraySampling" v-on:change="jsonSrcChange">
-                    <label class="uk-label uk-visible-large" for="array_sampling" data-uk-tooltip title="对于数组，只显示它的第一项">SMode</label>
+                    <input class="uk-visible-large" type="checkbox" style="display:none;"
+                        id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange();jsonSrcChange()">
                     <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
                             <i id="genShareLinkSpinner" class="uk-icon-spinner uk-icon-spin" style="display:none"></i>
                             转发当前JSON</button>
                     <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
-                    <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip title="复制结果框当前显示的文本(“折叠效果”也会被复制)">复制</button>
-                    <button class="uk-button copy-button uk-visible-large" data-uk-tooltip title="完全展开结果框的内容, 然后复制(不会复制“折叠效果”)" 
+                    <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip title="复制结果框当前显示的文本<br>(“折叠效果”也会被复制)">复制</button>
+                    <button class="uk-button copy-button uk-visible-large" data-uk-tooltip title="完全展开结果框的内容, 然后复制<br>(不会复制“折叠效果”)" 
                         data-clipboard-target="#json_result" @click="unFoldAll(998)">n级 &amp; 复制</button>
                     <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" data-uk-tooltip title="复制压缩后的 json, 不影响结果框的内容" >压缩 &amp; 复制</button>
                 </div>
@@ -155,6 +156,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 if (localStorage.json_arraySampling !== undefined) {
                     this.arraySampling = localStorage.json_arraySampling === 'true'
                 }
+                this.SModeStatusChange()
                 if (localStorage.json_defaultFold) {
                     this.defaultFold = localStorage.json_defaultFold
                 }
@@ -264,7 +266,6 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     this.genValue(obj, depth)
                 },
                 jsonSrcChange: function () {
-                    localStorage.json_arraySampling = this.arraySampling
                     if (this.jsonSrc === '') {
                         return
                     }
@@ -288,6 +289,18 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                             // $('#json_src').focus()
                             // setTimeout(() => {document.getElementById('json_src').setSelectionRange(position - 10, position + 10)}, 500)
                         }
+                    }
+                },
+                SModeStatusChange: function () {
+                    localStorage.json_arraySampling = this.arraySampling
+                    if (this.arraySampling) {
+                        $('#array-sampling-on').show()
+                        $('#array-sampling-label').addClass('uk-button-success')
+                        $('#array-sampling-off').hide()
+                    } else {
+                        $('#array-sampling-on').hide()
+                        $('#array-sampling-label').removeClass('uk-button-success')
+                        $('#array-sampling-off').show()
                     }
                 },
                 unFoldAll: function (level) {
@@ -439,6 +452,24 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         <button id="button-unFoldAll-4" class="uk-button" onclick=vm.unFoldAll(4)>4</button>
         <button id="button-unFoldAll-5" class="uk-button" onclick=vm.unFoldAll(5)>5</button>
         <button id="button-unFoldAll-n" class="uk-button" onclick=vm.unFoldAll(998)>n级</button>
+    </li>
+    <li class="header-extend-item uk-navbar-content">
+        <label class="uk-label uk-visible-large uk-button" id="array-sampling-label" for="array_sampling" 
+            data-uk-tooltip title="对于数组，只显示它的第一项">SMode: 
+            <span id="array-sampling-on" style="display:none;">已开启</span>
+            <span id="array-sampling-off" style="display:none;">已关闭</span>
+        </label>
+        <script>
+            if (localStorage.json_arraySampling == 'true') {
+                $('#array-sampling-on').show()
+                $('#array-sampling-label').addClass('uk-button-success')
+                $('#array-sampling-off').hide()
+            } else {
+                $('#array-sampling-on').hide()
+                $('#array-sampling-label').removeClass('uk-button-success')
+                $('#array-sampling-off').show()
+            }
+        </script>
     </li>
     <li class="header-extend-item" style="float:right">
         <div id="copy-success" class="uk-alert uk-alert-success" 
