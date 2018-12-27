@@ -161,6 +161,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 this.jsonSrcChange()
                 this.loadJsonSrcByShareId(shareId)
             } else {
+                window.top.history.replaceState(null, null, "/json/")
                 this.jsonSrcChange()
             }
         },
