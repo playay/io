@@ -351,9 +351,11 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             getQueryParamAndClearAll: function(key) {
                 var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
                 var r = window.top.location.search.substr(1).match(reg);
-                if (r != null) return decodeURIComponent(r[2]); return null;
-                
                 window.top.history.replaceState(null, null, "/json/")
+                if (r != null) {
+                    return decodeURIComponent(r[2])
+                }
+                return null;
             },
             loadJsonSrcByShareId: function(shareId) {
                 WithFParams.postForm('/unclassified/jsonShare/get',
