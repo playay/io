@@ -155,13 +155,12 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
             if (localStorage.json_jsonSrc) {
                 this.jsonSrc = localStorage.json_jsonSrc
             }
-            let shareId = this.getQueryParam('shareId')
+            let shareId = this.getQueryParamAndClearAll('shareId')
             if (shareId) {
                 this.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 JSON 加载中..."}'
                 this.jsonSrcChange()
                 this.loadJsonSrcByShareId(shareId)
             } else {
-                window.top.history.replaceState(null, null, "/json/")
                 this.jsonSrcChange()
             }
         },
@@ -349,10 +348,12 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     })
                 }
             },
-            getQueryParam: function(key) {
+            getQueryParamAndClearAll: function(key) {
                 var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
                 var r = window.top.location.search.substr(1).match(reg);
                 if (r != null) return decodeURIComponent(r[2]); return null;
+                
+                window.top.history.replaceState(null, null, "/json/")
             },
             loadJsonSrcByShareId: function(shareId) {
                 WithFParams.postForm('/unclassified/jsonShare/get',
@@ -367,7 +368,6 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                         }
                     }
                 ).always(() => {
-                    window.top.history.replaceState(null, null, "/json/")
                     this.jsonSrcChange()
                 })
             },
