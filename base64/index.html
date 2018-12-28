@@ -34,6 +34,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
     if (typeof localStorage.base64_activeTab == "undefined") {
         localStorage.base64_activeTab = 1
     }
+    window.top.history.replaceState(null, null, "/base64/")
 </script>
 
 <div class="uk-width-10-10 uk-height-1-1" style="padding-bottom: 50px;">
