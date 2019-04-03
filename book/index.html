@@ -124,7 +124,17 @@
         1111
     </div>
     <script>
-    
+        WithFParams.postForm(
+            '/unclassified/book/query',
+            {
+                'user_name': 'ChenYan',
+                'start_day': '2019-04-03',
+                'end_day': '2019-04-03',
+            },
+            (result) => {
+                
+            }
+        )
     </script>
 
 </body>
