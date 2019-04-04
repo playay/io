@@ -13,8 +13,9 @@
     
     <script src="//cdn.feling.io/js/jquery-3.3.1.min.js"></script>
     <script src="//cdn.feling.io/js/vue.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script> -->
-    
+    <script>
+        var DateFormat={};!function(a){var b=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],c=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],d=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],e=["January","February","March","April","May","June","July","August","September","October","November","December"],f={Jan:"01",Feb:"02",Mar:"03",Apr:"04",May:"05",Jun:"06",Jul:"07",Aug:"08",Sep:"09",Oct:"10",Nov:"11",Dec:"12"},g=/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.?\d{0,3}[Z\-+]?(\d{2}:?\d{2})?/;a.format=function(){function a(a){return b[parseInt(a,10)]||a}function h(a){return c[parseInt(a,10)]||a}function i(a){var b=parseInt(a,10)-1;return d[b]||a}function j(a){var b=parseInt(a,10)-1;return e[b]||a}function k(a){return f[a]||a}function l(a){var b,c,d,e,f,g=a,h="";return-1!==g.indexOf(".")&&(e=g.split("."),g=e[0],h=e[e.length-1]),f=g.split(":"),3===f.length?(b=f[0],c=f[1],d=f[2].replace(/\s.+/,"").replace(/[a-z]/gi,""),g=g.replace(/\s.+/,"").replace(/[a-z]/gi,""),{time:g,hour:b,minute:c,second:d,millis:h}):{time:"",hour:"",minute:"",second:"",millis:""}}function m(a,b){for(var c=b-String(a).length,d=0;c>d;d++)a="0"+a;return a}return{parseDate:function(a){var b,c,d={date:null,year:null,month:null,dayOfMonth:null,dayOfWeek:null,time:null};if("number"==typeof a)return this.parseDate(new Date(a));if("function"==typeof a.getFullYear)d.year=String(a.getFullYear()),d.month=String(a.getMonth()+1),d.dayOfMonth=String(a.getDate()),d.time=l(a.toTimeString()+"."+a.getMilliseconds());else if(-1!=a.search(g))b=a.split(/[T\+-]/),d.year=b[0],d.month=b[1],d.dayOfMonth=b[2],d.time=l(b[3].split(".")[0]);else switch(b=a.split(" "),6===b.length&&isNaN(b[5])&&(b[b.length]="()"),b.length){case 6:d.year=b[5],d.month=k(b[1]),d.dayOfMonth=b[2],d.time=l(b[3]);break;case 2:c=b[0].split("-"),d.year=c[0],d.month=c[1],d.dayOfMonth=c[2],d.time=l(b[1]);break;case 7:case 9:case 10:d.year=b[3],d.month=k(b[1]),d.dayOfMonth=b[2],d.time=l(b[4]);break;case 1:c=b[0].split(""),d.year=c[0]+c[1]+c[2]+c[3],d.month=c[5]+c[6],d.dayOfMonth=c[8]+c[9],d.time=l(c[13]+c[14]+c[15]+c[16]+c[17]+c[18]+c[19]+c[20]);break;default:return null}return d.date=d.time?new Date(d.year,d.month-1,d.dayOfMonth,d.time.hour,d.time.minute,d.time.second,d.time.millis):new Date(d.year,d.month-1,d.dayOfMonth),d.dayOfWeek=String(d.date.getDay()),d},date:function(b,c){try{var d=this.parseDate(b);if(null===d)return b;for(var e,f=d.year,g=d.month,k=d.dayOfMonth,l=d.dayOfWeek,n=d.time,o="",p="",q="",r=!1,s=0;s<c.length;s++){var t=c.charAt(s),u=c.charAt(s+1);if(r)"'"==t?(p+=""===o?"'":o,o="",r=!1):o+=t;else switch(o+=t,q="",o){case"ddd":p+=a(l),o="";break;case"dd":if("d"===u)break;p+=m(k,2),o="";break;case"d":if("d"===u)break;p+=parseInt(k,10),o="";break;case"D":k=1==k||21==k||31==k?parseInt(k,10)+"st":2==k||22==k?parseInt(k,10)+"nd":3==k||23==k?parseInt(k,10)+"rd":parseInt(k,10)+"th",p+=k,o="";break;case"MMMM":p+=j(g),o="";break;case"MMM":if("M"===u)break;p+=i(g),o="";break;case"MM":if("M"===u)break;p+=m(g,2),o="";break;case"M":if("M"===u)break;p+=parseInt(g,10),o="";break;case"y":case"yyy":if("y"===u)break;p+=o,o="";break;case"yy":if("y"===u)break;p+=String(f).slice(-2),o="";break;case"yyyy":p+=f,o="";break;case"HH":p+=m(n.hour,2),o="";break;case"H":if("H"===u)break;p+=parseInt(n.hour,10),o="";break;case"hh":e=0===parseInt(n.hour,10)?12:n.hour<13?n.hour:n.hour-12,p+=m(e,2),o="";break;case"h":if("h"===u)break;e=0===parseInt(n.hour,10)?12:n.hour<13?n.hour:n.hour-12,p+=parseInt(e,10),o="";break;case"mm":p+=m(n.minute,2),o="";break;case"m":if("m"===u)break;p+=n.minute,o="";break;case"ss":p+=m(n.second.substring(0,2),2),o="";break;case"s":if("s"===u)break;p+=n.second,o="";break;case"S":case"SS":if("S"===u)break;p+=o,o="";break;case"SSS":var v="000"+n.millis.substring(0,3);p+=v.substring(v.length-3),o="";break;case"a":p+=n.hour>=12?"PM":"AM",o="";break;case"p":p+=n.hour>=12?"p.m.":"a.m.",o="";break;case"E":p+=h(l),o="";break;case"'":o="",r=!0;break;default:p+=t,o=""}}return p+=q}catch(w){return console&&console.log&&console.log(w),b}},prettyDate:function(a){var b,c,d;return("string"==typeof a||"number"==typeof a)&&(b=new Date(a)),"object"==typeof a&&(b=new Date(a.toString())),c=((new Date).getTime()-b.getTime())/1e3,d=Math.floor(c/86400),isNaN(d)||0>d?void 0:60>c?"just now":120>c?"1 minute ago":3600>c?Math.floor(c/60)+" minutes ago":7200>c?"1 hour ago":86400>c?Math.floor(c/3600)+" hours ago":1===d?"Yesterday":7>d?d+" days ago":31>d?Math.ceil(d/7)+" weeks ago":d>=31?"more than 5 weeks ago":void 0},toBrowserTimeZone:function(a,b){return this.date(new Date(a),b||"MM/dd/yyyy HH:mm:ss")}}}()}(DateFormat);
+    </script>
     <script src="//cdn.feling.io/js/uikit.min.js"></script>
     <script>
         var WithFParams = {
@@ -54,87 +55,97 @@
 </head>
 
 <body>
-    <header>
-        <script>
-            $(function() {
-                $(content).scroll(function() {
-                    if ($(content).scrollTop() > 400)
-                        $('div.go-top').show();
-                    else
-                        $('div.go-top').hide();
-                });
-                $('div.go-top').click(function() {
-                    $('html, body, #content').animate({scrollTop: 0}, 400);
-                });
-            });
-            </script>
-            <style>
-            div.go-top {
-                display: none;
-                opacity: 0.6;
-                z-index: 999999;
-                position: fixed;
-                bottom: 100px;
-                right: 1%;
-                border: 1px solid #3399ff;
-                width: 38px;
-                height: 38px;
-                background-color: #ffffff;
-                border-radius: 3px;
-                cursor: pointer;
-            }
-            
-            div.go-top:hover {
-                opacity: 1;
-                filter: alpha(opacity=100);
-            }
-            
-            div.go-top div.arrow {
-                position: absolute;
-                left: 10px;
-                top: -1px;
-                width: 0;
-                height: 0;
-                border: 9px solid transparent;
-                border-bottom-color: #3399ff;
-            }
-            
-            div.go-top div.stick {
-                position: absolute;
-                left: 15px;
-                top: 15px;
-                width: 8px;
-                height: 14px;
-                display: block;
-                background-color: #3399ff;
-                -webkit-border-radius: 1px;
-                -moz-border-radius: 1px;
-                border-radius: 1px;
-            }
-            </style>
-            <div class="go-top">
-                <div class="arrow"></div>
-                <div class="stick"></div>
-            </div>
-    </header>
+    <div id="content" style="margin: 10px;">
+        <div style="height: 40px;" v-show="input_focuse"></div>
 
-    <style>
-    </style>
-    <div id="content">
-        1111
+        <div class="uk-form">
+            <div class="uk-form-row">
+                开始日期：<input class="uk-form" type="number" placeholder="开始日期" 
+                            v-model="start_day" v-on:focus="input_focuse=true" v-on:blur="input_focuse=false">
+            </div>
+            <div class="uk-form-row">
+                结束日期：<input class="uk-form" type="number" placeholder="结束日期" 
+                                v-model="end_day" v-on:focus="input_focuse=true" v-on:blur="input_focuse=false">
+                <button class="uk-button uk-button-primary" style="float:right;" @click="onQuery">查询</button>
+            </div>
+        </div>
+
+        <hr style="margin: 15px 0 15px 0;">
+
+        <div v-show="!querying && result.detail_count > 0 && !hit" 
+            style="margin-bottom:10px;padding:10px;border: 1px solid #E5E5E5;">
+            <p>{{ result.start_day }} 到 {{ result.end_day }}, 共 {{ result.day_count }} 天</p>
+            <p>共 ¥ <span class="uk-text-bold">{{ result.total }}</span> 元</p>
+        </div>
+
+
+        <div style="margin-bottom:10px;border: 1px solid #E5E5E5;" v-show="!querying && result.detail_count > 0 && !hit" v-for="detail in result.detail">
+            <table class="uk-table uk-table-striped" style="width:100%;margin-bottom:0;">
+                <caption>{{ detail.day }}，  总计 ¥ {{ detail.day_total }} 元</caption>
+                <thead v-show="detail.day_detail_count > 0">
+                    <tr>
+                        <th>长度</th>
+                        <th>条数</th>
+                        <th>单价</th>
+                        <th>合计</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="record in detail.day_detail">
+                        <td>{{ record.length }}</td>
+                        <td>{{ record.num }}</td>
+                        <td>0.0{{ record.price }}</td>
+                        <td>{{ record.single_total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div v-show="hit">
+            {{ hit }}
+        </div>
+        
     </div>
     <script>
-        WithFParams.postForm(
-            '/unclassified/book/query',
-            {
-                'user_name': 'ChenYan',
-                'start_day': '2019-04-03',
-                'end_day': '2019-04-03',
-            },
-            (result) => {
-                
+    var vm = new Vue({
+        el: "#content",
+        data: {
+            input_focuse: false,
+            user_name: 'Rong', // 'Rong'  'ChenYan'
+            start_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
+            end_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
+            result: {},
+            hit: '',
+            querying: false
+        },
+        methods: {
+            onQuery: function() {
+                this.querying = true
+                this.hit = ''
+                WithFParams.postForm('/unclassified/book/query',
+                    {
+                        'user_name': this.user_name,
+                        'start_day': this.start_day,
+                        'end_day': this.end_day,
+                    },
+                    (result) => {
+                        if (result.success) {
+                            if (result.code != 'E000000') {
+                                vm.hit = result.message
+                                return
+                            }
+                            vm.result = result.data
+                        } else {
+                            vm.hit = '查询询失败' + result.message
+                        }
+                    }
+                ).always(() => {
+                    vm.querying = false
+                })
             }
-        )
+        }
+    })
+    setTimeout(() => {vm.onQuery()}, 100)
     </script>
 
 </body>
