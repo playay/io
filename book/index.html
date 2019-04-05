@@ -72,16 +72,16 @@
 
         <hr style="margin: 15px 0 15px 0;">
 
-        <div v-show="!querying && result.detail_count > 0 && !hit" 
+        <div v-show="!querying && result.detail_count > 0 && !queryhit" 
             style="margin-bottom:10px;padding:10px;border: 1px solid #E5E5E5;">
-            <p>{{ result.start_day }} 到 {{ result.end_day }}, 共 {{ result.day_count }} 天</p>
-            <p>共 ¥ <span class="uk-text-bold">{{ result.total }}</span> 元</p>
+            <p>¥ <span class="uk-text-bold uk-text-large uk-text-danger">{{ result.total }}</span> 元</p>
+            <p>{{ result.start_day }} 到 {{ result.end_day }}， {{ result.day_count }} 天， {{ result.detail_count }} 行记录</p>
         </div>
 
 
-        <div style="margin-bottom:10px;border: 1px solid #E5E5E5;" v-show="!querying && result.detail_count > 0 && !hit" v-for="detail in result.detail">
+        <div style="margin-bottom:10px;border: 1px solid #E5E5E5;" v-show="!querying && result.detail_count > 0 && !queryhit" v-for="detail in result.detail">
             <table class="uk-table uk-table-striped" style="width:100%;margin-bottom:0;">
-                <caption>{{ detail.day }}，  总计 ¥ {{ detail.day_total }} 元</caption>
+                <caption>{{ detail.day }}， {{ detail.day_detail_count }} 行记录， ¥ {{ detail.day_total }} 元</caption>
                 <thead v-show="detail.day_detail_count > 0">
                     <tr>
                         <th>长度</th>
@@ -96,13 +96,35 @@
                         <td>{{ record.num }}</td>
                         <td>0.0{{ record.price }}</td>
                         <td>{{ record.single_total }}</td>
+                        <td v-if="localStorage.book_sgin"><a v-on:click="onDeleteItem = record" href="#delete-modal" data-uk-modal>删除</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <i v-show="querying" class="uk-icon-spinner uk-icon-spin"></i>
-        <div v-show="hit">
-            {{ hit }}
+        <div v-show="queryhit">
+            {{ queryhit }}
+        </div>
+
+        <div id="delete-modal" class="uk-modal">
+            <div class="uk-modal-dialog">
+                <table class="uk-table" style="width:100%;">
+                    <caption>{{ onDeleteItem.day }}</caption>
+                    <tbody>
+                        <tr class="uk-table-middle">
+                            <td>{{ onDeleteItem.length }}</td>
+                            <td>{{ onDeleteItem.num }}</td>
+                            <td>0.0{{ onDeleteItem.price }}</td>
+                            <td>{{ onDeleteItem.single_total }}</td>
+                            <td><button v-on:click="onDelete(onDeleteItem)" class="uk-button uk-button-danger" >
+                                    <i v-show="deleteing" class="uk-icon-spinner uk-icon-spin"></i>确定删除</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-show="deletehit">
+                    {{ deletehit }}
+                </div>
+            </div>
         </div>
         
     </div>
@@ -115,13 +137,38 @@
             start_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
             end_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
             result: {},
-            hit: '',
-            querying: false
+            queryhit: '',
+            querying: false,
+            deleteing: false,
+            onDeleteItem: {},
+            deletehit: ''
         },
         methods: {
+            onDelete: function(item) {
+                this.deletehit = ''
+                this.deleteing = true
+                WithFParams.postForm('/unclassified/book/delete',
+                    {
+                        'user_name': this.user_name,
+                        'id': item.id,
+                        'sign': localStorage.book_sgin
+                    },
+                    (result) => {
+                        if (result.success) {
+                            onDeleteItem = {}
+                            UIkit.modal("#delete-modal").hide()
+                            vm.onQuery()
+                        } else {
+                            vm.deletehit = '删除失败, ' + result.message
+                        }
+                    }
+                ).always(() => {
+                    vm.deleteing = false
+                })
+            },
             onQuery: function() {
                 this.querying = true
-                this.hit = ''
+                this.queryhit = ''
                 WithFParams.postForm('/unclassified/book/query',
                     {
                         'user_name': this.user_name,
@@ -131,12 +178,12 @@
                     (result) => {
                         if (result.success) {
                             if (result.code != 'E000000') {
-                                vm.hit = result.message
+                                vm.queryhit = result.message
                                 return
                             }
                             vm.result = result.data
                         } else {
-                            vm.hit = '查询询失败' + result.message
+                            vm.queryhit = '查询失败, ' + result.message
                         }
                     }
                 ).always(() => {
