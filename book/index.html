@@ -98,8 +98,8 @@
                         <td>0.0{{ record.price }}</td>
                         <td>{{ record.single_total }}</td>
                         <td v-if="localStorage.book_sgin">
-                            <a v-on:click="onDeleteItem = record" onmouseover="this.style.color='red';"
-                                href="#delete-modal" data-uk-modal>删除</a>
+                            <a v-on:click="onDeleteItem = record" href="#delete-modal" data-uk-modal
+                                onmouseover="this.style.color='red';" onmouseout="this.style.color='';">删除</a>
                         </td>
                     </tr>
                 </tbody>
