@@ -117,7 +117,7 @@
                             <td>0.0{{ onDeleteItem.price }}</td>
                             <td>{{ onDeleteItem.single_total }}</td>
                             <td><button v-on:click="onDelete(onDeleteItem)" class="uk-button uk-button-danger" >
-                                    <i v-show="deleteing" class="uk-icon-spinner uk-icon-spin"></i>确定删除</button></td>
+                                    <i v-show="deleteing" class="uk-icon-spinner uk-icon-spin"></i>删除</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -129,11 +129,14 @@
         
     </div>
     <script>
+    if (!localStorage.book_user_name) {
+        localStorage.book_user_name = 'Rong'
+    }
     var vm = new Vue({
         el: "#content",
         data: {
             input_focuse: false,
-            user_name: 'Rong', // 'Rong'  'ChenYan'
+            user_name: localStorage.book_user_name,
             start_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
             end_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
             result: {},
