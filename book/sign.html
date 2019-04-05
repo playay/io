@@ -1,7 +1,7 @@
 <script src="//cdn.feling.io/js/jquery-3.3.1.min.js"></script>
 <script>
 
-function getQueryParamAndClearAll(key) {
+function getQueryParam(key) {
     var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
     var r = window.top.location.search.substr(1).match(reg);
     if (r != null) {
@@ -12,14 +12,14 @@ function getQueryParamAndClearAll(key) {
 
 
 if (localStorage.book_sgin && localStorage.book_user_name) {
-    window.location.replace("https://feling.io/book/")
+    window.location.replace("https://feling.io/book/?user_name=" + localStorage.book_user_name)
 } else {
-    sign = getQueryParamAndClearAll('sign')
-    user_name = getQueryParamAndClearAll('user_name')
+    sign = getQueryParam('sign')
+    user_name = getQueryParam('user_name')
     if (sign) {
         localStorage.book_sgin = sign
         localStorage.book_user_name = user_name
-        window.location.replace("https://feling.io/book/")
+        window.location.replace("https://feling.io/book/?user_name=" + localStorage.book_user_name)
     } else {
         var url = "https://open.weixin.qq.com/connect/oauth2/authorize?"
                 + "appid=ww6f88babe6ddb78da&"

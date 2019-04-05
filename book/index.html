@@ -62,6 +62,7 @@
             <div class="uk-form-row">
                 开始日期：<input class="uk-form" type="number" placeholder="开始日期" 
                             v-model="start_day" v-on:focus="input_focuse=true" v-on:blur="input_focuse=false">
+                <span style="float:right;">{{ user_name }}</span>
             </div>
             <div class="uk-form-row">
                 结束日期：<input class="uk-form" type="number" placeholder="结束日期" 
@@ -116,8 +117,10 @@
                             <td>{{ onDeleteItem.num }}</td>
                             <td>0.0{{ onDeleteItem.price }}</td>
                             <td>{{ onDeleteItem.single_total }}</td>
-                            <td><button v-on:click="onDelete(onDeleteItem)" class="uk-button uk-button-danger" >
-                                    <i v-show="deleteing" class="uk-icon-spinner uk-icon-spin"></i>删除</button></td>
+                            <td style="width:70px;">
+                                <button v-on:click="onDelete(onDeleteItem)" class="uk-button uk-button-danger" >删除</button>
+                                <i v-show="deleteing" class="uk-icon-spinner uk-icon-spin"></i>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -129,14 +132,20 @@
         
     </div>
     <script>
-    if (!localStorage.book_user_name) {
-        localStorage.book_user_name = 'Rong'
+    function getUserNameInQueryParam(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var r = window.top.location.search.substr(1).match(reg);
+        if (r != null) {
+            return decodeURIComponent(r[2])
+        }
+        return 'Rong';
     }
+
     var vm = new Vue({
         el: "#content",
         data: {
             input_focuse: false,
-            user_name: localStorage.book_user_name,
+            user_name: getUserNameInQueryParam('user_name'),
             start_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
             end_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
             result: {},
