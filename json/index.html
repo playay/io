@@ -441,17 +441,17 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     </div>
 </li>
 <li class="header-extend-item uk-navbar-content uk-hidden-small">
-    <button id="" class="uk-button" onclick="button_unFoldAll_click(1)">1级</button>
-    <button id="button-unFoldAll-2" class="uk-button" onclick=button_unFoldAll_click(2)>2</button>
-    <button id="button-unFoldAll-3" class="uk-button" onclick=button_unFoldAll_click(3)>3</button>
-    <button id="button-unFoldAll-4" class="uk-button" onclick=button_unFoldAll_click(4)>4</button>
-    <button id="button-unFoldAll-5" class="uk-button" onclick=button_unFoldAll_click(5)>5</button>
-    <button id="button-unFoldAll-n" class="uk-button" onclick=button_unFoldAll_click(998)>n级</button>
+    <button id="" class="uk-button" onclick="button_unFoldAll_click(1, this)">1级</button>
+    <button id="button-unFoldAll-2" class="uk-button" onclick="button_unFoldAll_click(2, this)">2</button>
+    <button id="button-unFoldAll-3" class="uk-button" onclick="button_unFoldAll_click(3, this)">3</button>
+    <button id="button-unFoldAll-4" class="uk-button" onclick="button_unFoldAll_click(4, this)">4</button>
+    <button id="button-unFoldAll-5" class="uk-button" onclick="button_unFoldAll_click(5, this)">5</button>
+    <button id="button-unFoldAll-n" class="uk-button" onclick="button_unFoldAll_click(998, this)">n级</button>
     <script>
-        function button_unFoldAll_click(level) {
+        function button_unFoldAll_click(level, ele) {
             vm.unFoldAll(level);
-            $(this).addClass('uk-button-success');
-            $(this).siblings().removeClass('uk-button-success');
+            $(ele).addClass('uk-button-success');
+            $(ele).siblings().removeClass('uk-button-success');
         }
     </script>
 </li>
