@@ -419,7 +419,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     })
 </script>
 
-<li class="header-extend-item uk-parent uk-visible-large" data-uk-dropdown="{delay:1500}" style="display:none;">
+<li d="header-extend-item-0"class="header-extend-item uk-parent uk-visible-large" data-uk-dropdown="{delay:1500}" style="display:none;">
     <a class="uk-navbar-content">快捷键一览 <i class="uk-icon-caret-down"></i></a>
     <div class="uk-dropdown uk-dropdown-navbar" style="width:480px;">
         <table class="uk-table">
@@ -440,22 +440,26 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         </table>
     </div>
 </li>
-<li class="header-extend-item uk-navbar-content uk-hidden-small">
-    <button id="" class="uk-button" onclick="button_unFoldAll_click(1, this)">1级</button>
-    <button id="button-unFoldAll-2" class="uk-button" onclick="button_unFoldAll_click(2, this)">2</button>
-    <button id="button-unFoldAll-3" class="uk-button" onclick="button_unFoldAll_click(3, this)">3</button>
-    <button id="button-unFoldAll-4" class="uk-button" onclick="button_unFoldAll_click(4, this)">4</button>
-    <button id="button-unFoldAll-5" class="uk-button" onclick="button_unFoldAll_click(5, this)">5</button>
-    <button id="button-unFoldAll-n" class="uk-button" onclick="button_unFoldAll_click(998, this)">n级</button>
-    <script>
-        function button_unFoldAll_click(level, ele) {
-            vm.unFoldAll(level);
-            $(ele).addClass('uk-button-success');
-            $(ele).siblings().removeClass('uk-button-success');
-        }
-    </script>
+<li id="header-extend-item-1" class="header-extend-item uk-navbar-content uk-hidden-small">
+    <button id="button-unFoldAll-1" class="uk-button" v-bind:class="{'uk-button-success': level = 1}" onclick="vm.unFoldAll(1)">1级</button>
+    <button id="button-unFoldAll-2" class="uk-button" v-bind:class="{'uk-button-success': level = 2}" onclick="vm.unFoldAll(2)">2</button>
+    <button id="button-unFoldAll-3" class="uk-button" v-bind:class="{'uk-button-success': level = 3}" onclick="vm.unFoldAll(3)">3</button>
+    <button id="button-unFoldAll-4" class="uk-button" v-bind:class="{'uk-button-success': level = 4}" onclick="vm.unFoldAll(4)">4</button>
+    <button id="button-unFoldAll-5" class="uk-button" v-bind:class="{'uk-button-success': level = 5}" onclick="vm.unFoldAll(5)">5</button>
+    <button id="button-unFoldAll-n" class="uk-button" v-bind:class="{'uk-button-success': level = 998}" onclick="vm.unFoldAll(998)">n级</button>
 </li>
-<li class="header-extend-item uk-navbar-content">
+<script>
+    vm_header_extend_item_1 = new Vue({
+        el: "#header-extend-item-1",
+        data: {
+            level: vm.defaultFold,
+        },
+    })
+    vm.nextTick(() => {
+        vm_header_extend_item_1.level = vm.defaultFold
+    })
+</script>
+<li id="header-extend-item-2"class="header-extend-item uk-navbar-content">
     <label class="uk-label uk-visible-large uk-button" id="array-sampling-label" for="array_sampling" 
         data-uk-tooltip title="对于数组，只显示它的第一项">SMode: 
         <span id="array-sampling-on" style="display:none;">已开启</span>
@@ -473,7 +477,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         }
     </script>
 </li>
-<li class="header-extend-item" style="float:right">
+<li id="header-extend-item-3"class="header-extend-item" style="float:right">
     <div id="copy-success" class="uk-alert uk-alert-success" 
         style="display:none;margin-bottom:0px;">
         copied
