@@ -441,7 +441,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     </div>
 </li>
 <li class="header-extend-item uk-navbar-content uk-hidden-small">
-    <button id="button-unFoldAll-1" class="uk-button" onclick="vm.unFoldAll(1)">1级</button>
+    <button id="button-unFoldAll-1" class="uk-button" onclick="vm.unFoldAll(1);$(this).addClass('uk-button-success');$(this).siblings().removeClass('uk-button-success')">1级</button>
     <button id="button-unFoldAll-2" class="uk-button" onclick=vm.unFoldAll(2)>2</button>
     <button id="button-unFoldAll-3" class="uk-button" onclick=vm.unFoldAll(3)>3</button>
     <button id="button-unFoldAll-4" class="uk-button" onclick=vm.unFoldAll(4)>4</button>
