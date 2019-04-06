@@ -87,7 +87,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     <div id="json_result_box" class="uk-width-10-10">
         <div class="uk-width-1-1" style="height:30px;">
             <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 0 }" v-on:click="unFoldAll(1)">1级</button>
-            <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 999 }"  v-on:click="unFoldAll(998)">n级</button>
+            <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 997 }"  v-on:click="unFoldAll(998)">n级</button>
             {% raw %}
             <span id="cursor-position" style="display:none;" data-uk-tooltip title="输入框中 光标的位置">
                 {{ cursorPosition }} / {{ jsonSrc.length }} 
@@ -441,12 +441,12 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     </div>
 </li>
 <li class="header-extend-item uk-navbar-content uk-hidden-small">
-    <button id="button-unFoldAll-1" class="uk-button" v-bind:class="{ uk-button-success: vm.defaultFold == 0 }" onclick=vm.unFoldAll(1)>1级</button>
-    <button id="button-unFoldAll-2" class="uk-button" v-bind:class="{ uk-button-success: vm.defaultFold == 1 }" onclick=vm.unFoldAll(2)>2</button>
-    <button id="button-unFoldAll-3" class="uk-button" v-bind:class="{ uk-button-success: vm.defaultFold == 2 }" onclick=vm.unFoldAll(3)>3</button>
-    <button id="button-unFoldAll-4" class="uk-button" v-bind:class="{ uk-button-success: vm.defaultFold == 3 }" onclick=vm.unFoldAll(4)>4</button>
-    <button id="button-unFoldAll-5" class="uk-button" v-bind:class="{ uk-button-success: vm.defaultFold == 4 }" onclick=vm.unFoldAll(5)>5</button>
-    <button id="button-unFoldAll-n" class="uk-button" v-bind:class="{ uk-button-success: vm.defaultFold == 999 }" onclick=vm.unFoldAll(998)>n级</button>
+    <button id="button-unFoldAll-1" class="uk-button" onclick="vm.unFoldAll(1)">1级</button>
+    <button id="button-unFoldAll-2" class="uk-button" onclick=vm.unFoldAll(2)>2</button>
+    <button id="button-unFoldAll-3" class="uk-button" onclick=vm.unFoldAll(3)>3</button>
+    <button id="button-unFoldAll-4" class="uk-button" onclick=vm.unFoldAll(4)>4</button>
+    <button id="button-unFoldAll-5" class="uk-button" onclick=vm.unFoldAll(5)>5</button>
+    <button id="button-unFoldAll-n" class="uk-button" onclick=vm.unFoldAll(998)>n级</button>
 </li>
 <li class="header-extend-item uk-navbar-content">
     <label class="uk-label uk-visible-large uk-button" id="array-sampling-label" for="array_sampling" 
