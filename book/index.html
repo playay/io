@@ -62,7 +62,6 @@
             <div class="uk-form-row">
                 开始日期：<input class="uk-form" type="number" placeholder="开始日期" 
                             v-model="start_day" v-on:focus="input_focuse=true" v-on:blur="input_focuse=false">
-                <span style="float:right;">{{ user_name }}</span>
             </div>
             <div class="uk-form-row">
                 结束日期：<input class="uk-form" type="number" placeholder="结束日期" 
@@ -157,6 +156,9 @@
             deleteing: false,
             onDeleteItem: {},
             deletehit: ''
+        },
+        mounted: function () {
+            window.document.title = '花边记账-' + this.user_name
         },
         methods: {
             onDelete: function(item) {
