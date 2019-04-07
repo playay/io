@@ -51,6 +51,47 @@
         },
     }
     </script>
+
+    <script>
+    function getParamInQueryParam(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var r = window.top.location.search.substr(1).match(reg);
+        if (r != null) {
+            return decodeURIComponent(r[2])
+        }
+        return '';
+    }
+
+    var start_day = getParamInQueryParam('start_day')
+    var end_day = getParamInQueryParam('end_day')
+    if (!start_day) {
+        start_day = DateFormat.format.date(new Date(), "yyyyMMdd")
+    }
+    if (!end_day) {
+        end_day = start_day
+    }
+
+    var user_name = getParamInQueryParam('user_name')
+    var sign = getParamInQueryParam('sign')
+    if (user_name) {
+        localStorage.book_user_name = user_name
+    } else {
+        user_name = localStorage.book_user_name
+    }
+    if (sign) {
+        localStorage.book_sgin = sign
+    } else {
+        sign = localStorage.book_sgin
+    }
+    if (!user_name || !sign) {
+        window.location.replace("https://open.weixin.qq.com/connect/oauth2/authorize?"
+                + "appid=ww6f88babe6ddb78da&"
+                + "redirect_uri=https%3A%2F%2Fapi.feling.io%%2Funclassified%2Fbook%2Fsign"
+                + "&response_type=code&scope=snsapi_base&state="
+                + start_day + "," + end_day
+                + "#wechat_redirect")
+    }
+    </script>
     
 </head>
 
@@ -134,22 +175,12 @@
         
     </div>
     <script>
-    function getUserNameInQueryParam(key) {
-        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
-        var r = window.top.location.search.substr(1).match(reg);
-        if (r != null) {
-            return decodeURIComponent(r[2])
-        }
-        return 'Rong';
-    }
-
     var vm = new Vue({
         el: "#content",
         data: {
             input_focuse: false,
-            user_name: getUserNameInQueryParam('user_name'),
-            start_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
-            end_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
+            start_day: start_day? start_day: DateFormat.format.date(new Date(), "yyyyMMdd"),
+            end_day: end_day ? end_day : DateFormat.format.date(new Date(), "yyyyMMdd"),
             result: {},
             queryhit: '',
             querying: false,
@@ -158,7 +189,7 @@
             deletehit: ''
         },
         mounted: function () {
-            window.document.title = '花边记账-' + this.user_name
+            window.document.title = '花边记账-' + user_name
         },
         methods: {
             onDelete: function(item) {
@@ -166,9 +197,9 @@
                 this.deleteing = true
                 WithFParams.postForm('/unclassified/book/delete',
                     {
-                        'user_name': this.user_name,
-                        'id': item.id,
-                        'sign': localStorage.book_sgin
+                        'user_name': user_name,
+                        'sign': sign,
+                        'id': item.id
                     },
                     (result) => {
                         if (result.success) {
@@ -188,7 +219,7 @@
                 this.queryhit = ''
                 WithFParams.postForm('/unclassified/book/query',
                     {
-                        'user_name': this.user_name,
+                        'user_name': user_name,
                         'start_day': this.start_day,
                         'end_day': this.end_day,
                     },
