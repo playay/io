@@ -96,12 +96,10 @@
                     this.page.url = "https://feling.io{{ page.url }}";
                     this.page.identifier = "https://feling.io{{ page.url }}";
                 };
-                {
-                    var d = document, s = d.createElement('script');
-                    s.src = '//feling.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', + new Date());
-                    (d.head || d.body).appendChild(s);
-                };
+                var d = document, s = d.createElement('script');
+                s.src = '//feling.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
             </script>
         </div>
         
