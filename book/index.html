@@ -8,9 +8,22 @@
     <title>花边记账</title>
     
     <link rel="stylesheet" href="//cdn.feling.io/css/uikit.min.css" media="all">
-    <style>.uk-grid{margin-left:0}</style>
+    <style>
+    .uk-grid{margin-left:0}
+    .al-spinner {
+        background-image: url(https://cdn.feling.io/spinner.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 14px;
+        height: 14px;
+        vertical-align: middle;
+        display: inline-block;
+        -webkit-animation: uk-rotate 0.7s infinite linear;
+        animation: uk-rotate 0.7s infinite linear;
+    }
+    </style>
 
-    
     <link rel="icon" type="image/png" href="//cdn.feling.io/favicon.png">
     
     <script src="//cdn.feling.io/js/jquery-3.3.1.min.js"></script>
@@ -147,7 +160,7 @@
                 </tbody>
             </table>
         </div>
-        <i v-show="querying" class="uk-icon-spinner uk-icon-spin"></i>
+        <i v-show="querying" class="al-spinner"></i>
         <div v-show="queryhit">
             {{ queryhit }}
         </div>
@@ -163,7 +176,7 @@
                             <td>0.0{{ onDeleteItem.price }}</td>
                             <td>{{ onDeleteItem.single_total }}</td>
                             <td style="width:70px;">
-                                <i v-show="deleteing" class="uk-icon-spinner uk-icon-spin" style="margin-top: 8px;"></i>
+                                <i v-show="deleteing" class="al-spinner" style="margin-top: 8px;"></i>
                                 <button v-on:click="onDelete(onDeleteItem)" class="uk-button uk-button-danger" style="float:right;">删除</button>
                             </td>
                         </tr>
