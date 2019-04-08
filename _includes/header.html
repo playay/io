@@ -88,28 +88,22 @@
         <div id="ss-affiliates" style="display:none;" class="uk-navbar-content">
             <!-- <a href="https://secure.shadowsocks.nu/aff.php?aff=18934" 
                 target="_blank" > 使用 ss, 科学上网, 百元包年 </a> -->
+            <a href="#disqus_thread" data-uk-modal>反馈与意见</a>
         </div>
-        <ul class="uk-navbar-nav uk-hidden-small">
-            <li class="uk-parent" data-uk-dropdown="{}">
-                <a>反馈与意见</a>
-                <div class="uk-dropdown uk-dropdown-small">
-                    <div id="disqus_thread">
-                        <script>
-                            var disqus_config = function () {
-                                this.page.url = "https://feling.io{{ page.url }}";
-                                this.page.identifier = "https://feling.io{{ page.url }}";
-                            };
-                            $('#the-gfw').on('passible', function() {
-                                var d = document, s = d.createElement('script');
-                                s.src = '//feling.disqus.com/embed.js';
-                                s.setAttribute('data-timestamp', + new Date());
-                                (d.head || d.body).appendChild(s);
-                            });
-                        </script>
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <div id="disqus_thread" class="uk-modal">
+            <script>
+                var disqus_config = function () {
+                    this.page.url = "https://feling.io{{ page.url }}";
+                    this.page.identifier = "https://feling.io{{ page.url }}";
+                };
+                {
+                    var d = document, s = d.createElement('script');
+                    s.src = '//feling.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', + new Date());
+                    (d.head || d.body).appendChild(s);
+                };
+            </script>
+        </div>
         
          
         <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
