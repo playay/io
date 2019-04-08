@@ -71,9 +71,6 @@
                 <li class="uk-nav-divider"></li>
                 <li><a href="https://ocarina-diary.com/blogs/">陶笛日记</a></li>
 
-                <li class="uk-nav-divider"></li>
-                <li><a href="mailto:chenyan@feling.net?subject=对 feling.io 的建议与反馈">建议与反馈</a></li>
-
             </ul>
         </div>
     </div>
@@ -92,6 +89,29 @@
             <!-- <a href="https://secure.shadowsocks.nu/aff.php?aff=18934" 
                 target="_blank" > 使用 ss, 科学上网, 百元包年 </a> -->
         </div>
+        <ul class="uk-navbar-nav uk-hidden-small">
+            <li class="uk-parent" data-uk-dropdown="{}">
+                <a>反馈与意见</a>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <div id="disqus_thread">
+                        <script>
+                            var disqus_config = function () {
+                                this.page.url = "https://feling.io{{ page.url }}";
+                                this.page.identifier = "https://feling.io{{ page.url }}";
+                            };
+                            $('#the-gfw').on('passible', function() {
+                                var d = document, s = d.createElement('script');
+                                s.src = '//feling.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', + new Date());
+                                (d.head || d.body).appendChild(s);
+                            });
+                        </script>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+         
         <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
             style="display:none;font-weight:bold;font-size:16px;">
             <i id="signInSpinner" class="al-spinner" style="display:none"></i>
@@ -107,7 +127,7 @@
                     <ul class="uk-nav uk-nav-navbar">
                         <!-- <li><a href="#showAccessToken" data-uk-modal>查看 accessToken</a></li> -->
                         <li><a href="https://pages.feling.net/2018/11/google-api-proxy.html" target="_blank">nginx 海外接口代理</a></li>
-                        <li><a onClick="signOut()">退出登录<i id="signOutSpinner" class="al-spinner" style="display:none"></i></a></li>
+                        <li><a onClick="signOut()">退出登录  <i id="signOutSpinner" class="al-spinner" style="display:none"></i></a></li>
                     </ul>
                 </div>
             </li>
