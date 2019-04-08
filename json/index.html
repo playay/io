@@ -97,7 +97,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 <input class="uk-visible-large" type="checkbox" style="display:none;"
                     id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange();jsonSrcChange()">
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
-                        <i id="genShareLinkSpinner" class="al-spinner uk-icon-spin" style="display:none"></i>
+                        <i id="genShareLinkSpinner" class="al-spinner" style="display:none"></i>
                         转发当前JSON</button>
                 <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
                 <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip title="复制结果框当前显示的文本<br>(“折叠效果”也会被复制)">复制</button>
