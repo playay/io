@@ -22,6 +22,11 @@
         -webkit-animation: uk-rotate 0.7s infinite linear;
         animation: uk-rotate 0.7s infinite linear;
     }
+    .al-spinner-large {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
     </style>
 
     <link rel="icon" type="image/png" href="//cdn.feling.io/favicon.png">
@@ -160,7 +165,7 @@
                 </tbody>
             </table>
         </div>
-        <i v-show="querying" class="al-spinner"></i>
+        <i v-show="querying" class="al-spinner al-spinner-large"></i>
         <div v-show="queryhit">
             {{ queryhit }}
         </div>
