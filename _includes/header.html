@@ -134,8 +134,8 @@
         <script>
             function signOut() {
                 $("#signOutSpinner").show()
-                WithFParams.postForm('/login/signOut', {}, () => { })
-                    .always(() => {
+                WithFParams.postForm('/login/signOut', {}, function() { })
+                    .always(function() {
                         localStorage.removeItem('accessToken')
                         localStorage.removeItem('accessTokenExpiredAt')
                         localStorage.removeItem('userAvatar')
@@ -147,7 +147,7 @@
                     })
                 if (typeof gapi != "undefined") {
                     var auth2 = gapi.auth2.getAuthInstance()
-                    auth2.signOut().then(() => {})
+                    auth2.signOut().then(function() {})
                 }
             }
             function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
@@ -167,7 +167,7 @@
                     {
                         accessToken: localStorage.accessToken
                     },
-                    (result) => {
+                    function(result) {
                         if (result.success && result.data) {
                             localStorage.accessTokenExpiredAt = result.data.accessTokenExpiredAt
                             localStorage.userAvatar = result.data.userAvatar
@@ -181,7 +181,7 @@
                             $("#userAvatarAndName").hide()
                         }
                     }
-                ).always(() => {
+                ).always(function() {
                     loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
                 })
             } else {
@@ -216,7 +216,7 @@
                             }
                             this.msg = msg
                             this.level = level
-                            setTimeout(() => {this.msg = ''; this.level = ''}, duration)
+                            setTimeout(function(){vm_header_notify.msg = ''; vm_header_notify.level = ''}, duration)
                         }
                     }
                 })

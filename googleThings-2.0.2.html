@@ -29,21 +29,21 @@
                         localStorage.removeItem('accessToken')
                     }
                 }
-            ).always(() => {
+            ).always(function() {
                 $('#signInSpinner').hide()
             })
         }
 
         function onGapiLoad() {
-            gapi.load('auth2', () => {
+            gapi.load('auth2', function() {
                 var auth2 = gapi.auth2.init({
                     client_id: '1093205252929-r3fj3lliprgso4nrbtan10ugl4d7a1cl.apps.googleusercontent.com'
                 })
                 auth2.attachClickHandler('signInButton', {}, 
-                    (googleUser) => {
+                function(googleUser) {
                         useGoogleIdTokenForAuth(googleUser.getAuthResponse().id_token)
                     }, 
-                    (error) => {
+                    function(error) {
                         switch (error.error) {
                             case "popup_closed_by_user":
                                 localStorage.userCanceledLogin = true
