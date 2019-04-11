@@ -1,17 +1,15 @@
 
 <div id="iiie"></div>
 <script>
-    var IIIE = undefined
+    var IIIE = 1
     IIIE = new Vue({
         el:"#iiie",
         data: {},
-        methods: {
-            xxx: () => {
-
-            }
+        mounted: () => {
+            IIIE = 0
         }
     })
-    if (!IIIE) {
+    if (IIIE) {
         UIkit.modal.alert("该网页不支持您的浏览器版本，推荐使用 chrome 浏览器")
     }
 </script>
