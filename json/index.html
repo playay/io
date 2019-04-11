@@ -1,6 +1,6 @@
 ---
 title: Json 格式化
-layout: default
+layout: default_ie_ok
 keywords: [json,json在线解析,json格式化,json格式验证]
 description: 更直观的了解接口返回值格式、结构。格式化、高亮、折叠、转发你的 json 字符串。支持一键复制、一键折叠、快捷键。转发当前 json 字符串的功能, 让沟通交流更加方便。还有 SMode 模式, 对于数组, 只解析它的第一项, json 结构更清晰。
 ---
@@ -280,7 +280,6 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     var position = parseInt(e.message.substring(e.message.lastIndexOf(' ')))
                     if (position) {
                         // $('#json_src').focus()
-                        // setTimeout(() => {document.getElementById('json_src').setSelectionRange(position - 10, position + 10)}, 500)
                     }
                 }
             },
@@ -328,7 +327,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     {
                         "jsonSrc": this.jsonSrc
                     },
-                    (result) => {
+                    function (result) {
                         if (result.success) {
                             vm.shareLink = "https://feling.io/json/?shareId=" + result.data
                             if (!localStorage.json_notFirstTimeGenShareLink) {
@@ -339,7 +338,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                         }
                     }
                 )
-                .always(() => {
+                .always(function () {
                     $('#genShareLinkSpinner').hide()
                 })
             },
@@ -347,7 +346,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                 if (localStorage.json_notFirstTimeGenShareLink) {
                     this.genShareLink()
                 } else {
-                    UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续?', () => {
+                    UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续?', function () {
                         this.genShareLink()
                     })
                 }
@@ -373,7 +372,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                             this.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 json 加载失败"}'
                         }
                     }
-                ).always(() => {
+                ).always(function () {
                     this.jsonSrcChange()
                 })
             }
@@ -389,11 +388,11 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
         }
     }).on('success', function(e) {
         $('#copy-success').show()
-        setTimeout(() => {$('#copy-success').hide()} ,900)
+        setTimeout(function () {$('#copy-success').hide()} ,900)
     })
     new ClipboardJS('.copy-button').on('success', function(e) {
         $('#copy-success').show()
-        setTimeout(() => {$('#copy-success').hide()} ,900)
+        setTimeout(function () {$('#copy-success').hide()} ,900)
         e.clearSelection()
     })
     new ClipboardJS('#copy-share-link', {
@@ -403,7 +402,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
     }).on('success', function(e) {
         vm.shareLink = ''
         $('#copy-success').show()
-        setTimeout(() => {$('#copy-success').hide()} ,900)
+        setTimeout(function () {$('#copy-success').hide()} ,900)
     })
 </script>
 
