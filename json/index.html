@@ -347,7 +347,7 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     this.genShareLink()
                 } else {
                     UIkit.modal.confirm('此功能需要上传当前输入框的内容, 是否继续?', function () {
-                        this.genShareLink()
+                        vm.genShareLink()
                     })
                 }
             },
@@ -365,15 +365,15 @@ description: 更直观的了解接口返回值格式、结构。格式化、高�
                     {
                         "shareId": shareId
                     },
-                    (result) => {
+                    function(result) {
                         if (result.success) {
-                            this.jsonSrc = result.data.jsonSrc
+                            vm.jsonSrc = result.data.jsonSrc
                         } else {
-                            this.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 json 加载失败"}'
+                            vm.jsonSrc = '{"提示":"shareId: ' + shareId + ' 对应的 json 加载失败"}'
                         }
                     }
                 ).always(function () {
-                    this.jsonSrcChange()
+                    vm.jsonSrcChange()
                 })
             }
         }
