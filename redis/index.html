@@ -240,9 +240,9 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                 sshUsername: '',
                 sshPassword: '',
                 sshPrivateKey: '',
-                sshPrivateKeyPassword: '',
+                sshPrivateKeyPassword: ''
             },
-            lastResponse: new Map(),
+            lastResponse: new Map()
         },
         mounted: function () {
             if (!localStorage.redis_connections || localStorage.redis_connections === '[]') {
@@ -257,7 +257,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                     sshUsername: '',
                     sshPassword: '',
                     sshPrivateKey: '',
-                    sshPrivateKeyPassword: '',
+                    sshPrivateKeyPassword: ''
                 }])
             }
             this.redisConnections = JSON.parse(localStorage.redis_connections)
@@ -410,7 +410,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         sshUsername: '',
                         sshPassword: '',
                         sshPrivateKey: '',
-                        sshPrivateKeyPassword: '',
+                        sshPrivateKeyPassword: ''
                     }
                     this.form = {
                         name: '',
@@ -423,7 +423,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
                         sshUsername: '',
                         sshPassword: '',
                         sshPrivateKey: '',
-                        sshPrivateKeyPassword: '',
+                        sshPrivateKeyPassword: ''
                     }
                 }
                 $('[tname]').hide()
@@ -460,7 +460,7 @@ description: fredis 是一个网页版 redis 客户端，基于“ws2s项目”�
             },
             onConnectionsSorted: function () {
                 localStorage.redis_connections = JSON.stringify(this.redisConnections)
-            },
+            }
         }
     })
 </script>

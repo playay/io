@@ -46,7 +46,7 @@ description: 快速配置公网可访问的 mock http 接口
             el:'#access-manage',
             data: {
                 newAlias: '',
-                accessItemList: [],
+                accessItemList: []
             },
             mounted: function () {
                 this.listAll()
@@ -74,7 +74,7 @@ description: 快速配置公网可访问的 mock http 接口
                     WithFParams.postForm('/accessManage/addOne', 
                         {
                             from: 'mock',
-                            alias: this.newAlias,
+                            alias: this.newAlias
                         },
                         (result) => {
                             if (result.success) {
@@ -93,7 +93,7 @@ description: 快速配置公网可访问的 mock http 接口
                     WithFParams.postForm('/accessManage/disableOne', 
                         {
                             from: 'mock',
-                            accessKey: accessItem.accessKey,
+                            accessKey: accessItem.accessKey
                         },
                         (result) => {
                             if (result.success) {
@@ -109,7 +109,7 @@ description: 快速配置公网可访问的 mock http 接口
                     WithFParams.postForm('/accessManage/enableOne', 
                         {
                             from: 'mock',
-                            accessKey: accessItem.accessKey,
+                            accessKey: accessItem.accessKey
                         },
                         (result) => {
                             if (result.success) {
@@ -125,7 +125,7 @@ description: 快速配置公网可访问的 mock http 接口
                     WithFParams.postForm('/accessManage/deleteOne', 
                         {
                             from: 'mock',
-                            accessKey: accessItem.accessKey,
+                            accessKey: accessItem.accessKey
                         },
                         (result) => {
                             var index = vm_access_manage.accessItemList.indexOf(accessItem)
@@ -135,7 +135,7 @@ description: 快速配置公网可访问的 mock http 接口
                             }
                         }
                     )
-                },
+                }
             }
         })
     </script>
