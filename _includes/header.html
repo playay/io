@@ -1,22 +1,4 @@
 
-<div id="iiie"></div>
-<script>
-    IIIE = 1;
-    new Vue({
-        el:"#iiie",
-        data: {},
-        mounted: () => {
-            IIIE = 0
-        },
-    });
-</script>
-<script>
-    if (typeof IIIE == 'undefined' || IIIE == 1) {
-        UIkit.modal.alert("该网页不支持您的浏览器版本，推荐使用 chrome 浏览器")
-    }
-</script>
-
-
 <nav class="uk-navbar">
     <a class="uk-navbar-brand" data-uk-offcanvas="{target:'#offcanvas-nav',mode:'push'}">
         <i class="uk-icon-bars" data-uk-tooltip title="ctrl+b"></i>
