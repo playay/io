@@ -1,0 +1,15 @@
+<div id="the-gfw"></div>
+<script>
+var gfw_tester = new Image();
+gfw_tester.src = "https://www.google.com/images/branding/product/ico/googleg_lodp.ico?t=" + parseInt(new Date().getTime() / 100000);
+setTimeout(
+    function () {
+        if (!gfw_tester.complete || !gfw_tester.naturalWidth) {
+            gfw_tester.src = ''
+            return
+        }
+        $('#the-gfw').trigger('passible')
+    },
+    2000
+);
+</script>

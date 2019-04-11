@@ -118,10 +118,13 @@
                     this.page.url = "https://feling.io{{ page.url }}";
                     this.page.identifier = "https://feling.io{{ page.url }}";
                 };
-                var d = document, s = d.createElement('script');
-                s.src = '//feling.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', + new Date());
-                (d.head || d.body).appendChild(s);
+                $('#the-gfw').on('passible', function() {
+                    $('#disqus_thread_modal_entrance').show()
+                    var d = document, s = d.createElement('script');
+                    s.src = '//feling.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', + new Date());
+                    (d.head || d.body).appendChild(s);
+                });
             </script>
         </div>
         
@@ -250,7 +253,13 @@
 </nav>
 
 <div id="googleThings"></div>
-<script src="//cdn.feling.io/js/googleThings-2.0.3.js" async defer></script>
+<script>
+$('#the-gfw').on('passible', function() {
+    $("#googleThings").load("//cdn.feling.io/googleThings-2.0.2.html")
+});
+</script>
+
+
 <!-- <div id="showAccessToken" class="uk-modal">
     <div class="uk-modal-dialog" style="width:700px;">
         <table class="uk-table">
