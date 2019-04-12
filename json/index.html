@@ -451,6 +451,7 @@ if (!String.prototype.endsWith) {
     new ClipboardJS('.copy-button', {
         text: function(trigger) {
             var xx = trigger
+            console.log(trigger)
             return trigger.html
         }
     }).on('success', function(e) {
