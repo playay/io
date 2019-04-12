@@ -465,7 +465,7 @@ if (!String.prototype.endsWith) {
 </script>
 
 <script>
-    hotkeys('ctrl+1,ctrl+2,ctrl+3,ctrl+4,ctrl+5,ctrl+0', function(event,handler) {
+    hotkeys('ctrl+1,ctrl+2,ctrl+3,ctrl+4,ctrl+5,ctrl+0,ctrl+6', function(event,handler) {
         switch(handler.key){
             case "ctrl+1": $('#button-unFoldAll-1').click();break;
             case "ctrl+2": $('#button-unFoldAll-2').click();break;
@@ -473,9 +473,10 @@ if (!String.prototype.endsWith) {
             case "ctrl+4": $('#button-unFoldAll-4').click();break;
             case "ctrl+5": $('#button-unFoldAll-5').click();break;
             case "ctrl+0": $('#button-unFoldAll-n').click();break;
+            case "ctrl+6": $('#button-unFoldAll-n').click();break;
         }
     })
-    hotkeys('ctrl+s+m', function(event,handler) {
+    hotkeys('ctrl+m', function(event,handler) {
         $('#array_sampling').click()
     })
 </script>
@@ -486,13 +487,13 @@ if (!String.prototype.endsWith) {
         <table class="uk-table">
             <tbody>
                 <tr>
-                    <td class="uk-text-left uk-text-bold">ctrl+b, ⌘+b</td><td class="uk-text-left">打开/关闭 左侧菜单栏</td>
+                    <td class="uk-text-left uk-text-bold">ctrl+b 或 ⌘+b</td><td class="uk-text-left">打开/关闭 左侧菜单栏</td>
                 </tr>
                 <tr>
-                    <td class="uk-text-left uk-text-bold">ctrl+s+m</td><td class="uk-text-left">打开/关闭 SMode (对于数组, 只解析它的第一项)</td>
+                    <td class="uk-text-left uk-text-bold">ctrl+m</td><td class="uk-text-left">打开/关闭 SMode (对于数组, 只解析它的第一项)</td>
                 </tr>
                 <tr>
-                    <td class="uk-text-left uk-text-bold">ctrl+0</td><td class="uk-text-left">完全展开</td>
+                    <td class="uk-text-left uk-text-bold">ctrl+0 或 ctrl+6</td><td class="uk-text-left">完全展开</td>
                 </tr>
                 <tr>
                     <td class="uk-text-left uk-text-bold">ctrl+1, ..., ctrl+5</td><td class="uk-text-left">展开至 1~5 级</td>
