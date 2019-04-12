@@ -364,9 +364,9 @@ if (!String.prototype.endsWith) {
                     function(element, depth) {
                         if(element.tagName === 'I'){
                             if(depth > level){
-                                this.fold(element)
+                                fold(element)
                             } else {
-                                this.unFold(element)
+                                unFold(element)
                             }
                         }
                     },
