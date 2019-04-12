@@ -450,7 +450,7 @@ if (!String.prototype.endsWith) {
     })
     new ClipboardJS('.copy-button', {
         text: function(trigger) {
-            return $('#json_result').text
+            return $('#json_result').text()
         }
     }).on('success', function(e) {
         $('#copy-success').show()
