@@ -263,7 +263,7 @@ if (!String.prototype.endsWith) {
                 }
                 this.jsonResultTemp.push(start)
                 if (depth > this.defaultFold || itemCount === 0) {
-                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)">' 
+                    this.jsonResultTemp.push('<i class="uk-icon-angle-right" onClick="unFold(this)" onselectstart="return false;">' 
                         + '<span class="fold_icon">...' + itemCount + '</span>'
                         + '</i>'
                         + '<span class="foldContent" style="display:none">')
@@ -452,7 +452,7 @@ if (!String.prototype.endsWith) {
         $('#copy-success').show()
         setTimeout(function () {$('#copy-success').hide()} ,900)
         e.clearSelection()
-        e.text = e.text.replace('{', '{').replace('[', '[')
+
     })
     new ClipboardJS('#copy-share-link', {
         text: function(trigger) {
