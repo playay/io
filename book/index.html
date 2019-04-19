@@ -179,7 +179,7 @@
                         <tr class="uk-table-middle">
                             <td>{{ onDeleteItem.length }}</td>
                             <td>{{ onDeleteItem.num }}</td>
-                            <td>0.0{{ onDeleteItem.price }}</td>
+                            <td>{{ onDeleteItem.price / 1000 }}</td>
                             <td>{{ onDeleteItem.single_total }}</td>
                             <td style="width:70px;">
                                 <i v-show="deleteing" class="al-spinner" style="margin-top: 8px;"></i>
