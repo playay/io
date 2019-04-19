@@ -154,7 +154,7 @@
                     <tr v-for="record in detail.day_detail">
                         <td>{{ record.length }}</td>
                         <td>{{ record.num }}</td>
-                        <td>0.0{{ record.price }}</td>
+                        <td>{{ record.price / 1000 }}</td>
                         <td>{{ record.single_total }}</td>
                         <td v-if="localStorage.book_sgin">
                             <a v-on:click="onDeleteItem = record" href="#delete-modal" data-uk-modal
