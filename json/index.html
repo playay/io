@@ -546,7 +546,7 @@ if (!String.prototype.endsWith) {
         }
     </script>
 </li>
-<li id="header-extend-item-3" class="header-extend-item uk-parent uk-visible-large" data-uk-dropdown="{delay:800}">
+<li id="header-extend-item-3" class="header-extend-item uk-parent uk-visible-large" data-uk-dropdown="{delay:800}" style="display:none">
     <a>兼容IE</a>
     <div class="uk-dropdown uk-dropdown-navbar" style="width:480px;">
         <p>推荐使用 Chrome 浏览器</p>
@@ -563,10 +563,19 @@ if (!String.prototype.endsWith) {
                 update 了一晚上，第二天醒来居然是这个结果。。。
             </p>
             <img src="//cdn.feling.io/images/windows-update.jpeg" />
-
         </div>
+        <button class="uk-button" onclick="hideHeaderExtendItem3()">我知道了, 不再显示</button>
     </div>
 </li>
+<script>
+    function hideHeaderExtendItem3(params) {
+        $('#header-extend-item-3').hide()
+        localStorage.json_hideHeaderExtendItem3 = 'true'
+    }
+    if (localStorage.json_hideHeaderExtendItem3 != 'true') {
+        $('#header-extend-item-3').show()
+    }
+</script>
 <li id="header-extend-item-4" class="header-extend-item" style="float:right">
     <div id="copy-success" class="uk-alert uk-alert-success" 
         style="display:none;margin-bottom:0px;">
