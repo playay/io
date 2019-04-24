@@ -1,15 +1,12 @@
 <div id="the-gfw"></div>
 <script>
-var gfw_tester = new Image();
-gfw_tester.src = "https://www.google.com/images/branding/product/ico/googleg_lodp.ico?t=" + parseInt(new Date().getTime() / 100000);
-setTimeout(
-    function () {
-        if (!gfw_tester.complete || !gfw_tester.naturalWidth) {
-            gfw_tester.src = 'https://cdn.feling.io/favicon.png'
-            return
+let gfw_tester = $.ajax({
+    url: "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=xxx", 
+    complete: function (data) {
+        if (data.statusText !== "timeout") {
+            $('#the-gfw').trigger('passible')
         }
-        $('#the-gfw').trigger('passible')
     },
-    2000
-);
+    timeout: 2000
+});
 </script>
