@@ -106,7 +106,12 @@
         </div>
 
         <ul class="uk-navbar-nav uk-hidden-small" >
+            {% if page.url contains "/base64/" %}
+            <li><a href="/json/">Json 格式化</a></li>
+            {% else %}
             <li><a href="/base64/">Base64 编解码</a></li>
+            {% endif %}
+
             <li><a href="https://ocarina-diary.com/blogs/" target="_blank">陶笛日记</a></li>
         </ul>
          
