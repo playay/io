@@ -85,11 +85,6 @@
         <ul class="uk-navbar-nav" id="disqus_thread_modal_entrance" style="display:none;">
             <li><a href="#disqus_thread_modal" data-uk-modal>反馈与意见</a></li>
         </ul>
-
-        <ul class="uk-navbar-nav" >
-            <li><a href="https://ocarina-diary.com/blogs/" target="_blank">陶笛日记</a></li>
-        </ul>
-
         <div id="disqus_thread_modal" class="uk-modal ">
             <div class="uk-modal-dialog">
                 <a class="uk-modal-close uk-close"></a>
@@ -109,9 +104,13 @@
                 });
             </script>
         </div>
-        
+
+        <ul class="uk-navbar-nav uk-hidden-small" >
+            <li><a href="/base64/">Base64 编解码</a></li>
+            <li><a href="https://ocarina-diary.com/blogs/" target="_blank">陶笛日记</a></li>
+        </ul>
          
-        <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
+        <!-- <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
             style="display:none;font-weight:bold;font-size:16px;">
             <i id="signInSpinner" class="al-spinner" style="display:none"></i>
             Sign In With Google
@@ -124,7 +123,7 @@
                 </a>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
                     <ul class="uk-nav uk-nav-navbar">
-                        <!-- <li><a href="#showAccessToken" data-uk-modal>查看 accessToken</a></li> -->
+                         <li><a href="#showAccessToken" data-uk-modal>查看 accessToken</a></li>
                         <li><a href="https://pages.feling.net/2018/11/google-api-proxy.html" target="_blank">nginx 海外接口代理</a></li>
                         <li><a onClick="signOut()">退出登录  <i id="signOutSpinner" class="al-spinner" style="display:none"></i></a></li>
                     </ul>
@@ -186,7 +185,7 @@
             } else {
                 loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
             }
-        </script>
+        </script> -->
     </div>
 
     <ul id="header-extend" class="uk-navbar-nav uk-navbar-content uk-hidden-small">
@@ -233,12 +232,12 @@
 
 </nav>
 
-<div id="googleThings"></div>
+<!-- <div id="googleThings"></div>
 <script>
 $('#the-gfw').on('passible', function() {
     $("#googleThings").load("//cdn.feling.io/googleThings-2.0.2.html")
 });
-</script>
+</script> -->
 
 
 <!-- <div id="showAccessToken" class="uk-modal">
