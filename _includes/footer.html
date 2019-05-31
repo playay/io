@@ -6,18 +6,22 @@
     </div>
 
     <div id="ad-footer" class="uk-visible-large uk-width-medium-2-3" style="height: 100px;">
-        <div id="ad-footer-1" style="display: none;">
+        <div id="ad-footer-1">
             <a target="_blank" href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=b6wzfjp8">
                 <img src="//cdn.feling.io/images/ad_aliyun_20per_1.png">
             </a>
         </div>
-        <div id="ad-footer-2" style="display: none;">
+        <div id="ad-footer-2">
             <a data-type="3" data-tmpl="728x90" data-tmplid="194" data-rd="2" data-style="2" data-border="1" href="#"></a>
         </div>
         <script>
             let ad_footer_ids = ['ad-footer-1', 'ad-footer-2']
             let ad_footer_index = Math.floor((Math.random() * ad_footer_ids.length))
-            $('#' + ad_footer_ids[ad_footer_index]).show()
+            for (let index = 0; index < ad_footer_ids.length; index++) {
+                if (index != ad_footer_index) {
+                    $('#' + ad_footer_ids[index]).hide()
+                }
+            }
         </script>
         <script type="text/javascript">
             (function(win,doc){
