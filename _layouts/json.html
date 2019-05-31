@@ -9,13 +9,9 @@
 body {
     height: 100%;
 }
-#content-footer{
-    height: 100%;
-}
 
 #content {
     height: calc(100% - 40px);
-    padding: 10px 10px 20px 10px;
 }
 
 footer {
@@ -41,14 +37,13 @@ footer {
     </header>
     <hr style="margin:0">
 
-    <div id="content-footer">
-        <div id="content">
-            {{content}}         
-        </div>
+    <div id="content">
+        {{content}}     
         <footer>
             {% include footer.html %}
         </footer>
     </div>
+
     {% include baidu_tongji.html %}
 </body>
 
