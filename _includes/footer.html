@@ -6,8 +6,37 @@
     </div>
 
     <div id="ad-footer" class="uk-visible-large uk-width-medium-2-3" style="height: 100px;">
-        <a target="_blank" href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=b6wzfjp8">
-            <img src="//cdn.feling.io/images/ad_aliyun_20per_1.png">
-        </a>
+        <div id="ad-footer-1" style="display: none;">
+            <a target="_blank" href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=b6wzfjp8">
+                <img src="//cdn.feling.io/images/ad_aliyun_20per_1.png">
+            </a>
+        </div>
+        <div id="ad-footer-2" style="display: none;">
+            <a data-type="3" data-tmpl="728x90" data-tmplid="194" data-rd="2" data-style="2" data-border="1" href="#"></a>
+        </div>
+        <script>
+            let ad_footer_ids = ['ad-footer-1', 'ad-footer-2']
+            let ad_footer_index = Math.floor((Math.random() * ad_footer_ids.length))
+            $('#' + ad_footer_ids[ad_footer_index]).show()
+        </script>
+        <script type="text/javascript">
+            (function(win,doc){
+                var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+                if (!win.alimamatk_show) {
+                    s.charset = "gbk";
+                    s.async = true;
+                    s.src = "https://alimama.alicdn.com/tkapi.js";
+                    h.insertBefore(s, h.firstChild);
+                };
+                var o = {
+                    pid: "mm_110130084_530850157_108944450296",/*推广单元ID，用于区分不同的推广渠道*/
+                    appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+                    unid: "",/*自定义统计字段*/
+                    type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+                };
+                win.alimamatk_onload = win.alimamatk_onload || [];
+                win.alimamatk_onload.push(o);
+            })(window,document);
+        </script>        
     </div>
 </div>
