@@ -10,14 +10,17 @@ body {
     height: calc(100% + 105px);/* footer 高度100 + 5px */
 }
 
-#content {
-    padding: 10px 10px 20px 10px;
-    height: calc(100% - 177px);/* footer 高度100 + 5px, header 40px, body底部空白 20 + 12? px */
+#content+footer{
+    height: calc(100% - 72px);
     overflow: auto;
 }
 
+#content {
+    padding: 10px 10px 20px 10px;
+}
+
 footer {
-    margin-top: 5px; 
+    margin-top: 20px; 
     height: 100px; 
     background-color: #eee;
 }
@@ -31,12 +34,14 @@ footer {
     </header>
     <hr style="margin:0">
 
-    <div id="content">
-        {{content}}
+    <div id="content+footer">
+        <div>
+            {{content}}         
+        </div>
+        <footer>
+            {% include footer.html %}
+        </footer>
     </div>
-    <footer>
-        {% include footer.html %}
-    </footer>
     {% include baidu_tongji.html %}
 </body>
 
