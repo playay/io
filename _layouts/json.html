@@ -7,10 +7,13 @@
 
 <style>
 body {
-    height: 100%;
+    height: calc(100% + 105px);/* footer 高度100 + 5px */
 }
+
 #content {
-    height: calc(100% - 40px);
+    padding: 10px 10px 20px 10px;
+    height: calc(100% - 177px);/* footer 高度100 + 5px, header 40px, body底部空白 20 + 12? px */
+    overflow: auto;
 }
 
 footer {
@@ -30,20 +33,19 @@ footer {
                 alert("该网页不支持您的浏览器版本，推荐使用 chrome 浏览器")
             }
         </script>
-        {% include the-gfw.html %}
-        {% include header.html %}
-        {% include goTop.html %}
-    </header>
-    <hr style="margin:0">
-
-    <div id="content">
-        {{content}}     
-        <footer>
-            {% include footer.html %}
-        </footer>
-    </div>
-
-    {% include baidu_tongji.html %}
-</body>
-
-</html>
+         {% include the-gfw.html %}
+         {% include header.html %}
+         {% include goTop.html %}
+     </header>
+     <hr style="margin:0">
+ 
+     <div id="content">
+         {{content}}
+     </div>
+     <footer>
+         {% include footer.html %}
+     </footer>
+     {% include baidu_tongji.html %}
+ </body>
+ 
+ </html>
