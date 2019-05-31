@@ -10,7 +10,7 @@ body {
     height: calc(100% + 105px);/* footer 高度100 + 5px */
 }
 
-#content+footer{
+#content-footer{
     height: calc(100% - 72px);
     overflow: auto;
 }
@@ -34,8 +34,8 @@ footer {
     </header>
     <hr style="margin:0">
 
-    <div id="content+footer">
-        <div>
+    <div id="content-footer">
+        <div id="content">
             {{content}}         
         </div>
         <footer>
