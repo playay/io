@@ -154,9 +154,20 @@ if (!String.prototype.endsWith) {
             <div style="float:right;">
                 <input class="uk-visible-large" type="checkbox" style="display:none;"
                     id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange();jsonSrcChange()">
+                
+                <div class="uk-button-dropdown" data-uk-dropdown>
+                    <button id="alipay-red-bao-button" 
+                            class="uk-button uk-visible-large" 
+                            style="display:none;"
+                            v-on:mouseover="viewAlipayRedBao()">支付宝红包</button>
+                    <div class="uk-dropdown uk-dropdown-small" style="width:240px;">
+                        <img src="https://cdn.feling.io/images/alipay-red-bao.jpeg">
+                    </div>
+                </div>
+
                 <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
-                        <i id="genShareLinkSpinner" class="al-spinner" style="display:none"></i>
-                        转发当前JSON</button>
+                    <i id="genShareLinkSpinner" class="al-spinner" style="display:none"></i>
+                    转发当前JSON</button>
                 <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
                 <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip 
                         title="复制结果框当前显示的文本<br>(“折叠效果”也会被复制)" @click="hideIcon()">复制</button>
@@ -231,8 +242,21 @@ if (!String.prototype.endsWith) {
             } else {
                 this.jsonSrcChange()
             }
+            if (localStorage.alipayRedBaoNeedShow != '0') {
+                $('#alipay-red-bao-button').show()
+                if (new Date().setHours(0,0,0,0) < localStorage.alipayRedBaoViewTime
+                    && localStorage.alipayRedBaoViewTime < new Date().setHours(23,59,59,0)) {
+                    $('#alipay-red-bao-button').removeClass('red-point')
+                } else {
+                    $('#alipay-red-bao-button').addClass('red-point')
+                }
+            }
         },
         methods: {
+            viewAlipayRedBao: function() {
+                localStorage.alipayRedBaoViewTime = new Date().getTime()
+                $('#alipay-red-bao-button').removeClass('red-point')
+            },
             isArray: function (obj) {
                 return  obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'))
             },
