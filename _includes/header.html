@@ -59,83 +59,6 @@
             {% endif %}
             <li><a href="https://ocarina-diary.com/" target="_blank">陶笛日记</a></li>
         </ul>
-         
-        <!-- <a id="signInButton" class="uk-navbar-brand" onselectstart="return false;"
-            style="display:none;font-weight:bold;font-size:16px;">
-            <i id="signInSpinner" class="al-spinner" style="display:none"></i>
-            Sign In With Google
-        </a>
-        <ul id="userAvatarAndName" class="uk-navbar-nav" style="display:none;">
-            <li class="uk-parent" data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                <a class="uk-navbar-content" onselectstart="return false;">
-                    <img id="userAvatar" style="width:30px;height:30px;border-radius:50%;">
-                    <span id="userName"></span>  <i class="uk-icon-caret-down"></i>
-                </a>
-                <div class="uk-dropdown uk-dropdown-small uk-dropdown-navbar">
-                    <ul class="uk-nav uk-nav-navbar">
-                         <li><a href="#showAccessToken" data-uk-modal>查看 accessToken</a></li>
-                        <li><a href="https://pages.feling.net/2018/11/google-api-proxy.html" target="_blank">nginx 海外接口代理</a></li>
-                        <li><a onClick="signOut()">退出登录  <i id="signOutSpinner" class="al-spinner" style="display:none"></i></a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-        <script>
-            function signOut() {
-                $("#signOutSpinner").show()
-                WithFParams.postForm('/login/signOut', {}, function() { })
-                    .always(function() {
-                        localStorage.removeItem('accessToken')
-                        localStorage.removeItem('accessTokenExpiredAt')
-                        localStorage.removeItem('userAvatar')
-                        localStorage.removeItem('userName')
-                        $("#signInButton").show()
-                        $("#userAvatarAndName").hide()
-                        $("#signOutSpinner").hide()
-                    })
-                if (typeof gapi != "undefined") {
-                    var auth2 = gapi.auth2.getAuthInstance()
-                    auth2.signOut().then(function() {})
-                }
-            }
-            function loadUserAvatarAndNameFormLocalStorage2ShowInNavBar () {
-                if (localStorage.accessToken) {
-                    $("#userAvatar").attr("src", localStorage.userAvatar)
-                    $("#userName").html(localStorage.userName)
-                    $("#showAccessToken_0").html(localStorage.accessToken)
-                    $("#showAccessToken_1").html(new Date(localStorage.accessTokenExpiredAt).toLocaleString())
-                    $("#userAvatarAndName").show()
-                    $("#signInButton").hide()
-                } else {
-                    $("#userAvatarAndName").hide()
-                }
-            }
-            if (localStorage.accessToken) {
-                WithFParams.postForm('/login/getLoginInfo',
-                    {
-                        accessToken: localStorage.accessToken
-                    },
-                    function(result) {
-                        if (result.success && result.data) {
-                            localStorage.accessTokenExpiredAt = result.data.accessTokenExpiredAt
-                            localStorage.userAvatar = result.data.userAvatar
-                            localStorage.userName = result.data.userName
-                        } else {
-                            localStorage.removeItem('accessToken')
-                            localStorage.removeItem('accessTokenExpiredAt')
-                            localStorage.removeItem('userAvatar')
-                            localStorage.removeItem('userName')
-                            $("#signInButton").show()
-                            $("#userAvatarAndName").hide()
-                        }
-                    }
-                ).always(function() {
-                    loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
-                })
-            } else {
-                loadUserAvatarAndNameFormLocalStorage2ShowInNavBar()
-            }
-        </script> -->
     </div>
 
     <ul id="header-extend" class="uk-navbar-nav uk-navbar-content uk-hidden-small">
@@ -172,42 +95,5 @@
         </li>
         {% endraw %}
     </ul>
-    <!-- 
-    <p><i class="uk-icon-wechat"></i> 微信 </p>
-    <img src="//cdn.feling.io/images/donate-wechat.jpg" style="width:128px;height:128px;"/>
- 
-    <p><img src="//cdn.feling.io/images/icon-alipay.svg" style="width:18px;height:18px;"/> 支付宝 </p>
-    <img src="//cdn.feling.io/images/donate-alipay.png" style="width:128px;height:128px;"/>
-    -->
 
 </nav>
-
-<!-- <div id="googleThings"></div>
-<script>
-$('#the-gfw').on('passible', function() {
-    $("#googleThings").load("//cdn.feling.io/googleThings-2.0.2.html")
-});
-</script> -->
-
-
-<!-- <div id="showAccessToken" class="uk-modal">
-    <div class="uk-modal-dialog" style="width:700px;">
-        <table class="uk-table">
-            <tbody>
-                <tr>
-                    <td class="uk-text-left uk-text-bold">accessToken</td>
-                    <td id="showAccessToken_0" class="uk-text-left"></td>
-                </tr>
-                <tr>
-                    <td class="uk-text-left uk-text-bold">过期时间</td>
-                    <td id="showAccessToken_1" class="uk-text-left"></td>
-                </tr>
-            </tbody>
-        </table>
-        <ul class="uk-list">
-            <li>1. 重新登录, 即可重置 accessToken</li>
-            <li>2. 调用获取用户信息接口, 能延长 accessToken 的有效期至 当前时间+30天</li>
-            <li>3. 登录状态下刷新页面、调用需要 accessToken 作参数的接口 等, 均会间接触发调用获取用户信息接口</li>
-        </ul>
-    </div>
-</div> -->
