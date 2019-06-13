@@ -53,21 +53,14 @@ description: 兼容IE11。更直观的了解接口返回值格式、结构。格
     font-family: Consolas, monospace;
 }
 @media (min-width: 960px) {
-    #main {
-        display: flex;
-        flex-direction: row;
-    }
     #json_src_box {
         width: 38%;
-        height: 100%;
-        flex-grow: 1;
-        flex-shrink: 1;
+        display: inline-block;
     }
     #json_result_box {
         padding-left: 10px;
         width: 62%;
-        flex-grow: 1;
-        flex-shrink: 1;
+        float: right;
     }
 }
 @media (max-width: 960px) {
@@ -76,6 +69,7 @@ description: 兼容IE11。更直观的了解接口返回值格式、结构。格
         height: 200px;
     }
     #json_result_box {
+        margin-top: 10px;
         width: 100%;
     }
 }
