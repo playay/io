@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="uk-height-1-1">
+
+<head>
+{% include head.html %}
+</head>
+
+<style>
+body {
+    height: 100%;
+}
+
+#content {
+    padding: 10px 10px 10px 10px;
+    height: calc(100% - 152px);
+    overflow: auto;
+}
+
+footer {
+    height: 90px; 
+    background-color: #eee;
+}
+</style>
+<body>
+    <header>
+        <div id="iiie"></div>
+        <script>
+            IIIE = new Vue({el:"#iiie"});
+        </script>
+        <script>
+            if (typeof IIIE == 'undefined') {
+                alert("该网页不支持您的浏览器版本，推荐使用 chrome 浏览器")
+            }
+        </script>
+         {% include the-gfw.html %}
+         {% include header.html %}
+         {% include goTop.html %}
+     </header>
+     <hr style="margin:0">
+ 
+     <div id="content">
+         {{content}}
+     </div>
+     {% include baidu_tongji.html %}
+ </body>
+ 
+ </html>
