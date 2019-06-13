@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="uk-height-1-1">
+
+<head>
+{% include head.html %}
+</head>
+
+<style>
+body {
+    height: calc(100%);
+}
+
+#content {
+    padding: 10px 10px 20px 10px;
+    height: calc(100% - 177px);/* footer 高度100 + 5px, header 40px, body底部空白 20 + 12? px */
+    overflow: auto;
+}
+
+footer {
+    margin-top: 5px; 
+    height: 100px; 
+    background-color: #eee;
+}
+</style>
+<body>
+    <header>
+        {% include no-ie.html %}
+        {% include the-gfw.html %}
+        {% include header.html %}
+        {% include goTop.html %}
+    </header>
+    <hr style="margin:0">
+
+    <div id="content">
+        {{content}}
+    </div>
+    <footer>
+        {% include footer.html %}
+    </footer>
+    {% include baidu_tongji.html %}
+</body>
+
+</html>
