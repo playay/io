@@ -8,8 +8,6 @@ description: 兼容IE。更直观的了解接口返回值格式、结构。格�
     <a href="/.well-known/acme-challenge/Lx9RkUBqW324Ckq3FwbXUCv_bjO1-o-AaWwSZ1BmE_Y"></a>
     <a href="/mock/"></a>
     <a href="/book/"></a>
-    <a href="/json/"></a>
-    <a href="/base64/"></a>
 </div>
 
 <style type="text/css">
@@ -403,7 +401,7 @@ description: 兼容IE。更直观的了解接口返回值格式、结构。格�
                         },
                         function (result) {
                             if (result.success) {
-                                vm.shareLink = "https://feling.io/json/last.html?shareId=" + result.data
+                                vm.shareLink = "https://feling.io/json/?shareId=" + result.data
                                 if (!localStorage.json_notFirstTimeGenShareLink) {
                                     localStorage.json_notFirstTimeGenShareLink = true
                                 }
@@ -428,7 +426,7 @@ description: 兼容IE。更直观的了解接口返回值格式、结构。格�
                 getQueryParamAndClearAll: function(key) {
                     var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
                     var r = window.top.location.search.substr(1).match(reg);
-                    window.top.history.replaceState(null, null, "/json/last.html")
+                    window.top.history.replaceState(null, null, "/json/")
                     if (r != null) {
                         return decodeURIComponent(r[2])
                     }
