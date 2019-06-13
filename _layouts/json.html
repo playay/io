@@ -85,7 +85,7 @@ footer {
             font-family: Consolas, monospace;
         }
         @media (min-width: 960px) {
-            #main {
+            #content {
                 display: flex;
             }
             #json_src_box {
@@ -193,7 +193,7 @@ footer {
             icon.nextSibling.style.display = 'inline'
         }
         var vm = new Vue({
-            el: "#main",
+            el: "#content",
             data: {
                 reLink: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
                 reLastComma: /,(\s*[}\]])/g,
