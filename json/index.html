@@ -53,8 +53,8 @@ description: 兼容IE11。更直观的了解接口返回值格式、结构。格
     font-family: Consolas, monospace;
 }
 @media (min-width: 960px) {
-    #main {
-        display: inline-flex;
+    #content {
+        display: flex;
     }
     #json_src_box {
         width: 38%;
@@ -134,7 +134,6 @@ if (!String.prototype.endsWith) {
 }
 </script>
 
-<div id="main" class="uk-height-1-1">
     <div id="json_src_box" class="uk-width-10-10">
         <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" 
         v-on:click="$('#cursor-position').show();cursorPosition = $('#json_src').prop('selectionStart')"
@@ -182,9 +181,7 @@ if (!String.prototype.endsWith) {
         <div class="uk-width-1-1">
             <pre style="margin:0;"><code v-html="jsonResult" id="json_result"></code></pre>
         </div>
-        <!-- <div class="uk-width-1-1" style="height:30px;">...</div> -->
     </div>
-</div>
 
 
 <script>
@@ -211,7 +208,7 @@ if (!String.prototype.endsWith) {
         icon.nextSibling.style.display = 'inline'
     }
     var vm = new Vue({
-        el: "#main",
+        el: "#content",
         data: {
             reLink: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
             reLastComma: /,(\s*[}\]])/g,
