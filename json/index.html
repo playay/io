@@ -5,53 +5,53 @@ keywords: [json,json在线解析,json格式化,json格式验证]
 description: 兼容IE11。更直观的了解接口返回值格式、结构。格式化、高亮、折叠、转发你的 json 字符串。支持一键复制、一键折叠、快捷键。转发当前 json 字符串的功能, 让沟通交流更加方便。还有 SMode 模式, 对于数组, 只解析它的第一项, json 结构更清晰。
 ---
 
-    <div id="json_src_box" class="uk-width-10-10">
-        <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" 
-        v-on:click="$('#cursor-position').show();cursorPosition = $('#json_src').prop('selectionStart')"
-        v-on:keydown="cursorPosition = $('#json_src').prop('selectionStart')"
-        v-on:blur="cursorPosition = '?'"
-        v-on:input="cursorPosition = $('#json_src').prop('selectionStart');jsonSrcChange()">
-        </textarea>
-    </div>
+<div id="json_src_box" class="uk-width-10-10">
+    <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" 
+    v-on:click="$('#cursor-position').show();cursorPosition = $('#json_src').prop('selectionStart')"
+    v-on:keydown="cursorPosition = $('#json_src').prop('selectionStart')"
+    v-on:blur="cursorPosition = '?'"
+    v-on:input="cursorPosition = $('#json_src').prop('selectionStart');jsonSrcChange()">
+    </textarea>
+</div>
 
-    <div id="json_result_box" class="uk-width-10-10">
-        <div class="uk-width-1-1" style="height:30px;">
-            <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 0 }" v-on:click="unFoldAll(1)">1级</button>
-            <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 997 }"  v-on:click="unFoldAll(998)">n级</button>
-            {% raw %}
-            <span id="cursor-position" style="display:none;" data-uk-tooltip title="输入框中 光标的位置">
-                {{ cursorPosition }} / {{ jsonSrc.length }} 
-            </span>
-            {% endraw %}
-            <div style="float:right;">
-                <input class="uk-visible-large" type="checkbox" style="display:none;"
-                    id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange();jsonSrcChange()">
-                
-                <div class="uk-button-dropdown" data-uk-dropdown="{pos:'bottom-right'}">
-                    <button id="alipay-red-bao-button" 
-                            class="uk-button" 
-                            style="display:none;"
-                            v-on:mouseover="viewAlipayRedBao()">支付宝红包</button>
-                    <div class="uk-dropdown uk-dropdown-small" style="width:240px;">
-                        <img src="https://cdn.feling.io/images/alipay-red-bao.jpeg">
-                    </div>
+<div id="json_result_box" class="uk-width-10-10">
+    <div class="uk-width-1-1" style="height:30px;">
+        <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 0 }" v-on:click="unFoldAll(1)">1级</button>
+        <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 997 }"  v-on:click="unFoldAll(998)">n级</button>
+        {% raw %}
+        <span id="cursor-position" style="display:none;" data-uk-tooltip title="输入框中 光标的位置">
+            {{ cursorPosition }} / {{ jsonSrc.length }} 
+        </span>
+        {% endraw %}
+        <div style="float:right;">
+            <input class="uk-visible-large" type="checkbox" style="display:none;"
+                id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange();jsonSrcChange()">
+            
+            <div class="uk-button-dropdown" data-uk-dropdown="{pos:'bottom-right'}">
+                <button id="alipay-red-bao-button" 
+                        class="uk-button" 
+                        style="display:none;"
+                        v-on:mouseover="viewAlipayRedBao()">支付宝红包</button>
+                <div class="uk-dropdown uk-dropdown-small" style="width:240px;">
+                    <img src="https://cdn.feling.io/images/alipay-red-bao.jpeg">
                 </div>
-
-                <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
-                    <i id="genShareLinkSpinner" class="al-spinner" style="display:none"></i>
-                    转发当前JSON</button>
-                <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
-                <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip 
-                        title="复制结果框当前显示的文本<br>(“折叠效果”也会被复制)" @click="hideIcon()">复制</button>
-                <button class="uk-button copy-button uk-visible-large" data-uk-tooltip title="完全展开结果框的内容, 然后复制<br>(不会复制“折叠效果”)" 
-                    data-clipboard-target="#json_result" @click="unFoldAll(998);hideIcon()">n级 &amp; 复制</button>
-                <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" data-uk-tooltip title="复制压缩后的 json, 不影响结果框的“折叠效果”、“SMode效果”" >压缩 &amp; 复制</button>
             </div>
-        </div>
-        <hr style="margin: 0px">
-        <div class="uk-width-1-1">
-            <pre style="margin:0;"><code v-html="jsonResult" id="json_result"></code></pre>
+
+            <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
+                <i id="genShareLinkSpinner" class="al-spinner" style="display:none"></i>
+                转发当前JSON</button>
+            <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
+            <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip 
+                    title="复制结果框当前显示的文本<br>(“折叠效果”也会被复制)" @click="hideIcon()">复制</button>
+            <button class="uk-button copy-button uk-visible-large" data-uk-tooltip title="完全展开结果框的内容, 然后复制<br>(不会复制“折叠效果”)" 
+                data-clipboard-target="#json_result" @click="unFoldAll(998);hideIcon()">n级 &amp; 复制</button>
+            <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" data-uk-tooltip title="复制压缩后的 json, 不影响结果框的“折叠效果”、“SMode效果”" >压缩 &amp; 复制</button>
         </div>
     </div>
+    <hr style="margin: 0px">
+    <div class="uk-width-1-1">
+        <pre style="margin:0;"><code v-html="jsonResult" id="json_result"></code></pre>
+    </div>
+</div>
 
 
