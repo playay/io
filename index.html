@@ -551,38 +551,6 @@ description: 兼容IE。更直观的了解接口返回值格式、结构。格�
             }
         </script>
     </li>
-    <li id="header-extend-item-3" class="header-extend-item uk-parent uk-visible-large" data-uk-dropdown="{delay:800}" style="display:none">
-        <a>兼容IE</a>
-        <div class="uk-dropdown uk-dropdown-navbar" style="width:480px;">
-            <p>推荐使用 Chrome 浏览器</p>
-            <div>
-                <p>
-                    由于页面在 PC 版 Bing 搜索的排名上升，增加了很多来自 IE 的访问。<br>
-                    所以特地增加了对 IE 的兼容（<b>IE11 上测试通过</b>）。感谢大家的支持。<br><br>
-                    2019-04-13<br>
-                </p>
-            </div>
-            <div>
-                <p>
-                    找来上学时的旧电脑，花了两天时间 装win7、装windows update。<br>
-                    update 了一晚上，第二天醒来居然是这个结果。。。
-                </p>
-                <img src="//cdn.feling.io/images/windows-update.jpeg" />
-            </div>
-            <div>
-                <button class="uk-button uk-active" onclick="hideHeaderExtendItem3()">我知道了, 不再显示</button>
-            </div>
-        </div>
-    </li>
-    <script>
-        function hideHeaderExtendItem3(params) {
-            $('#header-extend-item-3').hide()
-            localStorage.json_hideHeaderExtendItem3 = 'true'
-        }
-        if (localStorage.json_hideHeaderExtendItem3 != 'true') {
-            $('#header-extend-item-3').show()
-        }
-    </script>
     <li id="header-extend-item-4" class="header-extend-item" style="float:right">
         <div id="copy-success" class="uk-alert uk-alert-success" 
             style="display:none;margin-bottom:0px;">
