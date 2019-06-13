@@ -136,9 +136,18 @@ description: 兼容IE。更直观的了解接口返回值格式、结构。格�
         };
     }
     </script>
-    
     <div id="main" class="uk-grid uk-grid-collapse uk-height-1-1">
-        <div id="json_src_box" class="uk-width-10-10" style="height:calc(100% - 5px);">
+        <style>
+            #json_src_box{
+                height:calc(100% - 5px);
+            }
+            @media(max-width: 960px) {
+                #json_src_box{
+                    height: 210px;
+                }
+            }
+        </style>
+        <div id="json_src_box" class="uk-width-10-10">
             <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" 
             v-on:click="$('#cursor-position').show();cursorPosition = $('#json_src').prop('selectionStart')"
             v-on:keydown="cursorPosition = $('#json_src').prop('selectionStart')"
