@@ -429,7 +429,7 @@ footer {
                 getQueryParamAndClearAll: function(key) {
                     var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
                     var r = window.top.location.search.substr(1).match(reg);
-                    window.top.history.replaceState(null, null, "/json/")
+                    // window.top.history.replaceState(null, null, "/json/")
                     if (r != null) {
                         return decodeURIComponent(r[2])
                     }
