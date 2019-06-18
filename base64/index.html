@@ -34,7 +34,6 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
     if (typeof localStorage.base64_activeTab == "undefined") {
         localStorage.base64_activeTab = 1
     }
-    window.top.history.replaceState(null, null, "/base64/")
 </script>
 
 <div class="uk-width-10-10 uk-height-1-1" style="padding-bottom: 50px;">
@@ -44,7 +43,7 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
         <li><a id="activeTab0" onClick="localStorage.base64_activeTab = 0" href="#">文字</a></li>
         <li><a id="activeTab1" onClick="localStorage.base64_activeTab = 1" href="#">图片</a></li>
 
-        <li style="float:right; display:none;"><a href="#">关于 Base64</a></li>
+        <li style="float:right;"><a href="https://pages.feling.net/2018/02/why-base64.html">人们为什么使用Base64？</a></li>
     </ul>
 </div>
 
@@ -82,11 +81,6 @@ description: 在线 Base64 编码、解码。支持文字、图片。智能适�
                     <input type="file" style="display:none;" id="file_input" accept="image/*" 
                     v-on:change="onFileInputChange">
                 </div>
-            </div>
-        </li>
-        <li>
-            <div>
-                ...
             </div>
         </li>
     </ul>
