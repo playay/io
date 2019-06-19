@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="uk-height-1-1">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="hostname" content="feling.io">
+    <meta name="description" content="feling.io 在线工具">
+    <meta name="keywords" content="json,json在线解析,json格式化,json格式验证,base64编码解码,base64图片">
+    <meta name="robots" content="all">
+    <meta name="author" content="feling.io">
+    <title>关于我们 - feling.io</title>
+    <link rel="stylesheet" href="//cdn.feling.io/css/uikit.min.css" media="all">
+    <link rel="icon" type="image/png" href="//cdn.feling.io/favicon.png">
+    <script src="//cdn.feling.io/js/jquery-3.3.1.min.js"></script>
+    <script src="//cdn.feling.io/js/vue.min.js"></script>
+    <script src="//cdn.feling.io/js/uikit.min.js"></script>
+</head>
+
+<body class="uk-height-1-1">
+    <header>
+        <!-- 浏览器兼容性检测 -->
+        <div id="iiie"></div>
+        <script>
+            IIIE = new Vue({el:"#iiie"});
+        </script>
+        <script>
+            if (typeof IIIE == 'undefined') {
+                alert("该网页不支持您的浏览器版本，推荐使用 chrome 浏览器")
+            }
+        </script>
+
+        <!-- 网络联通性检测 -->
+        <div id="the-gfw"></div>
+        <script>
+            let gfw_tester = $.ajax({
+                url: "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=xxx", 
+                complete: function (data) {
+                    if (data.statusText !== "timeout") {
+                        $('#the-gfw').trigger('passible')
+                    }
+                },
+                timeout: 2000
+            });
+        </script>
+
+        <nav class="uk-navbar">
+            <a href="/" class="uk-navbar-brand">
+                <img width="28px;" height="28px;" src="//cdn.feling.io/favicon.png">
+                <span style="
+                    font-size: 8px;
+                    color: rgb(35, 120, 220);
+                "> feling.io </span>
+            </a>
+            <div class="uk-navbar-flip">
+                <ul class="uk-navbar-nav" id="disqus_thread_modal_entrance">
+                    <li><a href="#disqus_thread_modal" data-uk-modal>反馈与意见</a></li>
+                </ul>
+                <div id="disqus_thread_modal" class="uk-modal">
+                    <div class="uk-modal-dialog">
+                        <a class="uk-modal-close uk-close"></a>
+                        <div id="disqus_thread">您的网络环境无法加载 disqus 的评论模块</div>
+                    </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = "https://feling.io/";
+                            this.page.identifier = "https://feling.io/";
+                        };
+                        $('#the-gfw').on('passible', function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = '//feling.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', + new Date());
+                            (d.head || d.body).appendChild(s);
+                        });
+                    </script>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 回到顶部 -->
+        <script>
+            $(function() {
+                $(content).scroll(function() {
+                    if ($(content).scrollTop() > 400)
+                        $('div.go-top').show();
+                    else
+                        $('div.go-top').hide();
+                });
+                $('div.go-top').click(function() {
+                    $('html, body, #content').animate({scrollTop: 0}, 400);
+                });
+            });
+        </script>
+        <style>
+            div.go-top {
+                display: none;
+                opacity: 0.6;
+                z-index: 999999;
+                position: fixed;
+                bottom: 100px;
+                right: 1%;
+                border: 1px solid #3399ff;
+                width: 38px;
+                height: 38px;
+                background-color: #ffffff;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            
+            div.go-top:hover {
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+            
+            div.go-top div.arrow {
+                position: absolute;
+                left: 10px;
+                top: -1px;
+                width: 0;
+                height: 0;
+                border: 9px solid transparent;
+                border-bottom-color: #3399ff;
+            }
+            
+            div.go-top div.stick {
+                position: absolute;
+                left: 15px;
+                top: 15px;
+                width: 8px;
+                height: 14px;
+                display: block;
+                background-color: #3399ff;
+                -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                border-radius: 1px;
+            }
+        </style>
+        <div class="go-top">
+            <div class="arrow"></div>
+            <div class="stick"></div>
+        </div>
+    </header>
+    <hr style="margin:0 0 10px 0;">
+
+    <div id="content" style="height:calc(100% - 110px - 40px - 12px);">
+        <h3>关于 聆熵</h3>
+        <hr>
+        <article>
+            
+        </article>
+
+        <h3>关于 未来</h3>
+        <h3>关于 feling.io</h3>
+    </div>
+
+    <hr style="margin:0">
+    <footer class="uk-grid uk-grid-small" style="background:#f6f6f6;padding: 10px 10px 0 10px;">
+        <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-text-small">
+            <span>
+                由 <a href="https://gitee.com/apihub" target="_blank">聆熵信息技术</a> 维护与更新
+            </span><br><br>
+            <span>
+                <a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=b6wzfjp8" 
+                    target="_blank">阿里云</a> 提供主机、对象存储、CDN、函数计算等服务
+            </span><br>
+            <span>
+                网站源码 开源地址: <a href="https://github.com/playay/io" 
+                                    target="_blank">https://github.com/playay/io</a>
+            </span><br>
+            <span>
+                闽ICP备17033777号-2
+            </span><br><br>
+        </div>
+        <div class="uk-width-small-1-1 uk-width-medium-1-3">
+            <span class="uk-text-top">联系微信: &nbsp;&nbsp;</span>
+            <img style="display: inline-block" 
+                width="100" height="100"
+                src="//cdn.feling.io/images/weixin-qrcode-apihub.jpeg" />
+        </div>
+        <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-text-small">
+            <a href="/about.html" target="_blank">关于我们</a> <br><br>
+            <a href="#zhengzhaoxinxi_modal" data-uk-modal>证照信息</a>
+            <div id="zhengzhaoxinxi_modal" class="uk-modal">
+                <div class="uk-modal-dialog uk-modal-dialog-large">
+                    <a class="uk-modal-close uk-close"></a>
+                    <img src="//cdn.feling.io/images/zhengzhaoxinxi.jpg">
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?eb2e47d50973b9fd1a325718406ab901";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </footer>
+</body>
+</html>
