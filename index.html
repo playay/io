@@ -142,8 +142,11 @@
     </header>
     <hr style="margin:0 0 10px 0;">
 
-    <div id="content" style="height:calc(100% - 120px - 40px - 12px);">
+    <div id="content" style="height:calc(100% - 120px - 40px - 2px);">
         <div>
+            <ul class="uk-tab">
+                <li class="uk-active"><a href="">前后端联调</a></li>
+            </ul>
             <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/json/"> 
                 <div style="text-align:left;font-size:18px">Json 格式化</div> 
                 <hr style="margin:0">
@@ -164,34 +167,41 @@
                 <p style="text-align:left;font-size:11px;margin:0px;">base64 编解码</p>
             </a>
 
-            <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/redis/"> 
-                <div style="text-align:left;font-size:18px">Fredis</div> 
-                <hr style="margin:0">
-                <p style="text-align:left;font-size:11px;margin:0px;">网页版 redis 客户端</p>
-            </a> 
-        
             <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/timestamp/"> 
                 <div style="text-align:left;font-size:18px">时间戳 ⇄ 时间</div>
                 <hr style="margin:0">
                 <p style="text-align:left;font-size:11px;margin:0px;">把 毫秒数 转成人类友好的字符串</p>
             </a>
         </div>
+        <div>
+            <ul class="uk-tab">
+                <li class="uk-active"><a href="">ws2s 系列</a></li>
+            </ul>
+            <a class="uk-button" style="margin: 0px 0px 10px 10px;" href="/redis/"> 
+                <div style="text-align:left;font-size:18px">Fredis</div> 
+                <hr style="margin:0">
+                <p style="text-align:left;font-size:11px;margin:0px;">网页版 redis 客户端</p>
+            </a> 
+        </div>
     </div>
 
     <hr style="margin:0">
-    <footer class="uk-grid uk-grid-small" style="background:#eee;padding:10px;">
+    <footer class="uk-grid uk-grid-small" style="background:#eee;padding: 10 10 0 10px;">
         <div class="uk-width-small-1-1 uk-width-medium-1-3 uk-text-small">
-            <p>
-                由 <a href="https://gitee.com/apihub" target="_blank">聆熵信息技术</a> 维护与更新<br><br>
-
+            <span>
+                由 <a href="https://gitee.com/apihub" target="_blank">聆熵信息技术</a> 维护与更新
+            </span><br><br>
+            <span>
                 <a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=b6wzfjp8" 
-                    target="_blank">阿里云</a> 提供主机、对象存储、CDN、函数计算等服务 <br>
-
+                    target="_blank">阿里云</a> 提供主机、对象存储、CDN、函数计算等服务
+            </span><br>
+            <span>
                 网站源码 开源地址: <a href="https://github.com/playay/io" 
-                                    target="_blank">https://github.com/playay/io</a><br>
-
-                闽ICP备17033777号-2<br><br>
-            </p>
+                                    target="_blank">https://github.com/playay/io</a>
+            </span><br>
+            <span>
+                闽ICP备17033777号-2
+            </span><br><br>
         </div>
         <div class="uk-width-small-1-1 uk-width-medium-1-3">
             <span class="uk-text-top">联系微信: &nbsp;&nbsp;</span>
