@@ -49,7 +49,7 @@
                 <img width="28px;" height="28px;" src="//cdn.feling.io/favicon.png">
             </a>
             <div class="uk-navbar-flip">
-                <ul class="uk-navbar-nav" id="disqus_thread_modal_entrance" style="display:none;">
+                <ul class="uk-navbar-nav" id="disqus_thread_modal_entrance">
                     <li><a href="#disqus_thread_modal" data-uk-modal>反馈与意见</a></li>
                 </ul>
                 <div id="disqus_thread_modal" class="uk-modal">
@@ -59,11 +59,10 @@
                     </div>
                     <script>
                         var disqus_config = function () {
-                            this.page.url = "https://feling.io/json/";
-                            this.page.identifier = "https://feling.io/json/";
+                            this.page.url = "https://feling.io/";
+                            this.page.identifier = "https://feling.io/";
                         };
                         $('#the-gfw').on('passible', function() {
-                            $('#disqus_thread_modal_entrance').show()
                             var d = document, s = d.createElement('script');
                             s.src = '//feling.disqus.com/embed.js';
                             s.setAttribute('data-timestamp', + new Date());
