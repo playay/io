@@ -1,44 +1,159 @@
----
-title: Json格式化
-layout: index
-keywords: [json,json在线解析,json格式化,json格式验证]
-description: 兼容IE。更直观的了解接口返回值格式、结构。格式化、高亮、折叠、转发你的 json 字符串。支持一键复制、一键折叠、快捷键。转发当前 json 字符串的功能, 让沟通交流更加方便。还有 SMode 模式, 对于数组, 只解析它的第一项, json 结构更清晰。
----
+<!DOCTYPE html>
+<html lang="zh-CN" class="uk-height-1-1">
 
-<div id="json_src_box" class="uk-width-10-10">
-    <textarea id="json_src" class="uk-width-1-1" autofocus spellcheck="false" v-model="jsonSrc" 
-    v-on:click="$('#cursor-position').show();cursorPosition = $('#json_src').prop('selectionStart')"
-    v-on:keydown="cursorPosition = $('#json_src').prop('selectionStart')"
-    v-on:blur="cursorPosition = '?'"
-    v-on:input="cursorPosition = $('#json_src').prop('selectionStart');jsonSrcChange()">
-    </textarea>
-</div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="hostname" content="feling.io">
+    <meta name="description" content="feling.io 在线工具">
+    <meta name="keywords" content="json,json在线解析,json格式化,json格式验证,base64编码解码,base64图片">
+    <meta name="robots" content="all">
+    <meta name="author" content="feling.io">
+    <title>feling.io 在线工具</title>
+    <link rel="stylesheet" href="//cdn.feling.io/css/uikit.min.css" media="all">
+    <link rel="icon" type="image/png" href="//cdn.feling.io/favicon.png">
+    <script src="//cdn.feling.io/js/jquery-3.3.1.min.js"></script>
+    <script src="//cdn.feling.io/js/vue.min.js"></script>
+    <script src="//cdn.feling.io/js/uikit.min.js"></script>
+</head>
 
-<div id="json_result_box" class="uk-width-10-10">
-    <div class="uk-width-1-1" style="height:30px;">
-        <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 0 }" v-on:click="unFoldAll(1)">1级</button>
-        <button class="uk-button uk-visible-small" v-bind:class="{ 'uk-button-success': defaultFold == 997 }"  v-on:click="unFoldAll(998)">n级</button>
-        {% raw %}
-        <span id="cursor-position" style="display:none;" data-uk-tooltip title="输入框中 光标的位置">
-            {{ cursorPosition }} / {{ jsonSrc.length }} 
-        </span>
-        {% endraw %}
-        <div style="float:right;">
-            <input class="uk-visible-large" type="checkbox" style="display:none;"
-                id="array_sampling" v-model="arraySampling" v-on:change="SModeStatusChange();jsonSrcChange()">
-            <button v-show="!shareLink" class="uk-button uk-visible-large" v-on:click="share">
-                    <i id="genShareLinkSpinner" class="al-spinner" style="display:none"></i>
-                    转发当前JSON</button>
-            <button id="copy-share-link" v-show="shareLink" class="uk-button uk-button-success" style="display:none;">再点一次,复制转发链接</button>
-            <button class="uk-button copy-button" data-clipboard-target="#json_result" data-uk-tooltip 
-                    title="复制结果框当前显示的文本<br>(“折叠效果”也会被复制)" @click="hideIcon()">复制</button>
-            <button class="uk-button copy-button uk-visible-large" data-uk-tooltip title="完全展开结果框的内容, 然后复制<br>(不会复制“折叠效果”)" 
-                data-clipboard-target="#json_result" @click="unFoldAll(998);hideIcon()">n级 &amp; 复制</button>
-            <button id="copy-compression-jsonSrc" class="uk-button uk-visible-large" data-uk-tooltip title="复制压缩后的 json, 不影响结果框的“折叠效果”、“SMode效果”" >压缩 &amp; 复制</button>
+<body>
+    <header>
+        <!-- 浏览器兼容性检测 -->
+        <div id="iiie"></div>
+        <script>
+            IIIE = new Vue({el:"#iiie"});
+        </script>
+        <script>
+            if (typeof IIIE == 'undefined') {
+                alert("该网页不支持您的浏览器版本，推荐使用 chrome 浏览器")
+            }
+        </script>
+
+        <!-- 网络联通性检测 -->
+        <div id="the-gfw"></div>
+        <script>
+            let gfw_tester = $.ajax({
+                url: "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=xxx", 
+                complete: function (data) {
+                    if (data.statusText !== "timeout") {
+                        $('#the-gfw').trigger('passible')
+                    }
+                },
+                timeout: 2000
+            });
+        </script>
+
+        <nav class="uk-navbar">
+            <div class="uk-navbar-flip">
+                <ul class="uk-navbar-nav" id="disqus_thread_modal_entrance" style="display:none;">
+                    <li><a href="#disqus_thread_modal" data-uk-modal>反馈与意见</a></li>
+                </ul>
+                <div id="disqus_thread_modal" class="uk-modal">
+                    <div class="uk-modal-dialog">
+                        <a class="uk-modal-close uk-close"></a>
+                        <div id="disqus_thread">您的网络环境无法加载 disqus 的评论模块</div>
+                    </div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = "https://feling.io/json/";
+                            this.page.identifier = "https://feling.io/json/";
+                        };
+                        $('#the-gfw').on('passible', function() {
+                            $('#disqus_thread_modal_entrance').show()
+                            var d = document, s = d.createElement('script');
+                            s.src = '//feling.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', + new Date());
+                            (d.head || d.body).appendChild(s);
+                        });
+                    </script>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 回到顶部 -->
+        <script>
+            $(function() {
+                $(content).scroll(function() {
+                    if ($(content).scrollTop() > 400)
+                        $('div.go-top').show();
+                    else
+                        $('div.go-top').hide();
+                });
+                $('div.go-top').click(function() {
+                    $('html, body, #content').animate({scrollTop: 0}, 400);
+                });
+            });
+        </script>
+        <style>
+            div.go-top {
+                display: none;
+                opacity: 0.6;
+                z-index: 999999;
+                position: fixed;
+                bottom: 100px;
+                right: 1%;
+                border: 1px solid #3399ff;
+                width: 38px;
+                height: 38px;
+                background-color: #ffffff;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            
+            div.go-top:hover {
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+            
+            div.go-top div.arrow {
+                position: absolute;
+                left: 10px;
+                top: -1px;
+                width: 0;
+                height: 0;
+                border: 9px solid transparent;
+                border-bottom-color: #3399ff;
+            }
+            
+            div.go-top div.stick {
+                position: absolute;
+                left: 15px;
+                top: 15px;
+                width: 8px;
+                height: 14px;
+                display: block;
+                background-color: #3399ff;
+                -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                border-radius: 1px;
+            }
+        </style>
+        <div class="go-top">
+            <div class="arrow"></div>
+            <div class="stick"></div>
         </div>
-    </div>
-    <hr style="margin: 0px">
-    <div class="uk-width-1-1">
-        <pre style="margin:0;"><code v-html="jsonResult" id="json_result"></code></pre>
-    </div>
-</div>
+    </header>
+    <hr style="margin:0">
+
+    <div id="content"></div>
+
+    <footer>
+        <p>feling.io 在线工具 由 漳州开发区聆熵信息技术服务工作室 
+            | <a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=b6wzfjp8" 
+                target="_blank">阿里云</a> 提供主机、对象存储、CDN、函数计算等服务 
+            | 闽ICP备17033777号-2
+        </p>
+
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?eb2e47d50973b9fd1a325718406ab901";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </footer>
+</body>
+</html>
